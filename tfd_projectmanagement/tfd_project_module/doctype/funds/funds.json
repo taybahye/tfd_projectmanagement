@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-20 19:25:11.872128",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "final",
+  "column_break_lqfn",
+  "funding_reference",
+  "company",
+  "section_break_iwas",
+  "bank",
+  "column_break_lwml",
+  "funding_type",
+  "column_break_hqxu",
+  "funding_additional_reference",
+  "tab_break_wgpm",
+  "section_break_dkbe",
+  "doner",
+  "doner_name",
+  "column_break_arvy",
+  "funding_name",
+  "column_break_ezlk",
+  "grant_amount",
+  "column_break_yxkh",
+  "currency",
+  "column_break_obvd",
+  "currency_ex"
+ ],
+ "fields": [
+  {
+   "fieldname": "final",
+   "fieldtype": "Select",
+   "label": "Final",
+   "options": "\nFinal"
+  },
+  {
+   "fieldname": "column_break_lqfn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_reference",
+   "fieldtype": "Data",
+   "label": "Funding Reference"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_iwas",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "label": "Bank",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_lwml",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_type",
+   "fieldtype": "Select",
+   "label": "Funding Type",
+   "options": "New\nAdditional"
+  },
+  {
+   "fieldname": "column_break_hqxu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.funding_type == \"Additional\"",
+   "fieldname": "funding_additional_reference",
+   "fieldtype": "Link",
+   "label": "Funding Additional Reference",
+   "options": "Funds"
+  },
+  {
+   "fieldname": "section_break_dkbe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "doner",
+   "fieldtype": "Data",
+   "label": "Doner"
+  },
+  {
+   "fieldname": "column_break_arvy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_name",
+   "fieldtype": "Data",
+   "label": "Funding Name"
+  },
+  {
+   "fieldname": "column_break_ezlk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grant_amount",
+   "fieldtype": "Data",
+   "label": "Grant Amount "
+  },
+  {
+   "fieldname": "column_break_yxkh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "column_break_obvd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency_ex",
+   "fieldtype": "Data",
+   "label": "Currency Ex"
+  },
+  {
+   "fieldname": "doner_name",
+   "fieldtype": "Data",
+   "label": "Doner Name"
+  },
+  {
+   "fieldname": "tab_break_wgpm",
+   "fieldtype": "Tab Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-20 19:54:10.383809",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Funds",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
