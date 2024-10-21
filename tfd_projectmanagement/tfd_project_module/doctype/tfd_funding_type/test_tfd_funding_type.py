@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestFunds(FrappeTestCase):
+class TestTFDFundingType(FrappeTestCase):
 	pass
