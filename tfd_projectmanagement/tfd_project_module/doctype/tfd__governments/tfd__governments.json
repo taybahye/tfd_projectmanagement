@@ -1,0 +1,121 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{\u0643\u0648\u062f_\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629}-{\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a}-{\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a}",
+ "creation": "2024-10-21 10:57:12.523651",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "\u0643\u0648\u062f_\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629",
+  "tfd_code",
+  "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a",
+  "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a",
+  "map_image",
+  "x",
+  "y",
+  "population",
+  "column_break_edxh",
+  "geolocation_ibjd",
+  "returnees",
+  "female_population",
+  "male_population"
+ ],
+ "fields": [
+  {
+   "fieldname": "\u0643\u0648\u062f_\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0643\u0648\u062f \u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tfd_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TFD Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629 \u0628\u0627\u0644\u0639\u0631\u0628\u064a",
+   "reqd": 1
+  },
+  {
+   "fieldname": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629 \u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "map_image",
+   "fieldtype": "Attach Image",
+   "label": "Map Image"
+  },
+  {
+   "fieldname": "x",
+   "fieldtype": "Data",
+   "label": "X"
+  },
+  {
+   "fieldname": "y",
+   "fieldtype": "Data",
+   "label": "Y"
+  },
+  {
+   "fieldname": "column_break_edxh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "geolocation_ibjd",
+   "fieldtype": "Geolocation"
+  },
+  {
+   "fieldname": "female_population",
+   "fieldtype": "Int",
+   "label": "Female Population"
+  },
+  {
+   "fieldname": "male_population",
+   "fieldtype": "Int",
+   "label": "Male Population"
+  },
+  {
+   "fieldname": "population",
+   "fieldtype": "Int",
+   "label": "Population"
+  },
+  {
+   "fieldname": "returnees",
+   "fieldtype": "Int",
+   "label": "returnees"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-21 12:10:29.444560",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD  Governments",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

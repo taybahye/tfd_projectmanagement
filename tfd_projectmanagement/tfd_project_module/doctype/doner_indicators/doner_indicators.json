@@ -1,0 +1,205 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-21 01:00:14.476634",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ehtu",
+  "code",
+  "lft",
+  "rgt",
+  "column_break_vlru",
+  "indicator_categoies",
+  "column_break_hdeq",
+  "english_display_name",
+  "column_break_tmnw",
+  "arabic_display_name",
+  "indicator_description_section",
+  "english_description",
+  "column_break_tgie",
+  "aribic_description",
+  "actual_and_target_values_represents_nd_preriodicity_section",
+  "type",
+  "direction_of_change",
+  "column_break_rffw",
+  "data_format",
+  "parent_doner_indicators",
+  "column_break_rmxr",
+  "status",
+  "percentage",
+  "old_parent",
+  "is_group"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ehtu",
+   "fieldtype": "Section Break",
+   "label": "Indicators Information"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "Doner Indicators"
+  },
+  {
+   "fieldname": "parent_doner_indicators",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Doner Indicators",
+   "options": "Doner Indicators"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Code ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "indicator_categoies",
+   "fieldtype": "Link",
+   "label": "Indicator Categoies",
+   "options": "Indicator Categoies",
+   "reqd": 1
+  },
+  {
+   "fieldname": "english_display_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "English display name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "arabic_display_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Arabic display name ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "indicator_description_section",
+   "fieldtype": "Section Break",
+   "label": "Indicator description"
+  },
+  {
+   "fieldname": "english_description",
+   "fieldtype": "Data",
+   "label": "English Description"
+  },
+  {
+   "fieldname": "column_break_tgie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "aribic_description",
+   "fieldtype": "Data",
+   "label": "Aribic Description"
+  },
+  {
+   "fieldname": "column_break_vlru",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hdeq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tmnw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "actual_and_target_values_represents_nd_preriodicity_section",
+   "fieldtype": "Section Break",
+   "label": "Actual and Target Values Represents nd Preriodicity"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nGoal\nOutcome\nOutput\nImpact\nIndicator",
+   "reqd": 1
+  },
+  {
+   "fieldname": "direction_of_change",
+   "fieldtype": "Select",
+   "label": "Direction Of Change",
+   "options": "Increasing\nDecreasing"
+  },
+  {
+   "fieldname": "column_break_rffw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "data_format",
+   "fieldtype": "Select",
+   "label": "Data Format",
+   "options": "Number\nText"
+  },
+  {
+   "fieldname": "column_break_rmxr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive"
+  },
+  {
+   "default": "0",
+   "fieldname": "percentage",
+   "fieldtype": "Check",
+   "label": "Percentage"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2024-10-21 12:18:51.008128",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Doner Indicators",
+ "nsm_parent_field": "parent_doner_indicators",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-21 11:31:57.414215",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "city",
+  "column_break_jgmd",
+  "directorate",
+  "column_break_kfgn",
+  "disticts",
+  "column_break_imay",
+  "code",
+  "column_break_zbvq",
+  "tfd_code",
+  "section_break_wgqn",
+  "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a",
+  "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a",
+  "population",
+  "female_population",
+  "male_population",
+  "column_break_edxh",
+  "geolocation_ibjd"
+ ],
+ "fields": [
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "TFD  Governments",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jgmd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "directorate",
+   "fieldtype": "Link",
+   "label": "Directorate",
+   "options": "TFD Directorate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_imay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zbvq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tfd_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TFD Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wgqn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Arabic Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "English Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "population",
+   "fieldtype": "Data",
+   "label": "Population",
+   "reqd": 1
+  },
+  {
+   "fieldname": "female_population",
+   "fieldtype": "Int",
+   "label": "Female Population",
+   "reqd": 1
+  },
+  {
+   "fieldname": "male_population",
+   "fieldtype": "Int",
+   "label": "Male Population",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_edxh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "geolocation_ibjd",
+   "fieldtype": "Geolocation"
+  },
+  {
+   "fieldname": "column_break_kfgn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "disticts",
+   "fieldtype": "Link",
+   "label": "Disticts",
+   "options": "TFD Districts",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-21 11:33:10.676439",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Villages",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
