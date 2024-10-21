@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestDonerIndicators(FrappeTestCase):
+class TestTFDIndicators(FrappeTestCase):
 	pass
