@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{\u0643\u0648\u062f_\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629}-{\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a}-{\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a}",
  "creation": "2024-10-21 10:57:12.523651",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -55,18 +56,13 @@
   },
   {
    "fieldname": "x",
-   "fieldtype": "Float",
+   "fieldtype": "Data",
    "label": "X"
   },
   {
    "fieldname": "y",
-   "fieldtype": "Float",
-   "label": "Y"
-  },
-  {
-   "fieldname": "population",
    "fieldtype": "Data",
-   "label": "Population"
+   "label": "Y"
   },
   {
    "fieldname": "column_break_edxh",
@@ -77,11 +73,6 @@
    "fieldtype": "Geolocation"
   },
   {
-   "fieldname": "returnees",
-   "fieldtype": "Data",
-   "label": "returnees"
-  },
-  {
    "fieldname": "female_population",
    "fieldtype": "Int",
    "label": "Female Population"
@@ -90,14 +81,25 @@
    "fieldname": "male_population",
    "fieldtype": "Int",
    "label": "Male Population"
+  },
+  {
+   "fieldname": "population",
+   "fieldtype": "Int",
+   "label": "Population"
+  },
+  {
+   "fieldname": "returnees",
+   "fieldtype": "Int",
+   "label": "returnees"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 11:17:05.197704",
+ "modified": "2024-10-21 12:10:29.444560",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD  Governments",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

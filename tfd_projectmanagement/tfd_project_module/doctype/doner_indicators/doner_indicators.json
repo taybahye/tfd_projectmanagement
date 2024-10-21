@@ -9,7 +9,6 @@
   "code",
   "lft",
   "rgt",
-  "is_group",
   "column_break_vlru",
   "indicator_categoies",
   "column_break_hdeq",
@@ -29,7 +28,8 @@
   "column_break_rmxr",
   "status",
   "percentage",
-  "old_parent"
+  "old_parent",
+  "is_group"
  ],
  "fields": [
   {
@@ -179,7 +179,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-21 01:24:21.284396",
+ "modified": "2024-10-21 12:18:51.008128",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Doner Indicators",
