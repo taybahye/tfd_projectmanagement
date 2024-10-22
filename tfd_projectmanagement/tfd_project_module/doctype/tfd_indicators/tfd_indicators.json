@@ -24,11 +24,9 @@
   "direction_of_change",
   "column_break_rffw",
   "data_format",
-  "parent_doner_indicators",
   "column_break_rmxr",
   "status",
   "percentage",
-  "old_parent",
   "is_group"
  ],
  "fields": [
@@ -58,19 +56,6 @@
    "fieldname": "is_group",
    "fieldtype": "Check",
    "label": "Is Group"
-  },
-  {
-   "fieldname": "old_parent",
-   "fieldtype": "Link",
-   "label": "Old Parent",
-   "options": "Doner Indicators"
-  },
-  {
-   "fieldname": "parent_doner_indicators",
-   "fieldtype": "Link",
-   "ignore_user_permissions": 1,
-   "label": "Parent Doner Indicators",
-   "options": "Doner Indicators"
   },
   {
    "fieldname": "code",
@@ -177,9 +162,8 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "is_tree": 1,
  "links": [],
- "modified": "2024-10-21 12:18:51.008128",
+ "modified": "2024-10-22 11:14:18.636340",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Indicators",
