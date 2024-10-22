@@ -6,3 +6,22 @@
 
 // 	},
 // });
+frappe.ui.form.on('TFD Districts', {
+    city: function(frm) {
+        if (frm.doc.city) {
+            frm.set_query('directorate', function() {
+                return {
+                    filters: {
+                        'government': frm.doc.city  // ربط المديريات بالمدينة المختارة
+                    }
+                };
+            });
+        } else {
+            frm.set_query('directorate', function() {
+                return {};
+            });
+        }
+    }
+});
+
+

@@ -63,14 +63,14 @@
    "fieldname": "old_parent",
    "fieldtype": "Link",
    "label": "Old Parent",
-   "options": "Doner Indicators"
+   "options": "TFD Indicators"
   },
   {
    "fieldname": "parent_doner_indicators",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
    "label": "Parent Doner Indicators",
-   "options": "Doner Indicators"
+   "options": "TFD Indicators"
   },
   {
    "fieldname": "code",
@@ -83,7 +83,7 @@
    "fieldname": "indicator_categoies",
    "fieldtype": "Link",
    "label": "Indicator Categoies",
-   "options": "Indicator Categoies",
+   "options": "TFD Indicator Categoies",
    "reqd": 1
   },
   {
@@ -179,10 +179,10 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-21 12:18:51.008128",
+ "modified": "2024-10-21 23:10:06.431797",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
- "name": "Doner Indicators",
+ "name": "TFD Indicators",
  "nsm_parent_field": "parent_doner_indicators",
  "owner": "Administrator",
  "permissions": [

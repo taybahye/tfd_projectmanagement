@@ -1,0 +1,180 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-21 22:48:12.157469",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "activity_information_section",
+  "activity_name",
+  "compnay",
+  "column_break_deug",
+  "status",
+  "responsible_party",
+  "section_break_xpch",
+  "indicator",
+  "column_break_xyxf",
+  "cluster",
+  "column_break_ptik",
+  "stander_activity",
+  "section_break_wtjm",
+  "start_date",
+  "column_break_picf",
+  "end_date",
+  "budget_tab",
+  "description",
+  "column_break_zzdk",
+  "budget_amount",
+  "column_break_orvl",
+  "actual_spent",
+  "column_break_hkic",
+  "remaining_budget",
+  "tab_3_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "activity_name",
+   "fieldtype": "Data",
+   "label": "Activity Name"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nCompleted\nIn Progress"
+  },
+  {
+   "fieldname": "compnay",
+   "fieldtype": "Link",
+   "label": "Compnay",
+   "options": "Company"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End date"
+  },
+  {
+   "fieldname": "responsible_party",
+   "fieldtype": "Data",
+   "label": "Staff Responsible "
+  },
+  {
+   "fieldname": "indicator",
+   "fieldtype": "Link",
+   "label": "Indicator",
+   "options": "TFD Indicators"
+  },
+  {
+   "fieldname": "section_break_xpch",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cluster",
+   "fieldtype": "Link",
+   "label": "Sector",
+   "options": "TFD Cluster"
+  },
+  {
+   "fieldname": "stander_activity",
+   "fieldtype": "Data",
+   "label": "Stander Activity"
+  },
+  {
+   "fieldname": "section_break_wtjm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "activity_information_section",
+   "fieldtype": "Section Break",
+   "label": "Activity Information"
+  },
+  {
+   "fieldname": "column_break_deug",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_xyxf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ptik",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_picf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "budget_tab",
+   "fieldtype": "Tab Break",
+   "label": "Budget"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "fieldname": "budget_amount",
+   "fieldtype": "Float",
+   "label": "Budget Amount"
+  },
+  {
+   "fieldname": "actual_spent",
+   "fieldtype": "Float",
+   "label": "Actual Spent"
+  },
+  {
+   "fieldname": "remaining_budget",
+   "fieldtype": "Float",
+   "label": "Remaining Budget"
+  },
+  {
+   "fieldname": "column_break_zzdk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_orvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hkic",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tab_3_tab",
+   "fieldtype": "Tab Break",
+   "label": "Tab 3"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-22 11:36:08.025005",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Activity",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

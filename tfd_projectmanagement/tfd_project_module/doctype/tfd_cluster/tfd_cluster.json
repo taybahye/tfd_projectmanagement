@@ -1,25 +1,31 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-10-21 01:03:06.002743",
+ "creation": "2024-10-21 23:06:01.402323",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "name1"
+  "cluster_name",
+  "description"
  ],
  "fields": [
   {
-   "fieldname": "name1",
+   "fieldname": "cluster_name",
    "fieldtype": "Data",
-   "label": "Name"
+   "label": "Cluster Name"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 01:04:08.636719",
+ "modified": "2024-10-21 23:08:44.516313",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
- "name": "Indicator Categoies",
+ "name": "TFD Cluster",
  "owner": "Administrator",
  "permissions": [
   {

@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Amd Oudah Prosite  and contributors
 // For license information, please see license.txt
 
-// frappe.ui.form.on("Indicator Categoies", {
+// frappe.ui.form.on("TFD Indicators", {
 // 	refresh(frm) {
 
 // 	},
