@@ -12,7 +12,6 @@
   "status",
   "responsible_party",
   "section_break_xpch",
-  "indicator",
   "activity_type",
   "column_break_xyxf",
   "cluster",
@@ -55,12 +54,6 @@
    "fieldname": "responsible_party",
    "fieldtype": "Data",
    "label": "Staff Responsible "
-  },
-  {
-   "fieldname": "indicator",
-   "fieldtype": "Link",
-   "label": "Indicator",
-   "options": "TFD Indicators"
   },
   {
    "fieldname": "section_break_xpch",
@@ -168,7 +161,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 13:16:02.327772",
+ "modified": "2024-10-22 13:47:02.767288",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Activity",
