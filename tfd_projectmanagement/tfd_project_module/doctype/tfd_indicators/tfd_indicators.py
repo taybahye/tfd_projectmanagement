@@ -5,5 +5,5 @@
 from frappe.utils.nestedset import NestedSet
 
 
-class DonerIndicators(NestedSet):
+class TFDIndicators(NestedSet):
 	pass
