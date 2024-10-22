@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "activity_information_section",
+  "activity_code",
   "activity_name",
   "compnay",
   "column_break_deug",
@@ -157,11 +158,16 @@
    "fieldname": "actual_end_date",
    "fieldtype": "Date",
    "label": "Actual End date"
+  },
+  {
+   "fieldname": "activity_code",
+   "fieldtype": "Data",
+   "label": "Activity code"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 13:47:02.767288",
+ "modified": "2024-10-22 13:59:27.141974",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Activity",
