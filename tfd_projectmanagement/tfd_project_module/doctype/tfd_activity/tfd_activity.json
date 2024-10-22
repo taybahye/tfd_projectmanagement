@@ -13,14 +13,17 @@
   "responsible_party",
   "section_break_xpch",
   "indicator",
+  "activity_type",
   "column_break_xyxf",
   "cluster",
   "column_break_ptik",
   "stander_activity",
   "section_break_wtjm",
-  "start_date",
+  "planned_start_date",
+  "actual_start_date",
   "column_break_picf",
-  "end_date",
+  "planned_end_date",
+  "actual_end_date",
   "budget_tab",
   "description",
   "column_break_zzdk",
@@ -28,8 +31,7 @@
   "column_break_orvl",
   "actual_spent",
   "column_break_hkic",
-  "remaining_budget",
-  "tab_3_tab"
+  "remaining_budget"
  ],
  "fields": [
   {
@@ -41,23 +43,13 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Active\nCompleted\nIn Progress"
+   "options": "Active\nIn Progress\nPartially Completed\nCompleted"
   },
   {
    "fieldname": "compnay",
    "fieldtype": "Link",
    "label": "Compnay",
    "options": "Company"
-  },
-  {
-   "fieldname": "start_date",
-   "fieldtype": "Date",
-   "label": "Start Date"
-  },
-  {
-   "fieldname": "end_date",
-   "fieldtype": "Date",
-   "label": "End date"
   },
   {
    "fieldname": "responsible_party",
@@ -148,14 +140,35 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "tab_3_tab",
-   "fieldtype": "Tab Break",
-   "label": "Tab 3"
+   "fieldname": "activity_type",
+   "fieldtype": "Select",
+   "label": "Activity Type ",
+   "options": "Research\nSurvey\nTraining\nSite Visits"
+  },
+  {
+   "fieldname": "planned_start_date",
+   "fieldtype": "Date",
+   "label": "Planned Start Date"
+  },
+  {
+   "fieldname": "actual_start_date",
+   "fieldtype": "Date",
+   "label": "Actual Start Date"
+  },
+  {
+   "fieldname": "planned_end_date",
+   "fieldtype": "Date",
+   "label": "Planned End Date"
+  },
+  {
+   "fieldname": "actual_end_date",
+   "fieldtype": "Date",
+   "label": "Actual End date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 11:36:08.025005",
+ "modified": "2024-10-22 13:16:02.327772",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Activity",
