@@ -24,11 +24,9 @@
   "direction_of_change",
   "column_break_rffw",
   "data_format",
-  "parent_doner_indicators",
   "column_break_rmxr",
   "status",
   "percentage",
-  "old_parent",
   "is_group"
  ],
  "fields": [
@@ -177,7 +175,6 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "is_tree": 1,
  "links": [],
  "modified": "2024-10-21 23:10:06.431797",
  "modified_by": "Administrator",
