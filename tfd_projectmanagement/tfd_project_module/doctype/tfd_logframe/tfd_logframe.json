@@ -13,7 +13,11 @@
   "column_break_bjvk",
   "logframe_name",
   "column_break_bzjm",
-  "indicator",
+  "indicator_name",
+  "column_break_xrmk",
+  "type",
+  "section_break_eutk",
+  "activities",
   "section_break_hjhj",
   "baseline",
   "column_break_xyta",
@@ -79,7 +83,6 @@
    "in_list_view": 1,
    "label": "Logframe Name",
    "options": "TFD Logframes",
-   "reqd": 1,
    "unique": 1
   },
   {
@@ -127,20 +130,39 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "indicator",
-   "fieldtype": "Link",
-   "label": "Indicator",
-   "options": "TFD Indicators"
-  },
-  {
    "fieldname": "column_break_bzjm",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_eutk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "activities",
+   "fieldtype": "Table",
+   "label": "Activities",
+   "options": "TFD Logframe Activities"
+  },
+  {
+   "fieldname": "column_break_xrmk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "Type"
+  },
+  {
+   "fieldname": "indicator_name",
+   "fieldtype": "Link",
+   "label": "Indicator Name",
+   "options": "indicator3"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-22 13:38:02.459508",
+ "modified": "2024-10-25 20:35:29.835310",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
