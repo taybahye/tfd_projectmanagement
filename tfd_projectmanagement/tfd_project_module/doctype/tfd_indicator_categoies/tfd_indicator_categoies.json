@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:name1",
  "creation": "2024-10-21 01:03:06.002743",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,15 +12,17 @@
   {
    "fieldname": "name1",
    "fieldtype": "Data",
-   "label": "Name"
+   "label": "Name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 01:04:08.636719",
+ "modified": "2024-10-27 12:01:53.483556",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Indicator Categoies",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

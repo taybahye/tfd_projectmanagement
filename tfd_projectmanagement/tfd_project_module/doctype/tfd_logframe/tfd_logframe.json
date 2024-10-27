@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:logframe_name",
+ "autoname": "format:{logframe_name}-{####}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -83,7 +83,7 @@
    "in_list_view": 1,
    "label": "Logframe Name",
    "options": "TFD Logframes",
-   "unique": 1
+   "reqd": 1
   },
   {
    "fieldname": "baseline",
@@ -156,17 +156,18 @@
    "fieldname": "indicator_name",
    "fieldtype": "Link",
    "label": "Indicator Name",
-   "options": "TFD Indicators"
+   "options": "TFD Indicators",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-27 11:12:38.142165",
+ "modified": "2024-10-27 11:58:49.218847",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "nsm_parent_field": "parent_tfd_logframe",
  "owner": "Administrator",
  "permissions": [

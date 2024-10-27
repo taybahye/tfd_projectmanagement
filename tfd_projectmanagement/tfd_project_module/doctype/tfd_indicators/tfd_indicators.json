@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:arabic_display_name",
  "creation": "2024-10-26 11:57:55.969387",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -89,7 +90,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Arabic display name ",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "indicator_description_section",
@@ -163,10 +165,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-26 11:57:55.969387",
+ "modified": "2024-10-27 11:54:18.067894",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Indicators",
+ "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_doner_indicators",
  "owner": "Administrator",
  "permissions": [
