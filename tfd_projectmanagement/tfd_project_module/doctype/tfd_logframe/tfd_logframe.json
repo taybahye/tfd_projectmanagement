@@ -156,13 +156,13 @@
    "fieldname": "indicator_name",
    "fieldtype": "Link",
    "label": "Indicator Name",
-   "options": "indicator3"
+   "options": "TFD Indicators"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-25 20:35:29.835310",
+ "modified": "2024-10-27 11:12:38.142165",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
