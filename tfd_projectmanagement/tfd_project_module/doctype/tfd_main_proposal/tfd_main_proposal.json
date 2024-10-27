@@ -1,0 +1,357 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:project_title",
+ "creation": "2024-10-26 22:47:16.665157",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "cover_page_tab",
+  "proposal_information_section",
+  "project_title",
+  "fund_code",
+  "fund_name",
+  "donor",
+  "grant_amount",
+  "column_break_exvl",
+  "table_ahkd",
+  "fund_start_date",
+  "fund_end_date",
+  "hr_plan_section",
+  "staffing_plan",
+  "staffing_details",
+  "total_estimated_budget",
+  "project_summery_section",
+  "project_summery",
+  "other_funding_secured_for_this_project_section",
+  "fund_secure",
+  "organization_focal_point_section",
+  "table_jibv",
+  "country_context__funding_section",
+  "country_context_fund",
+  "logical_framework_tab",
+  "logical_framework_section",
+  "overall_project_objective",
+  "framework",
+  "work_plan_tab",
+  "work_plan",
+  "tab_4_tab",
+  "targeted_affected_persons_and_locations_section",
+  "targeted_affected_persons",
+  "indirect_beneficiaries",
+  "other_info_tab",
+  "participation_of_and_accountability_section",
+  "participation_of_and_accountability",
+  "risk_management_section",
+  "table_giiy",
+  "exit_strategy_sustainability_section",
+  "table_clyd",
+  "coordination_and_complementarity_section",
+  "table_barb",
+  "budget_tab",
+  "staffing_and_other_personal_cost_section",
+  "table_gofv",
+  "staff_budget_total",
+  "location_tab",
+  "projects_location",
+  "documents_tab",
+  "tfd_documents"
+ ],
+ "fields": [
+  {
+   "fieldname": "fund_code",
+   "fieldtype": "Link",
+   "label": "Fund Code",
+   "options": "TFD Funds"
+  },
+  {
+   "fetch_from": "fund_code.funding_name",
+   "fieldname": "fund_name",
+   "fieldtype": "Data",
+   "label": "Fund Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "fund_code.donor",
+   "fieldname": "donor",
+   "fieldtype": "Data",
+   "label": "Donor",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "fund_code.grant_amount",
+   "fieldname": "grant_amount",
+   "fieldtype": "Float",
+   "label": "Grant Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_exvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "fund_code.start_date",
+   "fieldname": "fund_start_date",
+   "fieldtype": "Date",
+   "label": "Fund Start Date"
+  },
+  {
+   "fetch_from": "fund_code.closing_date",
+   "fieldname": "fund_end_date",
+   "fieldtype": "Date",
+   "label": "Fund End Date"
+  },
+  {
+   "fieldname": "cover_page_tab",
+   "fieldtype": "Tab Break",
+   "label": "Cover Page"
+  },
+  {
+   "fieldname": "proposal_information_section",
+   "fieldtype": "Section Break",
+   "label": " Proposal Information"
+  },
+  {
+   "fieldname": "hr_plan_section",
+   "fieldtype": "Section Break",
+   "label": "HR Plan"
+  },
+  {
+   "fieldname": "staffing_plan",
+   "fieldtype": "Link",
+   "label": "Staffing Plan",
+   "options": "Staffing Plan"
+  },
+  {
+   "fieldname": "staffing_details",
+   "fieldtype": "Table",
+   "label": "Staffing Details",
+   "options": "Staffing Plan Detail"
+  },
+  {
+   "fieldname": "total_estimated_budget",
+   "fieldtype": "Data",
+   "label": "Total Estimated Budget"
+  },
+  {
+   "fieldname": "project_summery_section",
+   "fieldtype": "Section Break",
+   "label": "Project Summery"
+  },
+  {
+   "fieldname": "project_summery",
+   "fieldtype": "Text Editor",
+   "label": "Project Summery"
+  },
+  {
+   "fieldname": "other_funding_secured_for_this_project_section",
+   "fieldtype": "Section Break",
+   "label": "Other Funding Secured for this project"
+  },
+  {
+   "fieldname": "fund_secure",
+   "fieldtype": "Table",
+   "label": "Fund Secure",
+   "options": "TFD Fund Secure"
+  },
+  {
+   "fieldname": "organization_focal_point_section",
+   "fieldtype": "Section Break",
+   "label": "Organization Focal Point"
+  },
+  {
+   "fieldname": "table_jibv",
+   "fieldtype": "Table",
+   "options": "TFD Organization Focal Point"
+  },
+  {
+   "fieldname": "country_context__funding_section",
+   "fieldtype": "Section Break",
+   "label": "Country Context  Funding"
+  },
+  {
+   "fieldname": "country_context_fund",
+   "fieldtype": "Table",
+   "options": "TFD Country Context Fund"
+  },
+  {
+   "fieldname": "logical_framework_tab",
+   "fieldtype": "Tab Break",
+   "label": "Logical Framework"
+  },
+  {
+   "fieldname": "logical_framework_section",
+   "fieldtype": "Section Break",
+   "label": "Logical Framework"
+  },
+  {
+   "fieldname": "overall_project_objective",
+   "fieldtype": "Small Text",
+   "label": "Overall Project Objective"
+  },
+  {
+   "fieldname": "framework",
+   "fieldtype": "Link",
+   "label": "Framework",
+   "options": "TFD Logframe"
+  },
+  {
+   "fieldname": "work_plan_tab",
+   "fieldtype": "Tab Break",
+   "label": "Work Plan"
+  },
+  {
+   "fieldname": "work_plan",
+   "fieldtype": "Link",
+   "label": "Work Plan",
+   "options": "Implementation Name"
+  },
+  {
+   "fieldname": "tab_4_tab",
+   "fieldtype": "Tab Break",
+   "label": "Affected Persons"
+  },
+  {
+   "fieldname": "targeted_affected_persons_and_locations_section",
+   "fieldtype": "Section Break",
+   "label": "Targeted affected persons and locations"
+  },
+  {
+   "fieldname": "targeted_affected_persons",
+   "fieldtype": "Table",
+   "label": "Targeted affected Persons",
+   "options": "TFD Targeted affected Persons"
+  },
+  {
+   "fieldname": "indirect_beneficiaries",
+   "fieldtype": "Small Text",
+   "label": "Indirect Beneficiaries"
+  },
+  {
+   "fieldname": "other_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "Other Info"
+  },
+  {
+   "fieldname": "participation_of_and_accountability_section",
+   "fieldtype": "Section Break",
+   "label": "Participation of and Accountability"
+  },
+  {
+   "fieldname": "participation_of_and_accountability",
+   "fieldtype": "Table",
+   "label": "Participation of and Accountability",
+   "options": "TFD Participation of and Accountability"
+  },
+  {
+   "fieldname": "risk_management_section",
+   "fieldtype": "Section Break",
+   "label": "Risk Management"
+  },
+  {
+   "fieldname": "table_giiy",
+   "fieldtype": "Table",
+   "options": "TFD Participation of and Accountability"
+  },
+  {
+   "fieldname": "exit_strategy_sustainability_section",
+   "fieldtype": "Section Break",
+   "label": "Exit Strategy Sustainability"
+  },
+  {
+   "fieldname": "table_clyd",
+   "fieldtype": "Table",
+   "options": "TFD Participation of and Accountability"
+  },
+  {
+   "fieldname": "coordination_and_complementarity_section",
+   "fieldtype": "Section Break",
+   "label": "Coordination and Complementarity "
+  },
+  {
+   "fieldname": "table_barb",
+   "fieldtype": "Table",
+   "options": "TFD Participation of and Accountability"
+  },
+  {
+   "fieldname": "budget_tab",
+   "fieldtype": "Tab Break",
+   "label": "Budget"
+  },
+  {
+   "fieldname": "staffing_and_other_personal_cost_section",
+   "fieldtype": "Section Break",
+   "label": "Staffing and Other Personal cost"
+  },
+  {
+   "fieldname": "table_gofv",
+   "fieldtype": "Table",
+   "options": "TFD Budget Staffing"
+  },
+  {
+   "fieldname": "staff_budget_total",
+   "fieldtype": "Currency",
+   "label": "Staff Budget Total"
+  },
+  {
+   "fieldname": "location_tab",
+   "fieldtype": "Tab Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "projects_location",
+   "fieldtype": "Geolocation",
+   "label": "Projects Location"
+  },
+  {
+   "fieldname": "documents_tab",
+   "fieldtype": "Tab Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "tfd_documents",
+   "fieldtype": "Table",
+   "label": "TFD Documents",
+   "options": "TFD Documents"
+  },
+  {
+   "fieldname": "project_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project Title",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "table_ahkd",
+   "fieldtype": "Table",
+   "label": "Cluster",
+   "options": "TFD Main Sub Cluster Chilled Percentage"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-27 12:27:52.979764",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Main Proposal",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

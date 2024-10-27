@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-27 12:12:33.315515",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "primary_cluster",
+  "column_break_conv",
+  "sub_cluster",
+  "column_break_uflh",
+  "percentage"
+ ],
+ "fields": [
+  {
+   "fieldname": "primary_cluster",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Primary Cluster",
+   "options": "TFD Primary Cluster"
+  },
+  {
+   "fieldname": "column_break_conv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sub_cluster",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sub Cluster",
+   "options": "TFD Sub Cluster"
+  },
+  {
+   "fieldname": "column_break_uflh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Percentage "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-27 12:24:09.637608",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Main Sub Cluster Chilled Percentage",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

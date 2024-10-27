@@ -1,11 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:fund_code",
  "creation": "2024-10-21 12:37:10.509476",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "final",
+  "fund_code",
   "column_break_lqfn",
   "funding_reference",
   "company",
@@ -203,14 +205,22 @@
    "fieldtype": "Table",
    "label": "Accounts",
    "options": "TFD Account Child"
+  },
+  {
+   "fieldname": "fund_code",
+   "fieldtype": "Data",
+   "label": "Fund Code",
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 22:22:39.365609",
+ "modified": "2024-10-26 22:56:27.293746",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Funds",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

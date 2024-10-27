@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-27 10:48:32.428492",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "implementation_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "implementation_name",
+   "fieldtype": "Data",
+   "label": "Implementation Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-27 10:51:47.245973",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Implementation Name",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

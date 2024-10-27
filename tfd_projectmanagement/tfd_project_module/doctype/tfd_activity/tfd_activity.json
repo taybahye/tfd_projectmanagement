@@ -11,7 +11,7 @@
   "compnay",
   "column_break_deug",
   "status",
-  "responsible_party",
+  "estimated_budget",
   "section_break_xpch",
   "activity_type",
   "column_break_xyxf",
@@ -23,21 +23,15 @@
   "actual_start_date",
   "column_break_picf",
   "planned_end_date",
-  "actual_end_date",
-  "budget_tab",
-  "description",
-  "column_break_zzdk",
-  "budget_amount",
-  "column_break_orvl",
-  "actual_spent",
-  "column_break_hkic",
-  "remaining_budget"
+  "actual_end_date"
  ],
  "fields": [
   {
    "fieldname": "activity_name",
    "fieldtype": "Data",
-   "label": "Activity Name"
+   "in_list_view": 1,
+   "label": "Activity Name",
+   "reqd": 1
   },
   {
    "fieldname": "status",
@@ -48,13 +42,10 @@
   {
    "fieldname": "compnay",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Compnay",
-   "options": "Company"
-  },
-  {
-   "fieldname": "responsible_party",
-   "fieldtype": "Data",
-   "label": "Staff Responsible "
+   "options": "Company",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_xpch",
@@ -97,43 +88,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "budget_tab",
-   "fieldtype": "Tab Break",
-   "label": "Budget"
-  },
-  {
-   "fieldname": "description",
-   "fieldtype": "Data",
-   "label": "Description"
-  },
-  {
-   "fieldname": "budget_amount",
-   "fieldtype": "Float",
-   "label": "Budget Amount"
-  },
-  {
-   "fieldname": "actual_spent",
-   "fieldtype": "Float",
-   "label": "Actual Spent"
-  },
-  {
-   "fieldname": "remaining_budget",
-   "fieldtype": "Float",
-   "label": "Remaining Budget"
-  },
-  {
-   "fieldname": "column_break_zzdk",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_orvl",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_hkic",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "activity_type",
    "fieldtype": "Select",
    "label": "Activity Type ",
@@ -162,12 +116,19 @@
   {
    "fieldname": "activity_code",
    "fieldtype": "Data",
-   "label": "Activity code"
+   "in_list_view": 1,
+   "label": "Activity code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "estimated_budget",
+   "fieldtype": "Float",
+   "label": "Estimated Budget"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 13:59:27.141974",
+ "modified": "2024-10-23 11:33:24.633686",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Activity",
