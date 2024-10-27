@@ -1,7 +1,8 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-10-21 01:00:14.476634",
+ "autoname": "field:arabic_display_name",
+ "creation": "2024-10-26 11:57:55.969387",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -36,6 +37,13 @@
    "label": "Indicators Information"
   },
   {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Code ",
+   "reqd": 1
+  },
+  {
    "fieldname": "lft",
    "fieldtype": "Int",
    "hidden": 1,
@@ -52,11 +60,8 @@
    "read_only": 1
   },
   {
-   "fieldname": "code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Code ",
-   "reqd": 1
+   "fieldname": "column_break_vlru",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "indicator_categoies",
@@ -66,6 +71,10 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_hdeq",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "english_display_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -73,11 +82,16 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_tmnw",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "arabic_display_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Arabic display name ",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "indicator_description_section",
@@ -97,18 +111,6 @@
    "fieldname": "aribic_description",
    "fieldtype": "Data",
    "label": "Aribic Description"
-  },
-  {
-   "fieldname": "column_break_vlru",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_hdeq",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_tmnw",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "actual_and_target_values_represents_nd_preriodicity_section",
@@ -163,10 +165,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 13:41:22.462935",
+ "modified": "2024-10-27 11:54:18.067894",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Indicators",
+ "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_doner_indicators",
  "owner": "Administrator",
  "permissions": [

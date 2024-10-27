@@ -13,7 +13,11 @@
   "column_break_bjvk",
   "logframe_name",
   "column_break_bzjm",
-  "indicator",
+  "indicator_name",
+  "column_break_xrmk",
+  "type",
+  "section_break_eutk",
+  "activities",
   "section_break_hjhj",
   "baseline",
   "column_break_xyta",
@@ -137,6 +141,32 @@
   {
    "fieldname": "column_break_bzjm",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_eutk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "activities",
+   "fieldtype": "Table",
+   "label": "Activities",
+   "options": "TFD Logframe Activities"
+  },
+  {
+   "fieldname": "column_break_xrmk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "Type"
+  },
+  {
+   "fieldname": "indicator_name",
+   "fieldtype": "Link",
+   "label": "Indicator Name",
+   "options": "TFD Indicators",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
