@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-27 10:53:22.713787",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "targeted_affected_persons_type",
+  "directly_affected_persons_details",
+  "man",
+  "woman",
+  "boys"
+ ],
+ "fields": [
+  {
+   "fieldname": "targeted_affected_persons_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Targeted affected Persons Type",
+   "options": "TFD Targeted affected Persons Type"
+  },
+  {
+   "fieldname": "directly_affected_persons_details",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Directly affected Persons details"
+  },
+  {
+   "fieldname": "man",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Man"
+  },
+  {
+   "fieldname": "woman",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Woman"
+  },
+  {
+   "fieldname": "boys",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Boys"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-27 11:04:52.113597",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Targeted affected Persons",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

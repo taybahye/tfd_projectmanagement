@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{####}",
+ "autoname": "format:{logframe_name}-{###}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -75,14 +75,16 @@
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   },
   {
    "fieldname": "logframe_name",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Logframe Name",
-   "options": "TFD Logframe Name",
+   "options": "TFD Logframes",
    "reqd": 1
   },
   {
@@ -135,6 +137,13 @@
   {
    "fieldname": "section_break_nehd",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "indicator",
+   "fieldtype": "Link",
+   "label": "Indicator",
+   "options": "TFD Indicators",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_bzjm",
