@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Amd Oudah Prosite  and contributors
 // For license information, please see license.txt
 
-// frappe.ui.form.on("TFD Logframes", {
+// frappe.ui.form.on("TFD Logframe Name", {
 // 	refresh(frm) {
 
 // 	},

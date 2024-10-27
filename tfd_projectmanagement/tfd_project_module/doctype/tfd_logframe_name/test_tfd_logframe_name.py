@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestTFDLogframes(FrappeTestCase):
+class TestTFDLogframeName(FrappeTestCase):
 	pass

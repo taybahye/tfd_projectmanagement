@@ -82,7 +82,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Logframe Name",
-   "options": "TFD Logframes",
+   "options": "TFD Logframe Name",
    "reqd": 1
   },
   {
@@ -163,7 +163,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-27 11:58:49.218847",
+ "modified": "2024-10-27 12:23:54.115813",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
