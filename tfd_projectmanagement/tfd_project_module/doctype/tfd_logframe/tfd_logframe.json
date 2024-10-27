@@ -88,22 +88,29 @@
   {
    "fieldname": "baseline",
    "fieldtype": "Data",
-   "label": "Baseline"
+   "in_list_view": 1,
+   "label": "Baseline",
+   "reqd": 1
   },
   {
    "fieldname": "target",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Target"
   },
   {
    "fieldname": "acheivement",
    "fieldtype": "Data",
-   "label": "Acheivement"
+   "in_list_view": 1,
+   "label": "Acheivement",
+   "read_only": 1
   },
   {
    "fieldname": "growth_in",
    "fieldtype": "Data",
-   "label": "Growth In"
+   "in_list_view": 1,
+   "label": "Growth In",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_bjvk",
@@ -148,13 +155,16 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "indicator_name.type",
    "fieldname": "type",
    "fieldtype": "Data",
-   "label": "Type"
+   "label": "Type",
+   "read_only": 1
   },
   {
    "fieldname": "indicator_name",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Indicator Name",
    "options": "TFD Indicators",
    "reqd": 1
@@ -163,7 +173,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-27 12:23:54.115813",
+ "modified": "2024-10-27 12:48:01.653818",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{activity_code}-{activity_name}",
  "creation": "2024-10-21 22:48:12.157469",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -167,10 +168,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 13:59:27.141974",
+ "modified": "2024-10-27 12:29:28.980529",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Activity",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
