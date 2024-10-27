@@ -33,6 +33,8 @@
   "logical_framework_section",
   "overall_project_objective",
   "framework",
+  "indicators",
+  "activities",
   "work_plan_tab",
   "work_plan",
   "tab_4_tab",
@@ -193,7 +195,7 @@
    "fieldname": "framework",
    "fieldtype": "Link",
    "label": "Framework",
-   "options": "TFD Logframe"
+   "options": "TFD Logframe Name"
   },
   {
    "fieldname": "work_plan_tab",
@@ -327,11 +329,25 @@
    "fieldtype": "Table",
    "label": "Cluster",
    "options": "TFD Main Sub Cluster Chilled Percentage"
+  },
+  {
+   "fieldname": "indicators",
+   "fieldtype": "Table",
+   "label": "Indicators",
+   "options": "TFD Logframe Indicators",
+   "read_only": 1
+  },
+  {
+   "fieldname": "activities",
+   "fieldtype": "Table",
+   "label": "Activities",
+   "options": "TFD Logframe Indicator Activity",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-27 12:27:52.979764",
+ "modified": "2024-10-27 13:58:32.167592",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",

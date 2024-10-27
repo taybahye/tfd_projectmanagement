@@ -29,6 +29,31 @@ frappe.ui.form.on("TFD Main Proposal", {
         })
       }
     },
+    framework: function(frm) {
+      let framework = frm.doc.framework;
+  
+      if (framework) {
+          frappe.call({
+              method: "get_indicators",
+              doc: frm.doc,
+
+              args: { logframe_name: framework },  // تمرير framework كـ logframe_name
+  
+              callback: (r) => {
+                  if (r.message) {
+                      console.log("Response received:", r.message);
+                      frm.clear_table("indicators");
+                      $.each(r.message, function (_i, e) {
+                          let row = frm.add_child("indicators");
+                          row.indicator = e.indicator_name;
+                      });
+                      refresh_field("indicators");
+                  }
+              }
+          });
+      }
+  }
+  
 });
 
 frappe.ui.form.on('Staffing Plan Detail', {

@@ -29,7 +29,8 @@
   "section_break_nehd",
   "old_parent",
   "parent_tfd_logframe",
-  "is_group"
+  "is_group",
+  "indicator"
  ],
  "fields": [
   {
@@ -84,7 +85,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Logframe Name",
-   "options": "TFD Logframes",
+   "options": "TFD Logframe Name",
    "reqd": 1
   },
   {
@@ -182,7 +183,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-27 12:48:01.653818",
+ "modified": "2024-10-27 13:11:15.016363",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",

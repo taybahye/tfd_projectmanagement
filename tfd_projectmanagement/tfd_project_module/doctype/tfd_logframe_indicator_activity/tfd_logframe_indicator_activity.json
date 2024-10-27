@@ -1,0 +1,38 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-27 13:56:18.730657",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "activity",
+  "indicator"
+ ],
+ "fields": [
+  {
+   "fieldname": "activity",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Activity"
+  },
+  {
+   "fieldname": "indicator",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Indicator"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-27 13:56:51.435473",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Logframe Indicator Activity",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
