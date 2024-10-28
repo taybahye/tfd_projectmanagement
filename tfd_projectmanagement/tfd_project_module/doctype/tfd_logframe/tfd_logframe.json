@@ -29,8 +29,7 @@
   "section_break_nehd",
   "old_parent",
   "parent_tfd_logframe",
-  "is_group",
-  "indicator"
+  "is_group"
  ],
  "fields": [
   {
@@ -140,13 +139,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "indicator",
-   "fieldtype": "Link",
-   "label": "Indicator",
-   "options": "TFD Indicators",
-   "reqd": 1
-  },
-  {
    "fieldname": "column_break_bzjm",
    "fieldtype": "Column Break"
   },
@@ -183,7 +175,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-27 13:11:15.016363",
+ "modified": "2024-10-28 12:21:41.811169",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",

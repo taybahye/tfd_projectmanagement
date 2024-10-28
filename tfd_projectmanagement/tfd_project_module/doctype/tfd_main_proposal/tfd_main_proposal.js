@@ -36,23 +36,35 @@ frappe.ui.form.on("TFD Main Proposal", {
           frappe.call({
               method: "get_indicators",
               doc: frm.doc,
-
               args: { logframe_name: framework },  // تمرير framework كـ logframe_name
   
               callback: (r) => {
                   if (r.message) {
                       console.log("Response received:", r.message);
+  
+                      // تحديث جدول المؤشرات
                       frm.clear_table("indicators");
-                      $.each(r.message, function (_i, e) {
+                      $.each(r.message, function(_i, e) {
                           let row = frm.add_child("indicators");
                           row.indicator = e.indicator_name;
                       });
                       refresh_field("indicators");
+  
+                      // تحديث جدول الأنشطة
+                      frm.clear_table("activities");
+                      $.each(r.message, function(_i, e) {
+                          $.each(e.activities, function(_j, activity) {
+                              let activity_row = frm.add_child("activities");
+                              activity_row.activity = activity;  // تأكد من أن اسم الحقل متطابق
+                          });
+                      });
+                      refresh_field("activities");
                   }
               }
           });
       }
   }
+  
   
 });
 
