@@ -22,27 +22,35 @@ class TFDMainProposal(Document):
   #   # frappe.msgprint(f"Indicator List: {indicator_list}")  # تحقق من نتائج الاستعلام
   #   return indicator_list
   @frappe.whitelist()
-  def get_indicators(self ,logframe_name):
-    # Fetch indicators for the specified logframe name
-    indicator_list = frappe.db.sql(f"""
-      SELECT indicator_name , name
-      FROM `tabTFD Logframe`
-      WHERE logframe_name = '{logframe_name}'
-    """, as_dict=True)
-    
-    frappe.msgprint(f"Documents with logframe_name {logframe_name}: {indicator_list}")
-    
-    # Fetch activities for each indicator
-    for indicator in indicator_list:
-        activities = frappe.db.sql("""
-            SELECT activity
-            FROM `tabTFD Logframe Activities`
-            WHERE parent = %s
-        """, (indicator['name'],), as_dict=True)
-        
-        # Add activities to each indicator
-        indicator['activities'] = [activity['activity'] for activity in activities]
+  def get_indicators(self, logframe_name):
+        indicator_list = frappe.db.sql("""
+            SELECT DISTINCT indicator_name
+            FROM `tabTFD Logframe`
+            WHERE logframe_name = %s
+            ORDER BY logframe_name
+        """, (logframe_name,), as_dict=True)
 
-    # Output the final result
-    frappe.msgprint(f"Indicator List with Activities: {indicator_list}")
-    return indicator_list 
+        frappe.msgprint(f"Indicator List with Indicator Names: {indicator_list}")
+
+        unique_activity_set = set()
+
+        for indicator in indicator_list:
+            activities = frappe.db.sql("""
+                SELECT DISTINCT activity
+                FROM `tabTFD Logframe Activities`
+                WHERE parent IN (
+                    SELECT name
+                    FROM `tabTFD Logframe`
+                    WHERE logframe_name = %s AND indicator_name = %s
+                )
+            """, (logframe_name, indicator['indicator_name']), as_dict=True)
+
+            for activity in activities:
+                unique_activity_set.add((activity['activity'], indicator['indicator_name']))
+
+        final_activity_list = [
+            {'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set
+        ]
+
+        frappe.msgprint(f"Unique Activity List with Indicator Names: {final_activity_list}")
+        return final_activity_list

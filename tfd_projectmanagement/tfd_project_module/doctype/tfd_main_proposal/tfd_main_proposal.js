@@ -36,34 +36,41 @@ frappe.ui.form.on("TFD Main Proposal", {
           frappe.call({
               method: "get_indicators",
               doc: frm.doc,
-              args: { logframe_name: framework },  // تمرير framework كـ logframe_name
+              args: { logframe_name: framework },
   
               callback: (r) => {
                   if (r.message) {
                       console.log("Response received:", r.message);
   
-                      // تحديث جدول المؤشرات
+                      // Clear existing rows in the tables
                       frm.clear_table("indicators");
-                      $.each(r.message, function(_i, e) {
-                          let row = frm.add_child("indicators");
-                          row.indicator = e.indicator_name;
-                      });
-                      refresh_field("indicators");
-  
-                      // تحديث جدول الأنشطة
                       frm.clear_table("activities");
+  
+                      // Create a Set to track unique indicators
+                      let addedIndicators = new Set();
+  
                       $.each(r.message, function(_i, e) {
-                          $.each(e.activities, function(_j, activity) {
-                              let activity_row = frm.add_child("activities");
-                              activity_row.activity = activity;  // تأكد من أن اسم الحقل متطابق
-                          });
+                          // Add unique indicators
+                          if (!addedIndicators.has(e.indicator)) {
+                              let indicator_row = frm.add_child("indicators");
+                              indicator_row.indicator = e.indicator;
+                              addedIndicators.add(e.indicator);
+                          }
+  
+                          // Add unique activities linked to the indicator
+                          let activity_row = frm.add_child("activities");
+                          activity_row.activity = e.activity;
+                          activity_row.indicator = e.indicator;
                       });
+  
+                      // Refresh both tables
+                      refresh_field("indicators");
                       refresh_field("activities");
                   }
               }
           });
       }
-  }
+  },
   
   
 });
