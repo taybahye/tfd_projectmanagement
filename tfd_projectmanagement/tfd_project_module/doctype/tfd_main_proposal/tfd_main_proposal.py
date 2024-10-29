@@ -30,7 +30,7 @@ class TFDMainProposal(Document):
             ORDER BY logframe_name
         """, (logframe_name,), as_dict=True)
 
-        frappe.msgprint(f"Indicator List with Indicator Names: {indicator_list}")
+        # frappe.msgprint(f"Indicator List with Indicator Names: {indicator_list}")
 
         unique_activity_set = set()
 
@@ -52,5 +52,5 @@ class TFDMainProposal(Document):
             {'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set
         ]
 
-        frappe.msgprint(f"Unique Activity List with Indicator Names: {final_activity_list}")
+        # frappe.msgprint(f"Unique Activity List with Indicator Names: {final_activity_list}")
         return final_activity_list
