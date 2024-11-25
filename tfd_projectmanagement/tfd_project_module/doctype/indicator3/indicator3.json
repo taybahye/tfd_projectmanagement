@@ -164,7 +164,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-25 19:03:15.474229",
+ "modified": "2024-11-25 22:03:26.346292",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "indicator3",
@@ -184,6 +184,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

@@ -216,7 +216,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-26 22:56:27.293746",
+ "modified": "2024-11-25 22:03:13.059012",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Funds",
@@ -236,6 +236,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

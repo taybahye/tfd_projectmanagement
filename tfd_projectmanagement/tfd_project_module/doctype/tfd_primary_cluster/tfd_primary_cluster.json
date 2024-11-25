@@ -18,7 +18,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-27 12:17:16.973835",
+ "modified": "2024-11-25 22:00:00.140626",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Primary Cluster",
@@ -38,6 +38,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

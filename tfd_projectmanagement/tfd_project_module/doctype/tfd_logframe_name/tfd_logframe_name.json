@@ -25,7 +25,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-25 19:12:10.548501",
+ "modified": "2024-11-25 22:03:01.869989",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe Name",
@@ -45,6 +45,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

@@ -16,7 +16,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-27 12:02:21.364181",
+ "modified": "2024-11-25 22:00:23.372696",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Document Main Category",
@@ -35,6 +35,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
