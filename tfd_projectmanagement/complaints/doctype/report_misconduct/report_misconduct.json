@@ -35,7 +35,7 @@
    "fieldname": "describe_what_happened_including_as_much_detail_as_you_know",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Describe what happened, including as much detail as you know"
+   "label": "Describe what happened including as much detail as you know"
   },
   {
    "fieldname": "who_committed_the_alleged_violation",
@@ -47,22 +47,22 @@
    "fieldname": "where_did_the_incident_occur_specify_the_location",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Do you know if there is anyone else involved? Provide full names, titles and organization if possible"
+   "label": "Do you know if there is anyone else involved? Provide full names titles and organization if possible"
   },
   {
    "fieldname": "where_did_the_incident_occur_specify_the_loc",
    "fieldtype": "Small Text",
-   "label": "Where did the incident occur Specify the loc"
+   "label": "Where did the incident occur Specify the location"
   },
   {
    "fieldname": "when_the_incident_occurred_specify_the_date",
    "fieldtype": "Small Text",
-   "label": "When the incident occurred, specify the date"
+   "label": "When the incident occurred specify the date"
   },
   {
    "fieldname": "when_the_incident_occurred_specify_the_time",
    "fieldtype": "Small Text",
-   "label": "When the incident occurred, specify the time"
+   "label": "When the incident occurred specify the time"
   },
   {
    "fieldname": "how_the_individual_committed_the_alleged_violation",
@@ -90,7 +90,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-25 21:35:11.385192",
+ "modified": "2024-11-27 11:18:11.765052",
  "modified_by": "Administrator",
  "module": "Complaints",
  "name": "Report misconduct",
