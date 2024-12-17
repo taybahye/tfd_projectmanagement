@@ -1,0 +1,137 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-17 10:12:59.439577",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "project_cost",
+  "year",
+  "month_1",
+  "month_2",
+  "month_3",
+  "month_4",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project Name",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "project_name.estimated_costing",
+   "fieldname": "project_cost",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project Cost",
+   "options": "Project"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Year",
+   "options": "2024\n2025\n2026"
+  },
+  {
+   "default": "0",
+   "fieldname": "month_1",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "January"
+  },
+  {
+   "default": "0",
+   "fieldname": "month_2",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "February"
+  },
+  {
+   "default": "0",
+   "fieldname": "month_3",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "March"
+  },
+  {
+   "default": "0",
+   "fieldname": "month_4",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "April"
+  },
+  {
+   "default": "0",
+   "fieldname": "may",
+   "fieldtype": "Check",
+   "label": "May"
+  },
+  {
+   "default": "0",
+   "fieldname": "june",
+   "fieldtype": "Check",
+   "label": "June"
+  },
+  {
+   "default": "0",
+   "fieldname": "july",
+   "fieldtype": "Check",
+   "label": "July"
+  },
+  {
+   "default": "0",
+   "fieldname": "august",
+   "fieldtype": "Check",
+   "label": "August"
+  },
+  {
+   "default": "0",
+   "fieldname": "september",
+   "fieldtype": "Check",
+   "label": "September"
+  },
+  {
+   "default": "0",
+   "fieldname": "october",
+   "fieldtype": "Check",
+   "label": "October"
+  },
+  {
+   "default": "0",
+   "fieldname": "november",
+   "fieldtype": "Check",
+   "label": "November"
+  },
+  {
+   "default": "0",
+   "fieldname": "december",
+   "fieldtype": "Check",
+   "label": "December"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-17 10:55:03.666009",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Project Plan",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
