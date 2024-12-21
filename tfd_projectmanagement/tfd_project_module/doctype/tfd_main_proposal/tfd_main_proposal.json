@@ -33,8 +33,11 @@
   "logical_framework_section",
   "overall_project_objective",
   "framework",
+  "goals",
+  "outcomes",
   "indicators",
   "activities",
+  "inputs",
   "out",
   "project_info",
   "work_plan_tab",
@@ -364,11 +367,29 @@
    "fieldtype": "Table",
    "label": "Project Plan",
    "options": "Project Plan"
+  },
+  {
+   "fieldname": "goals",
+   "fieldtype": "Table",
+   "label": "Goals",
+   "options": "TFD Goals child"
+  },
+  {
+   "fieldname": "outcomes",
+   "fieldtype": "Table",
+   "label": "Outcomes",
+   "options": "TFD Outcome Child"
+  },
+  {
+   "fieldname": "inputs",
+   "fieldtype": "Table",
+   "label": "Inputs",
+   "options": "TFD Input Child"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-17 10:39:41.856054",
+ "modified": "2024-12-21 14:29:28.404918",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
