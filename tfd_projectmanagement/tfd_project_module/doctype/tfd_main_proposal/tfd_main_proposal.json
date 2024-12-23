@@ -35,8 +35,11 @@
   "framework",
   "indicators",
   "activities",
+  "out",
+  "project_info",
   "work_plan_tab",
   "work_plan",
+  "project_plan",
   "tab_4_tab",
   "targeted_affected_persons_and_locations_section",
   "targeted_affected_persons",
@@ -343,11 +346,29 @@
    "label": "Activities",
    "options": "TFD Logframe Indicator Activity",
    "read_only": 1
+  },
+  {
+   "fieldname": "out",
+   "fieldtype": "Table",
+   "label": "OUT",
+   "options": "Output"
+  },
+  {
+   "fieldname": "project_info",
+   "fieldtype": "Table",
+   "label": "Project Info",
+   "options": "Project Information"
+  },
+  {
+   "fieldname": "project_plan",
+   "fieldtype": "Table",
+   "label": "Project Plan",
+   "options": "Project Plan"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 21:57:44.649898",
+ "modified": "2024-12-17 10:39:41.856054",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
