@@ -38,7 +38,8 @@
   "indicators",
   "activities",
   "inputs",
-  "out",
+  "output",
+  "indictors",
   "project_info",
   "work_plan_tab",
   "work_plan",
@@ -351,12 +352,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "out",
-   "fieldtype": "Table",
-   "label": "OUT",
-   "options": "Output"
-  },
-  {
    "fieldname": "project_info",
    "fieldtype": "Table",
    "label": "Project Info",
@@ -385,11 +380,23 @@
    "fieldtype": "Table",
    "label": "Inputs",
    "options": "TFD Input Child"
+  },
+  {
+   "fieldname": "output",
+   "fieldtype": "Table",
+   "label": "Output",
+   "options": "TFD Output Child"
+  },
+  {
+   "fieldname": "indictors",
+   "fieldtype": "Table",
+   "label": "Indictors",
+   "options": "Output"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-21 14:29:28.404918",
+ "modified": "2024-12-28 14:35:31.359364",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
