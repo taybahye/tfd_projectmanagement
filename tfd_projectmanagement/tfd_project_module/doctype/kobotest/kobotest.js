@@ -9,13 +9,14 @@
 
 
 	},
-    get_get(frm){
+    get(frm){
+		alert('ww')
         frappe.call({
 			method: "get_form_data",
 			doc: frm.doc,
 			callback: function(r) {
-                frm.refresh_field("pages");
-                frm.refresh_field("answers");	
+                // frm.refresh_field("pages");
+                // frm.refresh_field("answers");	
 			}
 		});
     },

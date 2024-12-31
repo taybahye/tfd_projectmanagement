@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:name1",
+ "autoname": "field:code",
  "creation": "2024-12-21 13:57:45.518392",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -13,14 +13,14 @@
  "fields": [
   {
    "fieldname": "name1",
-   "fieldtype": "Data",
-   "label": "Name",
-   "unique": 1
+   "fieldtype": "Long Text",
+   "label": "Name"
   },
   {
    "fieldname": "code",
    "fieldtype": "Data",
-   "label": "Code"
+   "label": "Code",
+   "unique": 1
   },
   {
    "fieldname": "type",
@@ -31,7 +31,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-21 14:00:39.887272",
+ "modified": "2024-12-31 11:11:51.755483",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Goal",
@@ -51,6 +51,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

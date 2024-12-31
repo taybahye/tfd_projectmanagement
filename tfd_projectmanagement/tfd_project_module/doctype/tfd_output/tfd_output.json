@@ -34,7 +34,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-24 12:22:18.873131",
+ "modified": "2024-12-31 11:04:46.296786",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Output",
@@ -54,6 +54,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
