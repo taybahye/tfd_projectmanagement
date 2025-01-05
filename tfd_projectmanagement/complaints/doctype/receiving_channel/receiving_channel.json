@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:channel",
  "creation": "2024-12-21 11:00:22.896041",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,15 +12,17 @@
   {
    "fieldname": "channel",
    "fieldtype": "Data",
-   "label": "Channel"
+   "label": "Channel",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-21 11:01:10.346086",
+ "modified": "2024-12-31 10:28:54.482144",
  "modified_by": "Administrator",
  "module": "Complaints",
  "name": "Receiving Channel",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

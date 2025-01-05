@@ -6,7 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "get",
-  "g"
+  "g",
+  "sector"
  ],
  "fields": [
   {
@@ -18,11 +19,16 @@
    "fieldname": "g",
    "fieldtype": "JSON",
    "label": "g"
+  },
+  {
+   "fieldname": "sector",
+   "fieldtype": "Data",
+   "label": "Sector"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-30 23:50:32.276874",
+ "modified": "2025-01-01 12:09:39.081858",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Kobotest",
