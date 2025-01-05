@@ -6,37 +6,50 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "name1",
-  "code",
-  "type"
+  "outcome_code",
+  "outcome_name",
+  "code_output",
+  "output_name"
  ],
  "fields": [
   {
-   "fieldname": "name1",
+   "columns": 1,
+   "fieldname": "outcome_code",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Name",
+   "label": "Outcome Code",
+   "options": "TFD Outcome"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "outcome_code.name1",
+   "fieldname": "outcome_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Outcome Name"
+  },
+  {
+   "columns": 1,
+   "fieldname": "code_output",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Code Output",
    "options": "TFD Output"
   },
   {
-   "fetch_from": "name1.code",
-   "fieldname": "code",
+   "columns": 7,
+   "fetch_from": "code_output.name1",
+   "fieldname": "output_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Code"
-  },
-  {
-   "fetch_from": "name1.type",
-   "fieldname": "type",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Type"
+   "label": "Output Name",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-12-24 12:18:29.211385",
+ "modified": "2025-01-05 01:04:55.479266",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Output Child",

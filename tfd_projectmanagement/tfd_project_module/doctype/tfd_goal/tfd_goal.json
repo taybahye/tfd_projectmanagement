@@ -1,41 +1,43 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:code",
+ "autoname": "naming_series:.##",
  "creation": "2024-12-21 13:57:45.518392",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "name1",
-  "code",
-  "type"
+  "type",
+  "naming_series"
  ],
  "fields": [
   {
    "fieldname": "name1",
    "fieldtype": "Long Text",
-   "label": "Name"
-  },
-  {
-   "fieldname": "code",
-   "fieldtype": "Data",
-   "label": "Code",
-   "unique": 1
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
   },
   {
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
    "options": "Goal"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Code",
+   "options": "G-"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-31 11:11:51.755483",
+ "modified": "2025-01-04 23:58:53.251246",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Goal",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -54,5 +56,6 @@
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "name1"
 }

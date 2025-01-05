@@ -1,44 +1,50 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:name1",
+ "autoname": "naming_series:put-.###",
  "creation": "2024-12-24 12:12:46.589431",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "outcomes_code",
+  "outcomes_name",
   "name1",
-  "code",
-  "type"
+  "naming_series"
  ],
  "fields": [
   {
    "fieldname": "name1",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Name",
-   "unique": 1
+   "reqd": 1
   },
   {
-   "fieldname": "code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Code"
-  },
-  {
-   "fieldname": "type",
+   "fieldname": "naming_series",
    "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Type",
-   "options": "OUTPUT"
+   "label": "Code",
+   "options": "put-.###"
+  },
+  {
+   "fieldname": "outcomes_code",
+   "fieldtype": "Link",
+   "label": "Outcomes Code",
+   "options": "TFD Outcome"
+  },
+  {
+   "fetch_from": "outcomes_code.name1",
+   "fieldname": "outcomes_name",
+   "fieldtype": "Data",
+   "label": "Outcomes Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-31 11:04:46.296786",
+ "modified": "2025-01-05 00:53:40.132610",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Output",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
