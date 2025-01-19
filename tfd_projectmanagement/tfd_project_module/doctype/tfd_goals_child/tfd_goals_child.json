@@ -23,7 +23,7 @@
    "columns": 8,
    "fetch_from": "name1.name1",
    "fieldname": "code",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Name"
   },
@@ -38,7 +38,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-01-05 00:02:29.889782",
+ "modified": "2025-01-19 12:15:51.906729",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Goals child",

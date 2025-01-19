@@ -354,7 +354,7 @@
   {
    "fieldname": "project_info",
    "fieldtype": "Table",
-   "label": "Project Info",
+   "label": "Activities",
    "options": "Project Information"
   },
   {
@@ -397,7 +397,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-31 11:03:50.878230",
+ "modified": "2025-01-19 12:06:59.169439",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
