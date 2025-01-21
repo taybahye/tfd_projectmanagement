@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "name1",
-  "type",
   "naming_series"
  ],
  "fields": [
@@ -15,14 +14,8 @@
    "fieldname": "name1",
    "fieldtype": "Long Text",
    "in_list_view": 1,
-   "label": "Name",
+   "label": "Goal Name",
    "reqd": 1
-  },
-  {
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "label": "Type",
-   "options": "Goal"
   },
   {
    "fieldname": "naming_series",
@@ -33,7 +26,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-04 23:58:53.251246",
+ "modified": "2025-01-22 00:26:45.924629",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Goal",

@@ -1,22 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:arabic_display_name",
+ "autoname": "naming_series:Ind.####",
  "creation": "2024-10-26 11:57:55.969387",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_ehtu",
-  "code",
+  "naming_series",
   "lft",
   "rgt",
-  "column_break_vlru",
-  "indicator_categoies",
+  "column_break_tmnw",
+  "output_code",
+  "output_name",
   "column_break_hdeq",
   "english_display_name",
-  "column_break_tmnw",
-  "arabic_display_name",
+  "cluster",
   "indicator_description_section",
+  "arabic_display_name",
+  "column_break_nkay",
   "english_description",
   "column_break_tgie",
   "aribic_description",
@@ -25,6 +27,7 @@
   "direction_of_change",
   "column_break_rffw",
   "data_format",
+  "indicator_categoies",
   "column_break_rmxr",
   "status",
   "percentage",
@@ -35,13 +38,6 @@
    "fieldname": "section_break_ehtu",
    "fieldtype": "Section Break",
    "label": "Indicators Information"
-  },
-  {
-   "fieldname": "code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Code ",
-   "reqd": 1
   },
   {
    "fieldname": "lft",
@@ -60,15 +56,10 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_vlru",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "indicator_categoies",
    "fieldtype": "Link",
    "label": "Indicator Categoies",
-   "options": "TFD Indicator Categoies",
-   "reqd": 1
+   "options": "TFD Indicator Categoies"
   },
   {
    "fieldname": "column_break_hdeq",
@@ -76,7 +67,7 @@
   },
   {
    "fieldname": "english_display_name",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "English display name",
    "reqd": 1
@@ -87,11 +78,9 @@
   },
   {
    "fieldname": "arabic_display_name",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Arabic display name ",
-   "reqd": 1,
-   "unique": 1
+   "label": "Arabic display name "
   },
   {
    "fieldname": "indicator_description_section",
@@ -100,7 +89,7 @@
   },
   {
    "fieldname": "english_description",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "English Description"
   },
   {
@@ -109,7 +98,7 @@
   },
   {
    "fieldname": "aribic_description",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Aribic Description"
   },
   {
@@ -121,8 +110,7 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nGoal\nOutcome\nOutput\nImpact\nIndicator",
-   "reqd": 1
+   "options": "Ind"
   },
   {
    "fieldname": "direction_of_change",
@@ -161,15 +149,46 @@
    "fieldname": "has_beneficiaries",
    "fieldtype": "Check",
    "label": "Has Beneficiaries"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Code ",
+   "options": "Ind.####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "output_code",
+   "fieldtype": "Link",
+   "label": "Output Code",
+   "options": "TFD Output",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "output_code.name1",
+   "fieldname": "output_name",
+   "fieldtype": "Small Text",
+   "label": "Output Name"
+  },
+  {
+   "fieldname": "column_break_nkay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cluster",
+   "fieldtype": "Link",
+   "label": "Cluster",
+   "options": "TFD Cluster"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 21:57:04.417175",
+ "modified": "2025-01-22 01:03:48.008427",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Indicators",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "nsm_parent_field": "parent_doner_indicators",
  "owner": "Administrator",
  "permissions": [
@@ -187,6 +206,7 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "english_display_name",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

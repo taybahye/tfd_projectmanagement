@@ -32,7 +32,6 @@
   "logical_framework_tab",
   "logical_framework_section",
   "overall_project_objective",
-  "framework",
   "goals",
   "outcomes",
   "indicators",
@@ -197,12 +196,6 @@
    "fieldname": "overall_project_objective",
    "fieldtype": "Small Text",
    "label": "Overall Project Objective"
-  },
-  {
-   "fieldname": "framework",
-   "fieldtype": "Link",
-   "label": "Framework",
-   "options": "TFD Logframe Name"
   },
   {
    "fieldname": "work_plan_tab",
@@ -392,12 +385,12 @@
    "fieldname": "indictors",
    "fieldtype": "Table",
    "label": "Indictors",
-   "options": "Output"
+   "options": "Indicator Proposal Chilled"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-19 12:06:59.169439",
+ "modified": "2025-01-22 01:12:25.465591",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
@@ -417,7 +410,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "naming_series:goal_code.##",
+ "autoname": "naming_series:naming_series.##",
  "creation": "2024-12-21 14:13:21.928964",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -16,31 +16,33 @@
    "fieldname": "name1",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Name",
+   "label": "Outcome Name",
    "reqd": 1
   },
   {
    "fieldname": "goal_code",
    "fieldtype": "Link",
    "label": "Goal Code",
-   "options": "TFD Goal"
+   "options": "TFD Goal",
+   "reqd": 1
   },
   {
    "fetch_from": "goal_code.name1",
    "fieldname": "goal_name",
-   "fieldtype": "Data",
-   "label": "Goal Name"
+   "fieldtype": "Small Text",
+   "label": "Goal Name",
+   "reqd": 1
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "label": "Code",
+   "label": "Outcome Code",
    "options": "out-"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-05 00:30:35.125981",
+ "modified": "2025-01-22 00:37:44.279926",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Outcome",
@@ -61,6 +63,7 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "name1",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

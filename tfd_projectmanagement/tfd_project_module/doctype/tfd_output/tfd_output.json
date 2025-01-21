@@ -16,31 +16,33 @@
    "fieldname": "name1",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Name",
+   "label": "Output Name",
    "reqd": 1
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "label": "Code",
+   "label": "Output Code",
    "options": "put-.###"
   },
   {
    "fieldname": "outcomes_code",
    "fieldtype": "Link",
    "label": "Outcomes Code",
-   "options": "TFD Outcome"
+   "options": "TFD Outcome",
+   "reqd": 1
   },
   {
    "fetch_from": "outcomes_code.name1",
    "fieldname": "outcomes_name",
-   "fieldtype": "Data",
-   "label": "Outcomes Name"
+   "fieldtype": "Small Text",
+   "label": "Outcomes Name",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-05 00:53:40.132610",
+ "modified": "2025-01-22 00:42:16.428006",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Output",
@@ -61,6 +63,7 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "name1",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
