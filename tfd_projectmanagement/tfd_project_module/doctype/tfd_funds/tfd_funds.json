@@ -183,7 +183,8 @@
   },
   {
    "fieldname": "section_break_xvqb",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Covenments"
   },
   {
    "fieldname": "closing_date",
@@ -216,7 +217,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 22:03:13.059012",
+ "modified": "2025-01-23 10:45:56.706727",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Funds",
