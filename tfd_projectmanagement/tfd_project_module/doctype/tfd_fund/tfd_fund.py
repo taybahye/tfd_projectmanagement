@@ -1,7 +1,7 @@
 import frappe
 from frappe.model.document import Document
 
-class TFDFunds(Document):
+class TFDFund(Document):
 
     @frappe.whitelist()
     def calculate_population(self, env_name, percentage):

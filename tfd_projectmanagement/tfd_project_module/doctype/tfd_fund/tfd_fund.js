@@ -1,4 +1,4 @@
-frappe.ui.form.on("TFD Funds", {
+frappe.ui.form.on("TFD Fund", {
     refresh: function(frm) {
         frm.set_query('bank', function() {
             return {

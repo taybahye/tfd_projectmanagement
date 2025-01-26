@@ -70,7 +70,7 @@
    "fieldname": "fund_code",
    "fieldtype": "Link",
    "label": "Fund Code",
-   "options": "TFD Funds"
+   "options": "TFD Fund"
   },
   {
    "fetch_from": "fund_code.funding_name",
@@ -390,7 +390,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-22 01:12:25.465591",
+ "modified": "2025-01-26 11:42:11.518346",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",

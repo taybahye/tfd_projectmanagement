@@ -216,12 +216,11 @@
   }
  ],
  "index_web_pages_for_search": 1,
- 
  "links": [],
  "modified": "2025-01-23 10:45:56.706727",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
- "name": "TFD Funds",
+ "name": "TFD Fund",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
