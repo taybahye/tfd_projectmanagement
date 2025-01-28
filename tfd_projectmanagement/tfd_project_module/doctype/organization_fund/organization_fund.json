@@ -5,7 +5,17 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "company"
+  "company",
+  "column_break_zjox",
+  "fund_code",
+  "column_break_duab",
+  "fund_name",
+  "section_break_xyal",
+  "donor_id",
+  "column_break_oovp",
+  "donor_name",
+  "column_break_wigb",
+  "grant_aoumnt"
  ],
  "fields": [
   {
@@ -14,11 +24,57 @@
    "label": "Company",
    "options": "Company",
    "remember_last_selected_value": 1
+  },
+  {
+   "fieldname": "column_break_zjox",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fund_code",
+   "fieldtype": "Select",
+   "label": "Fund Code"
+  },
+  {
+   "fieldname": "column_break_duab",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fund_name",
+   "fieldtype": "Data",
+   "label": "Fund Name"
+  },
+  {
+   "fieldname": "section_break_xyal",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "donor_id",
+   "fieldtype": "Link",
+   "label": "Donor Id",
+   "options": "Donor"
+  },
+  {
+   "fieldname": "column_break_oovp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "donor_name",
+   "fieldtype": "Data",
+   "label": "Donor Name"
+  },
+  {
+   "fieldname": "column_break_wigb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grant_aoumnt",
+   "fieldtype": "Currency",
+   "label": "Grant Aoumnt"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-28 10:27:00.952212",
+ "modified": "2025-01-28 10:41:13.208449",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Organization Fund",
