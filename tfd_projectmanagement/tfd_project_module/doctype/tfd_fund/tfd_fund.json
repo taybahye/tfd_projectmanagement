@@ -139,6 +139,7 @@
    "options": "Currency Exchange"
   },
   {
+   "fetch_from": "donor.donor_name",
    "fieldname": "doner_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -217,7 +218,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-23 10:45:56.706727",
+ "modified": "2025-01-28 11:41:43.752443",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Fund",
