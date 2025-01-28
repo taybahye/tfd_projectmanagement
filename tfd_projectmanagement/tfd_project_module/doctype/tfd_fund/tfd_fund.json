@@ -55,7 +55,7 @@
    "fieldname": "funding_reference",
    "fieldtype": "Link",
    "label": "Funding Reference",
-   "options": "TFD Funds"
+   "options": "TFD Fund"
   },
   {
    "fieldname": "company",
@@ -92,7 +92,7 @@
    "fieldname": "funding_additional_reference",
    "fieldtype": "Link",
    "label": "Funding Additional Reference",
-   "options": "TFD Funds"
+   "options": "TFD Fund"
   },
   {
    "fieldname": "section_break_dkbe",
