@@ -21,12 +21,12 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Code",
-   "options": "G-"
+   "options": "Ind-"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-22 00:26:45.924629",
+ "modified": "2025-02-10 00:32:03.353842",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Goal",

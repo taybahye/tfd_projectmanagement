@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:project_title",
+ "autoname": "field:abbr",
  "creation": "2024-10-26 22:47:16.665157",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -9,6 +9,7 @@
   "cover_page_tab",
   "proposal_information_section",
   "project_title",
+  "abbr",
   "fund_code",
   "fund_name",
   "donor",
@@ -386,11 +387,18 @@
    "fieldtype": "Table",
    "label": "Indictors",
    "options": "Indicator Proposal Chilled"
+  },
+  {
+   "fieldname": "abbr",
+   "fieldtype": "Data",
+   "label": "Abbr",
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-28 10:49:06.710929",
+ "modified": "2025-02-10 00:30:22.574738",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
