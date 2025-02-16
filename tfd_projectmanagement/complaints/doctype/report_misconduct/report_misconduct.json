@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-23 13:47:07.779446",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "report_misconduct_details_section",
+  "what_is_the_alleged_error_you_are_reporting",
+  "describe_what_happened_including_as_much_detail_as_you_know",
+  "who_committed_the_alleged_violation",
+  "where_did_the_incident_occur_specify_the_location",
+  "where_did_the_incident_occur_specify_the_loc",
+  "when_the_incident_occurred_specify_the_date",
+  "when_the_incident_occurred_specify_the_time",
+  "how_the_individual_committed_the_alleged_violation",
+  "why_do_you_think_the_activity_was_inappropriate",
+  "do_you_have_evidence_to_prove_the_incident",
+  "can_you_share_it_with_us"
+ ],
+ "fields": [
+  {
+   "fieldname": "report_misconduct_details_section",
+   "fieldtype": "Section Break",
+   "label": "Report misconduct Details"
+  },
+  {
+   "fieldname": "what_is_the_alleged_error_you_are_reporting",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "What is the alleged error you are reporting?"
+  },
+  {
+   "fieldname": "describe_what_happened_including_as_much_detail_as_you_know",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Describe what happened including as much detail as you know"
+  },
+  {
+   "fieldname": "who_committed_the_alleged_violation",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Who committed the alleged violation?"
+  },
+  {
+   "fieldname": "where_did_the_incident_occur_specify_the_location",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Do you know if there is anyone else involved? Provide full names titles and organization if possible"
+  },
+  {
+   "fieldname": "where_did_the_incident_occur_specify_the_loc",
+   "fieldtype": "Small Text",
+   "label": "Where did the incident occur Specify the location"
+  },
+  {
+   "fieldname": "when_the_incident_occurred_specify_the_date",
+   "fieldtype": "Small Text",
+   "label": "When the incident occurred specify the date"
+  },
+  {
+   "fieldname": "when_the_incident_occurred_specify_the_time",
+   "fieldtype": "Small Text",
+   "label": "When the incident occurred specify the time"
+  },
+  {
+   "fieldname": "how_the_individual_committed_the_alleged_violation",
+   "fieldtype": "Small Text",
+   "label": "How the individual committed the alleged violation"
+  },
+  {
+   "fieldname": "why_do_you_think_the_activity_was_inappropriate",
+   "fieldtype": "Small Text",
+   "label": "Why do you think the activity was inappropriate"
+  },
+  {
+   "fieldname": "do_you_have_evidence_to_prove_the_incident",
+   "fieldtype": "Select",
+   "label": "Do you have evidence to prove the incident?",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "can_you_share_it_with_us",
+   "fieldtype": "Select",
+   "label": "Can you share it with us?",
+   "options": "Yes\nNo"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-11-27 11:18:11.765052",
+ "modified_by": "Administrator",
+ "module": "Complaints",
+ "name": "Report misconduct",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

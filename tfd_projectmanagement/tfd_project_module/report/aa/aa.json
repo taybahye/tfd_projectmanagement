@@ -1,0 +1,36 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-12-01 13:49:52.460275",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"columns\":[{\"label\":\"Salary Slip ID\",\"fieldname\":\"salary_slip_id\",\"fieldtype\":\"Link\",\"options\":\"Salary Slip\",\"width\":150,\"id\":\"salary_slip_id\",\"name\":\"Salary Slip ID\",\"editable\":false,\"compareValue\":null},{\"label\":\"Employee\",\"fieldname\":\"employee\",\"fieldtype\":\"Link\",\"options\":\"Employee\",\"width\":120,\"id\":\"employee\",\"name\":\"Employee\",\"editable\":false,\"compareValue\":null},{\"label\":\"Employee Name\",\"fieldname\":\"employee_name\",\"fieldtype\":\"Data\",\"width\":140,\"id\":\"employee_name\",\"name\":\"Employee Name\",\"editable\":false,\"compareValue\":null},{\"label\":\"Branch\",\"fieldname\":\"branch\",\"fieldtype\":\"Link\",\"options\":\"Branch\",\"width\":120,\"id\":\"branch\",\"name\":\"Branch\",\"editable\":false,\"compareValue\":null},{\"label\":\"Department\",\"fieldname\":\"department\",\"fieldtype\":\"Link\",\"options\":\"Department\",\"width\":120,\"id\":\"department\",\"name\":\"Department\",\"editable\":false,\"compareValue\":null},{\"label\":\"Designation\",\"fieldname\":\"designation\",\"fieldtype\":\"Link\",\"options\":\"Designation\",\"width\":120,\"id\":\"designation\",\"name\":\"Designation\",\"editable\":false,\"compareValue\":null},{\"label\":\"Start Date\",\"fieldname\":\"start_date\",\"fieldtype\":\"Data\",\"width\":80,\"id\":\"start_date\",\"name\":\"Start Date\",\"editable\":false,\"compareValue\":null},{\"label\":\"End Date\",\"fieldname\":\"end_date\",\"fieldtype\":\"Data\",\"width\":120,\"id\":\"end_date\",\"name\":\"End Date\",\"editable\":false,\"compareValue\":null},{\"label\":\"Leave Without Pay\",\"fieldname\":\"leave_without_pay\",\"fieldtype\":\"Float\",\"width\":50,\"id\":\"leave_without_pay\",\"name\":\"Leave Without Pay\",\"editable\":false,\"compareValue\":null},{\"label\":\"Payment Days\",\"fieldname\":\"payment_days\",\"fieldtype\":\"Float\",\"width\":120,\"id\":\"payment_days\",\"name\":\"Payment Days\",\"editable\":false,\"compareValue\":null},{\"label\":\"\u0627\u0644\u062a\u0623\u0645\u064a\u0646\u0627\u062a (9%) USD\",\"fieldname\":\"\u0627\u0644\u062a\u0623\u0645\u064a\u0646\u0627\u062a_(9%)_usd\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"\u0627\u0644\u062a\u0623\u0645\u064a\u0646\u0627\u062a_(9%)_usd\",\"name\":\"\u0627\u0644\u062a\u0623\u0645\u064a\u0646\u0627\u062a (9%) USD\",\"editable\":false,\"compareValue\":null},{\"label\":\"\u0627\u0644\u0631\u0627\u062a\u0628 \u0627\u0644\u0623\u0633\u0627\u0633\u064a USD\",\"fieldname\":\"\u0627\u0644\u0631\u0627\u062a\u0628_\u0627\u0644\u0623\u0633\u0627\u0633\u064a_usd\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"\u0627\u0644\u0631\u0627\u062a\u0628_\u0627\u0644\u0623\u0633\u0627\u0633\u064a_usd\",\"name\":\"\u0627\u0644\u0631\u0627\u062a\u0628 \u0627\u0644\u0623\u0633\u0627\u0633\u064a USD\",\"editable\":false,\"compareValue\":null},{\"label\":\"Gross Pay\",\"fieldname\":\"gross_pay\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"gross_pay\",\"name\":\"Gross Pay\",\"editable\":false,\"compareValue\":null},{\"label\":\"\u062a\u0627\u0645\u064a\u0646 15% USD\",\"fieldname\":\"\u062a\u0627\u0645\u064a\u0646_15%_usd\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"\u062a\u0627\u0645\u064a\u0646_15%_usd\",\"name\":\"\u062a\u0627\u0645\u064a\u0646 15% USD\",\"editable\":false,\"compareValue\":null},{\"label\":\"Loan Repayment\",\"fieldname\":\"total_loan_repayment\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"total_loan_repayment\",\"name\":\"Loan Repayment\",\"editable\":false,\"compareValue\":null},{\"label\":\"Total Deduction\",\"fieldname\":\"total_deduction\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"total_deduction\",\"name\":\"Total Deduction\",\"editable\":false,\"compareValue\":null},{\"label\":\"Net Pay\",\"fieldname\":\"net_pay\",\"fieldtype\":\"Currency\",\"options\":\"currency\",\"width\":120,\"id\":\"net_pay\",\"name\":\"Net Pay\",\"editable\":false,\"compareValue\":null}],\"filters\":{\"from_date\":\"2024-11-01\",\"to_date\":\"2024-12-01\",\"currency\":\"USD\",\"company\":\"Taybah Foundation For Development\",\"docstatus\":\"Submitted\"}}",
+ "letter_head": "TFD",
+ "letterhead": null,
+ "modified": "2024-12-09 12:22:19.685913",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "aa",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Salary Slip",
+ "reference_report": "",
+ "report_name": "aa",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "Employee"
+  }
+ ],
+ "timeout": 0
+}

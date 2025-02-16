@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-11 12:19:50.343275",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "cost",
+  "project"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project Name",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "project_name.estimated_costing",
+   "fieldname": "cost",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost"
+  },
+  {
+   "fetch_from": "project_name.project_name",
+   "fieldname": "project",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-31 11:51:00.308065",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Project Information",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,245 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:fund_code",
+ "creation": "2024-10-21 12:37:10.509476",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "final",
+  "fund_code",
+  "column_break_lqfn",
+  "funding_reference",
+  "company",
+  "section_break_iwas",
+  "bank",
+  "column_break_lwml",
+  "funding_type",
+  "column_break_hqxu",
+  "funding_additional_reference",
+  "section_break_dkbe",
+  "donor",
+  "doner_name",
+  "column_break_arvy",
+  "funding_name",
+  "abbr",
+  "column_break_ezlk",
+  "grant_amount",
+  "column_break_yxkh",
+  "currency",
+  "column_break_obvd",
+  "currency_ex",
+  "section_break_wapa",
+  "start_date",
+  "column_break_dxdr",
+  "closing_date",
+  "column_break_krjd",
+  "funding_types",
+  "section_break_xvqb",
+  "list_governments",
+  "section_break_coud",
+  "accounts"
+ ],
+ "fields": [
+  {
+   "fieldname": "final",
+   "fieldtype": "Select",
+   "label": "Final",
+   "options": "\nFinal"
+  },
+  {
+   "fieldname": "column_break_lqfn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_reference",
+   "fieldtype": "Link",
+   "label": "Funding Reference",
+   "options": "TFD Fund"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_iwas",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "label": "Bank",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_lwml",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_type",
+   "fieldtype": "Select",
+   "label": "Funding Type",
+   "options": "New\nAdditional"
+  },
+  {
+   "fieldname": "column_break_hqxu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.funding_type == \"Additional\"",
+   "fieldname": "funding_additional_reference",
+   "fieldtype": "Link",
+   "label": "Funding Additional Reference",
+   "options": "TFD Fund"
+  },
+  {
+   "fieldname": "section_break_dkbe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_arvy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Funding Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ezlk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grant_amount",
+   "fieldtype": "Data",
+   "label": "Grant Amount "
+  },
+  {
+   "fieldname": "column_break_yxkh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "column_break_obvd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency_ex",
+   "fieldtype": "Link",
+   "label": "Currency Ex",
+   "options": "Currency Exchange"
+  },
+  {
+   "fetch_from": "donor.donor_name",
+   "fieldname": "doner_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Doner Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "donor",
+   "fieldtype": "Link",
+   "label": "Donor",
+   "options": "Donor"
+  },
+  {
+   "fieldname": "abbr",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Abbr",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wapa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "column_break_dxdr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_krjd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_types",
+   "fieldtype": "Link",
+   "label": "Funding Type",
+   "options": "TFD Funding Type"
+  },
+  {
+   "fieldname": "section_break_xvqb",
+   "fieldtype": "Section Break",
+   "label": "Covenments"
+  },
+  {
+   "fieldname": "closing_date",
+   "fieldtype": "Date",
+   "label": "Closing Date"
+  },
+  {
+   "fieldname": "list_governments",
+   "fieldtype": "Table",
+   "label": "List Governments",
+   "options": "TFD Governments Child"
+  },
+  {
+   "fieldname": "section_break_coud",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "accounts",
+   "fieldtype": "Table",
+   "label": "Accounts",
+   "options": "TFD Account Child"
+  },
+  {
+   "fieldname": "fund_code",
+   "fieldtype": "Data",
+   "label": "Fund Code",
+   "reqd": 1,
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-28 11:41:43.752443",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Fund",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
