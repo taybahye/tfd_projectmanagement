@@ -19,7 +19,7 @@
    "fieldname": "name1",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Output Name",
+   "label": "Outcome Name",
    "options": "TFD Outcome",
    "reqd": 1
   },
@@ -59,7 +59,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-01-22 00:32:13.771807",
+ "modified": "2025-03-11 11:22:50.423213",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Outcome Child",
