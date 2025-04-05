@@ -23,8 +23,25 @@ FORM_DETAILS_URL = "https://kf.kobotoolbox.org/api/v2/assets/"
 class kobo(Document):
 
     @frappe.whitelist()
-    def get_kobo_forms1(self):
-        self.import_kobo_form_data("aCBiRZuZjGSsaMpySR78v6", "CLTS_Questionnaire")
+    def get_kobo_all_data(self):
+        try:
+            response = requests.get(ASSETS_URL, headers=HEADERS)
+            if response.status_code != 200:
+                frappe.msgprint(f"Error {response.status_code}: {response.text}")
+                raise Exception("Failed to Data forms")
+            forms = response.json().get("results", [])
+            for asset in forms:
+                raw_name = asset.get('name')              #doctype_name or form.get("title", f"KoboForm_{name}")
+                doctype_name = self._sanitize_doctype_name(raw_name)
+                # frappe.msgprint(f"--....>>>>>>>> {asset.get('uid')}: {doctype_name}")
+                self.import_kobo_form_data(asset.get('uid'), doctype_name)
+
+            return forms
+        except Exception:
+            frappe.log_error(frappe.get_traceback(), "Kobo: Error in get_kobo_all_data")
+            frappe.throw("Failed to Data from Kobo")
+            
+        # self.import_kobo_form_data("aCBiRZuZjGSsaMpySR78v6", "CLTS_Questionnaire")
 
     @frappe.whitelist()
     def get_kobo_forms(self):
@@ -36,6 +53,7 @@ class kobo(Document):
 
             forms = response.json().get("results", [])
             for asset in forms:
+                # frappe.msgprint(f"--....>>>>>>>> {asset.get('uid')}: {asset.get('name')}")
                 self.get_kobo_form_data(asset.get('uid'), asset.get('name'))
 
             return forms
@@ -88,7 +106,8 @@ class kobo(Document):
         options = choices_map.get(list_name, []) if choices_map else []
 
         if qtype.startswith("select_one"):
-            options_str = "\n".join([f"{opt[1]}:{opt[0]}" for opt in options]) if options else ""
+            # options_str = "\n".join([f"{opt[1]}:{opt[0]}" for opt in options]) if options else ""
+            options_str = "\n".join([f"{opt[0]}" for opt in options]) if options else ""
             field = {
                 "fieldname": name,
                 "label": label,
@@ -221,6 +240,8 @@ class kobo(Document):
 
             doctype_doc.insert()
             frappe.msgprint(f"Doctype {full_doctype_name} created successfully.")
+            # self.get_kobo_form_data(uid, full_doctype_name)
+
             return {"status": "success", "doctype": full_doctype_name}
 
         except Exception:
@@ -275,6 +296,8 @@ class kobo(Document):
     @frappe.whitelist()
     def import_kobo_form_data(self, uid, doctype_name):
         try:
+            # Delete all existing data before importing new submissions
+            frappe.db.delete(doctype_name, {})  # This line deletes all existing records
             submissions = []
             used_method = ""
             
@@ -396,11 +419,8 @@ class kobo(Document):
                             submissions = response_v1.json()
         return submissions
     
-
-        
     
-	
-	
+    
 # # -------------------------------------------------------------------------------.............>>>>>>>>>>>>>>>>>>
 # # ---------------iهذا الاخر مع ال checkbox ----------------------------------------------------------------.............>>>>>>>>>>>>>>>>>>
 
