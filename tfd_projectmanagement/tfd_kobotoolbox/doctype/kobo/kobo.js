@@ -31,13 +31,13 @@ frappe.ui.form.on("kobo", {
         // console.log("test")
 		alert('Starting Request...')
 		frappe.call({
-			method: "get_kobo_forms",
+			method: "get_kobo_all_data",
 			doc: frm.doc,
 			callback: function (response) {
 				// frappe.show_progress(__('Fetching Data'), 100, 100, __('Completed!'));
 				// frm.refresh_field("data_from_api");
-				frm.refresh_field(response);
-				frappe.msgprint(__('Data fetch completed!'));
+				// frm.refresh_field(response);
+				// frappe.msgprint(__('Data fetch completed!'));
 			},
 			always: function () {
 				frappe.hide_progress(); // إخفاء progress بعد انتهاء العملية
