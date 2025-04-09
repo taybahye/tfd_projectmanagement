@@ -339,7 +339,6 @@ class kobo(Document):
 
             if not submissions:
                 frappe.throw("No submissions found for this form.")
-
             count = 0
             for submission in submissions:
                 doc_data = {}
