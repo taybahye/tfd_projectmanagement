@@ -1,0 +1,203 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{logframe_name}-{###}",
+ "creation": "2024-10-22 07:21:56.127991",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_oybk",
+  "company",
+  "rgt",
+  "lft",
+  "column_break_bjvk",
+  "logframe_name",
+  "column_break_bzjm",
+  "indicator_name",
+  "column_break_xrmk",
+  "type",
+  "section_break_eutk",
+  "activities",
+  "section_break_hjhj",
+  "baseline",
+  "column_break_xyta",
+  "target",
+  "column_break_rklh",
+  "acheivement",
+  "column_break_dzqd",
+  "growth_in",
+  "section_break_nehd",
+  "old_parent",
+  "parent_tfd_logframe",
+  "is_group"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_oybk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "TFD Logframe"
+  },
+  {
+   "fieldname": "parent_tfd_logframe",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent TFD Logframe",
+   "options": "TFD Logframe"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "logframe_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Logframe Name",
+   "options": "TFD Logframe Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "baseline",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Baseline",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Target"
+  },
+  {
+   "fieldname": "acheivement",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Acheivement",
+   "read_only": 1
+  },
+  {
+   "fieldname": "growth_in",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Growth In",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bjvk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hjhj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_xyta",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_rklh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dzqd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_nehd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_bzjm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_eutk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "activities",
+   "fieldtype": "Table",
+   "label": "Activities",
+   "options": "TFD Logframe Activities"
+  },
+  {
+   "fieldname": "column_break_xrmk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "indicator_name.type",
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "indicator_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Indicator Name",
+   "options": "TFD Indicators",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2024-10-28 12:21:41.811169",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Logframe",
+ "naming_rule": "Expression",
+ "nsm_parent_field": "parent_tfd_logframe",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
