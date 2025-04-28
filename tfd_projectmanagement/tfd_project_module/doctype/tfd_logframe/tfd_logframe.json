@@ -104,15 +104,13 @@
    "fieldname": "acheivement",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Acheivement",
-   "read_only": 1
+   "label": "Acheivement"
   },
   {
    "fieldname": "growth_in",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Growth In",
-   "read_only": 1
+   "label": "Growth In"
   },
   {
    "fieldname": "column_break_bjvk",
@@ -175,7 +173,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-10-28 12:21:41.811169",
+ "modified": "2025-04-29 00:47:48.116426",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
