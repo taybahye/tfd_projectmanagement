@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-23 11:10:56.446924",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "document_name",
+  "column_break_rakv",
+  "description",
+  "column_break_onyw",
+  "attach_file"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Document Name"
+  },
+  {
+   "fieldname": "column_break_rakv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Description "
+  },
+  {
+   "fieldname": "column_break_onyw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attach_file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach File"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-23 11:14:24.430293",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Need Assessment Documents",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
