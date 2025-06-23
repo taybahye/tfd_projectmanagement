@@ -1,0 +1,260 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{type}-Ind.{indcode}-{en_ind_name}-{#####}",
+ "creation": "2025-06-23 09:56:15.347880",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "innn_section",
+  "column_break_cwuy",
+  "indcode",
+  "column_break_dtvx",
+  "indicator_categories",
+  "section_break_ufzp",
+  "en_ind_name",
+  "ind_des",
+  "column_break_gaaq",
+  "ar_ind_name",
+  "ar_ind_des",
+  "actual_and_target_values_represents_and_periodicity_section",
+  "type",
+  "data_format",
+  "start_date",
+  "end_date",
+  "column_break_rfvg",
+  "ind_nature",
+  "category",
+  "status",
+  "direction_of_change",
+  "is_it_beneficiary_indicator",
+  "column_break_hmrz",
+  "periodicity_actual",
+  "periodicity_target",
+  "number_of_decimal_places",
+  "percentage",
+  "lft",
+  "rgt",
+  "is_group",
+  "old_parent",
+  "parent_doner_indicators"
+ ],
+ "fields": [
+  {
+   "fieldname": "innn_section",
+   "fieldtype": "Section Break",
+   "label": "Indicators Information"
+  },
+  {
+   "fieldname": "column_break_cwuy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "indcode",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Code ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_dtvx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "indicator_categories",
+   "fieldtype": "Link",
+   "label": "Indicator Categories",
+   "options": "TFD Indicator Categoies",
+   "reqd": 1
+  },
+  {
+   "fieldname": "en_ind_name",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "English display name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ar_ind_name",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Arabic display name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ufzp",
+   "fieldtype": "Section Break",
+   "label": "Indicator description  "
+  },
+  {
+   "fieldname": "ind_des",
+   "fieldtype": "Text",
+   "label": "English Description  ",
+   "max_height": "50px"
+  },
+  {
+   "fieldname": "column_break_gaaq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ar_ind_des",
+   "fieldtype": "Text",
+   "label": "Arabic Description",
+   "max_height": "50px"
+  },
+  {
+   "fieldname": "actual_and_target_values_represents_and_periodicity_section",
+   "fieldtype": "Section Break",
+   "label": "Actual and Target Values Represents and Periodicity"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nGoal\nOutcome\nOutput\nImpact\nInd",
+   "reqd": 1
+  },
+  {
+   "fieldname": "data_format",
+   "fieldtype": "Select",
+   "label": "Data Format",
+   "options": "Number\nText"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "column_break_rfvg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ind_nature",
+   "fieldtype": "Select",
+   "label": "Nature",
+   "options": "--select--\nCumulative\nIncremental\nSpecific-Calculation"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "Master indicator tracking"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive"
+  },
+  {
+   "fieldname": "direction_of_change",
+   "fieldtype": "Select",
+   "label": "Direction Of Change",
+   "options": "Increasing\ndecreasing"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_it_beneficiary_indicator",
+   "fieldtype": "Check",
+   "label": "Is it Beneficiary Indicator "
+  },
+  {
+   "fieldname": "column_break_hmrz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "periodicity_actual",
+   "fieldtype": "Select",
+   "label": "Periodicity Actual",
+   "options": "--select--\nAnnual\nQuarterly"
+  },
+  {
+   "fieldname": "periodicity_target",
+   "fieldtype": "Select",
+   "label": "Periodicity Target",
+   "options": "--select--\nAnnual\nQuarterly"
+  },
+  {
+   "fieldname": "number_of_decimal_places",
+   "fieldtype": "Int",
+   "label": "Number of Decimal Places"
+  },
+  {
+   "default": "0",
+   "fieldname": "percentage",
+   "fieldtype": "Check",
+   "label": "Percentage"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "Doner Indicators"
+  },
+  {
+   "fieldname": "parent_doner_indicators",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Doner Indicators",
+   "options": "Doner Indicators"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2025-06-23 09:57:58.953948",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Main Indicators",
+ "naming_rule": "Expression",
+ "nsm_parent_field": "parent_doner_indicators",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "ar_ind_name,indcode",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

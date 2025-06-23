@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:project_name",
+ "creation": "2025-06-23 09:45:08.712267",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "column_break_euwt",
+  "estimated_cost",
+  "column_break_msvs",
+  "status",
+  "section_break_qsml",
+  "need_assessment_documents"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_euwt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost"
+  },
+  {
+   "fieldname": "column_break_msvs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nOngoing\nCompleted\nCancel"
+  },
+  {
+   "fieldname": "section_break_qsml",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "need_assessment_documents",
+   "fieldtype": "Table",
+   "label": "Need Assessment Documents",
+   "options": "Need Assessment Documents"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-23 11:14:11.207725",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Projects",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -8,6 +8,7 @@
  "field_order": [
   "cover_page_tab",
   "proposal_information_section",
+  "project",
   "project_title",
   "abbr",
   "fund_code",
@@ -43,6 +44,7 @@
   "project_info",
   "work_plan_tab",
   "work_plan",
+  "work_plan_name",
   "project_plan",
   "tab_4_tab",
   "targeted_affected_persons_and_locations_section",
@@ -318,6 +320,7 @@
    "options": "TFD Documents"
   },
   {
+   "fetch_from": "project.project_name",
    "fieldname": "project_title",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -394,11 +397,23 @@
    "label": "Abbr",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "TFD Projects"
+  },
+  {
+   "fetch_from": "work_plan.implementation_name",
+   "fieldname": "work_plan_name",
+   "fieldtype": "Data",
+   "label": "Work plan Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-10 00:30:22.574738",
+ "modified": "2025-06-23 10:27:29.227099",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
