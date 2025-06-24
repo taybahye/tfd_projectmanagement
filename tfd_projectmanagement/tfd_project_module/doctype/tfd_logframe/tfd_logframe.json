@@ -14,9 +14,11 @@
   "logframe_name",
   "column_break_bzjm",
   "indicator_name",
+  "hide",
   "column_break_xrmk",
   "type",
   "section_break_eutk",
+  "column_break_qoak",
   "activities",
   "section_break_hjhj",
   "baseline",
@@ -147,6 +149,7 @@
   {
    "fieldname": "activities",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Activities",
    "options": "TFD Logframe Activities"
   },
@@ -168,12 +171,24 @@
    "label": "Indicator Name",
    "options": "TFD Indicators",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qoak",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "hide",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Print Hide"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-04-29 00:47:48.116426",
+ "modified": "2025-06-24 09:27:40.384470",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
