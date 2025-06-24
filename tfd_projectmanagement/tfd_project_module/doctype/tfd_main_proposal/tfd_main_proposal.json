@@ -19,6 +19,7 @@
   "table_ahkd",
   "fund_start_date",
   "fund_end_date",
+  "donor_name",
   "hr_plan_section",
   "staffing_plan",
   "staffing_details",
@@ -34,6 +35,7 @@
   "logical_framework_tab",
   "logical_framework_section",
   "overall_project_objective",
+  "log_frame_name",
   "goals",
   "outcomes",
   "indicators",
@@ -409,11 +411,23 @@
    "fieldname": "work_plan_name",
    "fieldtype": "Data",
    "label": "Work plan Name"
+  },
+  {
+   "fieldname": "log_frame_name",
+   "fieldtype": "Link",
+   "label": "Log frame Name",
+   "options": "TFD Logframe Name"
+  },
+  {
+   "fetch_from": "fund_code.doner_name",
+   "fieldname": "donor_name",
+   "fieldtype": "Data",
+   "label": "Donor Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-23 10:27:29.227099",
+ "modified": "2025-06-24 11:53:08.398156",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",

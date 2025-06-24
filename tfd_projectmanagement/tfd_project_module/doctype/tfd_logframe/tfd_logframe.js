@@ -38,6 +38,6 @@ frappe.ui.form.on('TFD Logframe', {
 
     refresh: function(frm) {
         // عند فتح النموذج لأول مرة، إخفاء حقل activities افتراضياً
-        frm.set_df_property('activities', 'hidden', 0);
+        // frm.set_df_property('activities', 'hidden', 0);
     }
 });

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:data_szcj",
  "creation": "2024-10-27 12:18:22.857203",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -13,7 +14,8 @@
   {
    "fieldname": "data_szcj",
    "fieldtype": "Data",
-   "label": "Sub Cluster"
+   "label": "Sub Cluster",
+   "unique": 1
   },
   {
    "fieldname": "main_cluster",
@@ -28,10 +30,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 21:59:46.732306",
+ "modified": "2025-06-24 12:21:30.144404",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Sub Cluster",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
