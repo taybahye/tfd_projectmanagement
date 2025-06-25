@@ -29,7 +29,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Activity ID",
-   "options": "Project Information"
+   "options": "Project"
   },
   {
    "columns": 1,
@@ -37,7 +37,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Year",
-   "options": "2024\n2025\n2026"
+   "options": "2025\n2026\n2027\n2028\n2029"
   },
   {
    "columns": 1,
@@ -136,16 +136,17 @@
    "label": "December"
   },
   {
-   "fetch_from": "project_name.activity__name",
+   "fetch_from": "project_name.project_name",
    "fieldname": "activity_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Activity Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-06-25 10:49:01.602054",
+ "modified": "2025-06-25 11:09:04.203353",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Plan",
