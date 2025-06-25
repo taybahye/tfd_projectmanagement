@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{project}-{folder_name}-{###}",
+ "creation": "2025-06-25 12:57:05.051307",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "folder_name",
+  "folder_description",
+  "attachment",
+  "project_archived_mande_chilled",
+  "lft",
+  "rgt",
+  "is_group",
+  "old_parent",
+  "parent_project_archived_mande"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "TFD Projects",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project_archived_mande_chilled",
+   "fieldtype": "Table",
+   "label": "Project Archived MandE chilled",
+   "options": "Project Archived MandE chilled"
+  },
+  {
+   "fieldname": "folder_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Folder Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "folder_description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "folder Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "Attachment"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "Project Archived MandE"
+  },
+  {
+   "fieldname": "parent_project_archived_mande",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Project Archived MandE",
+   "options": "Project Archived MandE"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2025-06-25 13:22:55.575481",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Project Archived MandE",
+ "naming_rule": "Expression",
+ "nsm_parent_field": "parent_project_archived_mande",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
