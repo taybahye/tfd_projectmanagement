@@ -1,15 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{###}",
+ "autoname": "format:{indicator_name}-{##}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_oybk",
   "company",
-  "rgt",
-  "lft",
   "column_break_bjvk",
   "logframe_name",
   "column_break_bzjm",
@@ -17,9 +15,8 @@
   "hide",
   "column_break_xrmk",
   "type",
-  "section_break_eutk",
-  "column_break_qoak",
-  "activities",
+  "indicator_name_section",
+  "indicator_name1",
   "section_break_hjhj",
   "baseline",
   "column_break_xyta",
@@ -28,10 +25,15 @@
   "acheivement",
   "column_break_dzqd",
   "growth_in",
+  "section_break_eutk",
+  "column_break_qoak",
+  "activities",
   "section_break_nehd",
+  "is_group",
   "old_parent",
   "parent_tfd_logframe",
-  "is_group"
+  "lft",
+  "rgt"
  ],
  "fields": [
   {
@@ -149,9 +151,8 @@
   {
    "fieldname": "activities",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "Activities",
-   "options": "TFD Logframe Activities"
+   "options": "Project Information"
   },
   {
    "fieldname": "column_break_xrmk",
@@ -169,7 +170,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Indicator Name",
-   "options": "TFD Indicators",
+   "options": "TFD Main Indicators",
    "reqd": 1
   },
   {
@@ -183,12 +184,23 @@
    "fieldtype": "Check",
    "in_list_view": 1,
    "label": "Print Hide"
+  },
+  {
+   "fieldname": "indicator_name_section",
+   "fieldtype": "Section Break",
+   "label": "Indicator Name"
+  },
+  {
+   "fetch_from": "indicator_name.en_ind_name",
+   "fieldname": "indicator_name1",
+   "fieldtype": "Small Text",
+   "label": "Indicator Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-06-24 09:27:40.384470",
+ "modified": "2025-06-25 01:36:22.975486",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
@@ -209,7 +221,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

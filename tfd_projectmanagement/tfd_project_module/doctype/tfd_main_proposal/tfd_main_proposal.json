@@ -36,6 +36,7 @@
   "logical_framework_section",
   "overall_project_objective",
   "log_frame_name",
+  "indicators_and_activities_html",
   "goals",
   "outcomes",
   "indicators",
@@ -46,7 +47,6 @@
   "project_info",
   "work_plan_tab",
   "work_plan",
-  "work_plan_name",
   "project_plan",
   "tab_4_tab",
   "targeted_affected_persons_and_locations_section",
@@ -149,16 +149,17 @@
   {
    "fieldname": "project_summery_section",
    "fieldtype": "Section Break",
-   "label": "Project Summery"
+   "label": "Project Proposal "
   },
   {
    "fieldname": "project_summery",
    "fieldtype": "Text Editor",
-   "label": "Project Summery"
+   "label": "Project Proposal "
   },
   {
    "fieldname": "other_funding_secured_for_this_project_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Other Funding Secured for this project"
   },
   {
@@ -170,6 +171,7 @@
   {
    "fieldname": "organization_focal_point_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Organization Focal Point"
   },
   {
@@ -180,7 +182,8 @@
   {
    "fieldname": "country_context__funding_section",
    "fieldtype": "Section Break",
-   "label": "Country Context  Funding"
+   "hidden": 1,
+   "label": "Country Context "
   },
   {
    "fieldname": "country_context_fund",
@@ -359,7 +362,7 @@
   {
    "fieldname": "project_plan",
    "fieldtype": "Table",
-   "label": "Project Plan",
+   "label": "Activities Plan",
    "options": "Project Plan"
   },
   {
@@ -407,12 +410,6 @@
    "options": "TFD Projects"
   },
   {
-   "fetch_from": "work_plan.implementation_name",
-   "fieldname": "work_plan_name",
-   "fieldtype": "Data",
-   "label": "Work plan Name"
-  },
-  {
    "fieldname": "log_frame_name",
    "fieldtype": "Link",
    "label": "Log frame Name",
@@ -423,11 +420,16 @@
    "fieldname": "donor_name",
    "fieldtype": "Data",
    "label": "Donor Name"
+  },
+  {
+   "fieldname": "indicators_and_activities_html",
+   "fieldtype": "HTML Editor",
+   "label": "Indicators And Activities"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-24 11:53:08.398156",
+ "modified": "2025-06-25 04:28:41.499896",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",

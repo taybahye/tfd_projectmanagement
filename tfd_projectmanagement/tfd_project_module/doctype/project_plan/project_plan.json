@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
-  "project_cost",
   "year",
   "month_1",
   "month_2",
@@ -24,21 +23,15 @@
  ],
  "fields": [
   {
+   "columns": 1,
    "fieldname": "project_name",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Project Name",
+   "label": "Activity Name",
    "options": "Project"
   },
   {
-   "fetch_from": "project_name.estimated_costing",
-   "fieldname": "project_cost",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Project Cost",
-   "options": "Project"
-  },
-  {
+   "columns": 1,
    "fieldname": "year",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -46,6 +39,7 @@
    "options": "2024\n2025\n2026"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "month_1",
    "fieldtype": "Check",
@@ -53,6 +47,7 @@
    "label": "January"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "month_2",
    "fieldtype": "Check",
@@ -60,6 +55,7 @@
    "label": "February"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "month_3",
    "fieldtype": "Check",
@@ -67,6 +63,7 @@
    "label": "March"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "month_4",
    "fieldtype": "Check",
@@ -74,58 +71,74 @@
    "label": "April"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "may",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "May"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "june",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "June"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "july",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "July"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "august",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "August"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "september",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "September"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "october",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "October"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "november",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "November"
   },
   {
+   "columns": 1,
    "default": "0",
    "fieldname": "december",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "December"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-12-17 10:55:03.666009",
+ "modified": "2025-06-24 22:56:31.859062",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Plan",
