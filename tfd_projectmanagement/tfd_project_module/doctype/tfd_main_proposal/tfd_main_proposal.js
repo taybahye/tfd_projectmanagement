@@ -107,7 +107,7 @@ frappe.ui.form.on("TFD Main Proposal", {
             // alert('aaa');
             // let entry =frm.add_child("staffing_details");
             if (!e.activity__name) {
-                frappe.msgprint(__('Activity name is missing for indicator: {0}', [e.indicator__name]));
+                // frappe.msgprint(__('Activity name is missing for indicator: {0}', [e.indicator__name]));
                 return; // Skip this entry if activity name is not present
             }
             let entry = frm.add_child("project_info");
@@ -117,8 +117,8 @@ frappe.ui.form.on("TFD Main Proposal", {
             entry.cost = e.cost;
             entry.activity__name = e.activity__name;
             //==============
-            entry.project_name = e.project_name;
-            entry.activity_name = e.activity__name;
+            entry1.project_name = e.project_name;
+            entry1.activity_name = e.activity__name;
 
             // entry.activity__name = e.activity__name;
             // entry.indicator__name = e.indicator__name;
