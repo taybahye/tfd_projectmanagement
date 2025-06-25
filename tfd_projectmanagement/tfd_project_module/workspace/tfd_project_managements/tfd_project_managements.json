@@ -124,85 +124,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Master Data",
-   "link_count": 7,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Governments",
-   "link_count": 0,
-   "link_to": "TFD Governments",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Districts ",
-   "link_count": 0,
-   "link_to": "TFD Directorate",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Subdistrict",
-   "link_count": 0,
-   "link_to": "TFD Districts",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Villages",
-   "link_count": 0,
-   "link_to": "TFD Villages",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Clusters",
-   "link_count": 0,
-   "link_to": "TFD Cluster",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Donors",
-   "link_count": 0,
-   "link_to": "Donor",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Bank of Indicators",
-   "link_count": 0,
-   "link_to": "TFD Main Indicators",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Implementation ",
    "link_count": 6,
    "link_type": "DocType",
@@ -327,9 +248,88 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Master Data",
+   "link_count": 7,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Governments",
+   "link_count": 0,
+   "link_to": "TFD Governments",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Districts ",
+   "link_count": 0,
+   "link_to": "TFD Directorate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Subdistrict",
+   "link_count": 0,
+   "link_to": "TFD Districts",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Villages",
+   "link_count": 0,
+   "link_to": "TFD Villages",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Clusters",
+   "link_count": 0,
+   "link_to": "TFD Cluster",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Donors",
+   "link_count": 0,
+   "link_to": "Donor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank of Indicators",
+   "link_count": 0,
+   "link_to": "TFD Main Indicators",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-06-24 13:33:39.237321",
+ "modified": "2025-06-25 00:01:00.651814",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Project Managements",

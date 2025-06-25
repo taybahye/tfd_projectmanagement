@@ -2,24 +2,29 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{type}-Ind.{indcode}-{en_ind_name}-{#####}",
+ "autoname": "format:{type}.{#####}-{en_ind_name}",
  "creation": "2025-06-23 09:56:15.347880",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "innn_section",
-  "column_break_cwuy",
-  "indcode",
   "column_break_dtvx",
   "indicator_categories",
+  "column_break_smee",
+  "type",
   "section_break_ufzp",
   "en_ind_name",
   "ind_des",
   "column_break_gaaq",
   "ar_ind_name",
   "ar_ind_des",
+  "section_break_rpaj",
+  "smart_indicators",
+  "column_break_hclt",
+  "means_of_verification",
+  "column_break_tzye",
+  "assumptions",
   "actual_and_target_values_represents_and_periodicity_section",
-  "type",
   "data_format",
   "start_date",
   "end_date",
@@ -45,17 +50,6 @@
    "fieldname": "innn_section",
    "fieldtype": "Section Break",
    "label": "Indicators Information"
-  },
-  {
-   "fieldname": "column_break_cwuy",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "indcode",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Code ",
-   "reqd": 1
   },
   {
    "fieldname": "column_break_dtvx",
@@ -145,12 +139,14 @@
   {
    "fieldname": "category",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Category",
    "options": "Master indicator tracking"
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Status",
    "options": "Active\nInactive"
   },
@@ -185,6 +181,7 @@
   {
    "fieldname": "number_of_decimal_places",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Number of Decimal Places"
   },
   {
@@ -227,12 +224,43 @@
    "ignore_user_permissions": 1,
    "label": "Parent Doner Indicators",
    "options": "Doner Indicators"
+  },
+  {
+   "fieldname": "column_break_smee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_rpaj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "smart_indicators",
+   "fieldtype": "Small Text",
+   "label": "Smart Indicators"
+  },
+  {
+   "fieldname": "column_break_hclt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "means_of_verification",
+   "fieldtype": "Small Text",
+   "label": "Means Of Verification"
+  },
+  {
+   "fieldname": "column_break_tzye",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assumptions",
+   "fieldtype": "Small Text",
+   "label": "Assumptions"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-06-23 09:57:58.953948",
+ "modified": "2025-06-25 00:40:02.029682",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Indicators",
@@ -253,7 +281,7 @@
    "write": 1
   }
  ],
- "search_fields": "ar_ind_name,indcode",
+ "search_fields": "ar_ind_name",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

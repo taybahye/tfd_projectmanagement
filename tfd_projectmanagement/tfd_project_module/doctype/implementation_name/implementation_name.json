@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:implementation_name",
  "creation": "2024-10-27 10:48:32.428492",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,15 +12,17 @@
   {
    "fieldname": "implementation_name",
    "fieldtype": "Data",
-   "label": "Implementation Name"
+   "label": "Implementation Name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 22:01:51.443132",
+ "modified": "2025-06-24 22:52:56.622661",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Implementation Name",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

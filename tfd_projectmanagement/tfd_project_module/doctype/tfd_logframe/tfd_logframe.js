@@ -5,7 +5,7 @@ frappe.ui.form.on('TFD Logframe', {
             frappe.call({
                 method: 'frappe.client.get_value',
                 args: {
-                    doctype: 'TFD Indicators',
+                    doctype: 'TFD Main Indicators',
                     filters: { name: frm.doc.indicator_name },
                     fieldname: ['type']
                 },
@@ -38,6 +38,6 @@ frappe.ui.form.on('TFD Logframe', {
 
     refresh: function(frm) {
         // عند فتح النموذج لأول مرة، إخفاء حقل activities افتراضياً
-        // frm.set_df_property('activities', 'hidden', 0);
+        frm.set_df_property('activities', 'hidden', 0);
     }
 });
