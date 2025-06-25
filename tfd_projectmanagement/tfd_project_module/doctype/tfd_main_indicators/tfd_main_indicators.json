@@ -216,7 +216,7 @@
    "fieldname": "old_parent",
    "fieldtype": "Link",
    "label": "Old Parent",
-   "options": "Doner Indicators"
+   "options": "TFD Main Indicators"
   },
   {
    "fieldname": "parent_doner_indicators",
@@ -260,7 +260,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-06-25 00:40:02.029682",
+ "modified": "2025-06-25 10:08:51.704767",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Indicators",
