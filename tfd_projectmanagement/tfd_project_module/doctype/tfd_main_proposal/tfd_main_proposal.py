@@ -31,7 +31,8 @@ class TFDMainProposal(Document):
 	`tabProject Information`.parentfield, 
 	`tabProject Information`.parenttype, 
 	`tabProject Information`.cost, 
-	`tabProject Information`.project_name
+	`tabProject Information`.project_name,
+    `tabProject Information`.activity__name
 FROM
 	`tabTFD Logframe`
 	INNER JOIN
@@ -42,7 +43,7 @@ FROM
 	`tabProject Information`
 	ON 
 		`tabTFD Logframe`.`name` = `tabProject Information`.parent
-		where `tabTFD Logframe`.logframe_name='{log_frame_name.log_frame_name}' ORDER BY `tabTFD Logframe`.parent_tfd_logframe ASC  """,as_dict=True)
+		where `tabTFD Logframe`.logframe_name='{log_frame_name.log_frame_name}' ORDER BY `tabTFD Logframe`.parent_tfd_logframe DESC  """,as_dict=True)
       
     #   frappe.msgprint(f"Indicator List: {log_frame_name.log_frame_name}") 
     #   frappe.msgprint({proj_list})

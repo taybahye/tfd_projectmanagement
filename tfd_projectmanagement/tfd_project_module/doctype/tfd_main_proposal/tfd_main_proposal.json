@@ -342,6 +342,7 @@
   {
    "fieldname": "indicators",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Indicators",
    "options": "TFD Logframe Indicators",
    "read_only": 1
@@ -349,6 +350,7 @@
   {
    "fieldname": "activities",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Activities",
    "options": "TFD Logframe Indicator Activity",
    "read_only": 1
@@ -368,12 +370,14 @@
   {
    "fieldname": "goals",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Goals",
    "options": "TFD Goals child"
   },
   {
    "fieldname": "outcomes",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Outcomes",
    "options": "TFD Outcome Child"
   },
@@ -387,12 +391,14 @@
   {
    "fieldname": "output",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Output",
    "options": "TFD Output Child"
   },
   {
    "fieldname": "indictors",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Indictors",
    "options": "Indicator Proposal Chilled"
   },
@@ -429,7 +435,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-25 04:28:41.499896",
+ "modified": "2025-06-25 10:26:20.504345",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",

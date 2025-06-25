@@ -7,14 +7,15 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
-  "cost"
+  "cost",
+  "activity__name"
  ],
  "fields": [
   {
    "fieldname": "project_name",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Activity Name",
+   "label": "Activity ID",
    "options": "Project"
   },
   {
@@ -23,12 +24,19 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Cost"
+  },
+  {
+   "fetch_from": "project_name.project_name",
+   "fieldname": "activity__name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Activity  Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-06-24 22:49:01.673896",
+ "modified": "2025-06-25 10:36:59.098384",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Information",
