@@ -94,20 +94,47 @@ frappe.ui.form.on("TFD Main Proposal", {
           // buildLogframeTree(logframeData,frm)
                 frm.set_value('indicators_and_activities_html', indicators_and_activities_htmlff);
  
-          // frm.doc.staffing_details=[]
+          frm.doc.project_info=[]
+          frm.doc.project_plan=[]
           $.each(r.message , function(_i,e)
           {
+  //           `tabProject Information`.cost, 
+	// `tabProject Information`.project_name,
+  //   `tabProject Information`.activity__name
+
             // console.log('eeeeeeeeeeeeee')
             // console.log(r.message)
             // alert('aaa');
             // let entry =frm.add_child("staffing_details");
-            //  alert(e.logframe_name)
+            if (!e.activity__name) {
+                frappe.msgprint(__('Activity name is missing for indicator: {0}', [e.indicator__name]));
+                return; // Skip this entry if activity name is not present
+            }
+            let entry = frm.add_child("project_info");
+            let entry1 = frm.add_child("project_plan");
+            // entry.indicator = e.indicator__name;
+            entry.project_name = e.project_name;
+            entry.cost = e.cost;
+            entry.activity__name = e.activity__name;
+            //==============
+            entry.project_name = e.project_name;
+            entry.activity_name = e.activity__name;
+
+            // entry.activity__name = e.activity__name;
+            // entry.indicator__name = e.indicator__name;
+            // entry.cost = e.cost;
+            // entry.project_name = e.project_name;
+            // alert(e.indicator__name)
+            // alert(e.activity__name)
+
+            //  alert(e.activity__name)
             // entry.designation=e.designation;
             // entry.vacancies=e.vacancies;
             // entry.estimated_cost_per_position=e.estimated_cost_per_position;
             // entry.number_of_positions=e.number_of_positions;
           })
-            // refresh_field("staffing_details")
+            refresh_field("project_info")
+            refresh_field("project_plan")
           //   set_total_estimated_cost(frm, cdt, cdn);
         })
       }
