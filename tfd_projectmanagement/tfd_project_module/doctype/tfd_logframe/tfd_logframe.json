@@ -76,12 +76,15 @@
    "options": "TFD Logframe"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "company",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Company",
    "options": "Company",
    "remember_last_selected_value": 1,
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "logframe_name",
@@ -200,7 +203,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-06-25 01:36:22.975486",
+ "modified": "2025-07-13 21:55:09.228652",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",

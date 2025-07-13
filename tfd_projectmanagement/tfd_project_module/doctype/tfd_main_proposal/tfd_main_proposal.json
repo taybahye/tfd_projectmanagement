@@ -20,6 +20,8 @@
   "fund_start_date",
   "fund_end_date",
   "donor_name",
+  "section_break_wjqp",
+  "tfd_fund_chilled_table",
   "hr_plan_section",
   "staffing_plan",
   "staffing_details",
@@ -431,11 +433,21 @@
    "fieldname": "indicators_and_activities_html",
    "fieldtype": "HTML Editor",
    "label": "Indicators And Activities"
+  },
+  {
+   "fieldname": "section_break_wjqp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tfd_fund_chilled_table",
+   "fieldtype": "Table",
+   "label": "TFD Fund Chilled table",
+   "options": "TFD Fund Chilled table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-25 10:26:20.504345",
+ "modified": "2025-07-13 21:30:32.283644",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
