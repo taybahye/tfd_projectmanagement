@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-13 21:18:26.703421",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "fund_id",
+  "column_break_aafs",
+  "fund_name",
+  "column_break_iiai",
+  "amount",
+  "column_break_odyj",
+  "donor_name",
+  "column_break_aysy",
+  "start_date",
+  "column_break_fmfm",
+  "end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "fund_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Fund ID",
+   "options": "TFD Fund"
+  },
+  {
+   "fieldname": "column_break_aafs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "fund_id.funding_name",
+   "fieldname": "fund_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Fund Name"
+  },
+  {
+   "fieldname": "column_break_iiai",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "fund_id.grant_amount",
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount "
+  },
+  {
+   "fieldname": "column_break_odyj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "fund_id.doner_name",
+   "fieldname": "donor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Donor Name"
+  },
+  {
+   "fieldname": "column_break_aysy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "fund_id.start_date",
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "column_break_fmfm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "fund_id.closing_date",
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-08-09 21:58:28.674870",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Fund Chilled table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
