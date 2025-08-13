@@ -7,20 +7,20 @@
  "doctype": "Report",
  "filters": [
   {
-   "default": "\"\"",
+   "default": "   ",
    "fieldname": "project",
    "fieldtype": "Link",
    "label": "Project",
    "mandatory": 1,
    "options": "TFD Projects",
-   "wildcard_filter": 1
+   "wildcard_filter": 0
   }
  ],
  "idx": 0,
  "is_standard": "Yes",
  "json": "{}",
  "letterhead": null,
- "modified": "2025-08-13 23:23:33.504580",
+ "modified": "2025-08-13 23:30:21.075211",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Indicators Report2",
