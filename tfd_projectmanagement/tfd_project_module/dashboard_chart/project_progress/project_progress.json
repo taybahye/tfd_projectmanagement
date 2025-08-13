@@ -10,7 +10,7 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "modified": "2025-08-13 23:55:06.628024",
+ "modified": "2025-08-14 00:04:34.177971",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Progress",
@@ -21,7 +21,7 @@
  "time_interval": "Yearly",
  "timeseries": 0,
  "timespan": "Last Year",
- "type": "Line",
+ "type": "Bar",
  "use_report_chart": 0,
  "x_field": "project",
  "y_axis": [
