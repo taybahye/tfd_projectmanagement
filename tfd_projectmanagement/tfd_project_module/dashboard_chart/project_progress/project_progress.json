@@ -10,7 +10,7 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "modified": "2025-08-14 00:04:34.177971",
+ "modified": "2025-08-14 00:10:22.171487",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Progress",
@@ -26,6 +26,7 @@
  "x_field": "project",
  "y_axis": [
   {
+   "color": "#449CF0",
    "y_field": "progress"
   }
  ]
