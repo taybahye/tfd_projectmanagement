@@ -27,7 +27,7 @@ frappe.query_reports["TFD Project Summary"] = {
 		},
 		{
 			fieldname: "name",
-			label: __("Project"),
+			label: __("Activity"),
 			fieldtype: "Link",
 			options: "Project"
 		},
