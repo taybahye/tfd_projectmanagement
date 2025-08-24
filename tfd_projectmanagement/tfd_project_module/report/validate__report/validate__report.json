@@ -1,0 +1,28 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2025-08-18 21:39:12.370027",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-08-18 22:07:14.378568",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Validate  Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \r\n    e.name AS employee_id,\r\n    e.employee_name,\r\n    e.branch,\r\n    COALESCE(COUNT(a.name), 0) AS attendance_days\r\nFROM \r\n    `tabEmployee` e\r\nLEFT JOIN \r\n    `tabAttendance` a \r\n    ON a.employee = e.name \r\n    AND a.attendance_date BETWEEN %(from_date)s AND %(to_date)s\r\nWHERE \r\n    e.branch = %(branch)s  \r\n    AND e.status= 'Active'\r\nGROUP BY \r\n    e.name, e.employee_name, e.branch\r\nORDER BY \r\n    e.employee_name\r\n",
+ "ref_doctype": "TFD Projects",
+ "report_name": "Validate  Report",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "timeout": 0
+}
