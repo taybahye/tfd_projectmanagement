@@ -43,7 +43,7 @@
   "rgt",
   "is_group",
   "old_parent",
-  "parent_doner_indicators"
+  "parent_tfd_main_indicators"
  ],
  "fields": [
   {
@@ -219,13 +219,6 @@
    "options": "TFD Main Indicators"
   },
   {
-   "fieldname": "parent_doner_indicators",
-   "fieldtype": "Link",
-   "ignore_user_permissions": 1,
-   "label": "Parent Doner Indicators",
-   "options": "TFD Main Indicators"
-  },
-  {
    "fieldname": "column_break_smee",
    "fieldtype": "Column Break"
   },
@@ -255,17 +248,24 @@
    "fieldname": "assumptions",
    "fieldtype": "Small Text",
    "label": "Assumptions"
+  },
+  {
+   "fieldname": "parent_tfd_main_indicators",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent TFD Main Indicators",
+   "options": "TFD Main Indicators"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-06-25 10:16:14.572311",
+ "modified": "2025-08-24 10:37:40.664656",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Indicators",
  "naming_rule": "Expression",
- "nsm_parent_field": "parent_doner_indicators",
+ "nsm_parent_field": "parent_tfd_main_indicators",
  "owner": "Administrator",
  "permissions": [
   {
