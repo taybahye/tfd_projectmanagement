@@ -168,3 +168,10 @@ def get_result_checkin():
             "error": True,
             "message": f"حدث خطأ أثناء التنفيذ: {str(e)}"
         }
+
+
+
+
+
+
+
