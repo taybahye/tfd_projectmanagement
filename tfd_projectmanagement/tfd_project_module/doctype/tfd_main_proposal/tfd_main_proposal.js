@@ -98,14 +98,7 @@ frappe.ui.form.on("TFD Main Proposal", {
           frm.doc.project_plan=[]
           $.each(r.message , function(_i,e)
           {
-  //           `tabProject Information`.cost, 
-	// `tabProject Information`.project_name,
-  //   `tabProject Information`.activity__name
-
-            // console.log('eeeeeeeeeeeeee')
-            // console.log(r.message)
-            // alert('aaa');
-            // let entry =frm.add_child("staffing_details");
+  
             if (!e.activity__name) {
                 // frappe.msgprint(__('Activity name is missing for indicator: {0}', [e.indicator__name]));
                 return; // Skip this entry if activity name is not present
