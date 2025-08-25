@@ -131,7 +131,31 @@ frappe.ui.form.on("TFD Main Proposal", {
           //   set_total_estimated_cost(frm, cdt, cdn);
         })
       }
-    },
+ },
+//   after_save : function(frm) {
+//         if (!frm.doc.name) return;
+
+//        console.log("hhhhhhhhhhhhhhhhhhhhhh");
+//                 frappe.call({
+//                     doc:frm.doc,
+//                     method: "get_project_plan",
+//                     callback: function(r) {
+//                         if (r.message) {
+//                             frm.clear_table("project_plan");
+
+//                             r.message.forEach(function(d) {
+//                                 let row = frm.add_child("project_plan");
+//                                 row.project_name = d.project_name;
+//                                 row.activity_name = d.activity__name;
+//                             });
+
+//                             frm.refresh_field("project_plan");
+                            
+//                         }
+//                     }
+//                 });
+//     }
+
 });
 
 frappe.ui.form.on('Staffing Plan Detail', {

@@ -2,22 +2,25 @@ from frappe.model.document import Document
 import frappe
 
 class TFDMainProposal(Document):
-    def before_save(self):
-            # جلب البيانات من Project Information
-            project_info = frappe.db.sql("""
-                SELECT project_name , activity__name
-                FROM `tabProject Information`
-                WHERE parent = %s
-            """, (self.name,), as_dict=True)
+    def on_update(self):
+        frappe.log("hiiiiiiiiiiii")
+        project_plan = frappe.db.sql("""
+            SELECT project_name, activity__name
+            FROM `tabProject Information`
+            WHERE parent = %s
+        """, (self.name,), as_dict=True)
 
-            self.set("project_plan", [])
+        # امسح الجدول الحالي
+        self.set("project_plan", [])
 
-            # انسخ البيانات للجدول الفرعي
-            for pi in project_info:
-                row = self.append("project_plan", {})
-                row.project_name = pi.project_name
-                row.activity_name = pi.activity__name
+        # اضف الصفوف الجديدة
+        for d in project_plan:
+            self.append("project_plan", {
+                "project_name": d.project_name,
+                "activity_name": d.activity__name
+            })
 
+        # self.save(ignore_permissions=True)
 
 
     @frappe.whitelist()
