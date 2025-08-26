@@ -19,6 +19,7 @@
   "indicator_name1",
   "section_break_hjhj",
   "baseline",
+  "achievement_percentage",
   "column_break_xyta",
   "target",
   "column_break_rklh",
@@ -103,13 +104,13 @@
   },
   {
    "fieldname": "target",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Target"
   },
   {
    "fieldname": "acheivement",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Acheivement"
   },
@@ -198,12 +199,18 @@
    "fieldname": "indicator_name1",
    "fieldtype": "Small Text",
    "label": "Indicator Name"
+  },
+  {
+   "fieldname": "achievement_percentage",
+   "fieldtype": "Percent",
+   "label": "Achievement Percentage",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-07-13 21:55:09.228652",
+ "modified": "2025-08-13 00:07:18.558510",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",

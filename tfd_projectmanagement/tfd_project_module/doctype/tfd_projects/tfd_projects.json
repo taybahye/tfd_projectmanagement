@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
+  "progress",
   "column_break_euwt",
   "estimated_cost",
   "column_break_msvs",
@@ -49,11 +50,16 @@
    "fieldtype": "Table",
    "label": "Need Assessment Documents",
    "options": "Need Assessment Documents"
+  },
+  {
+   "fieldname": "progress",
+   "fieldtype": "Percent",
+   "label": "Progress"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-23 11:14:11.207725",
+ "modified": "2025-08-13 23:46:07.962813",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Projects",

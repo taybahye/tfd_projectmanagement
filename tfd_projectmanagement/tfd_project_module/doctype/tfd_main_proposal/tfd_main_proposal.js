@@ -98,14 +98,7 @@ frappe.ui.form.on("TFD Main Proposal", {
           frm.doc.project_plan=[]
           $.each(r.message , function(_i,e)
           {
-  //           `tabProject Information`.cost, 
-	// `tabProject Information`.project_name,
-  //   `tabProject Information`.activity__name
-
-            // console.log('eeeeeeeeeeeeee')
-            // console.log(r.message)
-            // alert('aaa');
-            // let entry =frm.add_child("staffing_details");
+  
             if (!e.activity__name) {
                 // frappe.msgprint(__('Activity name is missing for indicator: {0}', [e.indicator__name]));
                 return; // Skip this entry if activity name is not present
@@ -138,7 +131,31 @@ frappe.ui.form.on("TFD Main Proposal", {
           //   set_total_estimated_cost(frm, cdt, cdn);
         })
       }
-    },
+ },
+//   after_save : function(frm) {
+//         if (!frm.doc.name) return;
+
+//        console.log("hhhhhhhhhhhhhhhhhhhhhh");
+//                 frappe.call({
+//                     doc:frm.doc,
+//                     method: "get_project_plan",
+//                     callback: function(r) {
+//                         if (r.message) {
+//                             frm.clear_table("project_plan");
+
+//                             r.message.forEach(function(d) {
+//                                 let row = frm.add_child("project_plan");
+//                                 row.project_name = d.project_name;
+//                                 row.activity_name = d.activity__name;
+//                             });
+
+//                             frm.refresh_field("project_plan");
+                            
+//                         }
+//                     }
+//                 });
+//     }
+
 });
 
 frappe.ui.form.on('Staffing Plan Detail', {
