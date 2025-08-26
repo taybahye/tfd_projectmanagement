@@ -232,7 +232,7 @@ const updateEstimatedBudget = (frm) => {
 
     let finalHtml = "<ul>";
     roots.forEach((root, index) => {
-        finalHtml += buildHTML(root, [index + 1]); // نبدأ من 1 وليس 2
+        finalHtml += buildHTML(root, [index + 0]); // نبدأ من 1 وليس 2
     });
     finalHtml += "</ul>";
 
