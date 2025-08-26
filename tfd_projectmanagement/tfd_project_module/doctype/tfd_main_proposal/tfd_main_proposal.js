@@ -182,7 +182,7 @@ const updateEstimatedBudget = (frm) => {
     frm.set_value('total_estimated_budget', totalBudget);
 };
 
- function buildLogframeTree(data) {
+ function buildLogframeTree_ol(data) {
     const nodes = {};
     const childrenMap = {};
     const renderedSet = new Set();
@@ -256,6 +256,79 @@ const updateEstimatedBudget = (frm) => {
     return finalHtml;
 }
 
+
+function buildLogframeTree(data) {
+    const nodes = {};
+    const childrenMap = {};
+
+    // فهرسة العقد وبناء خريطة الأبناء
+    data.forEach(item => {
+        nodes[item.name] = item;
+
+        let parentKey = item.parent_tfd_logframe;
+        if (!parentKey && item.parentfield === "activities") {
+            parentKey = item.parent;
+        }
+
+        if (parentKey) {
+            (childrenMap[parentKey] ||= []).push(item.name);
+        }
+    });
+
+    // ترتيب الأنواع والانتقال بين المستويات
+    const nextTypeFor = {
+        "Goal": "Outcome",
+        "Outcome": "Ind"
+        // إن كان لديك مستويات أخرى أضفها هنا مثل: "Output": "Ind", "Activity": ...
+    };
+
+    // يبني عنصر HTML لاسم عقدة معيّن مع مسار الترقيم
+    function buildHTML(nodeName, numberingPath) {
+        const node = nodes[nodeName];
+        const labelPrefix = `${node.type}.${numberingPath.join('.')}`;
+
+        let html = `<li><strong>${labelPrefix}</strong>: ${node.indicator_name1 || ''}`;
+
+        const allChildren = childrenMap[nodeName] || [];
+        const expectedChildType = nextTypeFor[node.type];
+
+        // اختر فقط الأبناء من النوع المتوقع في المستوى التالي (Outcome تحت Goal، Ind تحت Outcome)
+        const orderedChildren = expectedChildType
+            ? allChildren.filter(n => nodes[n]?.type === expectedChildType)
+            : allChildren;
+
+        if (orderedChildren.length) {
+            html += "<ul>";
+            // ملاحظة مهمة: نمرّر فهرس الابن (idx + 1) لمسار الترقيم، ولا نزود داخل buildHTML
+            orderedChildren.forEach((childName, idx) => {
+                html += buildHTML(childName, [...numberingPath, idx + 1]);
+            });
+            html += "</ul>";
+        }
+
+        html += "</li>";
+        return html;
+    }
+
+    // الجذور: العناصر التي لا أب لها (غالبًا الـ Goals)
+    const roots = data.filter(item =>
+        !item.parent_tfd_logframe && !(item.parentfield === "activities")
+    );
+
+    // إن كان لديك جذور بأنواع متعددة، خذ الـ Goals أولاً
+    const rootGoals = roots.filter(r => r.type === "Goal").map(r => r.name);
+    const otherRoots = roots.filter(r => r.type !== "Goal").map(r => r.name);
+    const rootOrder = [...rootGoals, ...otherRoots];
+
+    let finalHtml = "<ul>";
+    rootOrder.forEach((rootName, idx) => {
+        // يبدأ ترقيم الجذور من 1: Goal.1، Goal.2 ...
+        finalHtml += buildHTML(rootName, [idx + 1]);
+    });
+    finalHtml += "</ul>";
+
+    return finalHtml;
+}
 
 
 // function buildLogframeTree(data) {
