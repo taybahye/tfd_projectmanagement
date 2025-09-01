@@ -2,25 +2,16 @@ from frappe.model.document import Document
 import frappe
 
 class TFDMainProposal(Document):
-    def on_update(self):
-        frappe.log("hiiiiiiiiiiii")
-        project_plan = frappe.db.sql("""
-            SELECT project_name, activity__name
-            FROM `tabProject Information`
-            WHERE parent = %s
-        """, (self.name,), as_dict=True)
-
-        # امسح الجدول الحالي
+    def before_save(self):
+        project_plan = self.get("project_info") or []
         self.set("project_plan", [])
 
-        # اضف الصفوف الجديدة
         for d in project_plan:
             self.append("project_plan", {
                 "project_name": d.project_name,
                 "activity_name": d.activity__name
             })
 
-        # self.save(ignore_permissions=True)
 
 
     @frappe.whitelist()
