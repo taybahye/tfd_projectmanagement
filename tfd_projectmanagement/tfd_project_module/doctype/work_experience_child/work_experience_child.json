@@ -10,9 +10,10 @@
   "company",
   "location",
   "i_currently_work_here",
-  "from",
-  "to",
-  "years_of_experience",
+  "from_date",
+  "to_date",
+  "experience_months",
+  "experience_years",
   "role_description"
  ],
  "fields": [
@@ -44,35 +45,43 @@
    "label": "I currently work here"
   },
   {
-   "fieldname": "from",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "From",
-   "reqd": 1
-  },
-  {
    "fieldname": "role_description",
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Role Description"
   },
   {
-   "fieldname": "to",
+   "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "To",
+   "in_list_view": 1,
+   "label": "From Date",
    "reqd": 1
   },
   {
-   "fieldname": "years_of_experience",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "experience_months",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Experience Months",
+   "read_only": 1
+  },
+  {
+   "fieldname": "experience_years",
    "fieldtype": "Float",
-   "label": "Years of Experience",
+   "in_list_view": 1,
+   "label": "Experience Years",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-07 10:16:56.907028",
+ "modified": "2025-09-07 14:18:59.505066",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Work Experience Child",
