@@ -11,7 +11,6 @@ frappe.ui.form.on("Job Applicant", {
 function calculate_experience(cdt, cdn) {
     let row = frappe.get_doc(cdt, cdn);
     if (!row.from_date) return;
-
     let from = frappe.datetime.str_to_obj(row.from_date);
 
     // إذا Check مفعل نعتبر الموظف يعمل الآن
