@@ -70,24 +70,24 @@ frappe.query_reports["TFD Shift Attendance"] = {
 		}
 		return value;
 	},
-	onload: function (report) {
-		report.page.add_inner_button(__('احتساب التأخيرات وإنشاء الإجازات/الغياب'), function () {
-			frappe.call({
-				method: "tfd_projectmanagement.tfd_project_module.doctype.ahmed.ahmed.get_result_checkin",
-				callback: function (r) {
-					if (r.message) {
-						frappe.msgprint(r.message);
-						if (r.message.delay_summary) {
-							console.log("ملخص التأخير:", r.message.delay_summary);
-						}
-					}
-				},
-				error: function (err) {
-					frappe.msgprint("حدث خطأ أثناء تنفيذ العملية");
-					console.error(err);
-				}
-			});
-		}, 'الإجراءات المخصصة');
-	}
+	// onload: function (report) {
+	// 	report.page.add_inner_button(__('احتساب التأخيرات وإنشاء الإجازات/الغياب'), function () {
+	// 		frappe.call({
+	// 			method: "tfd_projectmanagement.tfd_project_module.doctype.ahmed.ahmed.get_result_checkin",
+	// 			callback: function (r) {
+	// 				if (r.message) {
+	// 					frappe.msgprint(r.message);
+	// 					if (r.message.delay_summary) {
+	// 						console.log("ملخص التأخير:", r.message.delay_summary);
+	// 					}
+	// 				}
+	// 			},
+	// 			error: function (err) {
+	// 				frappe.msgprint("حدث خطأ أثناء تنفيذ العملية");
+	// 				console.error(err);
+	// 			}
+	// 		});
+	// 	}, 'الإجراءات المخصصة');
+	// }
 	
 };
