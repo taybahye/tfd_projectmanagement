@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-18 02:32:57.435190",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "column_break_dumd",
+  "minutes"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "date"
+  },
+  {
+   "fieldname": "column_break_dumd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "minutes",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "minutes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-18 02:36:03.436786",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "late days chilled table",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
