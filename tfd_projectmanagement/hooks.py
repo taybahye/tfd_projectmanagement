@@ -115,12 +115,18 @@ app_license = "agpl-3.0"
 # -----------
 # Permissions evaluated in scripted ways
 
-
-doc_events = {
-    "Salary Slip": {
-        "validate": "my_app.payroll.late_deduction.apply_late_deduction",
-    }
+override_doctype_class = {
+    "Salary Slip": "tfd_projectmanagement.overrides.salary_slip_override.CustomSalarySlip"
 }
+
+#doc_events = {
+    #"Salary Slip": {
+   #     "validate": "tfd_projectmanagement.late_deduction.overrides.apply_late_deduction",
+  #      tfd_projectmanagement.payroll.late_deduction.apply_late_deduction
+
+ #   }
+#}
+#"/home/frappe/frappe-bench/apps/tfd_projectmanagement/tfd_projectmanagement/overrides/late_deduction.py"
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
