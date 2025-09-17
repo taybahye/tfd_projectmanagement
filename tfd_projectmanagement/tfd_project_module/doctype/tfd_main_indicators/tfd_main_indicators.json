@@ -2,7 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{type}.{#####}-{en_ind_name}",
+ "autoname": "format:{type}-{en_ind_name}",
  "creation": "2025-06-23 09:56:15.347880",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -67,6 +67,7 @@
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "English display name",
+   "length": 1000,
    "reqd": 1
   },
   {
@@ -85,7 +86,7 @@
    "fieldname": "ind_des",
    "fieldtype": "Text",
    "label": "English Description  ",
-   "max_height": "50px"
+   "max_height": "150px"
   },
   {
    "fieldname": "column_break_gaaq",
@@ -95,7 +96,7 @@
    "fieldname": "ar_ind_des",
    "fieldtype": "Text",
    "label": "Arabic Description",
-   "max_height": "50px"
+   "max_height": "150px"
   },
   {
    "fieldname": "actual_and_target_values_represents_and_periodicity_section",
@@ -260,7 +261,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-08-24 10:37:40.664656",
+ "modified": "2025-09-17 23:04:59.112694",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Indicators",
@@ -284,5 +285,6 @@
  "search_fields": "ar_ind_name",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "ind_des"
 }
