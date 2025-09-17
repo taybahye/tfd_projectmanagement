@@ -116,11 +116,11 @@ app_license = "agpl-3.0"
 # Permissions evaluated in scripted ways
 
 
-# doc_events = {
-#    "Salary Slip": {
-#        "validate": "my_app.payroll.late_deduction.apply_late_deduction",
-#    }
-#}
+doc_events = {
+    "Salary Slip": {
+        "validate": "my_app.payroll.late_deduction.apply_late_deduction",
+    }
+}
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
