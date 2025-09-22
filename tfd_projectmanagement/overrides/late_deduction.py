@@ -5,7 +5,7 @@ from frappe.utils import get_datetime
 
 LATE_GRACE_MINUTES = 10.0
 WORKING_HOURS_PER_DAY = 8.0
-BASE_COMPONENTS = {"Basic", "IMC Basic Salary"}
+BASE_COMPONENTS = {"Basic", "base"}
 FALLBACK_SHIFT_START = time(8, 0)
 
 def minutes_diff(later_dt, earlier_dt):
