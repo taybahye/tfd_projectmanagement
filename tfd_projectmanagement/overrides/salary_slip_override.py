@@ -560,7 +560,7 @@ class CustomSalarySlip(SalarySlip):
                 self.append("custom_late_days", {"date": d, "minutes": minutes})
             except Exception:
                 pass
-
+  
         # حقول مساعدة (إن وُجدت في الدوك تايب)
         if hasattr(self, "custom_number_of_late_days"):
             self.custom_number_of_late_days = float(days_count)
