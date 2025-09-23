@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class WorkExperienceChild(Document):
+class earlyexitchilled(Document):
 	pass
