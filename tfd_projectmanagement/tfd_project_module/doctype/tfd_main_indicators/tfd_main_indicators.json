@@ -64,17 +64,19 @@
   },
   {
    "fieldname": "en_ind_name",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "English display name",
    "length": 1000,
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "ar_ind_name",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Arabic display name",
+   "length": 1000,
    "reqd": 1
   },
   {
@@ -262,7 +264,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-09-23 13:06:18.843487",
+ "modified": "2025-09-24 12:07:02.888445",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Indicators",
