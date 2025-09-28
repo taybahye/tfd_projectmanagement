@@ -2,7 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{type}-{en_ind_name}",
+ "autoname": "format:Ind-{#####}",
  "creation": "2025-06-23 09:56:15.347880",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -64,17 +64,19 @@
   },
   {
    "fieldname": "en_ind_name",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "English display name",
    "length": 1000,
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "ar_ind_name",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Arabic display name",
+   "length": 1000,
    "reqd": 1
   },
   {
@@ -258,10 +260,11 @@
    "options": "TFD Main Indicators"
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-09-17 23:04:59.112694",
+ "modified": "2025-09-24 12:07:02.888445",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Indicators",
@@ -282,9 +285,10 @@
    "write": 1
   }
  ],
- "search_fields": "ar_ind_name",
+ "row_format": "Dynamic",
+ "search_fields": "en_ind_name",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "ind_des"
+ "title_field": "en_ind_name"
 }
