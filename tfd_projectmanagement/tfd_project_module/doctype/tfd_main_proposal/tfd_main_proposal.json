@@ -55,6 +55,19 @@
   "targeted_affected_persons",
   "indirect_beneficiaries",
   "other_info_tab",
+  "organization_information_section",
+  "name_of_cso_authorized_officer",
+  "email_of_authorized_officer",
+  "phone_of_authorized_officer",
+  "title_of_authorized_officer",
+  "column_break_wfqq",
+  "unicef_office",
+  "acronym",
+  "partnership_management_plan_section",
+  "hact_programmatic_visit",
+  "cash_transfer_modalityies",
+  "column_break_spfs",
+  "final_partnership_review",
   "participation_of_and_accountability_section",
   "participation_of_and_accountability",
   "participation_of_and_accountability_text",
@@ -70,6 +83,8 @@
   "budget_tab",
   "staffing_and_other_personal_cost_section",
   "table_gofv",
+  "from_cso",
+  "from_unicef",
   "staff_budget_total",
   "location_tab",
   "projects_location",
@@ -471,11 +486,86 @@
    "fieldname": "coordination_and_complementarity",
    "fieldtype": "Text Editor",
    "label": "Coordination and Complementarity "
+  },
+  {
+   "fieldname": "unicef_office",
+   "fieldtype": "Data",
+   "label": "UNICEF Office"
+  },
+  {
+   "fieldname": "acronym",
+   "fieldtype": "Data",
+   "label": "Acronym"
+  },
+  {
+   "fieldname": "name_of_cso_authorized_officer",
+   "fieldtype": "Data",
+   "label": "Name of CSO Authorized Officer"
+  },
+  {
+   "fieldname": "title_of_authorized_officer",
+   "fieldtype": "Data",
+   "label": "Title of Authorized Officer "
+  },
+  {
+   "fieldname": "email_of_authorized_officer",
+   "fieldtype": "Data",
+   "label": "Email of Authorized Officer  ",
+   "options": "Email "
+  },
+  {
+   "fieldname": "phone_of_authorized_officer",
+   "fieldtype": "Data",
+   "label": "Phone of Authorized Officer",
+   "options": "Phone "
+  },
+  {
+   "fieldname": "organization_information_section",
+   "fieldtype": "Section Break",
+   "label": "Organization information"
+  },
+  {
+   "fieldname": "column_break_wfqq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_cso",
+   "fieldtype": "Currency",
+   "label": "From CSO"
+  },
+  {
+   "fieldname": "from_unicef",
+   "fieldtype": "Currency",
+   "label": "From UNICEF"
+  },
+  {
+   "fieldname": "partnership_management_plan_section",
+   "fieldtype": "Section Break",
+   "label": "Partnership management plan "
+  },
+  {
+   "fieldname": "hact_programmatic_visit",
+   "fieldtype": "Data",
+   "label": " HACT programmatic visit"
+  },
+  {
+   "fieldname": "cash_transfer_modalityies",
+   "fieldtype": "Data",
+   "label": " Cash transfer modality(ies)"
+  },
+  {
+   "fieldname": "column_break_spfs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "final_partnership_review",
+   "fieldtype": "Data",
+   "label": "Final partnership review"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-23 00:09:46.811408",
+ "modified": "2025-09-24 15:21:47.969341",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Main Proposal",
