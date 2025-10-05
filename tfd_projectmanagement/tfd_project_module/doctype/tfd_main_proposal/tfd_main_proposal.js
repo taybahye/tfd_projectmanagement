@@ -261,139 +261,205 @@ const updateEstimatedBudget = (frm) => {
 // 2) إن لم يوجد → نربط العقدة بأقرب سلف منطقي بناءً على childOrder.
 // 3) الترقيم هرمي: Goal.N → Outcome.N.M → Output.N.M.K → Ind.N.M.K.L
 
-function buildLogframeTree(data, opts = {}) {
-    // إعدادات قابلة للتخصيص
-    const childOrder = opts.childOrder || {
-        Goal:   ["Outcome", "Output", "Ind"],  // ممكن مؤشرات مباشرة تحت Goal
-        Outcome:["Output", "Ind"],
-        Output: ["Ind"]
-        // لو عندك Activity أو غيره أضفه هنا: Activity: ["Ind"], ...
-    };
-    const orderKey = opts.orderKey || null; // مثال: "idx" لو عندك ترتيب مخصص
+// function buildLogframeTree(data, opts = {}) {
+//     // إعدادات قابلة للتخصيص
+//     const childOrder = opts.childOrder || {
+//         Goal:   ["Outcome", "Output", "Ind"],  // ممكن مؤشرات مباشرة تحت Goal
+//         Outcome:["Output", "Ind"],
+//         Output: ["Ind"]
+//         // لو عندك Activity أو غيره أضفه هنا: Activity: ["Ind"], ...
+//     };
+//     const orderKey = opts.orderKey || null; // مثال: "idx" لو عندك ترتيب مخصص
 
-    // أدوات مساعدة
-    const normType = (t) => {
-        t = (t || "").trim();
-        return t ? t[0].toUpperCase() + t.slice(1).toLowerCase() : "";
-    };
-    const textOf = (n) => n.indicator_name1 || n.title || n.subject || n.name || "";
+//     // أدوات مساعدة
+//     const normType = (t) => {
+//         t = (t || "").trim();
+//         return t ? t[0].toUpperCase() + t.slice(1).toLowerCase() : "";
+//     };
+//     const textOf = (n) => n.indicator_name1 || n.title || n.subject || n.name || "";
 
-    // 1) طبّع الأنواع ورتّب البيانات (اختياريًا على مفتاح orderKey)
-    const items = data.map(it => ({...it, type: normType(it.type)}));
-    if (orderKey) {
-        items.sort((a,b) => {
-            const av = a[orderKey] ?? Number.MAX_SAFE_INTEGER;
-            const bv = b[orderKey] ?? Number.MAX_SAFE_INTEGER;
-            return av === bv ? 0 : (av < bv ? -1 : 1);
+//     // 1) طبّع الأنواع ورتّب البيانات (اختياريًا على مفتاح orderKey)
+//     const items = data.map(it => ({...it, type: normType(it.type)}));
+//     if (orderKey) {
+//         items.sort((a,b) => {
+//             const av = a[orderKey] ?? Number.MAX_SAFE_INTEGER;
+//             const bv = b[orderKey] ?? Number.MAX_SAFE_INTEGER;
+//             return av === bv ? 0 : (av < bv ? -1 : 1);
+//         });
+//     }
+
+//     // 2) فهرسة وخرائط
+//     const nodes = Object.create(null);
+//     const childrenMap = Object.create(null);
+//     items.forEach(it => nodes[it.name] = it);
+
+//     // مكدّس المسار الحالي لاستخدامه في الإسناد التلقائي عند غياب الـ parent
+//     let stack = [];
+
+//     // إسناد طفل لأب
+//     const addChild = (parentName, childName) => {
+//         (childrenMap[parentName] ||= []).push(childName);
+//     };
+
+//     // إيجاد أقرب أب منطقي من المكدّس لِنوع childType
+//     const findAutoParentFromStack = (childType) => {
+//         for (let i = stack.length - 1; i >= 0; i--) {
+//             const anc = nodes[stack[i]];
+//             const allowed = childOrder[anc?.type] || [];
+//             if (allowed.includes(childType)) return anc.name;
+//         }
+//         return null; // يبقى جذر
+//     };
+
+//     // بناء روابط الأبناء
+//     for (const node of items) {
+//         let parentKey = node.parent_tfd_logframe || node.parent || null;
+
+//         if (!parentKey) {
+//             // لا يوجد parent → نبحث أقرب سلف منطقي
+//             parentKey = findAutoParentFromStack(node.type);
+//         }
+
+//         if (parentKey) {
+//             addChild(parentKey, node.name);
+//             // ضبط المكدّس: إن كان الأب موجودًا في المكدّس، نقصّه حتى الأب ثم نضيف الطفل
+//             const idxInStack = stack.lastIndexOf(parentKey);
+//             if (idxInStack >= 0) {
+//                 stack = stack.slice(0, idxInStack + 1);
+//             } else {
+//                 // الأب غير موجود بالمكدّس (مثلاً لم يُمرّ حتى الآن)، لا نقصّ
+//             }
+//             stack.push(node.name);
+//         } else {
+//             // جذر
+//             stack = (node.type === "Goal") ? [node.name] : [...stack, node.name];
+//         }
+//     }
+
+//     // 3) ترتيب أبناء كل أب حسب childOrder (ثم الأنواع غير المتوقعة في النهاية)
+//     const getOrderedChildren = (parentName) => {
+//         const parent = nodes[parentName];
+//         const all = childrenMap[parentName] || [];
+//         const order = childOrder[parent?.type] || [];
+
+//         const buckets = new Map(order.map(t => [t, []]));
+//         const rest = [];
+//         for (const child of all) {
+//             const t = nodes[child]?.type || "";
+//             (buckets.has(t) ? buckets.get(t) : rest).push(child);
+//         }
+//         return [...order.flatMap(t => buckets.get(t)), ...rest];
+//     };
+
+//     // 4) الجذور: لا parent_tfd_logframe ولا parent ولم يُسنَد تلقائيًا (أي ليس في أي childrenMap كطفل)
+//     const isChildSomewhere = new Set(
+//         Object.values(childrenMap).flat()
+//     );
+//     const roots = items.filter(it => !it.parent_tfd_logframe && !it.parent && !isChildSomewhere.has(it.name));
+
+//     // أعرض الـ Goals أولًا ثم غيرها
+//     const rootOrder = [
+//         ...roots.filter(r => r.type === "Goal"),
+//         ...roots.filter(r => r.type !== "Goal")
+//     ].map(r => r.name);
+
+//     // 5) الترقيم الهرمي والإخراج
+//     function buildHTML(nodeName, numberingPath) {
+//         const node = nodes[nodeName];
+//         const label = `${node.type}.${numberingPath.join(".")}`;
+//         const safeText = (window?.frappe?.utils?.escape_html)
+//             ? frappe.utils.escape_html(textOf(node))
+//             : textOf(node);
+
+//         let html = `<li><strong>${label}</strong>: ${safeText}`;
+
+//         const kids = getOrderedChildren(nodeName);
+//         if (kids.length) {
+//             html += "<ul>";
+//             kids.forEach((childName, idx) => {
+//                 html += buildHTML(childName, [...numberingPath, idx + 1]);
+//             });
+//             html += "</ul>";
+//         }
+
+//         html += "</li>";
+//         return html;
+//     }
+
+//     let finalHtml = "<ul>";
+//     rootOrder.forEach((rootName, idx) => {
+//         finalHtml += buildHTML(rootName, [idx + 1]); // Goal.1, Goal.2, ...
+//     });
+//     finalHtml += "</ul>";
+
+//     return finalHtml;
+// }
+
+function buildLogframeTree(data) {
+    const nodes = {};
+    const childrenMap = {};
+
+    // تطبيع الأنواع وتخزينها
+    data.forEach(item => {
+        const type = (item.type || "").trim();
+        item.type = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
+        nodes[item.name] = item;
+
+        const parent = item.parent_tfd_logframe || item.parent;
+        if (parent) {
+            if (!childrenMap[parent]) childrenMap[parent] = [];
+            childrenMap[parent].push(item.name);
+        }
+    });
+
+    // إيجاد الجذور (Goals)
+    const roots = data.filter(d => !d.parent_tfd_logframe && !d.parent);
+
+    const numberingMap = {}; // لحفظ الترقيم الكامل لكل عنصر
+
+    // دالة لتوليد الأرقام الهرمية
+    function assignNumbers(nodeName, numberingPath) {
+        const node = nodes[nodeName];
+        const children = childrenMap[nodeName] || [];
+
+        numberingMap[nodeName] = `${node.type}.${numberingPath.join(".")}`;
+
+        children.forEach((childName, idx) => {
+            assignNumbers(childName, [...numberingPath, idx + 1]);
         });
     }
 
-    // 2) فهرسة وخرائط
-    const nodes = Object.create(null);
-    const childrenMap = Object.create(null);
-    items.forEach(it => nodes[it.name] = it);
-
-    // مكدّس المسار الحالي لاستخدامه في الإسناد التلقائي عند غياب الـ parent
-    let stack = [];
-
-    // إسناد طفل لأب
-    const addChild = (parentName, childName) => {
-        (childrenMap[parentName] ||= []).push(childName);
-    };
-
-    // إيجاد أقرب أب منطقي من المكدّس لِنوع childType
-    const findAutoParentFromStack = (childType) => {
-        for (let i = stack.length - 1; i >= 0; i--) {
-            const anc = nodes[stack[i]];
-            const allowed = childOrder[anc?.type] || [];
-            if (allowed.includes(childType)) return anc.name;
-        }
-        return null; // يبقى جذر
-    };
-
-    // بناء روابط الأبناء
-    for (const node of items) {
-        let parentKey = node.parent_tfd_logframe || node.parent || null;
-
-        if (!parentKey) {
-            // لا يوجد parent → نبحث أقرب سلف منطقي
-            parentKey = findAutoParentFromStack(node.type);
-        }
-
-        if (parentKey) {
-            addChild(parentKey, node.name);
-            // ضبط المكدّس: إن كان الأب موجودًا في المكدّس، نقصّه حتى الأب ثم نضيف الطفل
-            const idxInStack = stack.lastIndexOf(parentKey);
-            if (idxInStack >= 0) {
-                stack = stack.slice(0, idxInStack + 1);
-            } else {
-                // الأب غير موجود بالمكدّس (مثلاً لم يُمرّ حتى الآن)، لا نقصّ
-            }
-            stack.push(node.name);
-        } else {
-            // جذر
-            stack = (node.type === "Goal") ? [node.name] : [...stack, node.name];
-        }
-    }
-
-    // 3) ترتيب أبناء كل أب حسب childOrder (ثم الأنواع غير المتوقعة في النهاية)
-    const getOrderedChildren = (parentName) => {
-        const parent = nodes[parentName];
-        const all = childrenMap[parentName] || [];
-        const order = childOrder[parent?.type] || [];
-
-        const buckets = new Map(order.map(t => [t, []]));
-        const rest = [];
-        for (const child of all) {
-            const t = nodes[child]?.type || "";
-            (buckets.has(t) ? buckets.get(t) : rest).push(child);
-        }
-        return [...order.flatMap(t => buckets.get(t)), ...rest];
-    };
-
-    // 4) الجذور: لا parent_tfd_logframe ولا parent ولم يُسنَد تلقائيًا (أي ليس في أي childrenMap كطفل)
-    const isChildSomewhere = new Set(
-        Object.values(childrenMap).flat()
-    );
-    const roots = items.filter(it => !it.parent_tfd_logframe && !it.parent && !isChildSomewhere.has(it.name));
-
-    // أعرض الـ Goals أولًا ثم غيرها
-    const rootOrder = [
-        ...roots.filter(r => r.type === "Goal"),
-        ...roots.filter(r => r.type !== "Goal")
-    ].map(r => r.name);
-
-    // 5) الترقيم الهرمي والإخراج
-    function buildHTML(nodeName, numberingPath) {
-        const node = nodes[nodeName];
-        const label = `${node.type}.${numberingPath.join(".")}`;
-        const safeText = (window?.frappe?.utils?.escape_html)
-            ? frappe.utils.escape_html(textOf(node))
-            : textOf(node);
-
-        let html = `<li><strong>${label}</strong>: ${safeText}`;
-
-        const kids = getOrderedChildren(nodeName);
-        if (kids.length) {
-            html += "<ul>";
-            kids.forEach((childName, idx) => {
-                html += buildHTML(childName, [...numberingPath, idx + 1]);
-            });
-            html += "</ul>";
-        }
-
-        html += "</li>";
-        return html;
-    }
-
-    let finalHtml = "<ul>";
-    rootOrder.forEach((rootName, idx) => {
-        finalHtml += buildHTML(rootName, [idx + 1]); // Goal.1, Goal.2, ...
+    // نبدأ من الجذور
+    roots.forEach((root, idx) => {
+        assignNumbers(root.name, [idx + 1]);
     });
-    finalHtml += "</ul>";
 
-    return finalHtml;
+    // تجميع حسب النوع
+    const grouped = {};
+    data.forEach(item => {
+        if (!grouped[item.type]) grouped[item.type] = [];
+        grouped[item.type].push(item);
+    });
+
+    // توليد HTML بالترقيم الهرمي المسطّح
+    let html = "";
+
+    const typeOrder = ["Goal", "Outcome", "Output", "Activity", "Ind"];
+    typeOrder.forEach(type => {
+        const items = grouped[type];
+        if (items && items.length) {
+            // html += `<h3></h3><ol>`;
+            items.forEach(item => {
+                const number = numberingMap[item.name] || `${type}`;
+                html += `<li><strong>${number}</strong>: ${item.indicator_name1 || ''}</li>`;
+            });
+            html += "</ol>";
+        }
+    });
+
+    return html;
 }
+
 
 
 
