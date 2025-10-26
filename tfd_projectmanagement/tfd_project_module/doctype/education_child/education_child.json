@@ -32,6 +32,7 @@
    "fieldname": "from",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_preview": 1,
    "label": "From",
    "reqd": 1
   },
@@ -39,6 +40,7 @@
    "fieldname": "to",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_preview": 1,
    "label": "To",
    "reqd": 1
   },
@@ -53,7 +55,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-10-05 13:20:02.318211",
+ "modified": "2025-10-05 13:28:32.173138",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Education Child",
