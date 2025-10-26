@@ -272,16 +272,23 @@ function buildLogframeTree(data, opts = {}) {
     // ...inside function buildLogframeTree(data, opts = {})...
 // ...
     // إعدادات قابلة للتخصيص
-    const childOrder = opts.childOrder || {
-        // الآن: Goal يمكن أن يحتوي على Outcome و Ind (المؤشرات) مباشرة
-      Goal:   ["Ind", "Outcome"],  
-        // الآن: Outcome يمكن أن يحتوي على Ind (المؤشرات) مباشرة
-        Outcome: ["Ind"]
-        // تم حذف 'Output' من هنا ومن قوائم الأبناء
-    };
-// ...
-    const orderKey = opts.orderKey || null; // مثال: "idx" لو عندك ترتيب مخصص
+//     const childOrder = opts.childOrder || {
+//         // الآن: Goal يمكن أن يحتوي على Outcome و Ind (المؤشرات) مباشرة
+//       Goal:   ["Ind", "Outcome"],  
+//         // الآن: Outcome يمكن أن يحتوي على Ind (المؤشرات) مباشرة
+//         Outcome: ["Ind"]
+//         // تم حذف 'Output' من هنا ومن قوائم الأبناء
+//     };
+// // ...
+//     const orderKey = opts.orderKey || null; // مثال: "idx" لو عندك ترتيب مخصص
 
+const childOrder = {
+        Goal:    ["Ind", "Outcome"],      // Indicators directly under Goal, then Outcomes
+        Outcome: ["Ind", "Output"],       // Indicators under Outcome, then Outputs
+        Output:  ["Ind"],                 // Indicators under Output
+    };
+
+    const orderKey = opts.orderKey || null;
     // أدوات مساعدة
     const normType = (t) => {
         t = (t || "").trim();
