@@ -262,13 +262,24 @@ const updateEstimatedBudget = (frm) => {
 // 3) الترقيم هرمي: Goal.N → Outcome.N.M → Output.N.M.K → Ind.N.M.K.L
 
 function buildLogframeTree(data, opts = {}) {
+    // // إعدادات قابلة للتخصيص
+    // const childOrder = opts.childOrder || {
+    //     Goal:   ["Outcome", "Output", "Ind"],  // ممكن مؤشرات مباشرة تحت Goal
+    //     Outcome:["Output", "Ind"],
+    //     Output: ["Ind"]
+    //     // لو عندك Activity أو غيره أضفه هنا: Activity: ["Ind"], ...
+    // };
+    // ...inside function buildLogframeTree(data, opts = {})...
+// ...
     // إعدادات قابلة للتخصيص
     const childOrder = opts.childOrder || {
-        Goal:   ["Outcome", "Output", "Ind"],  // ممكن مؤشرات مباشرة تحت Goal
-        Outcome:["Output", "Ind"],
-        Output: ["Ind"]
-        // لو عندك Activity أو غيره أضفه هنا: Activity: ["Ind"], ...
+        // الآن: Goal يمكن أن يحتوي على Outcome و Ind (المؤشرات) مباشرة
+      Goal:   ["Ind", "Outcome"],  
+        // الآن: Outcome يمكن أن يحتوي على Ind (المؤشرات) مباشرة
+        Outcome: ["Ind"]
+        // تم حذف 'Output' من هنا ومن قوائم الأبناء
     };
+// ...
     const orderKey = opts.orderKey || null; // مثال: "idx" لو عندك ترتيب مخصص
 
     // أدوات مساعدة
