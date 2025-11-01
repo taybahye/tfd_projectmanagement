@@ -759,13 +759,6 @@
 
 
 
-
-// Copyright (c) 2024, Amd Oudah Prosite and contributors
-// ملف Client Script لـ TFD Main Proposal
-
-// =========================================================================
-//           *** 1. دالة بناء الشجرة المُرتبة (باستخدام lft فقط) ***
-// =========================================================================
 function buildLogframeTree(data) {
     const childOrder = {
         Goal:    ["Ind", "Outcome"], 
@@ -773,7 +766,7 @@ function buildLogframeTree(data) {
         Output:  ["Ind"]
     };
 
-    const typeIcons = { Goal: "🌍", Outcome: "🎯", Output: "⚙️", Ind: "📊" };
+    // ❌ تم حذف تعريف typeIcons بناءً على طلبك
 
     const nodes = {};
     data.forEach(it => {
@@ -781,11 +774,11 @@ function buildLogframeTree(data) {
         nodes[it.name] = {
             ...it,
             type: type ? type[0].toUpperCase() + type.slice(1).toLowerCase() : "",
-            // لم تعد هذه الحقول مهمة للترتيب، ولكن نحافظ عليها
+            // حقول lft/rgt لم تعد تستخدم للترتيب
             lft: Number(it.lft) || Number.MAX_SAFE_INTEGER,
             rgt: Number(it.rgt) || Number.MAX_SAFE_INTEGER,
-            // 🚨 القيمة الرئيسية للترتيب الآن: كائن Date
-            creation: (it.creation && !isNaN(Date.parse(it.creation))) ? new Date(it.creation) : new Date(0) // استخدام تاريخ قديم جدًا إذا كان غير صالح
+            // 🌟 القيمة الرئيسية للترتيب: كائن Date، وتاريخ قديم (0) إذا كان غير صالح
+            creation: (it.creation && !isNaN(Date.parse(it.creation))) ? new Date(it.creation) : new Date(0) 
         };
     });
 
@@ -795,16 +788,13 @@ function buildLogframeTree(data) {
         if (parent) (childrenMap[parent] ||= []).push(it.name);
     });
 
-    // 🌟 التغيير الأول: دالة الترتيب تعتمد على تاريخ الإنشاء (creation)
+    // 🌟 دالة الترتيب: تعتمد كلياً على قيمة Timestamp لتاريخ الإنشاء
     const orderValue = (node) => {
-        // نستخدمgetTime() للحصول على قيمة عددية لـ Date للمقارنة
-        // كلما كان التاريخ أقدم (القيمة أصغر)، ظهر العنصر أبكر
         return node.creation.getTime(); 
     };
 
-    // ترتيب الأبناء لكل parent تصاعديًا (ترتيب مبدئي)
+    // ترتيب الأبناء لكل parent تصاعديًا حسب creation
     Object.keys(childrenMap).forEach(parent => {
-        // نستخدم orderValue بدلاً من الاعتماد على lft
         childrenMap[parent].sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b]));
     });
 
@@ -822,7 +812,7 @@ function buildLogframeTree(data) {
             (buckets.has(t) ? buckets.get(t) : rest).push(child);
         });
 
-        // 🌟 التغيير الثاني: ترتيب الأبناء داخل كل مجموعة نوع باستخدام creation
+        // ترتيب الأبناء داخل كل مجموعة نوع باستخدام creation
         for (let arr of buckets.values()) arr.sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b]));
         rest.sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b]));
 
@@ -837,7 +827,8 @@ function buildLogframeTree(data) {
             ? frappe.utils.escape_html(node.indicator_name1 || node.title || node.name)
             : (node.indicator_name1 || node.title || node.name);
 
-        let html = `<li><strong>${typeIcons[node.type] || ""} ${label}</strong>: ${text}`;
+        // 🌟 بناء HTML بدون أيقونات (typeIcons)
+        let html = `<li><strong>${label}</strong>: ${text}`;
 
         const kids = getOrderedChildren(nodeName);
         if (kids.length) {
@@ -852,11 +843,10 @@ function buildLogframeTree(data) {
         return html;
     }
 
-    // تحديد الجذور وترتيبها النهائي
+    // تحديد الجذور وترتيبها النهائي (باستخدام creation)
     const isChildSomewhere = new Set(Object.values(childrenMap).flat());
     const roots = data
         .filter(it => !isChildSomewhere.has(it.name)) 
-        // 🌟 التغيير الثالث: ترتيب الجذور باستخدام orderValue (أي creation)
         .sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b])) 
         .map(it => it.name);
 
@@ -882,7 +872,7 @@ frappe.ui.form.on("TFD Main Proposal", {
         if (logframe_name) {
             frappe.call({
                 doc: frm.doc,
-                method: "get_log_frame", // ⚠️ يجب أن تضمن هذه الدالة جلب حقل 'creation'
+                method: "get_log_frame", // يجب أن تضمن هذه الدالة جلب حقل 'creation'
                 args: { log_frame_name: logframe_name.toString() },
             }).done((r) => {
                 const logframeData = r.message;
@@ -894,7 +884,22 @@ frappe.ui.form.on("TFD Main Proposal", {
                 frm.set_value('indicators_and_activities_html', html_output);
 
                 // 3. (بقية الكود): تحديث جداول project_info و project_plan 
-                // ... (بقية منطق تحديث الجداول يبقى كما هو) ...
+                frm.doc.project_info = []
+                frm.doc.project_plan = []
+                $.each(r.message, function(_i, e) {
+                    if (!e.activity__name) {
+                        return;
+                    }
+                    let entry = frm.add_child("project_info");
+                    let entry1 = frm.add_child("project_plan");
+                    entry.project_name = e.project_name;
+                    entry.cost = e.cost;
+                    entry.activity__name = e.activity__name;
+                    entry1.project_name = e.project_name;
+                    entry1.activity_name = e.activity__name;
+                })
+                refresh_field("project_info")
+                refresh_field("project_plan")
             })
         } else {
             // مسح الحقل إذا تم مسح اختيار الإطار المنطقي
@@ -906,23 +911,18 @@ frappe.ui.form.on("TFD Main Proposal", {
     before_save: function(frm) {
         let logframe_name = frm.doc.log_frame_name;
         
-        // إذا لم يكن هناك إطار منطقي، لا تفعل شيئاً
         if (!logframe_name) return;
 
-        // تنفيذ نفس منطق جلب البيانات وترتيبها
+        // 🌟 التصحيح: نستخدم الدالة المخصصة (get_log_frame) لضمان جلب جميع العقد المرتبطة
         frappe.call({
-            method: "frappe.client.get_list",
-            args: {
-                doctype: "TFD Logframe",
-                filters: { "name": logframe_name }, 
-                fields: ["*"], // نحتاج لجميع الحقول بما فيها 'creation'
-                // 🌟 التغيير الرابع: طلب الترتيب المسبق من قاعدة البيانات حسب تاريخ الإنشاء
-                order_by: "creation ASC" 
-            },
+            doc: frm.doc,
+            method: "get_log_frame", 
+            args: { log_frame_name: logframe_name.toString() },
             async: false, // يجب أن يكون متزامناً لإكمال التحديث قبل الحفظ
             callback: (r) => {
-                if (r.message && r.message.length) {
-                    const logframeData = r.message;
+                const logframeData = r.message;
+                
+                if (logframeData && logframeData.length) { 
                     const html_output = buildLogframeTree(logframeData);
                     
                     // تحديث الحقل قبل حفظه في قاعدة البيانات
