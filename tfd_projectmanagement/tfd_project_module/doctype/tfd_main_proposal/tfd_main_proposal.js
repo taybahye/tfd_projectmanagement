@@ -757,16 +757,14 @@
 //     return finalHtml;
 // }
 
-
-
 function buildLogframeTree(data) {
-    const childOrder = {
-        Goal:    ["Ind", "Outcome"], 
-        Outcome: ["Ind", "Output"],
-        Output:  ["Ind"]
-    };
+    console.log("🚀 buildLogframeTree called with data:", data);
 
-    // ❌ تم حذف تعريف typeIcons بناءً على طلبك
+    const childOrder = {
+        Goal: ["Ind", "Outcome"], 
+        Outcome: ["Ind", "Output"],
+        Output: ["Ind"]
+    };
 
     const nodes = {};
     data.forEach(it => {
@@ -774,13 +772,13 @@ function buildLogframeTree(data) {
         nodes[it.name] = {
             ...it,
             type: type ? type[0].toUpperCase() + type.slice(1).toLowerCase() : "",
-            // حقول lft/rgt لم تعد تستخدم للترتيب
             lft: Number(it.lft) || Number.MAX_SAFE_INTEGER,
             rgt: Number(it.rgt) || Number.MAX_SAFE_INTEGER,
-            // 🌟 القيمة الرئيسية للترتيب: كائن Date، وتاريخ قديم (0) إذا كان غير صالح
-            creation: (it.creation && !isNaN(Date.parse(it.creation))) ? new Date(it.creation) : new Date(0) 
+            creation: (it.creation && !isNaN(Date.parse(it.creation))) ? new Date(it.creation) : new Date(0)
         };
     });
+
+    console.log("✅ Nodes created:", nodes);
 
     const childrenMap = {};
     data.forEach(it => {
@@ -788,17 +786,14 @@ function buildLogframeTree(data) {
         if (parent) (childrenMap[parent] ||= []).push(it.name);
     });
 
-    // 🌟 دالة الترتيب: تعتمد كلياً على قيمة Timestamp لتاريخ الإنشاء
-    const orderValue = (node) => {
-        return node.creation.getTime(); 
-    };
+    console.log("📚 Children map:", childrenMap);
 
-    // ترتيب الأبناء لكل parent تصاعديًا حسب creation
+    const orderValue = (node) => node.creation.getTime();
+
     Object.keys(childrenMap).forEach(parent => {
         childrenMap[parent].sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b]));
     });
 
-    // دالة الحصول على الأبناء المُرتبين (الجمع بين ترتيب النوع وترتيب creation)
     const getOrderedChildren = (parentName) => {
         const parent = nodes[parentName];
         const all = childrenMap[parentName] || [];
@@ -812,17 +807,11 @@ function buildLogframeTree(data) {
             (buckets.has(t) ? buckets.get(t) : rest).push(child);
         });
 
-        // ترتيب الأبناء داخل كل مجموعة نوع باستخدام creation
         for (let arr of buckets.values()) arr.sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b]));
         rest.sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b]));
 
-        // دمج المجموعات: النوع أولاً، ثم الترتيب الداخلي (creation)
         return [...order.flatMap(t => buckets.get(t)), ...rest];
     };
-
-
-
-    
 
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
@@ -831,7 +820,6 @@ function buildLogframeTree(data) {
             ? frappe.utils.escape_html(node.indicator_name1 || node.title || node.name)
             : (node.indicator_name1 || node.title || node.name);
 
-        // 🌟 بناء HTML بدون أيقونات (typeIcons)
         let html = `<li><strong>${label}</strong>: ${text}`;
 
         const kids = getOrderedChildren(nodeName);
@@ -847,12 +835,13 @@ function buildLogframeTree(data) {
         return html;
     }
 
-    // تحديد الجذور وترتيبها النهائي (باستخدام creation)
     const isChildSomewhere = new Set(Object.values(childrenMap).flat());
     const roots = data
         .filter(it => !isChildSomewhere.has(it.name)) 
         .sort((a, b) => orderValue(nodes[a]) - orderValue(nodes[b])) 
         .map(it => it.name);
+
+    console.log("🌳 Roots found:", roots);
 
     let html = "<ul>";
     roots.forEach((root, idx) => {
@@ -860,40 +849,37 @@ function buildLogframeTree(data) {
     });
     html += "</ul>";
 
+    console.log("✅ Final HTML generated:", html);
+    frappe.msgprint("✅ buildLogframeTree executed successfully!");
     return html;
 }
 
 // =========================================================================
-//                   *** 2. كود الأحداث (Events) ***
+//                   *** 2. كود الأحداث (Events) ***
 // =========================================================================
 
 frappe.ui.form.on("TFD Main Proposal", {
-    // ... (دالة staffing_plan تبقى كما هي) ...
-
-    // دالة تحديث الشجرة عند اختيار الـ Logframe
     log_frame_name: function(frm) {
         let logframe_name = frm.doc.log_frame_name;
         if (logframe_name) {
+            frappe.msgprint(`🔍 Fetching Logframe: ${logframe_name}`);
             frappe.call({
                 doc: frm.doc,
-                method: "get_log_frame", // يجب أن تضمن هذه الدالة جلب حقل 'creation'
+                method: "get_log_frame",
                 args: { log_frame_name: logframe_name.toString() },
             }).done((r) => {
+                console.log("📦 Response from get_log_frame:", r);
                 const logframeData = r.message;
-                
-                // 1. توليد HTML المُرتب
+
                 const html_output = buildLogframeTree(logframeData);
-                
-                // 2. تعيين HTML الناتج في الحقل المخصص للعرض
                 frm.set_value('indicators_and_activities_html', html_output);
 
-                // 3. (بقية الكود): تحديث جداول project_info و project_plan 
-                frm.doc.project_info = []
-                frm.doc.project_plan = []
+                frappe.msgprint("✅ Logframe HTML updated successfully!");
+
+                frm.doc.project_info = [];
+                frm.doc.project_plan = [];
                 $.each(r.message, function(_i, e) {
-                    if (!e.activity__name) {
-                        return;
-                    }
+                    if (!e.activity__name) return;
                     let entry = frm.add_child("project_info");
                     let entry1 = frm.add_child("project_plan");
                     entry.project_name = e.project_name;
@@ -902,41 +888,36 @@ frappe.ui.form.on("TFD Main Proposal", {
                     entry1.project_name = e.project_name;
                     entry1.activity_name = e.activity__name;
                 })
-                refresh_field("project_info")
-                refresh_field("project_plan")
+                refresh_field("project_info");
+                refresh_field("project_plan");
             })
         } else {
-            // مسح الحقل إذا تم مسح اختيار الإطار المنطقي
             frm.set_value('indicators_and_activities_html', '');
         }
     },
 
-    // ⚠️ الحل الحاسم: تنفيذ عملية التوليد قبل الحفظ
     before_save: function(frm) {
         let logframe_name = frm.doc.log_frame_name;
-        
         if (!logframe_name) return;
 
-        // 🌟 التصحيح: نستخدم الدالة المخصصة (get_log_frame) لضمان جلب جميع العقد المرتبطة
+        frappe.msgprint("💾 before_save triggered — updating HTML...");
         frappe.call({
             doc: frm.doc,
             method: "get_log_frame", 
             args: { log_frame_name: logframe_name.toString() },
-            async: false, // يجب أن يكون متزامناً لإكمال التحديث قبل الحفظ
+            async: false,
             callback: (r) => {
+                console.log("📦 before_save get_log_frame response:", r);
                 const logframeData = r.message;
-                
                 if (logframeData && logframeData.length) { 
                     const html_output = buildLogframeTree(logframeData);
-                    
-                    // تحديث الحقل قبل حفظه في قاعدة البيانات
                     frm.set_value('indicators_and_activities_html', html_output); 
+                    frappe.msgprint("✅ HTML updated before save!");
                 } else {
                     frm.set_value('indicators_and_activities_html', '<ul><li>No Logframe data found.</li></ul>');
+                    frappe.msgprint("⚠️ No Logframe data found.");
                 }
             }
         });
     }
-    
-    // ... (بقية الأحداث والدوال المساعدة تبقى كما هي)
 });
