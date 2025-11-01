@@ -894,30 +894,32 @@ frappe.ui.form.on("TFD Main Proposal", {
         } else {
             frm.set_value('indicators_and_activities_html', '');
         }
+            frm.save();
+
     },
 
-    before_save: function(frm) {
-        let logframe_name = frm.doc.log_frame_name;
-        if (!logframe_name) return;
+    // before_save: function(frm) {
+    //     let logframe_name = frm.doc.log_frame_name;
+    //     if (!logframe_name) return;
 
-        frappe.msgprint("💾 before_save triggered — updating HTML...");
-        frappe.call({
-            doc: frm.doc,
-            method: "get_log_frame", 
-            args: { log_frame_name: logframe_name.toString() },
-            async: false,
-            callback: (r) => {
-                console.log("📦 before_save get_log_frame response:", r);
-                const logframeData = r.message;
-                if (logframeData && logframeData.length) { 
-                    const html_output = buildLogframeTree(logframeData);
-                    frm.set_value('indicators_and_activities_html', html_output); 
-                    frappe.msgprint("✅ HTML updated before save!");
-                } else {
-                    frm.set_value('indicators_and_activities_html', '<ul><li>No Logframe data found.</li></ul>');
-                    frappe.msgprint("⚠️ No Logframe data found.");
-                }
-            }
-        });
-    }
+    //     frappe.msgprint("💾 before_save triggered — updating HTML...");
+    //     frappe.call({
+    //         doc: frm.doc,
+    //         method: "get_log_frame", 
+    //         args: { log_frame_name: logframe_name.toString() },
+    //         async: false,
+    //         callback: (r) => {
+    //             console.log("📦 before_save get_log_frame response:", r);
+    //             const logframeData = r.message;
+    //             if (logframeData && logframeData.length) { 
+    //                 const html_output = buildLogframeTree(logframeData);
+    //                 frm.set_value('indicators_and_activities_html', html_output); 
+    //                 frappe.msgprint("✅ HTML updated before save!");
+    //             } else {
+    //                 frm.set_value('indicators_and_activities_html', '<ul><li>No Logframe data found.</li></ul>');
+    //                 frappe.msgprint("⚠️ No Logframe data found.");
+    //             }
+    //         }
+    //     });
+    // }
 });
