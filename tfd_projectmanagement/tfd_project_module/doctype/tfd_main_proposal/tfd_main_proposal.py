@@ -1,7 +1,11 @@
-from frappe.model.document import Document
 import frappe
+from frappe.model.document import Document
 
 class TFDMainProposal(Document):
+
+    # -----------------------------------------------------------------------
+    # 1️⃣ Before Save: Sync project_info -> project_plan
+    # -----------------------------------------------------------------------
     def before_save(self):
         project_plan = self.get("project_info") or []
         self.set("project_plan", [])
@@ -12,100 +16,103 @@ class TFDMainProposal(Document):
                 "activity_name": d.activity__name
             })
 
-
-
+    # -----------------------------------------------------------------------
+    # 2️⃣ Get Staffing Plan Details
+    # -----------------------------------------------------------------------
     @frappe.whitelist()
     def get_staffing(staffing_plan):
-        proj_list=frappe.db.sql(f""" select * from  tabStaffing Plan Detail where parent='{staffing_plan.staffing_plan}' """,as_dict=True)
+        proj_list = frappe.db.sql(f"""
+            SELECT * 
+            FROM `tabStaffing Plan Detail`
+            WHERE parent = '{staffing_plan.staffing_plan}'
+        """, as_dict=True)
         return proj_list
-    
+
+    # -----------------------------------------------------------------------
+    # 3️⃣ Get Logframe Data (Ordered by creation datetime from TFD Main Indicators)
+    # -----------------------------------------------------------------------
     @frappe.whitelist()
     def get_log_frame(log_frame_name):
-        #   frappe.log(f"Indicator List: {ppst[0]}") 
-        #   frappe.msgprint(f"Indicator List: {log_frame_name.log_frame_name}") 
-        
-        proj_list=frappe.db.sql(f""" SELECT
-        `tabTFD Logframe`.logframe_name, 
-        `tabTFD Logframe`.indicator_name, 
-        `tabTFD Logframe`.type, 
-        `tabTFD Logframe`.docstatus, 
-        `tabTFD Logframe`.baseline, 
-        `tabTFD Logframe`.target, 
-        `tabTFD Logframe`.acheivement, 
-        `tabTFD Logframe`.growth_in, 
-        `tabTFD Logframe`.old_parent, 
-        `tabTFD Logframe`.parent_tfd_logframe, 
-        `tabTFD Logframe`.is_group, 
-        `tabTFD Logframe`.indicator_name1, 
-        `tabTFD Logframe`.company, 
-        `tabTFD Logframe`.`name`, 
-        `tabProject Information`.parent, 
-        `tabProject Information`.parentfield, 
-        `tabProject Information`.parenttype, 
-        `tabProject Information`.cost, 
-        `tabProject Information`.project_name,
-        `tabProject Information`.activity__name
-    FROM
-        `tabTFD Logframe`
-        INNER JOIN
-        `tabTFD Logframe Name`
-        ON 
-            `tabTFD Logframe`.logframe_name = `tabTFD Logframe Name`.`name`
-        LEFT JOIN
-        `tabProject Information`
-        ON 
-            `tabTFD Logframe`.`name` = `tabProject Information`.parent
-            where `tabTFD Logframe`.logframe_name='{log_frame_name.log_frame_name}' ORDER BY `tabTFD Logframe`.parent_tfd_logframe DESC  """,as_dict=True)
-        
-        #   frappe.msgprint(f"Indicator List: {log_frame_name.log_frame_name}") 
-        #   frappe.msgprint({proj_list})
+        """
+        Returns logframe data for the selected Log Frame name,
+        joined with creation datetime from TFD Main Indicators.
+        """
+
+        proj_list = frappe.db.sql(f"""
+            SELECT
+                logf.logframe_name,
+                logf.indicator_name,
+                logf.type,
+                logf.docstatus,
+                logf.baseline,
+                logf.target,
+                logf.acheivement,
+                logf.growth_in,
+                logf.old_parent,
+                logf.parent_tfd_logframe,
+                logf.is_group,
+                logf.indicator_name1,
+                logf.company,
+                logf.name,
+                proj.parent,
+                proj.parentfield,
+                proj.parenttype,
+                proj.cost,
+                proj.project_name,
+                proj.activity__name,
+                ind.creation AS indicator_creation
+            FROM
+                `tabTFD Logframe` AS logf
+            INNER JOIN
+                `tabTFD Logframe Name` AS lf_name
+                ON logf.logframe_name = lf_name.name
+            LEFT JOIN
+                `tabProject Information` AS proj
+                ON logf.name = proj.parent
+            LEFT JOIN
+                `tabTFD Main Indicators` AS ind
+                ON logf.name = ind.name
+            WHERE
+                logf.logframe_name = '{log_frame_name.log_frame_name}'
+            ORDER BY
+                ind.creation ASC
+        """, as_dict=True)
+
         return proj_list
 
-
-
-
-  # @frappe.whitelist()
-  # def get_indicators(self ,logframe_name):
-  #   # frappe.msgprint(f"Calling get_indicators with logframe_name: {self.framework}")  # تحقق من استلام logframe_name
-
-  #   indicator_list = frappe.db.sql(f"""
-  #     SELECT indicator_name 
-  #     FROM tabTFD Logframe
-  #     WHERE logframe_name = '{logframe_name}'
-  #   """, as_dict=True)
-
-  #   # frappe.msgprint(f"Indicator List: {indicator_list}")  # تحقق من نتائج الاستعلام
-  #   return indicator_list
+    # -----------------------------------------------------------------------
+    # 4️⃣ Get Indicators and Related Activities (Helper Method)
+    # -----------------------------------------------------------------------
     @frappe.whitelist()
     def get_indicators(self, logframe_name):
-            indicator_list = frappe.db.sql("""
-                SELECT DISTINCT indicator_name
-                FROM `tabTFD Logframe`
-                WHERE logframe_name = %s
-                ORDER BY logframe_name
-            """, (logframe_name,), as_dict=True)
+        """
+        Returns a unique list of activities linked to indicators under the given log frame.
+        """
+        indicator_list = frappe.db.sql("""
+            SELECT DISTINCT indicator_name
+            FROM `tabTFD Logframe`
+            WHERE logframe_name = %s
+            ORDER BY logframe_name
+        """, (logframe_name,), as_dict=True)
 
-            # frappe.msgprint(f"Indicator List with Indicator Names: {indicator_list}")
+        unique_activity_set = set()
 
-            unique_activity_set = set()
+        for indicator in indicator_list:
+            activities = frappe.db.sql("""
+                SELECT DISTINCT activity
+                FROM `tabTFD Logframe Activities`
+                WHERE parent IN (
+                    SELECT name
+                    FROM `tabTFD Logframe`
+                    WHERE logframe_name = %s AND indicator_name = %s
+                )
+            """, (logframe_name, indicator['indicator_name']), as_dict=True)
 
-            for indicator in indicator_list:
-                activities = frappe.db.sql("""
-                    SELECT DISTINCT activity
-                    FROM `tabTFD Logframe Activities`
-                    WHERE parent IN (
-                        SELECT name
-                        FROM `tabTFD Logframe`
-                        WHERE logframe_name = %s AND indicator_name = %s
-                    )
-                """, (logframe_name, indicator['indicator_name']), as_dict=True)
+            for activity in activities:
+                unique_activity_set.add((activity['activity'], indicator['indicator_name']))
 
-                for activity in activities:
-                    unique_activity_set.add((activity['activity'], indicator['indicator_name']))
+        final_activity_list = [
+            {'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set
+        ]
 
-            final_activity_list = [
-                {'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set
-            ]
-
-            # frappe.msgprint(f"Unique Activity List with Indicator Names: {final_activity_list}")
-            return final_activity_list
+        return final_activity_list

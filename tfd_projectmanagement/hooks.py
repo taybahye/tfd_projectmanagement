@@ -115,9 +115,6 @@ app_license = "agpl-3.0"
 # -----------
 # Permissions evaluated in scripted ways
 
-override_doctype_class = {
-    "Salary Slip": "tfd_projectmanagement.overrides.salary_slip_override.CustomSalarySlip"
-}
 
 #doc_events = {
     #"Salary Slip": {
