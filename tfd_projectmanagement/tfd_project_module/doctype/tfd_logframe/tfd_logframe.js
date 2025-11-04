@@ -39,5 +39,27 @@ frappe.ui.form.on('TFD Logframe', {
     refresh: function(frm) {
         // عند فتح النموذج لأول مرة، إخفاء حقل activities افتراضياً
         frm.set_df_property('activities', 'hidden', 0);
+         calculate_totals(frm);
+        
+        // detect changes in the child table
+        frm.fields_dict.indicators.grid.wrapper.on('change', function() {
+            calculate_totals(frm);
+        });
+    },
+    validate(frm) {
+        // recalculate before saving
+        calculate_totals(frm);
     }
 });
+function calculate_totals(frm) {
+    let total_target = 0;
+    let total_achievement = 0;
+
+    (frm.doc.disaggregation || []).forEach(row => {
+        total_target += flt(row.target);
+        total_achievement += flt(row.achievement);
+    });
+
+    frm.set_value('target', total_target);
+    frm.set_value('acheivement', total_achievement);
+}
