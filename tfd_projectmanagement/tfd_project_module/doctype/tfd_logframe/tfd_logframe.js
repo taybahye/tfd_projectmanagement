@@ -1,7 +1,7 @@
 frappe.ui.form.on('TFD Logframe', {
+
     indicator_name: function(frm) {
         if (frm.doc.indicator_name) {
-            // جلب حقل type من TFD Indicators
             frappe.call({
                 method: 'frappe.client.get_value',
                 args: {
@@ -11,16 +11,13 @@ frappe.ui.form.on('TFD Logframe', {
                 },
                 callback: function(r) {
                     if (r.message) {
-                        // ضبط قيمة الحقل "type" في logframe
                         frm.set_value('type', r.message.type);
+                        frm.set_df_property('type', 'hidden', 0);
 
-                        // إظهار الحقول بناءً على قيمة type
-                        frm.set_df_property('type', 'hidden', 0); // إظهار حقل type
-
-                        if (r.message.type === 'Output' || r.message.type === 'Indicator') {
-                            frm.set_df_property('activities', 'hidden', 0); // إظهار حقل activities
+                        if (['Output', 'Indicator'].includes(r.message.type)) {
+                            frm.set_df_property('activities', 'hidden', 0);
                         } else {
-                            frm.set_df_property('activities', 'hidden', 1); // إخفاء حقل activities
+                            frm.set_df_property('activities', 'hidden', 1);
                         }
                     } else {
                         frappe.msgprint(__('Could not find the Indicator: ' + frm.doc.indicator_name));
@@ -30,36 +27,47 @@ frappe.ui.form.on('TFD Logframe', {
                 }
             });
         } else {
-            // إذا لم يتم اختيار indicator، إخفاء الحقول
             frm.set_df_property('type', 'hidden', 1);
             frm.set_df_property('activities', 'hidden', 1);
         }
     },
 
     refresh: function(frm) {
-        // عند فتح النموذج لأول مرة، إخفاء حقل activities افتراضياً
+        // Show activities by default
         frm.set_df_property('activities', 'hidden', 0);
-         calculate_totals(frm);
-        
-        // detect changes in the child table
-        frm.fields_dict.indicators.grid.wrapper.on('change', function() {
+
+        // Watch for any change in disaggregation table
+        frm.fields_dict.disaggregation.grid.wrapper.on('change', function() {
             calculate_totals(frm);
         });
     },
+
     validate(frm) {
-        // recalculate before saving
+        // Recalculate before saving
         calculate_totals(frm);
     }
 });
+
+
+// === Helper Functions ===
+
+// Sum q1–q4 in each row and update total
+function calculate_row_total(row) {
+    row.total = (flt(row.q1) || 0) + (flt(row.q2) || 0) + (flt(row.q3) || 0) + (flt(row.q4) || 0);
+}
+
+// Sum all child totals and set parent fields if needed
 function calculate_totals(frm) {
     let total_target = 0;
     let total_achievement = 0;
 
     (frm.doc.disaggregation || []).forEach(row => {
-        total_target += flt(row.target);
-        total_achievement += flt(row.achievement);
+        calculate_row_total(row);
+        total_target += flt(row.total);
     });
 
-    frm.set_value('target', total_target);
-    frm.set_value('acheivement', total_achievement);
+    // Example: if you have total fields in parent
+    // frm.set_value('total_disaggregation', total_target);
+
+    // frm.refresh_field('disaggregation');
 }
