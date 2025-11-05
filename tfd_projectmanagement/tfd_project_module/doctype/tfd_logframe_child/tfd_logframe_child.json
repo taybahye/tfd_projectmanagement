@@ -9,9 +9,11 @@
   "type",
   "year",
   "month",
-  "quarter",
-  "target",
-  "achievement"
+  "q1",
+  "q2",
+  "q3",
+  "q4",
+  "total"
  ],
  "fields": [
   {
@@ -39,32 +41,50 @@
    "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
   },
   {
-   "fieldname": "target",
+   "description": "Target",
+   "fieldname": "q1",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Q1"
+  },
+  {
+   "description": "Target",
+   "fieldname": "q2",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Q2"
+  },
+  {
+   "description": "Target",
+   "fieldname": "q3",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Q3"
+  },
+  {
+   "description": "Target",
+   "fieldname": "q4",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Q4"
+  },
+  {
+   "fieldname": "total",
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_preview": 1,
-   "label": "Target"
-  },
-  {
-   "fieldname": "achievement",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "label": "Achievement"
-  },
-  {
-   "fieldname": "quarter",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "label": "Quarter",
-   "options": "\nQ1\nQ2\nQ3\nQ4"
+   "label": "Total",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-04 14:38:18.061319",
+ "modified": "2025-11-05 13:21:53.493046",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe child",
