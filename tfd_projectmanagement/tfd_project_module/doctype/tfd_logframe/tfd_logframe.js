@@ -1,5 +1,8 @@
-frappe.ui.form.on('TFD Logframe', {
+// ===============================
+// Parent DocType: TFD Logframe
+// ===============================
 
+frappe.ui.form.on('TFD Logframe', {
     indicator_name: function(frm) {
         if (frm.doc.indicator_name) {
             frappe.call({
@@ -32,42 +35,74 @@ frappe.ui.form.on('TFD Logframe', {
         }
     },
 
-    refresh: function(frm) {
-        // Show activities by default
+    refresh(frm) {
         frm.set_df_property('activities', 'hidden', 0);
-
-        // Watch for any change in disaggregation table
-        frm.fields_dict.disaggregation.grid.wrapper.on('change', function() {
-            calculate_totals(frm);
-        });
     },
 
     validate(frm) {
-        // Recalculate before saving
         calculate_totals(frm);
     }
 });
 
 
-// === Helper Functions ===
+// ===============================
+// Helper Functions
+// ===============================
 
-// Sum q1–q4 in each row and update total
 function calculate_row_total(row) {
-    row.total = (flt(row.q1) || 0) + (flt(row.q2) || 0) + (flt(row.q3) || 0) + (flt(row.q4) || 0);
+    row.total = cint(flt(row.q1)) + cint(flt(row.q2)) + cint(flt(row.q3)) + cint(flt(row.q4));
 }
 
-// Sum all child totals and set parent fields if needed
 function calculate_totals(frm) {
     let total_target = 0;
-    let total_achievement = 0;
 
     (frm.doc.disaggregation || []).forEach(row => {
         calculate_row_total(row);
-        total_target += flt(row.total);
+        total_target += cint(flt(row.total));
     });
 
-    // Example: if you have total fields in parent
-    // frm.set_value('total_disaggregation', total_target);
+    frm.refresh_field('disaggregation');
+}
 
-    // frm.refresh_field('disaggregation');
+
+// ===============================
+// Child Table: TFD Logframe child
+// ===============================
+
+frappe.ui.form.on('TFD Logframe child', {
+
+    // لما يتغير total → يقسم العدد على 4 بدون كسور
+    total(frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        let total = cint(flt(row.total));
+
+        if (total <= 0) return;
+
+        // تقسيم متساوي لأربعة أرباع (بدون كسور)
+        let divided = Math.floor(total / 4); // يقسم بدون كسور
+        let remainder = total - divided * 4; // لتوزيع الباقي إن وجد
+
+        // توزيع الباقي حتى يكون المجموع صحيح 100%
+        row.q1 = divided + (remainder > 0 ? 1 : 0);
+        row.q2 = divided + (remainder > 1 ? 1 : 0);
+        row.q3 = divided + (remainder > 2 ? 1 : 0);
+        row.q4 = divided;
+
+        frm.dirty();
+        frm.refresh_field('disaggregation');
+    },
+
+    // لما تتغير أي قيمة من Q1–Q4 → يعيد حساب total
+    q1: update_row_total,
+    q2: update_row_total,
+    q3: update_row_total,
+    q4: update_row_total
+});
+
+
+function update_row_total(frm, cdt, cdn) {
+    let row = locals[cdt][cdn];
+    row.total = cint(flt(row.q1)) + cint(flt(row.q2)) + cint(flt(row.q3)) + cint(flt(row.q4));
+    frm.dirty();
+    frm.refresh_field('disaggregation');
 }
