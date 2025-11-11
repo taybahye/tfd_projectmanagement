@@ -9,11 +9,12 @@
   "type",
   "year",
   "month",
+  "total",
+  "column_break_qogi",
   "q1",
   "q2",
   "q3",
-  "q4",
-  "total"
+  "q4"
  ],
  "fields": [
   {
@@ -78,17 +79,22 @@
    "in_list_view": 1,
    "in_preview": 1,
    "label": "Total (Target)"
+  },
+  {
+   "fieldname": "column_break_qogi",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-08 11:47:33.061237",
+ "modified": "2025-11-11 09:56:41.484202",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe child",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
