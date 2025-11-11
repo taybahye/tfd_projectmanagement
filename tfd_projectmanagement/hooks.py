@@ -7,7 +7,8 @@ app_license = "agpl-3.0"
 
 # Apps
 # ------------------
-
+doctype_js = {"Project" : "override/js/activity.js",
+              }
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
