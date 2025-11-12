@@ -5,14 +5,12 @@
 async function buildLogframeTree(data) {
     console.log("🚀 تم استدعاء buildLogframeTree بالبيانات:", data);
 
-    // 🧩 ترتيب الأنواع (العلاقات الهرمية)
     const childOrder = {
         Goal: ["Outcome", "Output", "Ind"],
         Outcome: ["Output", "Ind"],
         Output: ["Ind"]
     };
 
-    // 🧠 إنشاء العقد (Nodes)
     const nodes = {};
     data.forEach(it => {
         const type = (it.type || "").trim();
@@ -23,20 +21,17 @@ async function buildLogframeTree(data) {
         };
     });
 
-    // 🧩 بناء خريطة الأبناء
     const childrenMap = {};
     data.forEach(it => {
         const parent = it.parent_tfd_logframe || it.parent || null;
         if (parent) (childrenMap[parent] ||= []).push(it.name);
     });
 
-    // 🧩 استخراج الرقم من الاسم (احتياطي فقط)
     function getNumericCode(name) {
         const match = name ? name.match(/(\d+)/) : null;
         return match ? parseInt(match[1], 10) : 0;
     }
 
-    // 🧠 ترتيب الأبناء حسب النوع + order_index
     const getOrderedChildren = (parentName) => {
         const parent = nodes[parentName];
         const all = childrenMap[parentName] || [];
@@ -67,7 +62,6 @@ async function buildLogframeTree(data) {
         return [...order.flatMap(t => buckets.get(t)), ...rest];
     };
 
-    // 🧩 بناء HTML هرمي باستخدام order_index
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
         const type = node.type || "Item";
@@ -95,8 +89,7 @@ async function buildLogframeTree(data) {
         return html;
     }
 
-    // 🌳 تحديد الجذور (العناصر التي لا تملك أب)
-    const isChildSomewhere = new Set(Object.values(childrenMap).flat());
+    const children = new Set(Object.values(childrenMap).flat());
     const roots = data
         .filter(it =>
             !it.parent_tfd_logframe ||
@@ -107,7 +100,6 @@ async function buildLogframeTree(data) {
         .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
         .map(it => it.name);
 
-    // 🧱 بناء HTML النهائي
     let html = "<ul>";
     roots.forEach((root, idx) => {
         html += buildHTML(root, [idx + 1]);
@@ -119,47 +111,96 @@ async function buildLogframeTree(data) {
 
 
 // ============================================================================
-//             *** 2. الحدث في DocType TFD Main Proposal ***
+//             *** الأحداث في DocType TFD Main Proposal ***
 // ============================================================================
 
 frappe.ui.form.on("TFD Main Proposal", {
-    log_frame_name: function(frm) {
+    // عند اختيار Log Frame Name
+    async log_frame_name(frm) {
         const logframe_name = frm.doc.log_frame_name;
-        if (logframe_name) {
-            frappe.call({
-                doc: frm.doc,
-                method: "get_log_frame",
-                args: { log_frame_name: logframe_name.toString() },
-            }).done(async (r) => {
-                const logframeData = r.message || [];
-                console.log("🧩 logframeData from backend:", logframeData);
 
-                // 🧠 بناء الشجرة باستخدام order_index
-                const html_output = await buildLogframeTree(logframeData);
-                frm.set_value("indicators_and_activities_html", html_output);
-
-                // 🗂️ تعبئة الجداول من البيانات
-                frm.doc.project_info = [];
-                frm.doc.project_plan = [];
-
-                $.each(logframeData, function(_i, e) {
-                    if (!e.activity__name) return;
-                    let entry = frm.add_child("project_info");
-                    let entry1 = frm.add_child("project_plan");
-                    entry.project_name = e.project_name;
-                    entry.cost = e.cost;
-                    entry.activity__name = e.activity__name;
-                    entry1.project_name = e.project_name;
-                    entry1.activity_name = e.activity__name;
-                });
-
-                refresh_field("project_info");
-                refresh_field("project_plan");
-            });
-        } else {
+        if (!logframe_name) {
             frm.set_value("indicators_and_activities_html", "");
+            return;
         }
 
-        frm.save();
+        // =====================================================================
+        // 1️⃣ جلب بيانات الـ Logframe لعرضها كشجرة في الحقل HTML
+        // =====================================================================
+        frappe.call({
+            doc: frm.doc,
+            method: "get_log_frame",
+            args: { log_frame_name: logframe_name.toString() },
+        }).done(async (r) => {
+            const logframeData = r.message || [];
+            console.log("🧩 logframeData from backend:", logframeData);
+
+            const html_output = await buildLogframeTree(logframeData);
+            frm.set_value("indicators_and_activities_html", html_output);
+
+            frm.doc.project_info = [];
+            frm.doc.project_plan = [];
+
+            $.each(logframeData, function(_i, e) {
+                if (!e.activity__name) return;
+                let entry = frm.add_child("project_info");
+                let entry1 = frm.add_child("project_plan");
+                entry.project_name = e.project_name;
+                entry.cost = e.cost;
+                entry.activity__name = e.activity__name;
+                entry1.project_name = e.project_name;
+                entry1.activity_name = e.activity__name;
+            });
+
+            refresh_field("project_info");
+            refresh_field("project_plan");
+        });
+
+        // =====================================================================
+        // 2️⃣ جلب معلومات إضافية من TFD Logframe Name أو TFD Logframe
+        // =====================================================================
+        try {
+            // نحاول أولاً جلب الرابط إلى TFD Logframe (إذا موجود)
+            const logframe_link = await frappe.db.get_value(
+                "TFD Logframe Name",
+                logframe_name,
+                "logframe"
+            );
+
+            if (logframe_link && logframe_link.message.logframe) {
+                const real_logframe = logframe_link.message.logframe;
+
+                // الآن نجلب القيم المطلوبة من TFD Logframe
+                const logframe_details = await frappe.db.get_value(
+                    "TFD Logframe",
+                    real_logframe,
+                    ["order_index", "type", "indicator_name"]
+                );
+
+                if (logframe_details && logframe_details.message) {
+                    frm.set_value("overall_project_objective", logframe_details.message.indicator_name);
+                    frm.set_value("order_index", logframe_details.message.order_index);
+                    frm.set_value("type", logframe_details.message.type);
+                }
+            } else {
+                // لو ما في رابط مباشر، نحاول الجلب من TFD Logframe Name نفسه
+                const direct = await frappe.db.get_value(
+                    "TFD Logframe Name",
+                    logframe_name,
+                    ["order_index", "type", "indicator_name"]
+                );
+                if (direct && direct.message) {
+                    frm.set_value("overall_project_objective", direct.message.indicator_name);
+                    frm.set_value("order_index", direct.message.order_index);
+                    frm.set_value("type", direct.message.type);
+                }
+            }
+        } catch (err) {
+            console.error(err);
+            frappe.msgprint(__("حدث خطأ أثناء جلب بيانات الـ Logframe الإضافية."));
+        }
+
+        // حفظ التغييرات بعد كل شيء
+     //   frm.save();
     }
 });
