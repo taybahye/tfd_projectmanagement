@@ -1,8 +1,38 @@
-// ===============================
-// Parent DocType: TFD Logframe
-// ===============================
+// =======================================
+// Tree View Customization: TFD Logframe
+// =======================================
+
+frappe.treeview_settings['TFD Logframe'] = {
+    breadcrumb: "TFD",
+    title: __("TFD Logframe"),
+
+    // ✅ استخدم الـ API اللي أضفناه في tfd_logframe.py
+get_tree_nodes: "tfd_project_module.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
+
+    // ✅ ترتيب العقد حسب النوع ثم الترتيب المنطقي
+    sort_function: function (a, b) {
+        const type_order = ["Goal", "Outcome", "Output", "Impact", "Ind"];
+        const type_diff = type_order.indexOf(a.data.type) - type_order.indexOf(b.data.type);
+        if (type_diff !== 0) return type_diff;
+        return (a.data.order_index || 0) - (b.data.order_index || 0);
+    },
+
+    // ✅ التسمية الظاهرة في الشجرة
+    label: function (node) {
+        const prefix = node.data.type ? `[${node.data.type}] ` : "";
+        const order = node.data.order_index ? `${node.data.order_index}. ` : "";
+        const name = node.data.indicator_name || node.value || "";
+        return `${prefix}${order}${name}`;
+    }
+};
+
+
+// =======================================
+// Form Logic: Parent DocType (TFD Logframe)
+// =======================================
 
 frappe.ui.form.on('TFD Logframe', {
+    // 🔹 لما تختار indicator_name، يجلب النوع (type) من الـ Main Indicators
     indicator_name: function(frm) {
         if (frm.doc.indicator_name) {
             frappe.call({
@@ -17,6 +47,7 @@ frappe.ui.form.on('TFD Logframe', {
                         frm.set_value('type', r.message.type);
                         frm.set_df_property('type', 'hidden', 0);
 
+                        // 🔹 إظهار جدول الأنشطة فقط في المخرجات والمؤشرات
                         if (['Output', 'Indicator'].includes(r.message.type)) {
                             frm.set_df_property('activities', 'hidden', 0);
                         } else {
@@ -35,19 +66,21 @@ frappe.ui.form.on('TFD Logframe', {
         }
     },
 
+    // 🔹 عند تحديث الصفحة، تأكد أن الحقول تظهر حسب الحاجة
     refresh(frm) {
         frm.set_df_property('activities', 'hidden', 0);
     },
 
+    // 🔹 تحقق قبل الحفظ
     validate(frm) {
         calculate_totals(frm);
     }
 });
 
 
-// ===============================
-// Helper Functions
-// ===============================
+// =======================================
+// Helper Functions for Totals
+// =======================================
 
 function calculate_row_total(row) {
     row.total = cint(flt(row.q1)) + cint(flt(row.q2)) + cint(flt(row.q3)) + cint(flt(row.q4));
@@ -65,24 +98,20 @@ function calculate_totals(frm) {
 }
 
 
-// ===============================
-// Child Table: TFD Logframe child
-// ===============================
+// =======================================
+// Child Table Logic: TFD Logframe child
+// =======================================
 
 frappe.ui.form.on('TFD Logframe child', {
-
-    // لما يتغير total → يقسم العدد على 4 بدون كسور
+    // 🔹 لما يتغير total → يقسم العدد على الأرباع تلقائيًا
     total(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         let total = cint(flt(row.total));
-
         if (total <= 0) return;
 
-        // تقسيم متساوي لأربعة أرباع (بدون كسور)
-        let divided = Math.floor(total / 4); // يقسم بدون كسور
-        let remainder = total - divided * 4; // لتوزيع الباقي إن وجد
+        let divided = Math.floor(total / 4);
+        let remainder = total - divided * 4;
 
-        // توزيع الباقي حتى يكون المجموع صحيح 100%
         row.q1 = divided + (remainder > 0 ? 1 : 0);
         row.q2 = divided + (remainder > 1 ? 1 : 0);
         row.q3 = divided + (remainder > 2 ? 1 : 0);
@@ -92,13 +121,12 @@ frappe.ui.form.on('TFD Logframe child', {
         frm.refresh_field('disaggregation');
     },
 
-    // لما تتغير أي قيمة من Q1–Q4 → يعيد حساب total
+    // 🔹 لما تتغير أي قيمة من Q1–Q4 → يعيد حساب المجموع
     q1: update_row_total,
     q2: update_row_total,
     q3: update_row_total,
     q4: update_row_total
 });
-
 
 function update_row_total(frm, cdt, cdn) {
     let row = locals[cdt][cdn];

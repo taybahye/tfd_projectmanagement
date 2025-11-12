@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{indicator_name}-{##}",
+ "autoname": "format:{logframe_name}-{order_parent}-{type}-{order_index}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -15,6 +15,7 @@
   "hide",
   "column_break_xrmk",
   "type",
+  "order_index",
   "indicator_name_section",
   "indicator_name1",
   "section_break_oybp",
@@ -36,7 +37,9 @@
   "old_parent",
   "parent_tfd_logframe",
   "lft",
-  "rgt"
+  "rgt",
+  "column_break_ecaz",
+  "order_parent"
  ],
  "fields": [
   {
@@ -217,12 +220,26 @@
    "fieldtype": "Table",
    "label": "Disaggregation",
    "options": "TFD Logframe child"
+  },
+  {
+   "fieldname": "order_index",
+   "fieldtype": "Int",
+   "label": "Order Index"
+  },
+  {
+   "fieldname": "column_break_ecaz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "order_parent",
+   "fieldtype": "Data",
+   "label": "Order Parent"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-04 14:40:47.112222",
+ "modified": "2025-11-12 10:22:51.196462",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
@@ -245,5 +262,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "indicator_name"
 }
