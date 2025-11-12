@@ -7,7 +7,7 @@ frappe.treeview_settings['TFD Logframe'] = {
     title: __("TFD Logframe"),
 
     // ✅ استخدم الـ API اللي أضفناه في tfd_logframe.py
-get_tree_nodes: "tfd_project_module.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
+    get_tree_nodes: "tfd_projectmanagement.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
 
     // ✅ ترتيب العقد حسب النوع ثم الترتيب المنطقي
     sort_function: function (a, b) {
@@ -63,6 +63,23 @@ frappe.ui.form.on('TFD Logframe', {
         } else {
             frm.set_df_property('type', 'hidden', 1);
             frm.set_df_property('activities', 'hidden', 1);
+        }
+    },
+
+    // 🔹 عند اختيار الـ Old Parent → جلب order_index وتخزينه في order_parent
+    old_parent: function(frm) {
+        if (frm.doc.old_parent) {
+            frappe.db.get_value('TFD Logframe', frm.doc.old_parent, 'order_index')
+                .then(r => {
+                    if (r && r.message && r.message.order_index !== undefined) {
+                        frm.set_value('order_parent', r.message.order_index);
+                    } else {
+                        frappe.msgprint(__('Could not find order_index for the selected Old Parent'));
+                        frm.set_value('order_parent', null);
+                    }
+                });
+        } else {
+            frm.set_value('order_parent', null);
         }
     },
 
