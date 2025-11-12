@@ -226,7 +226,6 @@
    "options": "TFD Logframe child"
   },
   {
-<<<<<<< HEAD
    "fieldname": "order_index",
    "fieldtype": "Int",
    "label": "Order Index"
@@ -239,12 +238,15 @@
    "fieldname": "order_parent",
    "fieldtype": "Data",
    "label": "Order Parent"
-=======
+  },
+   {
    "fieldname": "activity",
    "fieldtype": "Link",
    "label": "Activity",
    "options": "Project",
    "width": "100px"
+
+
   },
   {
    "fetch_from": "activity.project_name",
@@ -259,17 +261,12 @@
   {
    "fieldname": "column_break_hedg",
    "fieldtype": "Column Break"
->>>>>>> 9bd07a8f4d876381120f2a31faa32916d8a9afed
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
-<<<<<<< HEAD
- "modified": "2025-11-12 10:22:51.196462",
-=======
  "modified": "2025-11-11 10:01:07.206573",
->>>>>>> 9bd07a8f4d876381120f2a31faa32916d8a9afed
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
