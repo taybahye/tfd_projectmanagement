@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{order_parent}-{type}-{order_index}",
+ "autoname": "format:{logframe_name}-{parent_tfd_logframe}-{type}-{order_index}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -135,7 +135,8 @@
   },
   {
    "fieldname": "section_break_hjhj",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_xyta",
@@ -264,7 +265,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-13 10:39:08.147330",
+ "modified": "2025-11-13 17:12:43.656280",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
