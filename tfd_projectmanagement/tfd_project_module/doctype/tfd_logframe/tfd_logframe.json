@@ -243,7 +243,6 @@
    "label": "Order Parent"
   },
   {
-  {
    "fieldname": "activity",
    "fieldtype": "Link",
    "label": "Activity",
