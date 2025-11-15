@@ -75,10 +75,10 @@ frappe.ui.form.on('TFD Logframe', {
         if (frm.doc.old_parent) {
             frappe.db.get_value('TFD Logframe', frm.doc.old_parent, 'main_order')
                 .then(r => {
-                    if (r && r.message && r.message.order_index !== undefined) {
-                        frm.set_value('order_parent', r.message.order_index);
+                    if (r && r.message && r.message.main_order !== undefined && r.message.main_order !== null) {
+                        frm.set_value('order_parent', r.message.main_order);
                     } else {
-                        frappe.msgprint(__('Could not find order_index for the selected Old Parent'));
+                        frappe.msgprint(__('Could not find main_order for the selected Parent'));
                         frm.set_value('order_parent', null);
                     }
                 });
@@ -86,6 +86,7 @@ frappe.ui.form.on('TFD Logframe', {
             frm.set_value('order_parent', null);
         }
     },
+
 
     refresh(frm) {
         frm.set_df_property('activities', 'hidden', 0);
