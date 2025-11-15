@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{order_parent}-{type}-{order_index}",
+ "autoname": "format:{logframe_name}-{type}-{main_order}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -43,7 +43,8 @@
   "lft",
   "rgt",
   "column_break_ecaz",
-  "order_parent"
+  "order_parent",
+  "main_order"
  ],
  "fields": [
   {
@@ -107,9 +108,9 @@
   {
    "fieldname": "baseline",
    "fieldtype": "Data",
+   "hidden": 1,
    "in_list_view": 1,
-   "label": "Baseline",
-   "reqd": 1
+   "label": "Baseline"
   },
   {
    "fieldname": "target",
@@ -135,7 +136,8 @@
   },
   {
    "fieldname": "section_break_hjhj",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_xyta",
@@ -228,7 +230,8 @@
   {
    "fieldname": "order_index",
    "fieldtype": "Int",
-   "label": "Order Index"
+   "label": "Order Index",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_ecaz",
@@ -239,6 +242,7 @@
    "fieldtype": "Data",
    "label": "Order Parent"
   },
+  {
   {
    "fieldname": "activity",
    "fieldtype": "Link",
@@ -259,12 +263,17 @@
   {
    "fieldname": "column_break_hedg",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "main_order",
+   "fieldtype": "Data",
+   "label": "main order "
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-12 11:26:55.415179",
+ "modified": "2025-11-15 13:08:30.025959",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
@@ -285,7 +294,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

@@ -20,25 +20,29 @@ class TFDMainProposal(Document):
     # 2️⃣ Get Staffing Plan Details
     # -----------------------------------------------------------------------
     @frappe.whitelist()
-    def get_staffing(staffing_plan):
-        proj_list = frappe.db.sql(f"""
-            SELECT * 
+    def get_staffing(self, staffing_plan):
+        proj_list = frappe.db.sql(
+            """
+            SELECT *
             FROM `tabStaffing Plan Detail`
-            WHERE parent = '{staffing_plan.staffing_plan}'
-        """, as_dict=True)
+            WHERE parent = %s
+            """,
+            (staffing_plan,),
+            as_dict=True
+        )
         return proj_list
 
     # -----------------------------------------------------------------------
-    # 3️⃣ Get Logframe Data (Ordered by creation datetime from TFD Main Indicators)
+    # 3️⃣ Get Logframe Data (Ordered)
     # -----------------------------------------------------------------------
     @frappe.whitelist()
-    def get_log_frame(log_frame_name):
+    def get_log_frame(self, log_frame_name):
         """
-        Returns logframe data for the selected Log Frame name,
-        joined with creation datetime from TFD Main Indicators.
+        Returns logframe rows for the selected Log Frame name.
+        Parameter: log_frame_name (string)
         """
-
-        proj_list = frappe.db.sql(f"""
+        proj_list = frappe.db.sql(
+            """
             SELECT
                 logf.logframe_name,
                 logf.indicator_name,
@@ -63,9 +67,6 @@ class TFDMainProposal(Document):
                 ind.creation AS indicator_creation
             FROM
                 `tabTFD Logframe` AS logf
-            INNER JOIN
-                `tabTFD Logframe Name` AS lf_name
-                ON logf.logframe_name = lf_name.name
             LEFT JOIN
                 `tabProject Information` AS proj
                 ON logf.name = proj.parent
@@ -73,11 +74,13 @@ class TFDMainProposal(Document):
                 `tabTFD Main Indicators` AS ind
                 ON logf.name = ind.name
             WHERE
-                logf.logframe_name = '{log_frame_name.log_frame_name}'
+                logf.logframe_name = %s
             ORDER BY
                 ind.creation ASC
-        """, as_dict=True)
-
+            """,
+            (log_frame_name,),
+            as_dict=True
+        )
         return proj_list
 
     # -----------------------------------------------------------------------
@@ -92,7 +95,7 @@ class TFDMainProposal(Document):
             SELECT DISTINCT indicator_name
             FROM `tabTFD Logframe`
             WHERE logframe_name = %s
-            ORDER BY logframe_name
+            ORDER BY indicator_name
         """, (logframe_name,), as_dict=True)
 
         unique_activity_set = set()
@@ -116,3 +119,37 @@ class TFDMainProposal(Document):
         ]
 
         return final_activity_list
+
+
+# ---------------------------------------------------------------------------
+# 5️⃣ SAFE helper: Get the Goal (root) node for a Logframe name
+# ---------------------------------------------------------------------------
+@frappe.whitelist()
+def get_logframe_link(logframe_name):
+    """
+    Returns the GOAL root node for the given logframe_name.
+    Guarantees keys: indicator_name1, order_index, type (safe defaults if missing).
+    """
+    # Try to get the Goal node
+    goal = frappe.db.get_value(
+        "TFD Logframe",
+        {"logframe_name": logframe_name, "type": "Goal"},
+        ["indicator_name1", "order_index", "type"],
+        as_dict=True
+    )
+
+    # Fallback: first root node (parent_tfd_logframe == "")
+    if not goal:
+        goal = frappe.db.get_value(
+            "TFD Logframe",
+            {"logframe_name": logframe_name, "parent_tfd_logframe": ["=", ""]},
+            ["indicator_name1", "order_index", "type"],
+            as_dict=True
+        )
+
+    # Ensure keys exist and return safe defaults
+    return {
+        "indicator_name1": (goal.get("indicator_name1") if goal else "") or "",
+        "order_index": (goal.get("order_index") if goal else 0) or 0,
+        "type": (goal.get("type") if goal else "") or ""
+    }

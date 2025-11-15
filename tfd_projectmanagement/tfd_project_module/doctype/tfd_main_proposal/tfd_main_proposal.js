@@ -5,14 +5,14 @@
 async function buildLogframeTree(data) {
     console.log("🚀 تم استدعاء buildLogframeTree بالبيانات:", data);
 
-    // 🧩 ترتيب الأنواع (العلاقات الهرمية)
+    // ترتيب الأبناء حسب نوع العنصر
     const childOrder = {
-        Goal: ["Outcome", "Output", "Ind"],
+        Goal: ["Ind", "Outcome", "Output"],
         Outcome: ["Output", "Ind"],
         Output: ["Ind"]
     };
 
-    // 🧠 إنشاء العقد (Nodes)
+    // تجهيز العقد (nodes)
     const nodes = {};
     data.forEach(it => {
         const type = (it.type || "").trim();
@@ -23,51 +23,61 @@ async function buildLogframeTree(data) {
         };
     });
 
-    // 🧩 بناء خريطة الأبناء
+    // بناء خريطة الأبناء
     const childrenMap = {};
     data.forEach(it => {
         const parent = it.parent_tfd_logframe || it.parent || null;
         if (parent) (childrenMap[parent] ||= []).push(it.name);
     });
 
-    // 🧩 استخراج الرقم من الاسم (احتياطي فقط)
+    // دالة لاستخراج رقم من الاسم (لمقارنة رقمية عند الفرز إذا لزم)
     function getNumericCode(name) {
         const match = name ? name.match(/(\d+)/) : null;
         return match ? parseInt(match[1], 10) : 0;
     }
 
-    // 🧠 ترتيب الأبناء حسب النوع + order_index
+    // دالة لترتيب الأبناء
     const getOrderedChildren = (parentName) => {
         const parent = nodes[parentName];
         const all = childrenMap[parentName] || [];
         const order = childOrder[parent?.type] || [];
 
+        // فصل الأبناء حسب النوع
         const buckets = new Map(order.map(t => [t, []]));
         const rest = [];
 
         all.forEach(child => {
             const t = nodes[child]?.type || "";
-            (buckets.has(t) ? buckets.get(t) : rest).push(child);
+            if (buckets.has(t)) {
+                buckets.get(t).push(child);
+            } else {
+                rest.push(child);
+            }
         });
 
-        for (let arr of buckets.values()) {
-            arr.sort((a, b) => {
-                const orderDiff = (nodes[a].order_index || 0) - (nodes[b].order_index || 0);
-                if (orderDiff !== 0) return orderDiff;
-                return getNumericCode(nodes[a].name) - getNumericCode(nodes[b].name);
-            });
-        }
-
-        rest.sort((a, b) => {
+        // ترتيب داخلي لكل مجموعة
+        const sorter = (a, b) => {
             const orderDiff = (nodes[a].order_index || 0) - (nodes[b].order_index || 0);
             if (orderDiff !== 0) return orderDiff;
             return getNumericCode(nodes[a].name) - getNumericCode(nodes[b].name);
+        };
+
+        for (let arr of buckets.values()) arr.sort(sorter);
+        rest.sort(sorter);
+
+        // ضمان أن "Ind" تظهر أولاً إذا كانت ضمن ترتيب الأبناء
+        const ordered = [];
+        if (order.includes("Ind") && buckets.get("Ind")) {
+            ordered.push(...buckets.get("Ind"));
+        }
+        order.forEach(t => {
+            if (t !== "Ind" && buckets.get(t)?.length) ordered.push(...buckets.get(t));
         });
 
-        return [...order.flatMap(t => buckets.get(t)), ...rest];
+        return [...ordered, ...rest];
     };
 
-    // 🧩 بناء HTML هرمي باستخدام order_index
+    // دالة لبناء HTML هرمي مع الترقيم
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
         const type = node.type || "Item";
@@ -95,19 +105,13 @@ async function buildLogframeTree(data) {
         return html;
     }
 
-    // 🌳 تحديد الجذور (العناصر التي لا تملك أب)
-    const isChildSomewhere = new Set(Object.values(childrenMap).flat());
+    // تحديد الجذور (العناصر العليا)
     const roots = data
-        .filter(it =>
-            !it.parent_tfd_logframe ||
-            it.parent_tfd_logframe === "undefined" ||
-            it.parent_tfd_logframe === "null" ||
-            it.parent_tfd_logframe === ""
-        )
+        .filter(it => !it.parent_tfd_logframe || it.parent_tfd_logframe === "" || it.parent_tfd_logframe === null)
         .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
         .map(it => it.name);
 
-    // 🧱 بناء HTML النهائي
+    // بناء HTML نهائي
     let html = "<ul>";
     roots.forEach((root, idx) => {
         html += buildHTML(root, [idx + 1]);
@@ -119,47 +123,82 @@ async function buildLogframeTree(data) {
 
 
 // ============================================================================
-//             *** 2. الحدث في DocType TFD Main Proposal ***
+//             *** الأحداث في DocType TFD Main Proposal ***
 // ============================================================================
 
 frappe.ui.form.on("TFD Main Proposal", {
-    log_frame_name: function(frm) {
+    // عند اختيار Log Frame Name
+    async log_frame_name(frm) {
         const logframe_name = frm.doc.log_frame_name;
-        if (logframe_name) {
-            frappe.call({
+
+        if (!logframe_name) {
+            frm.set_value("indicators_and_activities_html", "");
+            return;
+        }
+
+        // =====================================================================
+        // 1️⃣ جلب بيانات الـ Logframe لعرضها كشجرة في الحقل HTML
+        // =====================================================================
+        try {
+            const r = await frappe.call({
                 doc: frm.doc,
                 method: "get_log_frame",
                 args: { log_frame_name: logframe_name.toString() },
-            }).done(async (r) => {
-                const logframeData = r.message || [];
-                console.log("🧩 logframeData from backend:", logframeData);
-
-                // 🧠 بناء الشجرة باستخدام order_index
-                const html_output = await buildLogframeTree(logframeData);
-                frm.set_value("indicators_and_activities_html", html_output);
-
-                // 🗂️ تعبئة الجداول من البيانات
-                frm.doc.project_info = [];
-                frm.doc.project_plan = [];
-
-                $.each(logframeData, function(_i, e) {
-                    if (!e.activity__name) return;
-                    let entry = frm.add_child("project_info");
-                    let entry1 = frm.add_child("project_plan");
-                    entry.project_name = e.project_name;
-                    entry.cost = e.cost;
-                    entry.activity__name = e.activity__name;
-                    entry1.project_name = e.project_name;
-                    entry1.activity_name = e.activity__name;
-                });
-
-                refresh_field("project_info");
-                refresh_field("project_plan");
             });
-        } else {
-            frm.set_value("indicators_and_activities_html", "");
+
+            const logframeData = r.message || [];
+            console.log("🧩 logframeData from backend:", logframeData);
+
+            const html_output = await buildLogframeTree(logframeData);
+            frm.set_value("indicators_and_activities_html", html_output);
+
+            // Fill project_info / project_plan from returned rows
+            frm.doc.project_info = [];
+            frm.doc.project_plan = [];
+
+            $.each(logframeData, function (_i, e) {
+                if (!e.activity__name) return;
+                let entry = frm.add_child("project_info");
+                let entry1 = frm.add_child("project_plan");
+                entry.project_name = e.project_name;
+                entry.cost = e.cost;
+                entry.activity__name = e.activity__name;
+                entry1.project_name = e.project_name;
+                entry1.activity_name = e.activity__name;
+            });
+
+            refresh_field("project_info");
+            refresh_field("project_plan");
+        } catch (err) {
+            console.error("Error fetching logframe rows:", err);
+            frappe.msgprint(__("حدث خطأ أثناء جلب بيانات الـ Logframe لعرض الشجرة."));
         }
 
-        frm.save();
+        // =====================================================================
+        // 2️⃣ جلب معلومات الـ Goal (root) من الخادم بشكل آمن
+        // =====================================================================
+        try {
+            const resp = await frappe.call({
+                method: "tfd_projectmanagement.tfd_project_module.doctype.tfd_main_proposal.tfd_main_proposal.get_logframe_link",
+                args: { logframe_name },
+            });
+
+            const details = resp.message || {};
+
+            // always set objective (field exists in your form)
+            frm.set_value("overall_project_objective", details.indicator_name1 || "");
+
+            // set order_index and type only if these fields exist in the current form
+            if (frm.fields_dict && frm.fields_dict.order_index) {
+                frm.set_value("order_index", details.order_index || 0);
+            }
+            if (frm.fields_dict && frm.fields_dict.type) {
+                frm.set_value("type", details.type || "");
+            }
+
+        } catch (err) {
+            console.error("Error fetching goal details:", err);
+            frappe.msgprint(__("حدث خطأ أثناء جلب بيانات الـ Logframe الإضافية."));
+        }
     }
 });
