@@ -73,7 +73,7 @@ frappe.ui.form.on('TFD Logframe', {
     // Auto-set order_parent based on old_parent
     old_parent: function (frm) {
         if (frm.doc.old_parent) {
-            frappe.db.get_value('TFD Logframe', frm.doc.old_parent, 'order_index')
+            frappe.db.get_value('TFD Logframe', frm.doc.old_parent, 'main_order')
                 .then(r => {
                     if (r && r.message && r.message.order_index !== undefined) {
                         frm.set_value('order_parent', r.message.order_index);
