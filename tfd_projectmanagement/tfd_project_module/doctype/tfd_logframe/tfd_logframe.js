@@ -33,7 +33,7 @@ frappe.treeview_settings['TFD Logframe'] = {
 
 frappe.ui.form.on('TFD Logframe', {
     
-    // Auto-update main_order on index/parent change
+    // Auto-update main_order when index or parent changes
     order_parent: update_main_order,
     order_index: update_main_order,
 
@@ -154,15 +154,21 @@ function update_row_total(frm, cdt, cdn) {
 
 
 // =======================================
-// NEW: Auto-update main_order
+// NEW: Auto-update main_order (Fixed for Goals)
 // =======================================
 
 function update_main_order(frm) {
-    if (frm.doc.order_parent && frm.doc.order_index) {
-        frm.set_value(
-            "main_order",
-            `${frm.doc.order_parent}.${frm.doc.order_index}`
-        );
+    const parent = frm.doc.order_parent;
+    const index = frm.doc.order_index;
+
+    if (index) {
+        if (parent) {
+            // Child node → parent.index
+            frm.set_value("main_order", `${parent}.${index}`);
+        } else {
+            // Goal or top-level node → only index
+            frm.set_value("main_order", `${index}`);
+        }
     } else {
         frm.set_value("main_order", "");
     }
