@@ -5,18 +5,20 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_qyxa"
+  "indicator_logframe"
  ],
  "fields": [
   {
-   "fieldname": "section_break_qyxa",
-   "fieldtype": "Section Break"
+   "fieldname": "indicator_logframe",
+   "fieldtype": "Link",
+   "label": "Indicator Logframe",
+   "options": "TFD Logframe"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-11 20:06:07.500833",
+ "modified": "2025-11-12 11:30:25.036837",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Data Entry",

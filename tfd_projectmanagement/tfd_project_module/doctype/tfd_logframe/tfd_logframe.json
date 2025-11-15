@@ -239,14 +239,12 @@
    "fieldtype": "Data",
    "label": "Order Parent"
   },
-   {
+  {
    "fieldname": "activity",
    "fieldtype": "Link",
    "label": "Activity",
    "options": "Project",
    "width": "100px"
-
-
   },
   {
    "fetch_from": "activity.project_name",
@@ -266,7 +264,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-11 10:01:07.206573",
+ "modified": "2025-11-12 11:26:55.415179",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
