@@ -6,10 +6,10 @@ frappe.treeview_settings['TFD Logframe'] = {
     breadcrumb: "TFD",
     title: __("TFD Logframe"),
 
-    // ✅ استخدم الـ API اللي أضفناه في tfd_logframe.py
+    // Fetch children from server
     get_tree_nodes: "tfd_projectmanagement.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
 
-    // ✅ ترتيب العقد حسب النوع ثم الترتيب المنطقي
+    // Sorting of tree nodes
     sort_function: function (a, b) {
         const type_order = ["Goal", "Outcome", "Output", "Impact", "Ind"];
         const type_diff = type_order.indexOf(a.data.type) - type_order.indexOf(b.data.type);
@@ -17,7 +17,7 @@ frappe.treeview_settings['TFD Logframe'] = {
         return (a.data.order_index || 0) - (b.data.order_index || 0);
     },
 
-    // ✅ التسمية الظاهرة في الشجرة
+    // Label appearance in tree
     label: function (node) {
         const prefix = node.data.type ? `[${node.data.type}] ` : "";
         const order = node.data.order_index ? `${node.data.order_index}. ` : "";
@@ -32,8 +32,13 @@ frappe.treeview_settings['TFD Logframe'] = {
 // =======================================
 
 frappe.ui.form.on('TFD Logframe', {
-    // 🔹 لما تختار indicator_name، يجلب النوع (type) من الـ Main Indicators
-    indicator_name: function(frm) {
+    
+    // Auto-update main_order on index/parent change
+    order_parent: update_main_order,
+    order_index: update_main_order,
+
+    // Get type from TFD Main Indicators
+    indicator_name: function (frm) {
         if (frm.doc.indicator_name) {
             frappe.call({
                 method: 'frappe.client.get_value',
@@ -42,12 +47,11 @@ frappe.ui.form.on('TFD Logframe', {
                     filters: { name: frm.doc.indicator_name },
                     fieldname: ['type']
                 },
-                callback: function(r) {
+                callback: function (r) {
                     if (r.message) {
                         frm.set_value('type', r.message.type);
                         frm.set_df_property('type', 'hidden', 0);
 
-                        // 🔹 إظهار جدول الأنشطة فقط في المخرجات والمؤشرات
                         if (['Output', 'Indicator'].includes(r.message.type)) {
                             frm.set_df_property('activities', 'hidden', 0);
                         } else {
@@ -66,8 +70,8 @@ frappe.ui.form.on('TFD Logframe', {
         }
     },
 
-    // 🔹 عند اختيار الـ Old Parent → جلب order_index وتخزينه في order_parent
-    old_parent: function(frm) {
+    // Auto-set order_parent based on old_parent
+    old_parent: function (frm) {
         if (frm.doc.old_parent) {
             frappe.db.get_value('TFD Logframe', frm.doc.old_parent, 'order_index')
                 .then(r => {
@@ -83,12 +87,10 @@ frappe.ui.form.on('TFD Logframe', {
         }
     },
 
-    // 🔹 عند تحديث الصفحة، تأكد أن الحقول تظهر حسب الحاجة
     refresh(frm) {
         frm.set_df_property('activities', 'hidden', 0);
     },
 
-    // 🔹 تحقق قبل الحفظ
     validate(frm) {
         calculate_totals(frm);
     }
@@ -120,7 +122,6 @@ function calculate_totals(frm) {
 // =======================================
 
 frappe.ui.form.on('TFD Logframe child', {
-    // 🔹 لما يتغير total → يقسم العدد على الأرباع تلقائيًا
     total(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         let total = cint(flt(row.total));
@@ -138,7 +139,6 @@ frappe.ui.form.on('TFD Logframe child', {
         frm.refresh_field('disaggregation');
     },
 
-    // 🔹 لما تتغير أي قيمة من Q1–Q4 → يعيد حساب المجموع
     q1: update_row_total,
     q2: update_row_total,
     q3: update_row_total,
@@ -150,4 +150,20 @@ function update_row_total(frm, cdt, cdn) {
     row.total = cint(flt(row.q1)) + cint(flt(row.q2)) + cint(flt(row.q3)) + cint(flt(row.q4));
     frm.dirty();
     frm.refresh_field('disaggregation');
+}
+
+
+// =======================================
+// NEW: Auto-update main_order
+// =======================================
+
+function update_main_order(frm) {
+    if (frm.doc.order_parent && frm.doc.order_index) {
+        frm.set_value(
+            "main_order",
+            `${frm.doc.order_parent}.${frm.doc.order_index}`
+        );
+    } else {
+        frm.set_value("main_order", "");
+    }
 }
