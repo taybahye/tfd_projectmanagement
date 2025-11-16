@@ -52,11 +52,11 @@
    "options": "Need Assessment Documents"
   },
   {
-   "default": "Task Completion",
+   "default": "Activity Completion",
    "fieldname": "percent_complete_method",
    "fieldtype": "Select",
    "label": "% Complete Method",
-   "options": "Manual\nTask Completion\nTask Progress\nTask Weight"
+   "options": "Manual\nActivity Completion\nActivity Progress\nActivity Weight"
   },
   {
    "fieldname": "section_break_snwq",
@@ -117,7 +117,7 @@
    "link_fieldname": "custom_tfd_project"
   }
  ],
- "modified": "2025-11-15 21:10:52.714155",
+ "modified": "2025-11-16 09:57:47.199587",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Projects",
