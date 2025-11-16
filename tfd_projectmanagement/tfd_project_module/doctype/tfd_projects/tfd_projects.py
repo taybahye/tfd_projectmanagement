@@ -33,7 +33,7 @@ class TFDProjects(Document):
 	def update_project(self):
 		"""Called externally by Activity"""
 		self.update_percent_complete()
-		self.save(ignore_permissions=True)  # تحفظ التغييرات في قاعدة البيانات
+		self.save(ignore_permissions=True)  
 
 
 	def update_percent_complete(self):
