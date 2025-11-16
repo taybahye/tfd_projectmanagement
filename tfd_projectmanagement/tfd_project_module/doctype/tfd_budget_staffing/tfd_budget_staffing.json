@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-10-27 11:25:22.972706",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "unit",
+  "budget_line_description",
+  "tfd_remark",
+  "column_break_fjjl",
+  "total_cost",
+  "unit_cost",
+  "percentage",
+  "quantity",
+  "column_break_ihnw",
+  "direct_support",
+  "duration",
+  "remark_degree"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Code",
+   "options": "{#.##}"
+  },
+  {
+   "columns": 1,
+   "fieldname": "budget_line_description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Budget Line Description",
+   "max_height": "40px"
+  },
+  {
+   "columns": 1,
+   "fieldname": "tfd_remark",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "TFD Remark",
+   "options": "TFD Remark"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "tfd_remark.degree",
+   "fieldname": "remark_degree",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "  / 4000",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "direct_support",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Direct , Support",
+   "options": "Direct\nSupport",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Cost",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ihnw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "duration",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Duration",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_fjjl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Cost"
+  },
+  {
+   "columns": 1,
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "percentage"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-28 19:43:13.933977",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Budget Staffing",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:projects",
+ "creation": "2025-06-23 10:00:47.577552",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "projects",
+  "section_break_zcxc",
+  "indicators_to_program_chilled"
+ ],
+ "fields": [
+  {
+   "fieldname": "projects",
+   "fieldtype": "Link",
+   "label": "Activities ",
+   "options": "TFD Projects",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_zcxc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "indicators_to_program_chilled",
+   "fieldtype": "Table",
+   "label": "Indicators To Program Chilled",
+   "options": "Indicators To Program Chilled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-13 23:28:59.002401",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Indicators To Program",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,70 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"8GSg0mEu3r\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD</span>\",\"col\":12}},{\"id\":\"Qo8f8efNnA\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"MAYNaaCWoY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"TFD Indicators\",\"col\":3}},{\"id\":\"JY4JmvmsOR\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"TFD Governments\",\"col\":3}},{\"id\":\"QSjKNK8M5v\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"TFD Logframe\",\"col\":3}},{\"id\":\"Yyi1jknI3j\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"TFD Main Proposal\",\"col\":3}},{\"id\":\"vqyThTnSUe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"TFD Villages\",\"col\":3}}]",
+ "creation": "2024-11-03 22:09:26.061151",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "solid-success",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "TFD Planning",
+ "links": [],
+ "modified": "2025-06-23 01:32:38.877895",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "TFD Planning",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 48.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "TFD Indicators",
+   "link_to": "TFD Indicators",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "TFD Governments",
+   "link_to": "TFD Governments",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "TFD Logframe",
+   "link_to": "TFD Logframe",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "TFD Main Proposal",
+   "link_to": "TFD Main Proposal",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "TFD Villages",
+   "link_to": "TFD Villages",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "TFD Planning"
+}

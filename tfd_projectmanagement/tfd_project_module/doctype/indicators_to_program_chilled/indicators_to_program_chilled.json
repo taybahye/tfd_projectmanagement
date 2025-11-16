@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-23 10:02:35.906166",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "indicator",
+  "column_break_qrne",
+  "achievement",
+  "column_break_bmyv",
+  "date",
+  "column_break_mnkr",
+  "attachment_files",
+  "column_break_dgci",
+  "date_from",
+  "column_break_nsnm",
+  "date_to"
+ ],
+ "fields": [
+  {
+   "fieldname": "indicator",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Indicator",
+   "options": "TFD Main Indicators"
+  },
+  {
+   "fieldname": "column_break_qrne",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "achievement",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Achievement "
+  },
+  {
+   "fieldname": "column_break_bmyv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Entry Date"
+  },
+  {
+   "fieldname": "column_break_mnkr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attachment_files",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attachment Files"
+  },
+  {
+   "fieldname": "column_break_dgci",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_from",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date From"
+  },
+  {
+   "fieldname": "column_break_nsnm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_to",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date To"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-13 23:31:31.913375",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Indicators To Program Chilled",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

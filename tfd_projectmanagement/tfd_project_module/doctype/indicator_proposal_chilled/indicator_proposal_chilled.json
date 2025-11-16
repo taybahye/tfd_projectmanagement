@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-22 01:04:28.608281",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "output",
+  "indicator_code",
+  "indicator_name",
+  "column_break_vnlg",
+  "output_name",
+  "cluster_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "output",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Output",
+   "options": "TFD Output"
+  },
+  {
+   "fieldname": "column_break_vnlg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "output.name1",
+   "fieldname": "output_name",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Output Name"
+  },
+  {
+   "fieldname": "indicator_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Indicator Code",
+   "options": "TFD Indicators",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "indicator_code.english_display_name",
+   "fieldname": "indicator_name",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Indicator Name",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "indicator_code.cluster",
+   "fieldname": "cluster_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cluster Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-22 01:10:41.419384",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Indicator Proposal Chilled",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

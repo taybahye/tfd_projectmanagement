@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-17 10:12:59.439577",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "activity_name",
+  "year",
+  "month_1",
+  "month_2",
+  "month_3",
+  "month_4",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "project_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Activity ID",
+   "options": "Project"
+  },
+  {
+   "columns": 1,
+   "fieldname": "year",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Year",
+   "options": "2025\n2026\n2027\n2028\n2029"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "month_1",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "January"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "month_2",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "February"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "month_3",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "March"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "month_4",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "April"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "may",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "May"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "june",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "June"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "july",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "July"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "august",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "August"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "september",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "September"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "october",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "October"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "november",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "November"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "december",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "December"
+  },
+  {
+   "fetch_from": "project_name.project_name",
+   "fieldname": "activity_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Activity Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-25 11:09:04.203353",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Project Plan",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
