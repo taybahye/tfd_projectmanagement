@@ -10,7 +10,7 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "modified": "2025-08-14 00:10:22.171487",
+ "modified": "2025-11-16 18:36:08.034478",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Project Progress",
@@ -18,6 +18,7 @@
  "owner": "Administrator",
  "report_name": "Project Progress",
  "roles": [],
+ "show_values_over_chart": 0,
  "time_interval": "Yearly",
  "timeseries": 0,
  "timespan": "Last Year",
@@ -27,7 +28,7 @@
  "y_axis": [
   {
    "color": "#449CF0",
-   "y_field": "progress"
+   "y_field": "percent_complete"
   }
  ]
 }

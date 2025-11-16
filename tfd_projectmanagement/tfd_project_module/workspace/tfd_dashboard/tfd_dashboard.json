@@ -5,8 +5,8 @@
    "label": "Project Summary"
   },
   {
-   "chart_name": "Project Indicator",
-   "label": "Project Indicators Chart"
+   "chart_name": "Delayed Tasks Summary-1",
+   "label": "Delayed Tasks Summary"
   },
   {
    "chart_name": "TFD Project Status",
@@ -17,7 +17,7 @@
    "label": "Project Progress"
   }
  ],
- "content": "[{\"id\":\"7x95QKY5uR\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD Dashboard</span>\",\"col\":12}},{\"id\":\"hP1IZlXYlY\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Progress\",\"col\":12}},{\"id\":\"CkSujKMDRk\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Indicators Chart\",\"col\":12}},{\"id\":\"hbH95dtUT-\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Summary\",\"col\":6}},{\"id\":\"Iv4KDxqUz2\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Status\",\"col\":6}}]",
+ "content": "[{\"id\":\"7x95QKY5uR\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD Dashboard</span>\",\"col\":12}},{\"id\":\"hP1IZlXYlY\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Progress\",\"col\":12}},{\"id\":\"hbH95dtUT-\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Summary\",\"col\":6}},{\"id\":\"Iv4KDxqUz2\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Status\",\"col\":6}},{\"id\":\"lYNZwjCrQk\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Delayed Tasks Summary\",\"col\":12}}]",
  "creation": "2025-08-13 00:30:48.429629",
  "custom_blocks": [],
  "docstatus": 0,
@@ -30,8 +30,8 @@
  "is_hidden": 0,
  "label": "TFD Dashboard",
  "links": [],
- "modified": "2025-08-14 11:05:10.148428",
- "modified_by": "tfdadmin@gmail.com",
+ "modified": "2025-11-16 21:07:18.564471",
+ "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Dashboard",
  "number_cards": [],
@@ -39,11 +39,7 @@
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
- "roles": [
-  {
-   "role": "CEO"
-  }
- ],
+ "roles": [],
  "sequence_id": 71.0,
  "shortcuts": [],
  "title": "TFD Dashboard"
