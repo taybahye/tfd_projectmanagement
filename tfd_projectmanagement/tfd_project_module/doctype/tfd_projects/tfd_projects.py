@@ -54,7 +54,7 @@ class TFDProjects(Document):
 		if not total:
 			self.percent_complete = 0
 		else:
-			if (self.percent_complete_method == "Task Completion" and total > 0) or (
+			if (self.percent_complete_method == "Activity Completion" and total > 0) or (
 				not self.percent_complete_method and total > 0
 			):
 				completed = frappe.db.sql(
@@ -64,7 +64,7 @@ class TFDProjects(Document):
 				)[0][0]
 				self.percent_complete = flt(flt(completed) / total * 100, 2)
 
-			if self.percent_complete_method == "Task Progress" and total > 0:
+			if self.percent_complete_method == "Activity Progress" and total > 0:
 				progress = frappe.db.sql(
 					"""select sum(custom_progress) from tabProject where
 					custom_tfd_project=%s""",
@@ -72,7 +72,7 @@ class TFDProjects(Document):
 				)[0][0]
 				self.percent_complete = flt(flt(progress) / total, 2)
 
-			if self.percent_complete_method == "Task Weight" and total > 0:
+			if self.percent_complete_method == "Activity Weight" and total > 0:
 				weight_sum = frappe.db.sql(
 					"""select sum(custom_weight) from tabProject where
 					custom_tfd_project=%s""",

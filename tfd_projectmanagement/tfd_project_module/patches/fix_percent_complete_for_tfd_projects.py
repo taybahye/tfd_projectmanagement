@@ -5,7 +5,7 @@ from frappe.utils import flt
 def execute():
 	for project in frappe.get_all("TFD Projects", fields=["name", "percent_complete_method", "percent_complete"]):
 		total = frappe.db.count("Project", dict(custom_tfd_project=project.name))
-		if project.percent_complete_method == "Task Completion" and total > 0:
+		if project.percent_complete_method == "Activity Completion" and total > 0:
 			completed = frappe.db.sql(
 				"""select count(name) from tabProject where
 					custom_tfd_project=%s and status in ('Cancelled', 'Completed')""",
