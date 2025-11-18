@@ -117,13 +117,11 @@ doctype_js = {"Project" : "override/js/activity.js",
 # Permissions evaluated in scripted ways
 
 
-#doc_events = {
-    #"Salary Slip": {
-   #     "validate": "tfd_projectmanagement.late_deduction.overrides.apply_late_deduction",
-  #      tfd_projectmanagement.payroll.late_deduction.apply_late_deduction
-
- #   }
-#}
+doc_events = {
+    "Project": {
+       "on_update": "tfd_projectmanagement.override.py.activity.update_project",
+   }
+}
 #"/home/frappe/frappe-bench/apps/tfd_projectmanagement/tfd_projectmanagement/overrides/late_deduction.py"
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
