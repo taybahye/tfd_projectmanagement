@@ -21,14 +21,14 @@
    "fieldname": "number_target",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Number (Target)"
+   "label": "Number"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-11 10:18:15.959433",
+ "modified": "2025-11-16 09:41:47.702201",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Disaggregation Logframe Child",

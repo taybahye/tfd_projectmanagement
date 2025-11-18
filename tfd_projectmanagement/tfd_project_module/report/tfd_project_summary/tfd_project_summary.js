@@ -19,6 +19,12 @@ frappe.query_reports["TFD Project Summary"] = {
 			default: "Yes",
 		},
 		{
+			fieldname: "custom_tfd_project",
+			label: __("TFD Project"),
+			fieldtype: "Link",
+			options: "TFD Projects",
+		},
+		{
 			fieldname: "status",
 			label: __("Status"),
 			fieldtype: "Select",

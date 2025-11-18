@@ -18,10 +18,6 @@
   "order_index",
   "indicator_name_section",
   "indicator_name1",
-  "section_break_dcbi",
-  "activity",
-  "column_break_hedg",
-  "activity_name",
   "section_break_oybp",
   "disaggregation",
   "section_break_hjhj",
@@ -248,27 +244,6 @@
    "label": "Order Parent"
   },
   {
-   "fieldname": "activity",
-   "fieldtype": "Link",
-   "label": "Activity",
-   "options": "Project",
-   "width": "100px"
-  },
-  {
-   "fetch_from": "activity.project_name",
-   "fieldname": "activity_name",
-   "fieldtype": "Data",
-   "label": "Activity Name"
-  },
-  {
-   "fieldname": "section_break_dcbi",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_hedg",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "main_order",
    "fieldtype": "Data",
    "label": "main order "
@@ -277,7 +252,11 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2025-11-17 13:23:25.855157",
+=======
+ "modified": "2025-11-16 12:09:46.847192",
+>>>>>>> edaa530e647deda4773befbd7a36490081ec0652
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
@@ -298,6 +277,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
