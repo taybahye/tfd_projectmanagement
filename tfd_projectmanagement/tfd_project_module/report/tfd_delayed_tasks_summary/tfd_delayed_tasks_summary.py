@@ -77,7 +77,6 @@ def get_chart_data(data):
         else:
             on_track += 1
 
-    # Fix: Avoid crash when no data
     if delay == 0 and on_track == 0:
         return {
             "data": {
@@ -97,6 +96,8 @@ def get_chart_data(data):
         "colors": ["#84D5BA", "#CB4B5F"],
     }
     return charts
+
+
 
 def get_columns():
 	columns = [

@@ -1,0 +1,83 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{logframe_name}-{indicator_logframe}",
+ "creation": "2025-11-11 20:06:07.500833",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "logframe_name",
+  "indicator_logframe",
+  "column_break_nmmb",
+  "writer_by",
+  "section_break_vckw",
+  "disaggregation",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "indicator_logframe",
+   "fieldtype": "Link",
+   "label": "Indicator Logframe",
+   "options": "TFD Logframe"
+  },
+  {
+   "fieldname": "logframe_name",
+   "fieldtype": "Link",
+   "label": "Logframe Name",
+   "options": "TFD Logframe Name"
+  },
+  {
+   "fieldname": "disaggregation",
+   "fieldtype": "Table",
+   "label": "Disaggregation",
+   "options": "Disaggregation Logframe Child"
+  },
+  {
+   "fieldname": "column_break_nmmb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "writer_by",
+   "fieldtype": "Data",
+   "label": "Writer By"
+  },
+  {
+   "fieldname": "section_break_vckw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Float",
+   "label": "Total"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-11-19 10:54:01.826902",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Indicator Collected Data",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
