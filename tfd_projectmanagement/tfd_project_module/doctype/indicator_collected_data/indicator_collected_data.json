@@ -11,8 +11,9 @@
   "column_break_nmmb",
   "writer_by",
   "section_break_vckw",
-  "disaggregation",
-  "total"
+  "collecting_data",
+  "section_break_cvzb",
+  "aggregated_data"
  ],
  "fields": [
   {
@@ -28,12 +29,6 @@
    "options": "TFD Logframe Name"
   },
   {
-   "fieldname": "disaggregation",
-   "fieldtype": "Table",
-   "label": "Disaggregation",
-   "options": "Disaggregation Logframe Child"
-  },
-  {
    "fieldname": "column_break_nmmb",
    "fieldtype": "Column Break"
   },
@@ -47,15 +42,27 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "total",
-   "fieldtype": "Float",
-   "label": "Total"
+   "fieldname": "section_break_cvzb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "aggregated_data",
+   "fieldtype": "Table",
+   "label": "Aggregated Data",
+   "options": "Disaggregation Logframe Child",
+   "read_only": 1
+  },
+  {
+   "fieldname": "collecting_data",
+   "fieldtype": "Table",
+   "label": "Collecting Data",
+   "options": "Disaggregation Logframe Child"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-19 10:54:01.826902",
+ "modified": "2025-11-19 11:50:02.547030",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data",

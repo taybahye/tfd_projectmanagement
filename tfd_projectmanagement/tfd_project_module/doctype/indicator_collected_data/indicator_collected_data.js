@@ -19,14 +19,14 @@ frappe.ui.form.on("Indicator Collected Data", {
             
             callback(r) {
                 if (r.message) {
-                    frm.clear_table("disaggregation");
+                    frm.clear_table("collecting_data");
 
                     r.message.forEach(row => {
-                        let child = frm.add_child("disaggregation");
+                        let child = frm.add_child("collecting_data");
                         child.type = row.type;
                     });
 
-                    frm.refresh_field("disaggregation");
+                    frm.refresh_field("collecting_data");
                 }
             }
         });
