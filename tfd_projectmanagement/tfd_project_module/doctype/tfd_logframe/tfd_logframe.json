@@ -18,6 +18,7 @@
   "order_index",
   "indicator_name_section",
   "indicator_name1",
+  "user",
   "section_break_oybp",
   "disaggregation",
   "section_break_hjhj",
@@ -70,15 +71,15 @@
    "label": "Is Group"
   },
   {
-    "fieldname": "old_parent",
-    "label": "Old Parent",
-    "fieldtype": "Link",
-    "options": "TFD Logframe",
-    "allow_in_quick_entry": 1,
-    "in_preview": 1,
-    "reqd": 1,
-    "mandatory_depends_on": "eval:doc.__islocal == 1"
-    },
+   "allow_in_quick_entry": 1,
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "in_preview": 1,
+   "label": "Old Parent",
+   "mandatory_depends_on": "eval:doc.__islocal == 1",
+   "options": "TFD Logframe",
+   "reqd": 1
+  },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "parent_tfd_logframe",
@@ -247,12 +248,18 @@
    "fieldname": "main_order",
    "fieldtype": "Data",
    "label": "main order "
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "user",
+   "options": "User"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-17 13:23:25.855157",
+ "modified": "2025-11-21 20:03:12.463052",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
