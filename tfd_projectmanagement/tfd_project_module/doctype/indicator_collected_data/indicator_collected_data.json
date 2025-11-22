@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{indicator_logframe}",
+ "autoname": "field:indicator_logframe",
  "creation": "2025-11-11 20:06:07.500833",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -20,7 +20,8 @@
    "fieldname": "indicator_logframe",
    "fieldtype": "Link",
    "label": "Indicator Logframe",
-   "options": "TFD Logframe"
+   "options": "TFD Logframe",
+   "unique": 1
   },
   {
    "fieldname": "logframe_name",
@@ -62,11 +63,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-19 11:50:02.547030",
+ "modified": "2025-11-22 13:49:19.520154",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data",
- "naming_rule": "Expression",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
