@@ -7,9 +7,11 @@ frappe.ui.form.on("Indicator Collected Data", {
 			return {
 				filters: {
 					logframe_name: doc.logframe_name,
+                    collect_data : 1,
 				}
 			};
 		});
+      
 	},
     indicator_logframe(frm) {
 

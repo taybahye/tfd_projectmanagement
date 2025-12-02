@@ -8,11 +8,11 @@
  "field_order": [
   "section_break_oybk",
   "company",
+  "collect_data",
   "column_break_bjvk",
   "logframe_name",
   "column_break_bzjm",
   "indicator_name",
-  "hide",
   "column_break_xrmk",
   "type",
   "order_index",
@@ -196,13 +196,6 @@
    "hidden": 1
   },
   {
-   "default": "0",
-   "fieldname": "hide",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "label": "Print Hide"
-  },
-  {
    "fieldname": "indicator_name_section",
    "fieldtype": "Section Break",
    "label": "Indicator Name"
@@ -254,12 +247,18 @@
    "fieldtype": "Link",
    "label": "user",
    "options": "User"
+  },
+  {
+   "default": "0",
+   "fieldname": "collect_data",
+   "fieldtype": "Check",
+   "label": "Collect Data?"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-21 20:03:12.463052",
+ "modified": "2025-12-02 18:39:15.328186",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
