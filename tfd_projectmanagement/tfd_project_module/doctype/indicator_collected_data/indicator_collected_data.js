@@ -2,37 +2,37 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Indicator Collected Data", {
-	onload(frm) {
-		frm.set_query("indicator_logframe", function(doc) {
-			return {
-				filters: {
-					logframe_name: doc.logframe_name,
-                    collect_data : true,
-				}
-			};
-		});
+	// onload(frm) {
+	// 	frm.set_query("indicator_logframe", function(doc) {
+	// 		return {
+	// 			filters: {
+	// 				logframe_name: doc.logframe_name,
+    //                 collect_data : true,
+	// 			}
+	// 		};
+	// 	});
       
-	},
-    indicator_logframe(frm) {
+	// },
+    // indicator_logframe(frm) {
 
-        frappe.call({
-            method: "get_logframe_details",
-            doc: frm.doc,
+    //     frappe.call({
+    //         method: "get_logframe_details",
+    //         doc: frm.doc,
             
-            callback(r) {
-                if (r.message) {
-                    frm.clear_table("collecting_data");
+    //         callback(r) {
+    //             if (r.message) {
+    //                 frm.clear_table("collecting_data");
 
-                    r.message.forEach(row => {
-                        let child = frm.add_child("collecting_data");
-                        child.type = row.type;
-                    });
+    //                 r.message.forEach(row => {
+    //                     let child = frm.add_child("collecting_data");
+    //                     child.type = row.type;
+    //                 });
 
-                    frm.refresh_field("collecting_data");
-                }
-            }
-        });
-    } ,
+    //                 frm.refresh_field("collecting_data");
+    //             }
+    //         }
+    //     });
+    // } ,
      logframe_name: function(frm) {
         if (!frm.doc.logframe_name) return;
 
@@ -47,7 +47,7 @@ frappe.ui.form.on("Indicator Collected Data", {
 
                     r.message.forEach(row => {
                         let d = frm.add_child("collecting_data");
-                        d.indicator = row.indicator_name;
+                        d.indicator = row.name;
                         d.type = row.type;
                     });
 
