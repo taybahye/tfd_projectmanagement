@@ -33,28 +33,40 @@ frappe.ui.form.on("Indicator Collected Data", {
     //         }
     //     });
     // } ,
-     logframe_name: function(frm) {
-        if (!frm.doc.logframe_name) return;
+logframe_name: function(frm) {
+    if (!frm.doc.logframe_name) return;
 
-        frappe.call({
-            method: "tfd_projectmanagement.tfd_project_module.doctype.indicator_collected_data.indicator_collected_data.get_logframe_indicators",
-            args: {
-                logframe_name: frm.doc.logframe_name
-            },
-            callback: function(r) {
-                if (r.message) {
-                    frm.clear_table("collecting_data");
+    frappe.call({
+        method: "tfd_projectmanagement.tfd_project_module.doctype.indicator_collected_data.indicator_collected_data.get_logframe_indicators",
+        args: {
+            logframe_name: frm.doc.logframe_name
+        },
+        callback: function(r) {
+            if (r.message) {
+                frm.clear_table("collecting_data");
 
-                    r.message.forEach(row => {
-                        let d = frm.add_child("collecting_data");
-                        d.indicator_name_ar = row.indicator_name_ar;
-                        d.type = row.type;
-                    });
+                let currentIndicator = null;
 
-                    frm.refresh_field("collecting_data");
-                }
+                r.message.forEach(row => {
+                    // إذا تغير المؤشر، نضيف صف فارغ قبل المؤشر الجديد
+                    if(currentIndicator && currentIndicator != row.name){
+                        let emptyRow = frm.add_child("collecting_data");
+                        emptyRow.indicator_name_ar = ""; // صف فارغ
+                        emptyRow.type = "";
+                    }
+
+                    let d = frm.add_child("collecting_data");
+                    d.indicator_name_ar = row.indicator_name_ar;
+                    d.type = row.type;
+
+                    currentIndicator = row.name;
+                });
+
+                frm.refresh_field("collecting_data");
             }
-        });
-    }   
+        }
+    });
+}
+
 
 });
