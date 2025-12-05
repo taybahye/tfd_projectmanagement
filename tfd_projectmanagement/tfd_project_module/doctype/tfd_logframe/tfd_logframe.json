@@ -17,7 +17,9 @@
   "type",
   "order_index",
   "indicator_name_section",
-  "indicator_name1",
+  "indicator_name_en",
+  "column_break_skja",
+  "indicator_name_ar",
   "section_break_oybp",
   "disaggregation",
   "section_break_hjhj",
@@ -200,12 +202,6 @@
    "label": "Indicator Name"
   },
   {
-   "fetch_from": "indicator_name.en_ind_name",
-   "fieldname": "indicator_name1",
-   "fieldtype": "Small Text",
-   "label": "Indicator Name"
-  },
-  {
    "fieldname": "achievement_percentage",
    "fieldtype": "Percent",
    "label": "Achievement Percentage",
@@ -246,12 +242,28 @@
    "fieldname": "collect_data",
    "fieldtype": "Check",
    "label": "Collect Data?"
+  },
+  {
+   "fetch_from": "indicator_name.ar_ind_name",
+   "fieldname": "indicator_name_ar",
+   "fieldtype": "Small Text",
+   "label": "Indicator Name Ar"
+  },
+  {
+   "fieldname": "column_break_skja",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "indicator_name.en_ind_name",
+   "fieldname": "indicator_name_en",
+   "fieldtype": "Small Text",
+   "label": "Indicator Name En"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-12-02 18:45:15.448264",
+ "modified": "2025-12-05 22:40:35.021104",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",

@@ -47,7 +47,7 @@ frappe.ui.form.on("Indicator Collected Data", {
 
                     r.message.forEach(row => {
                         let d = frm.add_child("collecting_data");
-                        d.indicator = row.name;
+                        d.indicator_name_ar = row.indicator_name_ar;
                         d.type = row.type;
                     });
 
