@@ -246,7 +246,7 @@
   {
    "fetch_from": "indicator_name.ar_ind_name",
    "fieldname": "indicator_name_ar",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Indicator Name Ar"
   },
   {
@@ -256,14 +256,14 @@
   {
    "fetch_from": "indicator_name.en_ind_name",
    "fieldname": "indicator_name_en",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Indicator Name En"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-12-05 22:40:35.021104",
+ "modified": "2025-12-05 22:48:30.017640",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
