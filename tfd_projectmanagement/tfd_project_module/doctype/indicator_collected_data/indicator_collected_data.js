@@ -7,7 +7,7 @@ frappe.ui.form.on("Indicator Collected Data", {
 			return {
 				filters: {
 					logframe_name: doc.logframe_name,
-                    collect_data : 1,
+                    collect_data : true,
 				}
 			};
 		});
@@ -32,6 +32,29 @@ frappe.ui.form.on("Indicator Collected Data", {
                 }
             }
         });
-    }       
+    } ,
+     logframe_name: function(frm) {
+        if (!frm.doc.logframe_name) return;
+
+        frappe.call({
+            method: "tfd_projectmanagement.tfd_project_module.doctype.indicator_collected_data.indicator_collected_data.get_logframe_indicators",
+            args: {
+                logframe_name: frm.doc.logframe_name
+            },
+            callback: function(r) {
+                if (r.message) {
+                    frm.clear_table("collecting_data");
+
+                    r.message.forEach(row => {
+                        let d = frm.add_child("collecting_data");
+                        d.indicator = row.indicator_name;
+                        d.type = row.type;
+                    });
+
+                    frm.refresh_field("collecting_data");
+                }
+            }
+        });
+    }   
 
 });
