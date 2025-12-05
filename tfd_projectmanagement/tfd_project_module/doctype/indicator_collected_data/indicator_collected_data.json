@@ -1,15 +1,17 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:indicator_logframe",
+ "autoname": "format:{indicator_logframe}-{from_date}-{to_date}",
  "creation": "2025-11-11 20:06:07.500833",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "logframe_name",
+  "from_date",
   "indicator_logframe",
   "column_break_nmmb",
   "writer_by",
+  "to_date",
   "section_break_vckw",
   "collecting_data",
   "section_break_cvzb",
@@ -58,16 +60,26 @@
    "fieldtype": "Table",
    "label": "Collecting Data",
    "options": "Disaggregation Logframe Child"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-22 13:49:19.520154",
+ "modified": "2025-12-05 22:01:13.424212",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
