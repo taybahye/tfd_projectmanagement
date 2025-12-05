@@ -60,7 +60,7 @@ class IndicatorCollectedData(Document):
 @frappe.whitelist()
 def get_logframe_indicators(logframe_name):
 	return frappe.db.sql("""
-		SELECT log.indicator_name, logc.type
+		SELECT log.name, logc.type
 		FROM `tabTFD Logframe` log
 		JOIN `tabTFD Logframe child` logc ON log.name = logc.parent
 		WHERE log.logframe_name = %s
