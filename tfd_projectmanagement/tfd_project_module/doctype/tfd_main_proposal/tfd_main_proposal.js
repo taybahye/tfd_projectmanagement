@@ -1,6 +1,3 @@
-// ============================================================================
-//   *** دالة بناء الشجرة (ترقيم مستقل لكل نوع + ترتيب حسب Order Index) ***
-// ============================================================================
 async function buildLogframeTree(data) {
     const nodes = {};
     
@@ -26,23 +23,42 @@ async function buildLogframeTree(data) {
         return match ? parseInt(match[1], 10) : 0; 
     }
 
-    // 3. Sorting Function (ترتيب حسب Order Index فقط)
+    // ============================================================
+    // 3. Sorting Function (التعديل هنا: الترتيب حسب النوع أولاً)
+    // ============================================================
     const getOrderedChildren = (parentName) => {
         const all = childrenMap[parentName] || [];
+        
+        // خريطة الأولويات (الأقل يظهر أولاً)
+        const typePriority = {
+            "Ind": 1,       // يظهر أولاً
+            "Outcome": 2,   // يظهر ثانياً
+            "Output": 3,    // يظهر ثالثاً
+            "Activity": 4   // يظهر أخيراً
+        };
+
         return all.sort((a, b) => {
             const nodeA = nodes[a];
             const nodeB = nodes[b];
             
-            // الترتيب حسب Order Index أولاً
+            // 1. الترتيب حسب نوع العنصر (Ind قبل Outcome قبل Output)
+            const weightA = typePriority[nodeA.type] || 99; // 99 للأنواع غير المعروفة
+            const weightB = typePriority[nodeB.type] || 99;
+            
+            if (weightA !== weightB) {
+                return weightA - weightB;
+            }
+
+            // 2. إذا تساوى النوع، نرتب حسب Order Index
             const orderDiff = (nodeA.order_index || 0) - (nodeB.order_index || 0);
             if (orderDiff !== 0) return orderDiff;
             
-            // الترتيب حسب الاسم كاحتياط
+            // 3. الترتيب حسب الاسم كاحتياط أخير
             return getNumericCode(nodeA.name) - getNumericCode(nodeB.name);
         });
     };
 
-    // 4. Build HTML (تم تعديل الترقيم ليكون مستقلاً لكل نوع)
+    // 4. Build HTML
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
         const type = node.type;
@@ -52,8 +68,18 @@ async function buildLogframeTree(data) {
         const colorMap = { Goal: "#0d6efd", Outcome: "#198754", Output: "#0dcaf0", Ind: "#ffc107" };
         const color = colorMap[type] || "#000";
         
-        // تكوين العنوان
-        const label = `${type}.${numberingPath.join(".")}`;
+        // --- منطق التسمية (Ind.G + الترقيم) ---
+        const parentId = node.parent_tfd_logframe || node.parent;
+        const parentNode = parentId ? nodes[parentId] : null;
+        const parentType = parentNode ? parentNode.type : "";
+
+        let label = `${type}.${numberingPath.join(".")}`;
+
+        if (type === "Ind" && parentType === "Goal") {
+            const myIndex = numberingPath[numberingPath.length - 1];
+            label = `Ind.G.${myIndex}`;
+        }
+        // ------------------------------------
 
         let html = `<li style="margin-bottom:5px;">
                         <strong style="color:${color}">${label}</strong>: ${title}`;
@@ -62,19 +88,15 @@ async function buildLogframeTree(data) {
         if (kids.length) {
             html += "<ul style='margin-top:5px;'>";
             
-            // --- [التعديل هنا] ---
-            // إنشاء كائن لتتبع عدد مرات ظهور كل نوع داخل هذا المستوى
             const typeCounts = {}; 
 
             kids.forEach((childName) => { 
                 const childNode = nodes[childName];
-                const cType = childNode.type; // نوع الابن (Ind, Outcome, etc)
+                const cType = childNode.type;
                 
-                // تهيئة العداد للنوع إذا كان جديداً، ثم زيادته
                 if (!typeCounts[cType]) typeCounts[cType] = 0;
                 typeCounts[cType]++;
                 
-                // نمرر الرقم الخاص بالنوع (typeCounts) بدلاً من الترتيب العام (idx)
                 html += buildHTML(childName, [...numberingPath, typeCounts[cType]]); 
             });
             
@@ -90,7 +112,6 @@ async function buildLogframeTree(data) {
                       .map(it => it.name);
     
     let html = "<ul>";
-    // للجذر أيضاً نستخدم نفس المنطق إذا كان لديك أكثر من Goal
     const rootCounts = {};
     roots.forEach((root) => { 
         const rNode = nodes[root];
