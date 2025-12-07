@@ -80,13 +80,9 @@
    "fieldtype": "Link",
    "in_preview": 1,
    "label": "Old Parent",
-<<<<<<< HEAD
-   "options": "TFD Logframe"
-=======
    "mandatory_depends_on": "eval:doc.__islocal == 1",
    "options": "TFD Logframe",
    "reqd": 1
->>>>>>> bd2e966d3b1ffb5ec6200ac8425713e9f02e9737
   },
   {
    "allow_in_quick_entry": 1,
@@ -245,7 +241,6 @@
    "label": "main order "
   },
   {
-<<<<<<< HEAD
    "default": ".G",
    "depends_on": "eval:doc.parent_type == 'Goal'",
    "fieldname": "extended_type",
@@ -258,7 +253,8 @@
    "fieldtype": "Data",
    "label": "Parent_Type",
    "hidden": 1
-=======
+  },
+  {
    "default": "0",
    "fieldname": "collect_data",
    "fieldtype": "Check",
@@ -279,17 +275,12 @@
    "fieldname": "indicator_name_en",
    "fieldtype": "Data",
    "label": "Indicator Name En"
->>>>>>> bd2e966d3b1ffb5ec6200ac8425713e9f02e9737
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
-<<<<<<< HEAD
  "modified": "2025-12-07 00:48:49.135225",
-=======
- "modified": "2025-12-05 22:48:30.017640",
->>>>>>> bd2e966d3b1ffb5ec6200ac8425713e9f02e9737
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
