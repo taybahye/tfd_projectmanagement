@@ -1,21 +1,20 @@
 // ============================================================================
-//   *** دالة بناء الشجرة (ألوان فقط - بدون أيقونات) ***
+//   *** دالة بناء الشجرة (ترقيم مستقل لكل نوع + ترتيب حسب Order Index) ***
 // ============================================================================
 async function buildLogframeTree(data) {
-    const childOrder = { Goal: ["Ind", "Outcome", "Output"], Outcome: ["Output", "Ind"], Output: ["Ind"] };
     const nodes = {};
     
-    // تجهيز البيانات
+    // 1. Prepare Data
     data.forEach(it => {
         const type = (it.type || "").trim();
         nodes[it.name] = { 
             ...it, 
-            type: type ? type[0].toUpperCase() + type.slice(1).toLowerCase() : "", 
+            type: type ? type[0].toUpperCase() + type.slice(1).toLowerCase() : "Item", 
             order_index: it.order_index || 0 
         };
     });
 
-    // ربط الآباء بالأبناء
+    // 2. Map Parents to Children
     const childrenMap = {};
     data.forEach(it => {
         const parent = it.parent_tfd_logframe || it.parent || null;
@@ -27,43 +26,33 @@ async function buildLogframeTree(data) {
         return match ? parseInt(match[1], 10) : 0; 
     }
 
-    // دالة الترتيب
+    // 3. Sorting Function (ترتيب حسب Order Index فقط)
     const getOrderedChildren = (parentName) => {
-        const parent = nodes[parentName];
         const all = childrenMap[parentName] || [];
-        const order = childOrder[parent?.type] || [];
-        const buckets = new Map(order.map(t => [t, []]));
-        const rest = [];
-
-        all.forEach(child => {
-            const t = nodes[child]?.type || "";
-            if (buckets.has(t)) buckets.get(t).push(child); else rest.push(child);
-        });
-
-        const sorter = (a, b) => {
-            const orderDiff = (nodes[a].order_index || 0) - (nodes[b].order_index || 0);
+        return all.sort((a, b) => {
+            const nodeA = nodes[a];
+            const nodeB = nodes[b];
+            
+            // الترتيب حسب Order Index أولاً
+            const orderDiff = (nodeA.order_index || 0) - (nodeB.order_index || 0);
             if (orderDiff !== 0) return orderDiff;
-            return getNumericCode(nodes[a].name) - getNumericCode(nodes[b].name);
-        };
-
-        for (let arr of buckets.values()) arr.sort(sorter);
-        rest.sort(sorter);
-
-        const ordered = [];
-        if (order.includes("Ind") && buckets.get("Ind")) ordered.push(...buckets.get("Ind"));
-        order.forEach(t => { if (t !== "Ind" && buckets.get(t)?.length) ordered.push(...buckets.get(t)); });
-        return [...ordered, ...rest];
+            
+            // الترتيب حسب الاسم كاحتياط
+            return getNumericCode(nodeA.name) - getNumericCode(nodeB.name);
+        });
     };
 
-    // بناء HTML
+    // 4. Build HTML (تم تعديل الترقيم ليكون مستقلاً لكل نوع)
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
-        const type = node.type || "Item";
+        const type = node.type;
         const title = node.indicator_name1 || node.title || node.name;
         
-        // الألوان فقط كما طلبت
+        // Colors
         const colorMap = { Goal: "#0d6efd", Outcome: "#198754", Output: "#0dcaf0", Ind: "#ffc107" };
         const color = colorMap[type] || "#000";
+        
+        // تكوين العنوان
         const label = `${type}.${numberingPath.join(".")}`;
 
         let html = `<li style="margin-bottom:5px;">
@@ -72,23 +61,47 @@ async function buildLogframeTree(data) {
         const kids = getOrderedChildren(nodeName);
         if (kids.length) {
             html += "<ul style='margin-top:5px;'>";
-            kids.forEach((childName, idx) => { html += buildHTML(childName, [...numberingPath, idx + 1]); });
+            
+            // --- [التعديل هنا] ---
+            // إنشاء كائن لتتبع عدد مرات ظهور كل نوع داخل هذا المستوى
+            const typeCounts = {}; 
+
+            kids.forEach((childName) => { 
+                const childNode = nodes[childName];
+                const cType = childNode.type; // نوع الابن (Ind, Outcome, etc)
+                
+                // تهيئة العداد للنوع إذا كان جديداً، ثم زيادته
+                if (!typeCounts[cType]) typeCounts[cType] = 0;
+                typeCounts[cType]++;
+                
+                // نمرر الرقم الخاص بالنوع (typeCounts) بدلاً من الترتيب العام (idx)
+                html += buildHTML(childName, [...numberingPath, typeCounts[cType]]); 
+            });
+            
             html += "</ul>";
         }
         html += "</li>";
         return html;
     }
 
+    // 5. Build Root
     const roots = data.filter(it => !it.parent_tfd_logframe)
                       .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
                       .map(it => it.name);
     
     let html = "<ul>";
-    roots.forEach((root, idx) => { html += buildHTML(root, [idx + 1]); });
+    // للجذر أيضاً نستخدم نفس المنطق إذا كان لديك أكثر من Goal
+    const rootCounts = {};
+    roots.forEach((root) => { 
+        const rNode = nodes[root];
+        const rType = rNode.type;
+        if (!rootCounts[rType]) rootCounts[rType] = 0;
+        rootCounts[rType]++;
+        html += buildHTML(root, [rootCounts[rType]]); 
+    });
     html += "</ul>";
     return html;
 }
-
 // ============================================================================
 //             *** منطق النموذج (تم حل مشكلة التعليق نهائياً) ***
 // ============================================================================

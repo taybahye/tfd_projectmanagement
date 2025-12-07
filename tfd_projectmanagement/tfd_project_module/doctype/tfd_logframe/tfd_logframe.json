@@ -1,7 +1,8 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{type}-{main_order}",
+ "autoname": "format:{logframe_name}-{type}{extended_type}-{main_order}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -39,6 +40,8 @@
   "lft",
   "rgt",
   "column_break_ecaz",
+  "parent_type",
+  "extended_type",
   "order_parent",
   "main_order"
  ],
@@ -70,15 +73,13 @@
    "label": "Is Group"
   },
   {
-    "fieldname": "old_parent",
-    "label": "Old Parent",
-    "fieldtype": "Link",
-    "options": "TFD Logframe",
-    "allow_in_quick_entry": 1,
-    "in_preview": 1,
-    "reqd": 1,
-    "mandatory_depends_on": "eval:doc.__islocal == 1"
-    },
+   "allow_in_quick_entry": 1,
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "in_preview": 1,
+   "label": "Old Parent",
+   "options": "TFD Logframe"
+  },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "parent_tfd_logframe",
@@ -247,33 +248,33 @@
    "fieldname": "main_order",
    "fieldtype": "Data",
    "label": "main order "
+  },
+  {
+   "default": ".G",
+   "depends_on": "eval:doc.parent_type == 'Goal'",
+   "fieldname": "extended_type",
+   "fieldtype": "Data",
+   "label": "Extended type"
+  },
+  {
+   "fetch_from": "parent_tfd_logframe.type",
+   "fieldname": "parent_type",
+   "fieldtype": "Data",
+   "label": "Parent_Type",
+   "hidden": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-11-17 13:23:25.855157",
+ "modified": "2025-12-07 00:48:49.135225",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
  "naming_rule": "Expression",
  "nsm_parent_field": "parent_tfd_logframe",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
+ "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
