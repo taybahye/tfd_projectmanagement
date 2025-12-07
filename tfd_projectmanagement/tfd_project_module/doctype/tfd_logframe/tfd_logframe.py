@@ -10,7 +10,6 @@ class TFDLogframe(NestedSet):
             self.achievement_percentage = 0
 
     def before_insert(self):
-
         # ⭐ 1) إذا النوع Goal → لازم يكون بدون parent (ROOT منطقي فقط)
         if self.type == "Goal":
             self.parent_tfd_logframe = None
@@ -24,7 +23,6 @@ class TFDLogframe(NestedSet):
 
     def get_next_order_index(self):
         """يعطي رقم ترتيب داخل نفس الـ parent"""
-
         filters = {}
 
         # إذا له parent → نجيب آخر order_index داخل نفس parent
@@ -47,7 +45,6 @@ class TFDLogframe(NestedSet):
         الاسم النهائي:
         {parent أو ROOT}-{type}-{order_index}
         """
-
         # الاسم فقط—not actual parent field
         parent_name = self.parent_tfd_logframe if self.parent_tfd_logframe else "ROOT"
 
@@ -67,16 +64,25 @@ class TFDLogframe(NestedSet):
 
 
 # ==========================================
-# API for Tree View
+# API for Tree View (Updated & Fixed)
 # ==========================================
 @frappe.whitelist()
-def get_logframe_children(parent=None):
-    filters = {"parent_tfd_logframe": parent} if parent else {"parent_tfd_logframe": ["is", "not set"]}
+def get_logframe_children(doctype, parent=None, is_root=False, **kwargs):
+    
+    # تحديد الفلتر
+    filters = {}
+    if parent:
+        filters["parent_tfd_logframe"] = parent
+    else:
+        filters["parent_tfd_logframe"] = ["is", "not set"]
 
+    # جلب البيانات
+    # قمت بإضافة "is_group as expandable" ليظهر سهم التوسيع بجانب المجلدات
     children = frappe.get_all(
         "TFD Logframe",
         filters=filters,
-        fields=["name as value", "indicator_name", "type", "order_index", "is_group"],
+        fields=["name as value", "indicator_name as title", "type", "order_index", "is_group", "is_group as expandable"],
         order_by="order_index asc"
     )
+
     return children
