@@ -51,13 +51,28 @@ async function buildLogframeTree(data) {
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
         const type = node.type;
-        const title = node.indicator_name1 || node.title || node.name;
         
+        const id = node.name;
+
+        // 2. Get the Text Description
+        let description = node.indicator_name1 || node.indicator_name || node.title || ""; 
+
+        // *** THE FIX *** // Remove patterns like "Goal.00035-", "Ind.00216-", "Outcome.00167-" from the start.
+        // Regex explanation:
+        // ^          : Start of the string
+        // [A-Za-z]+  : Any word (Goal, Ind, Outcome...)
+        // \.         : A dot
+        // \d+        : Numbers
+        // \s*-\s* : A hyphen (with optional spaces around it)
+        if (description) {
+            description = description.replace(/^[A-Za-z]+\.\d+\s*-\s*/, "");
+        }
+
         // Colors
         const colorMap = { Goal: "#0d6efd", Outcome: "#198754", Output: "#0dcaf0", Ind: "#ffc107" };
         const color = colorMap[type] || "#000";
         
-        // --- Naming Logic ---
+        // --- Numbering Logic ---
         const parentId = node.parent_tfd_logframe || node.parent;
         const parentNode = parentId ? nodes[parentId] : null;
         const parentType = parentNode ? parentNode.type : "";
@@ -68,11 +83,13 @@ async function buildLogframeTree(data) {
             const myIndex = numberingPath[numberingPath.length - 1];
             label = `Ind.G.${myIndex}`;
         }
-        // --------------------
+        // -----------------------
 
-        // *** UPDATED HERE: Just ${title} ***
+        // Use the cleaned description. If empty, fallback to ID.
+        let fullText = description ? description : id;
+
         let html = `<li style="margin-bottom:5px;">
-                        <strong style="color:${color}">${label}</strong>: ${title}`;
+                        <strong style="color:${color}">${label}</strong>: ${fullText}`;
         
         const kids = getOrderedChildren(nodeName);
         if (kids.length) {
