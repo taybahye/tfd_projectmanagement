@@ -66,72 +66,23 @@ class TFDLogframe(NestedSet):
 # ==========================================
 # API for Tree View (Updated & Fixed)
 # =================+ww=========================
-
-
-
-import frappe
-import re  # ضروري للتعامل مع النصوص
-
 @frappe.whitelist()
 def get_logframe_children(doctype, parent=None, is_root=False, **kwargs):
     
-    # 1. الفلتر الأساسي
+    # تحديد الفلتر
     filters = {}
     if parent:
         filters["parent_tfd_logframe"] = parent
     else:
         filters["parent_tfd_logframe"] = ["is", "not set"]
 
-    # 2. جلب البيانات من قاعدة البيانات (بدون ترتيب SQL)
+    # جلب البيانات
+    # قمت بإضافة "is_group as expandable" ليظهر سهم التوسيع بجانب المجلدات
     children = frappe.get_all(
         "TFD Logframe",
         filters=filters,
-        fields=["name as value", "indicator_name as title", "type", "order_index", "is_group", "is_group as expandable"]
+        fields=["name as value", "indicator_name as title", "type", "order_index", "main_order", "is_group", "is_group as expandable"],
+        order_by="order_index asc"
     )
-
-    # 3. دالة حساب "وزن" كل صف للترتيب
-    def get_sort_key(row):
-        # --- أولاً: تحديد وزن النوع ---
-        priority_map = {
-            "ind": 1,       # يظهر أولاً
-            "goal": 2,
-            "outcome": 3,
-            "output": 4,
-            "activity": 5
-        }
-        
-        # محاولة معرفة النوع من الحقل أو من الاسم
-        t_type = (row.get("type") or "").lower()
-        val_str = (row.get("value") or "").lower()
-        
-        if not t_type:
-            if "ind" in val_str: t_type = "ind"
-            elif "outcome" in val_str: t_type = "outcome"
-            elif "output" in val_str: t_type = "output"
-            elif "activity" in val_str: t_type = "activity"
-            elif "goal" in val_str: t_type = "goal"
-        
-        # الوزن الافتراضي 99 للعناصر غير المعروفة
-        type_weight = priority_map.get(t_type, 99)
-
-        # --- ثانياً: استخراج الأرقام للترتيب (Natural Sort) ---
-        # نبحث عن رقم في نهاية النص مثل "-1.10" أو "-1.2"
-        # Regex: يبحث عن شرطة متبوعة بأرقام ونقاط في نهاية السطر
-        numbers = []
-        match = re.search(r'-(\d+(\.\d+)*)$', row.get("value") or "")
-        
-        if match:
-            num_str = match.group(1) # يأخذ النص "1.10"
-            # يحوله إلى قائمة أرقام [1, 10]
-            numbers = [int(n) for n in num_str.split('.') if n.isdigit()]
-        else:
-            # إذا لم يجد رقماً في الاسم، يستخدم order_index كاحتياطي
-            numbers = [row.get("order_index") or 0]
-
-        # نرجع (وزن النوع، قائمة الأرقام) ليقوم بايثون بالمقارنة
-        return (type_weight, numbers)
-
-    # 4. تطبيق الترتيب على القائمة قبل إرسالها
-    children.sort(key=get_sort_key)
 
     return children
