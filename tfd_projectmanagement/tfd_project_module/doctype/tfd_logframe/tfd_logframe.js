@@ -10,24 +10,34 @@ frappe.treeview_settings['TFD Logframe'] = {
     get_tree_nodes: "tfd_projectmanagement.tfd_project_module.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
 
     // دالة الترتيب (Ind يظهر أولاً حسب طلبك السابق)
+// tfd_logframe.js
+// دالة الترتيب (Natural Sort)
     sort_function: function (a, b) {
-        // الأولويات: الرقم الأقل يظهر في الأعلى
+        
+        // ⭐ 1. طباعة رسالة في الكونسول للتأكد أن الدالة تعمل
+        // افتح F12 -> Console، إذا لم تر هذه الرسالة فالكود لم يحمل!
+        // console.log("Sorting:", a.data.value, "vs", b.data.value);
+
+        // ⭐ 2. الترتيب حسب النوع (Ind, Goal, ...)
         const typePriority = { 
-            "Ind": 1, 
-            "Outcome": 2, 
-            "Output": 3, 
-            "Activity": 4, 
-            "Goal": 5 
+            "ind": 1, "outcome": 2, "output": 3, "activity": 4, "goal": 5 
         };
         
-        const weightA = typePriority[a.data.type] || 99;
-        const weightB = typePriority[b.data.type] || 99;
-
-        // 1. الترتيب حسب النوع
+        let typeA = (a.data.type || "").toLowerCase();
+        let typeB = (b.data.type || "").toLowerCase();
+        
+        let weightA = typePriority[typeA] || 99;
+        let weightB = typePriority[typeB] || 99;
+        
         if (weightA !== weightB) return weightA - weightB;
 
-        // 2. الترتيب حسب Order Index
-        return (a.data.order_index || 0) - (b.data.order_index || 0);
+        // ⭐ 3. الترتيب الرقمي الذكي (الحل السحري)
+        // نستخدم ID السجل (value) للمقارنة
+        let valA = String(a.data.value || "").trim();
+        let valB = String(b.data.value || "").trim();
+
+        // numeric: true تجبر النظام على قراءة "10" كرقم عشرة وليس نص
+        return valA.localeCompare(valB, undefined, { numeric: true, sensitivity: 'base' });
     },
 
     // شكل العنوان في الشجرة
