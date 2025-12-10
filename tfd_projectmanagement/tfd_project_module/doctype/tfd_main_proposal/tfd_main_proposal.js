@@ -23,37 +23,26 @@ async function buildLogframeTree(data) {
         return match ? parseInt(match[1], 10) : 0; 
     }
 
-    // ============================================================
-    // 3. Sorting Function (التعديل هنا: الترتيب حسب النوع أولاً)
-    // ============================================================
+    // 3. Sorting Function
     const getOrderedChildren = (parentName) => {
         const all = childrenMap[parentName] || [];
         
-        // خريطة الأولويات (الأقل يظهر أولاً)
-        const typePriority = {
-            "Ind": 1,       // يظهر أولاً
-            "Outcome": 2,   // يظهر ثانياً
-            "Output": 3,    // يظهر ثالثاً
-            "Activity": 4   // يظهر أخيراً
-        };
+        const typePriority = { "Ind": 1, "Outcome": 2, "Output": 3, "Activity": 4 };
 
         return all.sort((a, b) => {
             const nodeA = nodes[a];
             const nodeB = nodes[b];
             
-            // 1. الترتيب حسب نوع العنصر (Ind قبل Outcome قبل Output)
-            const weightA = typePriority[nodeA.type] || 99; // 99 للأنواع غير المعروفة
+            // 1. Sort by Type
+            const weightA = typePriority[nodeA.type] || 99;
             const weightB = typePriority[nodeB.type] || 99;
-            
-            if (weightA !== weightB) {
-                return weightA - weightB;
-            }
+            if (weightA !== weightB) return weightA - weightB;
 
-            // 2. إذا تساوى النوع، نرتب حسب Order Index
+            // 2. Sort by Order Index
             const orderDiff = (nodeA.order_index || 0) - (nodeB.order_index || 0);
             if (orderDiff !== 0) return orderDiff;
             
-            // 3. الترتيب حسب الاسم كاحتياط أخير
+            // 3. Sort by Name
             return getNumericCode(nodeA.name) - getNumericCode(nodeB.name);
         });
     };
@@ -68,7 +57,7 @@ async function buildLogframeTree(data) {
         const colorMap = { Goal: "#0d6efd", Outcome: "#198754", Output: "#0dcaf0", Ind: "#ffc107" };
         const color = colorMap[type] || "#000";
         
-        // --- منطق التسمية (Ind.G + الترقيم) ---
+        // --- Naming Logic ---
         const parentId = node.parent_tfd_logframe || node.parent;
         const parentNode = parentId ? nodes[parentId] : null;
         const parentType = parentNode ? parentNode.type : "";
@@ -79,27 +68,23 @@ async function buildLogframeTree(data) {
             const myIndex = numberingPath[numberingPath.length - 1];
             label = `Ind.G.${myIndex}`;
         }
-        // ------------------------------------
+        // --------------------
 
+        // *** UPDATED HERE: Just ${title} ***
         let html = `<li style="margin-bottom:5px;">
                         <strong style="color:${color}">${label}</strong>: ${title}`;
         
         const kids = getOrderedChildren(nodeName);
         if (kids.length) {
             html += "<ul style='margin-top:5px;'>";
-            
             const typeCounts = {}; 
-
             kids.forEach((childName) => { 
                 const childNode = nodes[childName];
                 const cType = childNode.type;
-                
                 if (!typeCounts[cType]) typeCounts[cType] = 0;
                 typeCounts[cType]++;
-                
                 html += buildHTML(childName, [...numberingPath, typeCounts[cType]]); 
             });
-            
             html += "</ul>";
         }
         html += "</li>";
