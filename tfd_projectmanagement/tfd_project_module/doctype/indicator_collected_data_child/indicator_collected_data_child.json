@@ -42,6 +42,7 @@
   {
    "fieldname": "logframe_indicator",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Logframe Indicator",
    "options": "TFD Logframe"
   },
@@ -55,7 +56,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-12-17 11:52:54.983536",
+ "modified": "2025-12-17 20:06:37.131905",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data Child",
