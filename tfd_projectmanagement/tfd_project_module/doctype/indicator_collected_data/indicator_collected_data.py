@@ -24,44 +24,44 @@ class IndicatorCollectedData(Document):
 
 
 
-	def validate(self):
-		self.generate_summary()
+	# def validate(self):
+	# 	self.generate_summary()
 
-	def generate_summary(self):
-		self.aggregated_data = []
+	# def generate_summary(self):
+	# 	self.aggregated_data = []
 
-		summary = {}
+	# 	summary = {}
 
-		for row in self.collecting_data:
-			type_name = row.type
+	# 	for row in self.collecting_data:
+	# 		type_name = row.type
 
-			if type_name not in summary:
-				summary[type_name] = {
-					"total": 0,
-					"last_date": row.date_collected
-				}
+	# 		if type_name not in summary:
+	# 			summary[type_name] = {
+	# 				"total": 0,
+	# 				"last_date": row.date_collected
+	# 			}
 
-			# جمع القيم
-			summary[type_name]["total"] += row.collected_value or 0
+	# 		# جمع القيم
+	# 		summary[type_name]["total"] += row.collected_value or 0
 
-			# تحديث آخر تاريخ
-			if row.date_collected and row.date_collected > summary[type_name]["last_date"]:
-				summary[type_name]["last_date"] = row.date_collected
+	# 		# تحديث آخر تاريخ
+	# 		if row.date_collected and row.date_collected > summary[type_name]["last_date"]:
+	# 			summary[type_name]["last_date"] = row.date_collected
 
-		# تعبئة الجدول الجديد aggregated_data
-		for type_name, info in summary.items():
-			child = self.append("aggregated_data", {})
-			child.type = type_name
-			child.collected_value = info["total"]
-			child.date_collected = info["last_date"]   # ← آخر تاريخ
+	# 	# تعبئة الجدول الجديد aggregated_data
+	# 	for type_name, info in summary.items():
+	# 		child = self.append("aggregated_data", {})
+	# 		child.type = type_name
+	# 		child.collected_value = info["total"]
+	# 		child.date_collected = info["last_date"]   # ← آخر تاريخ
 
 
 
 @frappe.whitelist()
 def get_logframe_indicators(logframe_name):
 	return frappe.db.sql("""
-		SELECT log.name, logc.type , log.indicator_name_en , log.indicator_name_ar
+		SELECT log.name, logc.type , log.indicator_name_en , log.indicator_name_ar , log.main_order
 		FROM `tabTFD Logframe` log
-		JOIN `tabTFD Logframe child` logc ON log.name = logc.parent
+		LEFT JOIN `tabTFD Logframe child` logc ON log.name = logc.parent
 		WHERE log.logframe_name = %s
 	""", (logframe_name,), as_dict=True)

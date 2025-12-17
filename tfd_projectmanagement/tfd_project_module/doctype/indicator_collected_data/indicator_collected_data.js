@@ -58,6 +58,8 @@ logframe_name: function(frm) {
                     let d = frm.add_child("collecting_data");
                     d.indicator_name_ar = row.indicator_name_ar;
                     d.type = row.type;
+                    d.logframe_indicator = row.name;
+                    d.order_index = row.main_order;
 
                     currentIndicator = row.name;
                 });

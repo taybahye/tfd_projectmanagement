@@ -50,12 +50,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "collecting_data",
-   "fieldtype": "Table",
-   "label": "Collecting Data",
-   "options": "Disaggregation Logframe Child"
-  },
-  {
    "fieldname": "from_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -68,12 +62,18 @@
    "in_list_view": 1,
    "label": "To Date",
    "reqd": 1
+  },
+  {
+   "fieldname": "collecting_data",
+   "fieldtype": "Table",
+   "label": "Collecting Data",
+   "options": "Indicator Collected Data Child"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-05 22:21:23.775248",
+ "modified": "2025-12-17 11:03:49.328420",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data",
