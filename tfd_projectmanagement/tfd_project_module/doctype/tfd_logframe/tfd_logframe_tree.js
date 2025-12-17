@@ -1,57 +1,49 @@
 frappe.treeview_settings['TFD Logframe'] = {
     breadcrumb: "TFD",
     title: __("TFD Logframe"),
-    get_tree_nodes: "tfd_projectmanagement.tfd_project_module.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
+    get_tree_nodes:
+        "tfd_projectmanagement.tfd_project_module.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
+
     sort_function: function (a, b) {
-        // دالة مساعدة لاكتشاف النوع (إما من الحقل أو من الاسم)
-        const getDetectedType = (node) => {
-            // 1. إذا كان النوع موجوداً في البيانات، استخدمه
+
+        const getType = (node) => {
             if (node.data.type) return node.data.type.toLowerCase();
-            
-            // 2. إذا كان فارغاً، ابحث عنه داخل الاسم (ID)
-            // مثال: "test4-Ind.G-1.1" يحتوي على "ind"
-            const val = (node.data.value || "").toLowerCase();
-            if (val.includes("ind")) return "ind";
-            if (val.includes("outcome")) return "outcome";
-            if (val.includes("output")) return "output";
-            if (val.includes("activity")) return "activity";
-            if (val.includes("goal")) return "goal";
-            
+
+            const v = (node.data.value || "").toLowerCase();
+            if (v.startsWith("ind")) return "ind";
+            if (v.startsWith("outcome")) return "outcome";
+            if (v.startsWith("output")) return "output";
+            if (v.startsWith("activity")) return "activity";
+            if (v.startsWith("goal")) return "goal";
             return "other";
         };
 
-        const typeA = getDetectedType(a);
-        const typeB = getDetectedType(b);
-
-        // قائمة الأولويات (Ind في الأعلى دائماً)
-        const typePriority = { 
-            "ind": 1, 
-            "goal": 2, // عادة Goal هو الأب، لكن للاحتياط
-            "outcome": 3, 
-            "output": 4, 
-            "activity": 5 
+        // ⭐ أولوية صارمة جداً
+        const priority = {
+            ind: 1,        // 🔥 دايم أولاً
+            outcome: 2,
+            output: 3,
+            activity: 4,
+            goal: 5
         };
-        
-        const weightA = typePriority[typeA] || 99;
-        const weightB = typePriority[typeB] || 99;
 
-        // ⭐ الترتيب الصارم: المجموعات أولاً!
-        // إذا اختلف النوع، رتب حسب النوع فوراً ولا تنظر للأرقام
-        if (weightA !== weightB) {
-            return weightA - weightB;
+        const typeA = getType(a);
+        const typeB = getType(b);
+
+        const pA = priority[typeA] || 99;
+        const pB = priority[typeB] || 99;
+
+        // 1️⃣ النوع يحسم الترتيب نهائياً
+        if (pA !== pB) {
+            return pA - pB;
         }
 
-        // ⭐ الترتيب الرقمي: فقط عندما يكون النوع متشابهاً
-        let valA = String(a.data.value || "").trim();
-        let valB = String(b.data.value || "").trim();
+        // 2️⃣ ترتيب رقمي فقط داخل نفس النوع
+        const extractNum = (val) => {
+            const m = String(val || "").match(/\d+/);
+            return m ? parseInt(m[0], 10) : 0;
+        };
 
-        return valA.localeCompare(valB, undefined, { numeric: true, sensitivity: 'base' });
-    },
-    // إعدادات الشجرة الإضافية
-    onload: function(treeview) {
-        treeview.make_new_node = function(parent_node, parent_label, is_root) {
-            // ... كود make_new_node الخاص بك ...
-            // يمكنك نسخه من الكود القديم
-        }
+        return extractNum(a.data.value) - extractNum(b.data.value);
     }
 };

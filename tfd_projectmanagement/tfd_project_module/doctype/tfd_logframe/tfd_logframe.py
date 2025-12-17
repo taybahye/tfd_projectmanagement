@@ -86,3 +86,34 @@ def get_logframe_children(doctype, parent=None, is_root=False, **kwargs):
     )
 
     return children
+
+# @frappe.whitelist()
+# def get_logframe_children(doctype, parent=None, **kwargs):
+
+#     children = frappe.get_all(
+#         "TFD Logframe",
+#         filters={"parent_logframe": parent} if parent else {},
+#         fields=["name as value", "type", "is_group"]
+#     )
+
+#     # ⭐ ترتيب صارم
+#     priority = {
+#         "Ind": 1,
+#         "Outcome": 2,
+#         "Output": 3,
+#         "Activity": 4,
+#         "Goal": 5
+#     }
+
+#     def sort_key(row):
+#         p = priority.get(row.type, 99)
+
+#         import re
+#         m = re.search(r"\d+", row.value or "")
+#         num = int(m.group()) if m else 0
+
+#         return (p, num)
+
+#     children.sort(key=sort_key)
+
+#     return children
