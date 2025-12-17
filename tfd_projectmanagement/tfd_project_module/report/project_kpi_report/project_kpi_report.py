@@ -16,11 +16,13 @@ def execute(filters=None):
 
 def get_columns():
     return [
+		{"label": _("Indicator Number"), "fieldname": "order_index", "fieldtype": "Data", "width": 120},
         {"label": _("From Date"), "fieldname": "from_date", "fieldtype": "Date", "width": 120},
         {"label": _("To Date"), "fieldname": "to_date", "fieldtype": "Date", "width": 120},
         {"label": _("Indicator"), "fieldname": "indicator_name_ar", "fieldtype": "Data", "width": 250},
         {"label": _("Type"), "fieldname": "type", "fieldtype": "Data", "width": 120},
 		{"label": _("Collected Data"), "fieldname": "collected_value", "fieldtype": "Data", "width": 120},
+
     ]
 def get_data(filters):
     query = """
@@ -29,6 +31,7 @@ def get_data(filters):
             icd.to_date,
             inch.indicator_name_ar,
             inch.type,
+			inch.order_index,
             SUM(inch.collected_value) AS collected_value,
             icd.logframe_name
         FROM `tabIndicator Collected Data` icd
