@@ -1,21 +1,17 @@
-// ============================================================================
-//   *** دالة بناء الشجرة (ألوان فقط - بدون أيقونات) ***
-// ============================================================================
 async function buildLogframeTree(data) {
-    const childOrder = { Goal: ["Ind", "Outcome", "Output"], Outcome: ["Output", "Ind"], Output: ["Ind"] };
     const nodes = {};
     
-    // تجهيز البيانات
+    // 1. Prepare Data
     data.forEach(it => {
         const type = (it.type || "").trim();
         nodes[it.name] = { 
             ...it, 
-            type: type ? type[0].toUpperCase() + type.slice(1).toLowerCase() : "", 
+            type: type ? type[0].toUpperCase() + type.slice(1).toLowerCase() : "Item", 
             order_index: it.order_index || 0 
         };
     });
 
-    // ربط الآباء بالأبناء
+    // 2. Map Parents to Children
     const childrenMap = {};
     data.forEach(it => {
         const parent = it.parent_tfd_logframe || it.parent || null;
@@ -27,68 +23,108 @@ async function buildLogframeTree(data) {
         return match ? parseInt(match[1], 10) : 0; 
     }
 
-    // دالة الترتيب
+    // 3. Sorting Function
     const getOrderedChildren = (parentName) => {
-        const parent = nodes[parentName];
         const all = childrenMap[parentName] || [];
-        const order = childOrder[parent?.type] || [];
-        const buckets = new Map(order.map(t => [t, []]));
-        const rest = [];
+        
+        const typePriority = { "Ind": 1, "Outcome": 2, "Output": 3, "Activity": 4 };
 
-        all.forEach(child => {
-            const t = nodes[child]?.type || "";
-            if (buckets.has(t)) buckets.get(t).push(child); else rest.push(child);
-        });
+        return all.sort((a, b) => {
+            const nodeA = nodes[a];
+            const nodeB = nodes[b];
+            
+            // 1. Sort by Type
+            const weightA = typePriority[nodeA.type] || 99;
+            const weightB = typePriority[nodeB.type] || 99;
+            if (weightA !== weightB) return weightA - weightB;
 
-        const sorter = (a, b) => {
-            const orderDiff = (nodes[a].order_index || 0) - (nodes[b].order_index || 0);
+            // 2. Sort by Order Index
+            const orderDiff = (nodeA.order_index || 0) - (nodeB.order_index || 0);
             if (orderDiff !== 0) return orderDiff;
-            return getNumericCode(nodes[a].name) - getNumericCode(nodes[b].name);
-        };
-
-        for (let arr of buckets.values()) arr.sort(sorter);
-        rest.sort(sorter);
-
-        const ordered = [];
-        if (order.includes("Ind") && buckets.get("Ind")) ordered.push(...buckets.get("Ind"));
-        order.forEach(t => { if (t !== "Ind" && buckets.get(t)?.length) ordered.push(...buckets.get(t)); });
-        return [...ordered, ...rest];
+            
+            // 3. Sort by Name
+            return getNumericCode(nodeA.name) - getNumericCode(nodeB.name);
+        });
     };
 
-    // بناء HTML
+    // 4. Build HTML
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
-        const type = node.type || "Item";
-        const title = node.indicator_name1 || node.title || node.name;
+        const type = node.type;
         
-        // الألوان فقط كما طلبت
+        const id = node.name;
+
+        // 2. Get the Text Description
+        let description = node.indicator_name1 || node.indicator_name || node.title || ""; 
+
+        // *** THE FIX *** // Remove patterns like "Goal.00035-", "Ind.00216-", "Outcome.00167-" from the start.
+        // Regex explanation:
+        // ^          : Start of the string
+        // [A-Za-z]+  : Any word (Goal, Ind, Outcome...)
+        // \.         : A dot
+        // \d+        : Numbers
+        // \s*-\s* : A hyphen (with optional spaces around it)
+        if (description) {
+            description = description.replace(/^[A-Za-z]+\.\d+\s*-\s*/, "");
+        }
+
+        // Colors
         const colorMap = { Goal: "#0d6efd", Outcome: "#198754", Output: "#0dcaf0", Ind: "#ffc107" };
         const color = colorMap[type] || "#000";
-        const label = `${type}.${numberingPath.join(".")}`;
+        
+        // --- Numbering Logic ---
+        const parentId = node.parent_tfd_logframe || node.parent;
+        const parentNode = parentId ? nodes[parentId] : null;
+        const parentType = parentNode ? parentNode.type : "";
+
+        let label = `${type}.${numberingPath.join(".")}`;
+
+        if (type === "Ind" && parentType === "Goal") {
+            const myIndex = numberingPath[numberingPath.length - 1];
+            label = `Ind.G.${myIndex}`;
+        }
+        // -----------------------
+
+        // Use the cleaned description. If empty, fallback to ID.
+        let fullText = description ? description : id;
 
         let html = `<li style="margin-bottom:5px;">
-                        <strong style="color:${color}">${label}</strong>: ${title}`;
+                        <strong style="color:${color}">${label}</strong>: ${fullText}`;
         
         const kids = getOrderedChildren(nodeName);
         if (kids.length) {
             html += "<ul style='margin-top:5px;'>";
-            kids.forEach((childName, idx) => { html += buildHTML(childName, [...numberingPath, idx + 1]); });
+            const typeCounts = {}; 
+            kids.forEach((childName) => { 
+                const childNode = nodes[childName];
+                const cType = childNode.type;
+                if (!typeCounts[cType]) typeCounts[cType] = 0;
+                typeCounts[cType]++;
+                html += buildHTML(childName, [...numberingPath, typeCounts[cType]]); 
+            });
             html += "</ul>";
         }
         html += "</li>";
         return html;
     }
 
+    // 5. Build Root
     const roots = data.filter(it => !it.parent_tfd_logframe)
                       .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
                       .map(it => it.name);
     
     let html = "<ul>";
-    roots.forEach((root, idx) => { html += buildHTML(root, [idx + 1]); });
+    const rootCounts = {};
+    roots.forEach((root) => { 
+        const rNode = nodes[root];
+        const rType = rNode.type;
+        if (!rootCounts[rType]) rootCounts[rType] = 0;
+        rootCounts[rType]++;
+        html += buildHTML(root, [rootCounts[rType]]); 
+    });
     html += "</ul>";
     return html;
 }
-
 // ============================================================================
 //             *** منطق النموذج (تم حل مشكلة التعليق نهائياً) ***
 // ============================================================================

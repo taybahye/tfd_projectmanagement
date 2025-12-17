@@ -1,7 +1,8 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{logframe_name}-{type}-{main_order}",
+ "autoname": "format:{logframe_name}-{type}{extended_type}-{main_order}",
  "creation": "2024-10-22 07:21:56.127991",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -41,6 +42,8 @@
   "lft",
   "rgt",
   "column_break_ecaz",
+  "parent_type",
+  "extended_type",
   "order_parent",
   "main_order"
  ],
@@ -77,9 +80,7 @@
    "fieldtype": "Link",
    "in_preview": 1,
    "label": "Old Parent",
-   "mandatory_depends_on": "eval:doc.__islocal == 1",
-   "options": "TFD Logframe",
-   "reqd": 1
+   "options": "TFD Logframe"
   },
   {
    "allow_in_quick_entry": 1,
@@ -239,6 +240,20 @@
    "label": "main order "
   },
   {
+   "depends_on": "eval:doc.parent_type == 'Goal'&&doc.type=='Ind'",
+   "fieldname": "extended_type",
+   "fieldtype": "Select",
+   "label": "Extended type",
+   "options": "\n.G"
+  },
+  {
+   "fetch_from": "parent_tfd_logframe.type",
+   "fieldname": "parent_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Parent_Type"
+  },
+  {
    "default": "0",
    "fieldname": "collect_data",
    "fieldtype": "Check",
@@ -271,21 +286,7 @@
  "naming_rule": "Expression",
  "nsm_parent_field": "parent_tfd_logframe",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
+ "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
