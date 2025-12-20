@@ -11,7 +11,8 @@
   "collected_value",
   "comment",
   "logframe_indicator",
-  "order_index"
+  "order_index",
+  "indicator_parent"
  ],
  "fields": [
   {
@@ -50,13 +51,18 @@
    "fieldname": "order_index",
    "fieldtype": "Data",
    "label": "Order Index"
+  },
+  {
+   "fieldname": "indicator_parent",
+   "fieldtype": "Small Text",
+   "label": "Indicator Parent"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-12-17 20:06:37.131905",
+ "modified": "2025-12-20 11:54:47.331486",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data Child",

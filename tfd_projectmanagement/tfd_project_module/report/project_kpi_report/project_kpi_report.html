@@ -1,0 +1,167 @@
+{%
+var is_ar = frappe.boot.lang === "ar";
+
+// تجميع البيانات حسب المؤشر
+var grouped_data = {};
+if (data && data.length) {
+    data.forEach(function(row) {
+        if (!grouped_data[row.indicator_name_ar]) {
+            grouped_data[row.indicator_name_ar] = {
+                result: row.result,
+                order_index: row.order_index,
+                indicator_name_ar: row.indicator_name_ar,
+                types: []
+            };
+        }
+        grouped_data[row.indicator_name_ar].types.push({
+            type: row.type,
+            collected_value: row.collected_value || 0
+        });
+    });
+}
+
+var display_data = Object.values(grouped_data).sort(function(a,b) {
+    return a.order_index - b.order_index;
+});
+%}
+
+<div dir="{%= is_ar ? 'rtl' : 'ltr' %}"
+     style="text-align:{%= is_ar ? 'right' : 'left' %}; font-family: {%= is_ar ? 'Tahoma, Arial' : 'Arial' %}">
+
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    direction: {%= is_ar ? 'rtl' : 'ltr' %};
+}
+th, td {
+    border: 1px solid #999;
+    padding: 6px;
+    text-align: {%= is_ar ? 'right' : 'left' %};
+}
+th {
+    background-color: #f2f2f2;
+}
+</style>
+
+<div style="text-align:center;font-size:18px;font-weight:bold;margin-bottom:10px;">
+    {%= is_ar ? "تقرير ملخص المؤشرات" : "Indicator Summary Report" %}
+</div>
+
+<div style="text-align:center;font-size:12px;margin-bottom:15px;">
+    {% if (filters.from_date && filters.to_date) { %}
+       {%= is_ar ? "الفترة" : "Period" %}: {%= filters.from_date %} → {%= filters.to_date %}
+    {% } %}
+    <br>
+    {%= is_ar ? "تاريخ الطباعة" : "Generated on" %}: {%= frappe.datetime.get_today() %}
+</div>
+
+{% if (display_data && display_data.length) { %}
+<table>
+    <thead>
+        <tr>
+            <th>{%= is_ar ? "النتائج" : "Result" %}</th>
+            <th>{%= is_ar ? "رقم المؤشر" : "#Indicator" %}</th>
+            <th>{%= is_ar ? "المؤشرات" : "Indicator" %}</th>
+            <th>{%= is_ar ? "التصنيف" : "Disaggregation" %}</th>
+            <th>{%= is_ar ? "القيمة المجمعة" : "Collected Value" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% display_data.forEach(function(row) { %}
+            {% row.types.forEach(function(t, index) { %}
+                <tr>
+                    {% if (index === 0) { %}
+                        <td rowspan="{%= row.types.length %}">{%= row.result %}</td>
+                        <td rowspan="{%= row.types.length %}">{%= row.order_index %}</td>
+                        <td rowspan="{%= row.types.length %}">{%= row.indicator_name_ar %}</td>
+                    {% } %}
+                    <td>{%= t.type %}</td>
+                    <td>{%= t.collected_value %}</td>
+                </tr>
+            {% }); %}
+        {% }); %}
+    </tbody>
+</table>
+{% } else { %}
+<p style="text-align:center;margin-top:20px;">
+    {%= is_ar ? "لا توجد بيانات للفترة المختارة" : "No data available for selected filters" %}
+</p>
+{% } %}
+
+</div>
+
+<!-- <style>
+    .report-title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .report-meta {
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+
+    th, td {
+        border: 1px solid #999;
+        padding: 6px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<div class="report-title">
+    Indicator Summary Report
+</div>
+<div class="report-t">
+    جدول تتبع مؤشرات الأداء مع الانجازات خلال الفترة
+</div>
+<div class="report-meta">
+    {% if (filters.from_date && filters.to_date) { %}
+        Period: {%= filters.from_date %} → {%= filters.to_date %}
+    {% } %}
+    <br>
+    Generated on: {%= frappe.datetime.get_today() %}
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Indicator</th>
+            <th>Type</th>
+            <th>Collected Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if (data && data.length) { %}
+            {% data.forEach(row => { %}
+                <tr>
+                    <td>{%= row.order_index %}</td>
+                    <td style="text-align:left">{%= row.indicator_name_ar %}</td>
+                    <td>{%= row.type %}</td>
+                    <td>{%= row.collected_value || 0 %}</td>
+                </tr>
+            {% }) %}
+        {% } %}
+    </tbody>
+</table>
+
+{% if (!data || !data.length) { %}
+<p style="text-align:center;margin-top:20px;">
+    No data available for selected filters
+</p>
+{% } %} -->

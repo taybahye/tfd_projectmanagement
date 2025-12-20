@@ -2,37 +2,6 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Indicator Collected Data", {
-	// onload(frm) {
-	// 	frm.set_query("indicator_logframe", function(doc) {
-	// 		return {
-	// 			filters: {
-	// 				logframe_name: doc.logframe_name,
-    //                 collect_data : true,
-	// 			}
-	// 		};
-	// 	});
-      
-	// },
-    // indicator_logframe(frm) {
-
-    //     frappe.call({
-    //         method: "get_logframe_details",
-    //         doc: frm.doc,
-            
-    //         callback(r) {
-    //             if (r.message) {
-    //                 frm.clear_table("collecting_data");
-
-    //                 r.message.forEach(row => {
-    //                     let child = frm.add_child("collecting_data");
-    //                     child.type = row.type;
-    //                 });
-
-    //                 frm.refresh_field("collecting_data");
-    //             }
-    //         }
-    //     });
-    // } ,
 logframe_name: function(frm) {
     if (!frm.doc.logframe_name) return;
 
@@ -48,7 +17,6 @@ logframe_name: function(frm) {
                 let currentIndicator = null;
 
                 r.message.forEach(row => {
-                    // إذا تغير المؤشر، نضيف صف فارغ قبل المؤشر الجديد
                     if(currentIndicator && currentIndicator != row.name){
                         let emptyRow = frm.add_child("collecting_data");
                         emptyRow.indicator_name_ar = ""; // صف فارغ
@@ -60,7 +28,7 @@ logframe_name: function(frm) {
                     d.type = row.type;
                     d.logframe_indicator = row.name;
                     d.order_index = row.main_order;
-
+                    d.indicator_parent = row.indicator_parent;
                     currentIndicator = row.name;
                 });
 
