@@ -1,48 +1,27 @@
 {%
-var is_ar = frappe.boot.lang === "ar";
-
-// تجميع البيانات حسب المؤشر
-var grouped_data = {};
-if (data && data.length) {
-    data.forEach(function(row) {
-        if (!grouped_data[row.indicator_name_ar]) {
-            grouped_data[row.indicator_name_ar] = {
-                result: row.result,
-                order_index: row.order_index,
-                indicator_name_ar: row.indicator_name_ar,
-                types: []
-            };
-        }
-        grouped_data[row.indicator_name_ar].types.push({
-            type: row.type,
-            collected_value: row.collected_value || 0
-        });
-    });
-}
-
-var display_data = Object.values(grouped_data).sort(function(a,b) {
-    return a.order_index - b.order_index;
-});
+    const is_ar = frappe.boot.lang === "ar";
 %}
 
 <div dir="{%= is_ar ? 'rtl' : 'ltr' %}"
      style="text-align:{%= is_ar ? 'right' : 'left' %}; font-family: {%= is_ar ? 'Tahoma, Arial' : 'Arial' %}">
 
 <style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-    direction: {%= is_ar ? 'rtl' : 'ltr' %};
-}
-th, td {
-    border: 1px solid #999;
-    padding: 6px;
-    text-align: {%= is_ar ? 'right' : 'left' %};
-}
-th {
-    background-color: #f2f2f2;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        direction: {%= is_ar ? 'rtl' : 'ltr' %};
+    }
+
+    th, td {
+        border: 1px solid #999;
+        padding: 6px;
+        text-align: {%= is_ar ? 'right' : 'left' %};
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
 </style>
 
 <div style="text-align:center;font-size:18px;font-weight:bold;margin-bottom:10px;">
@@ -57,7 +36,6 @@ th {
     {%= is_ar ? "تاريخ الطباعة" : "Generated on" %}: {%= frappe.datetime.get_today() %}
 </div>
 
-{% if (display_data && display_data.length) { %}
 <table>
     <thead>
         <tr>
@@ -65,32 +43,37 @@ th {
             <th>{%= is_ar ? "رقم المؤشر" : "#Indicator" %}</th>
             <th>{%= is_ar ? "المؤشرات" : "Indicator" %}</th>
             <th>{%= is_ar ? "التصنيف" : "Disaggregation" %}</th>
+            <!-- <th>{%= is_ar ? "قيمة خط الاساس" :" Baseline Value" %}</th> -->
+            <!-- <th>{%= is_ar ? "الهدف" : "Target" %}</th> -->
             <th>{%= is_ar ? "القيمة المجمعة" : "Collected Value" %}</th>
+            <!-- <th>{%= is_ar ? "نسبة الانجاز" : "Achiev" %}</th> -->
+
         </tr>
     </thead>
     <tbody>
-        {% display_data.forEach(function(row) { %}
-            {% row.types.forEach(function(t, index) { %}
+        {% if (data && data.length) { %}
+           {% data.forEach(row => { %}
                 <tr>
-                    {% if (index === 0) { %}
-                        <td rowspan="{%= row.types.length %}">{%= row.result %}</td>
-                        <td rowspan="{%= row.types.length %}">{%= row.order_index %}</td>
-                        <td rowspan="{%= row.types.length %}">{%= row.indicator_name_ar %}</td>
-                    {% } %}
-                    <td>{%= t.type %}</td>
-                    <td>{%= t.collected_value %}</td>
+                    <td>{%= row.result %}</td>
+                    <td>{%= row.order_index %}</td>
+                    <td>{%= row.indicator_name_ar %}</td>
+                    <td>{%= row.type %}</td>
+                    <td>{%= row.collected_value || 0 %}</td>
                 </tr>
-            {% }); %}
-        {% }); %}
+            {% }) %}
+        {% } %}
     </tbody>
 </table>
-{% } else { %}
+
+{% if (!data || !data.length) { %}
 <p style="text-align:center;margin-top:20px;">
     {%= is_ar ? "لا توجد بيانات للفترة المختارة" : "No data available for selected filters" %}
 </p>
 {% } %}
 
 </div>
+
+
 
 <!-- <style>
     .report-title {
