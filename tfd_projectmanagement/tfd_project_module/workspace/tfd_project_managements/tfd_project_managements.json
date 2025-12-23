@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"dBlGN0dl30\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD Project Managements</span>\",\"col\":12}},{\"id\":\"eWbVz9yHVY\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"EqP1QY00-y\",\"type\":\"card\",\"data\":{\"card_name\":\"Design\",\"col\":4}},{\"id\":\"qqvaFVK3CP\",\"type\":\"card\",\"data\":{\"card_name\":\"Implementation \",\"col\":4}},{\"id\":\"OBqastyNxb\",\"type\":\"card\",\"data\":{\"card_name\":\"Complaints\",\"col\":4}},{\"id\":\"nIkjSGaim5\",\"type\":\"card\",\"data\":{\"card_name\":\"Surveys \",\"col\":4}}]",
+ "content": "[{\"id\":\"dBlGN0dl30\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD Project Managements</span>\",\"col\":12}},{\"id\":\"eWbVz9yHVY\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"EqP1QY00-y\",\"type\":\"card\",\"data\":{\"card_name\":\"Design\",\"col\":4}},{\"id\":\"qqvaFVK3CP\",\"type\":\"card\",\"data\":{\"card_name\":\"Implementation \",\"col\":4}},{\"id\":\"OBqastyNxb\",\"type\":\"card\",\"data\":{\"card_name\":\"Complaints\",\"col\":4}},{\"id\":\"N2pLXEXUlB\",\"type\":\"card\",\"data\":{\"card_name\":\"Collected Data\",\"col\":4}},{\"id\":\"rIWG-FWgk0\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-06-23 01:38:10.580202",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,7 +12,343 @@
  "indicator_color": "green",
  "is_hidden": 0,
  "label": "TFD Project Managements",
- "modified": "2025-06-25 13:36:38.874245",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Complaints",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Issue",
+   "link_count": 0,
+   "link_to": "Issue",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Issue Type",
+   "link_count": 0,
+   "link_to": "Issue Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Issue Priority",
+   "link_count": 0,
+   "link_to": "Issue Priority",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Issue Service",
+   "link_count": 0,
+   "link_to": "ToDo",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Issue Summary Service",
+   "link_count": 0,
+   "link_to": "ToDo",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Design",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Projects Need Assessment",
+   "link_count": 0,
+   "link_to": "TFD Projects",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Proposal",
+   "link_count": 0,
+   "link_to": "TFD Main Proposal",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Log frame",
+   "link_count": 0,
+   "link_to": "TFD Logframe",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Budget",
+   "link_count": 0,
+   "link_to": "TFD Fund",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Master Data",
+   "link_count": 7,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Governments",
+   "link_count": 0,
+   "link_to": "TFD Governments",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Districts ",
+   "link_count": 0,
+   "link_to": "TFD Directorate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Subdistrict",
+   "link_count": 0,
+   "link_to": "TFD Districts",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Villages",
+   "link_count": 0,
+   "link_to": "TFD Villages",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Clusters",
+   "link_count": 0,
+   "link_to": "TFD Cluster",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Donors",
+   "link_count": 0,
+   "link_to": "Donor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank of Indicators",
+   "link_count": 0,
+   "link_to": "TFD Main Indicators",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Collected Data",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Indicator Collected Data",
+   "link_count": 0,
+   "link_to": "Indicator Collected Data",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project KPI Report",
+   "link_count": 0,
+   "link_to": "Project KPI Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Implementation ",
+   "link_count": 7,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "TFD Project",
+   "link_count": 0,
+   "link_to": "TFD Projects",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Activities",
+   "link_count": 0,
+   "link_to": "Project",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tasks",
+   "link_count": 0,
+   "link_to": "Task",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Timesheet ",
+   "link_count": 0,
+   "link_to": "Timesheet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Activity Cost",
+   "link_count": 0,
+   "link_to": "Activity Cost",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Activity Type",
+   "link_count": 0,
+   "link_to": "Activity Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Project Archived",
+   "link_count": 0,
+   "link_to": "Project Archived MandE",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project Summary",
+   "link_count": 0,
+   "link_to": "TFD Project Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Delayed Tasks Summary",
+   "link_count": 0,
+   "link_to": "TFD Delayed Tasks Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project KPI Report",
+   "link_count": 0,
+   "link_to": "Project KPI Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-12-23 13:12:07.713611",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Project Managements",
@@ -26,4 +362,3 @@
  "shortcuts": [],
  "title": "TFD Project Managements"
 }
-
