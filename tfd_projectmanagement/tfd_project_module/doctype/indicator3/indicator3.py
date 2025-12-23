@@ -1,9 +1,0 @@
-# Copyright (c) 2024, Amd Oudah Prosite  and contributors
-# For license information, please see license.txt
-
-# import frappe
-from frappe.model.document import Document
-
-
-class indicator3(Document):
-	pass

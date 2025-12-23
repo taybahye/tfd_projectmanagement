@@ -29,6 +29,7 @@ logframe_name: function(frm) {
                     d.logframe_indicator = row.name;
                     d.order_index = row.main_order;
                     d.indicator_parent = row.indicator_parent;
+                    d.baseline = row.baseline;
                     currentIndicator = row.name;
                 });
 

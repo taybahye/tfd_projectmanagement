@@ -20,4 +20,8 @@ frappe.query_reports["Project KPI Report"] = {
 			"fieldtype": "Date",
 		},
 	],
+	//  tree: true,
+    // name_field: "name",
+    // parent_field: "parent",
+    // initial_depth: 0
 };
