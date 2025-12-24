@@ -13,6 +13,7 @@
   "logframe_indicator",
   "order_index",
   "baseline",
+  "target",
   "indicator_parent"
  ],
  "fields": [
@@ -62,13 +63,18 @@
    "fieldname": "baseline",
    "fieldtype": "Float",
    "label": "Baseline"
+  },
+  {
+   "fieldname": "target",
+   "fieldtype": "Float",
+   "label": "Target"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-12-22 12:58:24.787206",
+ "modified": "2025-12-24 11:21:34.817508",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data Child",

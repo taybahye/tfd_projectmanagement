@@ -30,6 +30,7 @@ logframe_name: function(frm) {
                     d.order_index = row.main_order;
                     d.indicator_parent = row.indicator_parent;
                     d.baseline = row.baseline;
+                    d.target = row.target;
                     currentIndicator = row.name;
                 });
 

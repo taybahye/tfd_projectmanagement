@@ -64,6 +64,7 @@ def get_logframe_indicators(logframe_name):
 		 log.old_parent ,
 		 logc.type , 
 		 logc.baseline,
+		 logc.total AS target,
 		 log.indicator_name_en ,
 		 log.indicator_name_ar , 
 		 log.main_order,
