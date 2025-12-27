@@ -35,88 +35,43 @@ def get_columns():
 
     ]
 
-
 def get_data(filters):
-    conditions = ""
-    values = {}
-
-    if filters.get("logframe_name"):
-        conditions += " AND icd.logframe_name = %(logframe_name)s"
-        values["logframe_name"] = filters["logframe_name"]
-
-    if filters.get("from_date") and filters.get("to_date"):
-        conditions += """
-            AND icd.from_date >= %(from_date)s
-            AND icd.to_date <= %(to_date)s
-        """
-        values["from_date"] = filters["from_date"]
-        values["to_date"] = filters["to_date"]
-
-    # 1️⃣ جلب جميع الـ Results
-    results = frappe.db.sql(f"""
-        SELECT DISTINCT
-            inch.indicator_parent
+    query = """
+        SELECT
+            MIN(icd.from_date) AS from_date,
+            MAX(icd.to_date) AS to_date,
+            inch.indicator_name_ar,
+            inch.type,
+            inch.order_index,
+            SUM(inch.collected_value) AS collected_value,
+            icd.logframe_name
         FROM `tabIndicator Collected Data` icd
         JOIN `tabIndicator Collected Data Child` inch
             ON inch.parent = icd.name
-        WHERE TRIM(IFNULL(inch.indicator_parent, '')) <> ''
-        {conditions}
-        ORDER BY inch.indicator_parent
-    """, values, as_dict=True)
+        WHERE TRIM(IFNULL(inch.indicator_name_ar, '')) <> ''
+    """
 
-    data = []
+    values = {}
 
-    for res in results:
-        # 2️⃣ صف العنوان الخاص بالـ Result
-        data.append({
-            "result": res.indicator_parent,
-            "order_index": "",
-            "indicator_name_ar": "",
-            "type": "",
-            "baseline": "",
-            "target": "",
-            "collected_value": "",
-            "achievement_percent": "",
-            "comment"  : ""
-        })
+    # فلترة حسب Logframe
+    if filters.get("logframe_name"):
+        query += " AND icd.logframe_name = %(logframe_name)s"
+        values["logframe_name"] = filters.get("logframe_name")
 
-        # 3️⃣ جلب المؤشرات التابعة لكل Result
-        indicators = frappe.db.sql(f"""
-            SELECT
-                inch.order_index,
-                inch.indicator_name_ar,
-                inch.type,
-                inch.baseline,
-                inch.target,
-                inch.comment,
-                SUM(inch.collected_value) AS collected_value
-            FROM `tabIndicator Collected Data` icd
-            JOIN `tabIndicator Collected Data Child` inch
-                ON inch.parent = icd.name
-            WHERE
-                inch.indicator_parent = %(result)s
-                AND TRIM(IFNULL(inch.indicator_name_ar, '')) <> ''
-                {conditions}
-            GROUP BY inch.name
-            ORDER BY inch.order_index
-        """, {**values, "result": res.indicator_parent}, as_dict=True)
+    # فلترة حسب from_date
+    if filters.get("from_date"):
+        query += " AND icd.from_date >= %(from_date)s"
+        values["from_date"] = filters.get("from_date")
 
-        for ind in indicators:
-            # حساب نسبة الإنجاز
-            achievement_percent = 0
-            if ind.target and ind.target > 0:
-                achievement_percent = (ind.collected_value / ind.target) * 100
+    # فلترة حسب to_date
+    if filters.get("to_date"):
+        query += " AND icd.to_date <= %(to_date)s"
+        values["to_date"] = filters.get("to_date")
 
-            data.append({
-                "result": "",
-                "order_index": ind.order_index,
-                "indicator_name_ar": ind.indicator_name_ar,
-                "type": ind.type,
-                "baseline": ind.baseline,
-                "target": ind.target,
-                "collected_value": ind.collected_value,
-                "achievement_percent": round(achievement_percent, 2),
-                "comment" : ind.comment
-            })
+    # التجميع حسب المؤشر فقط
+    query += """
+        GROUP BY inch.indicator_name_ar, inch.type, inch.order_index, icd.logframe_name
+        ORDER BY inch.order_index
+    """
 
-    return data
+    return frappe.db.sql(query, values, as_dict=True)
