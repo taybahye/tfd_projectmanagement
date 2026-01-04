@@ -1,24 +1,15 @@
-// ============================================================================
-// 1. Tree View Customization (إعدادات الشجرة)
-// ============================================================================
-
+//  Tree View Customization (Tree Settings)
 frappe.treeview_settings['TFD Logframe'] = {
     breadcrumb: "TFD",
     title: __("TFD Logframe"),
 
-    // جلب الأبناء
+    // Fetch child nodes
     get_tree_nodes: "tfd_projectmanagement.tfd_project_module.doctype.tfd_logframe.tfd_logframe.get_logframe_children",
 
-    // دالة الترتيب (Ind يظهر أولاً حسب طلبك السابق)
-// tfd_logframe.js
-// دالة الترتيب (Natural Sort)
+    // Sorting function (Natural Sort)
     sort_function: function (a, b) {
         
-        // ⭐ 1. طباعة رسالة في الكونسول للتأكد أن الدالة تعمل
-        // افتح F12 -> Console، إذا لم تر هذه الرسالة فالكود لم يحمل!
-        // console.log("Sorting:", a.data.value, "vs", b.data.value);
-
-        // ⭐ 2. الترتيب حسب النوع (Ind, Goal, ...)
+        // Sort by type priority (ind, outcome, output, activity, goal)
         const typePriority = { 
             "ind": 1, "outcome": 2, "output": 3, "activity": 4, "goal": 5 
         };
@@ -31,32 +22,29 @@ frappe.treeview_settings['TFD Logframe'] = {
         
         if (weightA !== weightB) return weightA - weightB;
 
-        // ⭐ 3. الترتيب الرقمي الذكي (الحل السحري)
-        // نستخدم ID السجل (value) للمقارنة
+        // Natural numerical sorting for record IDs (value)
         let valA = String(a.data.value || "").trim();
         let valB = String(b.data.value || "").trim();
 
-        // numeric: true تجبر النظام على قراءة "10" كرقم عشرة وليس نص
+        // numeric: true forces the system to read "10" as a number, not text
         return valA.localeCompare(valB, undefined, { numeric: true, sensitivity: 'base' });
     },
 
-    // شكل العنوان في الشجرة
+    // Node title format in the tree
     label: function (node) {
         const prefix = node.data.type ? `[${node.data.type}] ` : "";
-        // نستخدم main_order إذا وجد، وإلا نستخدم order_index
+        // Use main_order if available, otherwise fallback to order_index
         const order = node.data.main_order ? `${node.data.main_order}- ` : (node.data.order_index ? `${node.data.order_index}. ` : "");
         const name = node.data.indicator_name || node.value || "";
         return `${prefix}${order}${name}`;
     },
 
-    // ========================================================================
-    // 2. Custom Quick Entry Dialog (نافذة الإضافة السريعة)
-    // ========================================================================
+    //  Custom Quick Entry Dialog
     onload: function (treeview) {
 
         treeview.make_new_node = function (parent_node, parent_label, is_root) {
             
-            // تحديد الأب التلقائي بناءً على مكان النقر
+            // Set automatic parent based on click location
             let default_parent = (!is_root && parent_node) ? parent_node : "";
 
             let d = new frappe.ui.Dialog({
@@ -79,7 +67,7 @@ frappe.treeview_settings['TFD Logframe'] = {
                         fieldtype: 'Int', fieldname: 'order_index', label: 'Order Index', reqd: 1 
                     },
                     
-                    // --- حقول مخفية مهمة للحسابات ---
+                    // --- Hidden fields for calculations ---
                     { fieldtype: 'Data', fieldname: 'order_parent', label: 'Hidden Parent Order', hidden: 1 }, 
                     { fieldtype: 'Link', fieldname: 'parent_tfd_logframe', label: 'Real Parent', options: 'TFD Logframe', hidden: 1, default: default_parent },
                     // --------------------------------
@@ -91,7 +79,7 @@ frappe.treeview_settings['TFD Logframe'] = {
                         label: 'Parent Logframe', 
                         options: 'TFD Logframe',
                         default: default_parent,
-                        read_only: 0 // قابل للتعديل
+                        read_only: 0 // Editable
                     },
                     { 
                         fieldtype: 'HTML', 
@@ -104,13 +92,13 @@ frappe.treeview_settings['TFD Logframe'] = {
                 primary_action: async function (values) {
                     d.disable_primary_action();
 
-                    // التأكد من أن القيم المخفية محدثة
-                    values.parent_tfd_logframe = values.dialog_parent; // ربط الأب المختار بالحقل الحقيقي
+                    // Ensure hidden values are updated
+                    values.parent_tfd_logframe = values.dialog_parent; // Map selected parent to the real field
                     
-                    // حساب نهائي قبل الإرسال
+                    // Final calculation before submission
                     let final_order_data = await get_calculated_order_data(values.dialog_parent, values.order_index);
                     values.main_order = final_order_data.full_order;
-                    values.order_parent = final_order_data.parent_order_str; // حفظ ترتيب الأب لاستخدامه لاحقاً في الفورم
+                    values.order_parent = final_order_data.parent_order_str; // Save parent order for later form use
 
                     frappe.call({
                         method: "frappe.desk.treeview.add_node",
@@ -119,7 +107,7 @@ frappe.treeview_settings['TFD Logframe'] = {
                             parent: values.parent_tfd_logframe || treeview.root_value,
                             name: values.logframe_name, 
                             is_group: values.is_group,
-                            data: values // يتم إرسال جميع القيم بما فيها main_order و order_parent
+                            data: values // Sends all values including main_order and order_parent
                         },
                         callback: function (r) {
                             d.enable_primary_action();
@@ -132,7 +120,7 @@ frappe.treeview_settings['TFD Logframe'] = {
                 }
             });
 
-            // دالة مساعدة للحساب (تُرجع كائن بيانات)
+            // Helper function for calculation (returns data object)
             const get_calculated_order_data = async (parent_name, index) => {
                 if (!parent_name) return { full_order: `${index}`, parent_order_str: "" };
                 
@@ -147,7 +135,7 @@ frappe.treeview_settings['TFD Logframe'] = {
                 }
             };
 
-            // دالة تحديث العرض (Preview)
+            // Function to update visual preview in dialog
             const update_preview = async () => {
                 let idx = d.get_value('order_index');
                 let par = d.get_value('dialog_parent');
@@ -157,11 +145,11 @@ frappe.treeview_settings['TFD Logframe'] = {
                 if(idx) {
                     let calc_data = await get_calculated_order_data(par, idx);
                     
-                    // تحديث الحقول المخفية لضمان صحة البيانات
+                    // Update hidden fields to ensure data integrity
                     d.set_value('order_parent', calc_data.parent_order_str);
                     d.set_value('parent_tfd_logframe', par);
 
-                    // رسم المعاينة
+                    // Render preview HTML
                     html_content = `
                         <div style="padding: 10px; background-color: #e2e3e5; border: 1px solid #d6d8db; color: #383d41; border-radius: 4px;">
                              Parent Order: <strong>${calc_data.parent_order_str || "Root"}</strong> <br>
@@ -182,25 +170,21 @@ frappe.treeview_settings['TFD Logframe'] = {
             d.fields_dict.order_index.df.onchange = () => update_preview();
             d.fields_dict.dialog_parent.df.onchange = () => update_preview();
 
-            // Run once
+            // Initial run
             d.show();
             setTimeout(() => update_preview(), 300);
         };
     }
 };
-
-
-// ============================================================================
-// 3. Form View Logic (منطق صفحة النموذج الكاملة)
-// ============================================================================
+//  Form View Logic (Main Form Page)
 
 frappe.ui.form.on('TFD Logframe', {
 
-    // عند تغيير الأب أو الرقم، نعيد حساب الترتيب
+    // Recalculate order string when parent or index changes
     order_parent: update_main_order_form,
     order_index: update_main_order_form,
 
-    // عند اختيار المؤشر، نجلب نوعه ونضبط الحقول
+    // When an indicator is chosen, fetch its type and adjust fields
     indicator_name: function (frm) {
         if (frm.doc.indicator_name) {
             frappe.call({
@@ -215,7 +199,7 @@ frappe.ui.form.on('TFD Logframe', {
                         frm.set_value('type', r.message.type);
                         frm.set_df_property('type', 'hidden', 0);
 
-                        // إظهار Activities فقط للـ Output و Indicator
+                        // Show Activities table only for Output and Indicator types
                         if (['Output', 'Indicator'].includes(r.message.type)) {
                             frm.set_df_property('activities', 'hidden', 0);
                         } else {
@@ -234,7 +218,7 @@ frappe.ui.form.on('TFD Logframe', {
         }
     },
 
-    // منطق لجلب بيانات الأب القديم (إن وجد)
+    // Logic to fetch data from the old parent (if exists)
     old_parent: function (frm) {
         if (frm.doc.old_parent) {
             frappe.db.get_value('TFD Logframe', frm.doc.old_parent, 'main_order')
@@ -251,21 +235,16 @@ frappe.ui.form.on('TFD Logframe', {
     },
 
     refresh(frm) {
-        // افتراضياً، نظهر الحقول، أو يمكن وضع شرط هنا
-        // frm.set_df_property('activities', 'hidden', 0); 
+        // Default behavior on refresh
     },
 
     validate(frm) {
         calculate_totals(frm);
     }
 });
+//  Helper Functions & Child Table Logic
 
-
-// ============================================================================
-// 4. Helper Functions & Child Table Logic (الدوال المساعدة والجداول)
-// ============================================================================
-
-// دالة تحديث الترتيب داخل الفورم
+// Function to update the main_order field in the form
 function update_main_order_form(frm) {
     const parent = frm.doc.order_parent;
     const index = frm.doc.order_index;
@@ -281,12 +260,12 @@ function update_main_order_form(frm) {
     }
 }
 
-// حساب المجموع للصف
+// Function to calculate row total
 function calculate_row_total(row) {
     row.total = cint(flt(row.q1)) + cint(flt(row.q2)) + cint(flt(row.q3)) + cint(flt(row.q4));
 }
 
-// حساب المجموع الكلي
+// Function to calculate final aggregate totals
 function calculate_totals(frm) {
     let total_target = 0;
     (frm.doc.disaggregation || []).forEach(row => {
@@ -296,14 +275,14 @@ function calculate_totals(frm) {
     frm.refresh_field('disaggregation');
 }
 
-// منطق الجدول الفرعي (Child Table)
+// Child Table logic
 frappe.ui.form.on('TFD Logframe child', {
     total(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         let total = cint(flt(row.total));
         if (total <= 0) return;
 
-        // توزيع تلقائي على الأرباع
+        // Auto-distribution across quarters
         let div = Math.floor(total / 4);
         let rem = total - div * 4;
 
@@ -322,6 +301,7 @@ frappe.ui.form.on('TFD Logframe child', {
     q4: update_row_total_trigger
 });
 
+// Trigger to update row totals when a specific quarter value changes
 function update_row_total_trigger(frm, cdt, cdn) {
     let row = locals[cdt][cdn];
     row.total = cint(flt(row.q1)) + cint(flt(row.q2)) + cint(flt(row.q3)) + cint(flt(row.q4));
