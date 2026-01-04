@@ -1,3 +1,4 @@
+// Filters Bank field to show only accounts of type 'Bank' on form refresh
 frappe.ui.form.on("TFD Fund", {
     refresh: function(frm) {
         frm.set_query('bank', function() {
@@ -6,16 +7,12 @@ frappe.ui.form.on("TFD Fund", {
                     account_type: 'Bank' 
                 }
             };
-        });
-
-       
+        }); 
     },
-
-   
 });
 
 
-
+// Calculates population for each child row when percentage changes
 frappe.ui.form.on("TFD Governments Child", {
     percentage: function(frm, cdt , cdn) {
         let row = locals[cdt][cdn];

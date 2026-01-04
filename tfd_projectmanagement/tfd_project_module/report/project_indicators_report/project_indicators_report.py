@@ -1,10 +1,14 @@
 import frappe
 
+
+# Entry point for the Project Indicators report: returns columns and data based on filters
 def execute(filters=None):
     columns = get_columns()
     data = get_data(filters)
     return columns, data
 
+
+# Defines the columns for the Project Indicators report
 def get_columns():
     return [
         {"label": "Project ID", "fieldname": "project_id", "fieldtype": "Link", "options": "TFD Projects", "width": 150},
@@ -13,6 +17,8 @@ def get_columns():
         {"label": "Achievement", "fieldname": "achievement", "fieldtype": "Float", "width": 120},
     ]
 
+
+# Retrieves the report data based on filters (e.g., project)
 def get_data(filters):
     conditions = ""
     values = {}

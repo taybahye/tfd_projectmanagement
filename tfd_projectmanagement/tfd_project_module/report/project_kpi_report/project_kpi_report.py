@@ -2,6 +2,7 @@ import frappe
 from frappe import _
 
 
+# Entry point for the report: returns columns and data based on filters
 def execute(filters=None):
     if not filters:
         filters = {}
@@ -11,6 +12,8 @@ def execute(filters=None):
     return columns, data
 
 
+
+# Defines the columns for the Project KPI report
 def get_columns():
     return [
         {"label": _("Result"), "fieldname": "result", "fieldtype": "Data", "width": 220},
@@ -35,6 +38,9 @@ def get_columns():
 
     ]
 
+
+
+# Retrieves and aggregates data for the Project KPI report based on filters
 def get_data(filters):
     query = """
         SELECT

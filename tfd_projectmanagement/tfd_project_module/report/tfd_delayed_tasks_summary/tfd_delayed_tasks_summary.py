@@ -7,6 +7,9 @@ from frappe import _
 from frappe.utils import date_diff, nowdate
 
 
+
+# Main function executed by the report
+# Returns columns, data, message (None), and charts
 def execute(filters=None):
 	columns, data = [], []
 	data = get_data(filters)
@@ -15,6 +18,8 @@ def execute(filters=None):
 	return columns, data, None, charts
 
 
+
+# Fetch task data and calculate delays
 def get_data(filters):
 	conditions = get_conditions(filters)
 	tasks = frappe.get_all(
@@ -34,6 +39,8 @@ def get_data(filters):
 		],
 		order_by="creation",
 	)
+
+	# Calculate delay in days for each task
 	for task in tasks:
 		if task.exp_end_date:
 			if task.completed_on:
@@ -51,11 +58,12 @@ def get_data(filters):
 		task.status = _(task.status)
 		task.priority = _(task.priority)
 
-	# Sort by descending order of delay
+    # Sort tasks by descending delay
 	tasks.sort(key=lambda x: x["delay"], reverse=True)
 	return tasks
 
 
+# Prepare query conditions based on filters
 def get_conditions(filters):
 	conditions = frappe._dict()
 	keys = ["priority", "status","project","custom_tfd_project"]
@@ -69,6 +77,8 @@ def get_conditions(filters):
 	return conditions
 
 
+
+# Prepare chart data for "On Track" vs "Delayed" tasks
 def get_chart_data(data):
     delay, on_track = 0, 0
     for entry in data:
@@ -77,6 +87,8 @@ def get_chart_data(data):
         else:
             on_track += 1
 
+
+    # If no tasks, show placeholder chart
     if delay == 0 and on_track == 0:
         return {
             "data": {
@@ -99,6 +111,7 @@ def get_chart_data(data):
 
 
 
+# Define report columns
 def get_columns():
 	columns = [
 		{"fieldname": "name", "fieldtype": "Link", "label": _("Task"), "options": "Task", "width": 150},

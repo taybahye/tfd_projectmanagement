@@ -1,11 +1,9 @@
-# Copyright (c) 2013, Frappe Technologies Pvt. Ltd. and contributors
-# For license information, please see license.txt
-
-
 import frappe
 from frappe import _
 
 
+# Main function executed by the report
+# Returns columns, data, message (None), chart data, and report summary
 def execute(filters=None):
 	columns = get_columns()
 	data = []
@@ -26,6 +24,7 @@ def execute(filters=None):
 		order_by="expected_end_date",
 	)
 
+    # For each project, calculate task statistics
 	for project in data:
 		project["total_tasks"] = frappe.db.count("Task", filters={"project": project.name})
 		project["completed_tasks"] = frappe.db.count(
@@ -41,6 +40,7 @@ def execute(filters=None):
 	return columns, data, None, chart, report_summary
 
 
+# Define the columns for the report
 def get_columns():
 	return [
 		{
@@ -82,18 +82,21 @@ def get_columns():
 	]
 
 
+# Prepare chart data for bar chart visualization
 def get_chart_data(data):
 	labels = []
 	total = []
 	completed = []
 	overdue = []
 
+    # Prepare arrays for chart labels and datasets
 	for project in data:
 		labels.append(project.project_name)
 		total.append(project.total_tasks)
 		completed.append(project.completed_tasks)
 		overdue.append(project.overdue_tasks)
 
+    # Return chart configuration
 	return {
 		"data": {
 			"labels": labels[:30],
@@ -108,7 +111,8 @@ def get_chart_data(data):
 		"barOptions": {"stacked": True},
 	}
 
-
+	
+# Generate summary metrics for the report
 def get_report_summary(data):
 	if not data:
 		return None

@@ -22,16 +22,19 @@ from erpnext.setup.doctype.holiday_list.holiday_list import is_holiday
 
 class TFDProjects(Document):
 	
+	# Validates the document and recalculates project completion percentage
 	def validate(self):
 		self.update_percent_complete()
 
 		
+	# Updates the project progress when triggered externally (e.g. from Activity)
 	def update_project(self):
 		"""Called externally by Activity"""
 		self.update_percent_complete()
 		self.save(ignore_permissions=True)  
 
 
+	# Calculates and updates the project completion percentage and status
 	def update_percent_complete(self):
 		if self.status == "Completed":
 			if (

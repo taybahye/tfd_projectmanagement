@@ -8,6 +8,8 @@ from frappe import _
 from frappe.utils import cint, flt, format_datetime, format_duration
 
 
+# Main function executed by the report
+# Returns columns, data, message (None), chart data, and report summary
 def execute(filters=None):
 	columns = get_columns()
 	data = get_data(filters)
@@ -16,6 +18,7 @@ def execute(filters=None):
 	return columns, data, None, chart, report_summary
 
 
+# Define report columns
 def get_columns():
 	return [
 		{
@@ -129,6 +132,7 @@ def get_columns():
 	]
 
 
+# Fetch attendance data from database and update derived fields
 def get_data(filters):
 	query = get_query(filters)
 	data = query.run(as_dict=True)
@@ -136,6 +140,8 @@ def get_data(filters):
 	return data
 
 
+
+# Generate summary metrics for the report
 def get_report_summary(data):
 	if not data:
 		return None
@@ -189,6 +195,7 @@ def get_report_summary(data):
 	]
 
 
+# Prepare chart data showing attendance distribution by shift
 def get_chart_data(data):
 	if not data:
 		return None
@@ -209,6 +216,7 @@ def get_chart_data(data):
 	return chart
 
 
+# Build query with filters applied
 def get_query(filters):
 	attendance = frappe.qb.DocType("Attendance")
 	checkin = frappe.qb.DocType("Employee Checkin")
@@ -247,6 +255,7 @@ def get_query(filters):
 		.groupby(attendance.name)
 	)
 
+    # Apply filters dynamically
 	for filter in filters:
 		if filter == "from_date":
 			query = query.where(attendance.attendance_date >= filters.from_date)
@@ -264,6 +273,8 @@ def get_query(filters):
 	return query
 
 
+
+# Update data fields for each record: late/early duration, working hours formatting
 def update_data(data, filters):
 	for d in data:
 		update_late_entry(d, filters.consider_grace_period)
@@ -278,11 +289,13 @@ def update_data(data, filters):
 	return data
 
 
+# Format float to default precision
 def format_float_precision(value):
 	precision = cint(frappe.db.get_default("float_precision")) or 2
 	return flt(value, precision)
 
 
+# Format in/out time correctly
 def format_in_out_time(in_time, out_time, attendance_date):
 	if in_time and not out_time and in_time.date() == attendance_date:
 		in_time = in_time.time()
@@ -293,6 +306,7 @@ def format_in_out_time(in_time, out_time, attendance_date):
 	return in_time, out_time
 
 
+# Convert datetime objects to time if start and end are on the same date
 def convert_datetime_to_time_for_same_date(start, end):
 	if start and end and start.date() == end.date():
 		start = start.time()
@@ -303,6 +317,7 @@ def convert_datetime_to_time_for_same_date(start, end):
 	return start, end
 
 
+# Update late entry duration
 def update_late_entry(entry, consider_grace_period):
 	if consider_grace_period:
 		if entry.late_entry:
@@ -316,6 +331,8 @@ def update_late_entry(entry, consider_grace_period):
 		entry.late_entry_hrs = format_duration(entry.late_entry_hrs.total_seconds())
 
 
+
+# Update early exit duration
 def update_early_exit(entry, consider_grace_period):
 	if consider_grace_period:
 		if entry.early_exit:

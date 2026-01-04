@@ -3,6 +3,7 @@ from frappe.model.document import Document
 
 class TFDFund(Document):
 
+    # Calculates population based on a government and a given percentage
     @frappe.whitelist()
     def calculate_population(self, env_name, percentage):
         if float(percentage) > 100:
