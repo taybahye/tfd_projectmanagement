@@ -1,65 +1,83 @@
-# Copyright (c) 2025, Amd Oudah Prosite and contributors
-# For license information, please see license.txt
-
 import frappe
 from frappe import _
 
+
+# Entry point for the report: returns columns and data based on filters
 def execute(filters=None):
     if not filters:
         filters = {}
 
     columns = get_columns()
     data = get_data(filters)
-
     return columns, data
 
 
+
+# Defines the columns for the Project KPI report
 def get_columns():
     return [
-        {"label": _("Logframe"), "fieldname": "logframe_name", "fieldtype": "Data", "width": 200},
-        {"label": _("Indicator"), "fieldname": "indicator_logframe", "fieldtype": "Data", "width": 200},
-        {"label": _("Type"), "fieldname": "indicator_type", "fieldtype": "Data", "width": 120},
-        {"label": _("Target Value"), "fieldname": "target", "fieldtype": "Float", "width": 120},
-        {"label": _("Actual Value"), "fieldname": "actual_value", "fieldtype": "Float", "width": 120},
+        {"label": _("Result"), "fieldname": "result", "fieldtype": "Data", "width": 220},
+        {"label": _("Indicator Number"), "fieldname": "order_index", "fieldtype": "Data", "width": 120},
+        {"label": _("Indicator"), "fieldname": "indicator_name_ar", "fieldtype": "Data", "width": 300},
+        {"label": _("Type"), "fieldname": "type", "fieldtype": "Data", "width": 120},
+        {"label": _("Baseline"), "fieldname": "baseline", "fieldtype": "Float", "width": 140},
+        {"label": _("Target"), "fieldname": "target", "fieldtype": "Float", "width": 140},
+        {
+            "label": _("Cumulative Achievement"),
+            "fieldname": "collected_value",
+            "fieldtype": "Float",
+            "width": 140
+        },
+        {
+            "label": _("Achievement %"),
+            "fieldname": "achievement_percent",
+            "fieldtype": "Percent",
+            "width": 140
+        },
+        {"label": _("Comment"), "fieldname": "comment", "fieldtype": "Data", "width": 300},
+
     ]
 
 
+
+# Retrieves and aggregates data for the Project KPI report based on filters
 def get_data(filters):
-		query = """
-			SELECT
-				k.logframe_name,
-				k.indicator_logframe,
-				lt.type AS indicator_type,
-				lt.total AS target,
-				DATE_FORMAT(a.date_collected, '%%Y-%%m') AS period,
-				SUM(COALESCE(a.collected_value, 0)) AS actual_value
-			FROM `tabIndicator Collected Data` k
-			LEFT JOIN `tabDisaggregation Logframe Child` a
-				ON k.name = a.parent AND a.parentfield = 'collecting_data'
-			LEFT JOIN `tabTFD Logframe` l
-				ON l.name = k.indicator_logframe
-			LEFT JOIN `tabTFD Logframe child` lt
-				ON lt.parent = l.name AND lt.type = a.type
-			WHERE 1=1
-		"""
+    query = """
+        SELECT
+            MIN(icd.from_date) AS from_date,
+            MAX(icd.to_date) AS to_date,
+            inch.indicator_name_ar,
+            inch.type,
+            inch.order_index,
+            SUM(inch.collected_value) AS collected_value,
+            icd.logframe_name
+        FROM `tabIndicator Collected Data` icd
+        JOIN `tabIndicator Collected Data Child` inch
+            ON inch.parent = icd.name
+        WHERE TRIM(IFNULL(inch.indicator_name_ar, '')) <> ''
+    """
 
-		values = {}
+    values = {}
 
-		if filters.get("logframe"):
-			query += " AND k.logframe_name = %(logframe)s"
-			values["logframe"] = filters.get("logframe")
+    # فلترة حسب Logframe
+    if filters.get("logframe_name"):
+        query += " AND icd.logframe_name = %(logframe_name)s"
+        values["logframe_name"] = filters.get("logframe_name")
 
-		if filters.get("from_date"):
-			query += " AND a.date_collected >= %(from_date)s"
-			values["from_date"] = filters.get("from_date")
+    # فلترة حسب from_date
+    if filters.get("from_date"):
+        query += " AND icd.from_date >= %(from_date)s"
+        values["from_date"] = filters.get("from_date")
 
-		if filters.get("to_date"):
-			query += " AND a.date_collected <= %(to_date)s"
-			values["to_date"] = filters.get("to_date")
+    # فلترة حسب to_date
+    if filters.get("to_date"):
+        query += " AND icd.to_date <= %(to_date)s"
+        values["to_date"] = filters.get("to_date")
 
-		query += """
-			GROUP BY k.logframe_name, k.indicator_logframe, lt.type, lt.total, period
-			ORDER BY k.logframe_name, k.indicator_logframe, period
-		"""
+    # التجميع حسب المؤشر فقط
+    query += """
+        GROUP BY inch.indicator_name_ar, inch.type, inch.order_index, icd.logframe_name
+        ORDER BY inch.order_index
+    """
 
-		return frappe.db.sql(query, values, as_dict=True)
+    return frappe.db.sql(query, values, as_dict=True)

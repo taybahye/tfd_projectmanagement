@@ -1,3 +1,4 @@
+// Customizes the List View behavior and status indicator for TFD Projects
 frappe.listview_settings["TFD Projects"] = {
 	add_fields: ["status", "priority", "is_active", "percent_complete", "expected_end_date", "project_name"],
 	filters: [["status", "=", "Open"]],

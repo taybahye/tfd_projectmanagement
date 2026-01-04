@@ -2,6 +2,8 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Project", {
+    // Event: refresh
+    // Sets a custom query for the 'custom_parent' field to only show groups
     refresh(frm) {
         frm.set_query("custom_parent", function() {
             return {
@@ -11,6 +13,10 @@ frappe.ui.form.on("Project", {
             };
         });
     },
+
+
+    // Event: validate
+    // Calculates totals for the custom_disaggregation child table
     validate(frm) {
         if (!frm.doc.custom_disaggregation || frm.doc.custom_disaggregation.length === 0) {
             return;

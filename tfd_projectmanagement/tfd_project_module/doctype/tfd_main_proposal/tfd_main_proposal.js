@@ -125,23 +125,25 @@ async function buildLogframeTree(data) {
     html += "</ul>";
     return html;
 }
+// ============================================================================
+//             *** منطق النموذج (تم حل مشكلة التعليق نهائياً) ***
+// ============================================================================
 
-//Form Logic: Solves freezing issues by separating View from Population ***
 frappe.ui.form.on("TFD Main Proposal", {
     
-    // Refresh: Render HTML tree only. Do NOT modify child tables here.
+    // 1️⃣ عند التحميل (Refresh): ممنوع لمس الجداول! عرض فقط.
     refresh: function(frm) {
         if (frm.doc.log_frame_name) {
             frm.trigger('render_view_only'); 
         }
     },
 
-    // Trigger: On Link Change, fetch new data and populate fields/tables.
+    // 2️⃣ عند تغيير الاسم يدوياً: هنا فقط نملأ الجداول
     log_frame_name: function(frm) {
         if (frm.doc.log_frame_name) {
             frm.trigger('fetch_and_populate');
         } else {
-            // Cleanup: Clear HTML wrapper and child tables if link is removed
+            // تنظيف إذا تم حذف الاسم
             $(frm.fields_dict.indicators_and_activities_html.wrapper).html("");
             frm.doc.project_info = [];
             frm.doc.project_plan = [];
@@ -150,7 +152,7 @@ frappe.ui.form.on("TFD Main Proposal", {
         }
     },
 
-    //View Only: Fetch data specifically for building the interactive UI tree
+    // دالة العرض فقط (خفيفة جداً)
     render_view_only: async function(frm) {
         const logframe_name = frm.doc.log_frame_name;
         try {
@@ -159,23 +161,19 @@ frappe.ui.form.on("TFD Main Proposal", {
                 method: "get_log_frame",
                 args: { log_frame_name: logframe_name.toString() }
             });
-            // Generate and inject the HTML tree structure
             const html_output = await buildLogframeTree(r.message || []);
             $(frm.fields_dict.indicators_and_activities_html.wrapper).html(html_output);
-        } catch (e) { 
-            console.error("Rendering Error:", e); 
-        }
+        } catch (e) { console.log(e); }
     },
 
-    // Data Population: Heavy processing (runs only on manual selection)
+    // دالة التعبئة (تعمل فقط عند الاختيار اليدوي)
     fetch_and_populate: async function(frm) {
         const logframe_name = frm.doc.log_frame_name;
         
-        // Show loading indicator in the UI
-        $(frm.fields_dict.indicators_and_activities_html.wrapper).html('<div class="text-muted">Fetching data...</div>');
+        // مؤشر تحميل
+        $(frm.fields_dict.indicators_and_activities_html.wrapper).html('<div class="text-muted">جاري جلب البيانات...</div>');
 
         try {
-            // Fetch Log Frame details from server
             const r = await frappe.call({
                 doc: frm.doc,
                 method: "get_log_frame",
@@ -184,36 +182,36 @@ frappe.ui.form.on("TFD Main Proposal", {
 
             const data = r.message || [];
             
-            // Build the visual tree
+            // 1. رسم الشجرة
             const html_output = await buildLogframeTree(data);
             $(frm.fields_dict.indicators_and_activities_html.wrapper).html(html_output);
 
-            // Populate Child Table: project_info
+            // 2. تعبئة جدول واحد فقط (project_info) لتخفيف الحمل
             frm.doc.project_info = [];
+            
             $.each(data, function(_i, e) {
-                if (!e.activity__name) return; // Skip rows without activities
+                if (!e.activity__name) return;
                 let row = frm.add_child("project_info");
                 row.project_name = e.project_name;
                 row.cost = e.cost;
                 row.activity__name = e.activity__name;
             });
+            
             frm.refresh_field("project_info");
 
-            // Fetch and set secondary link/objective data
+            // 3. جلب بيانات الهدف
             const resp = await frappe.call({
                 doc: frm.doc,
                 method: "get_logframe_link",
                 args: { logframe_name }
             });
             const d = resp.message || {};
-            
-            // Map returned values to form fields
             frm.set_value("overall_project_objective", d.indicator_name1 || "");
             if (frm.fields_dict.order_index) frm.set_value("order_index", d.order_index || 0);
             if (frm.fields_dict.type) frm.set_value("type", d.type || "");
 
         } catch (err) {
-            frappe.msgprint("Error occurred while populating data.");
+            frappe.msgprint("حدث خطأ في جلب البيانات");
             console.error(err);
         }
     }

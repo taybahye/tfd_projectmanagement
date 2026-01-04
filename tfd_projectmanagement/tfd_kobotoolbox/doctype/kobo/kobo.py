@@ -1,9 +1,6 @@
 # Copyright (c) 2025, Amd Oudah Prosite  and contributors
 # For license information, please see license.txt
 
-
-# # ---------------iهذا الاخر مع ال checkbox ----------------------------------------------------------------.............>>>>>>>>>>>>>>>>>>
-
 import frappe
 from frappe import _, msgprint
 import requests
@@ -22,6 +19,7 @@ FORM_DETAILS_URL = "https://kf.kobotoolbox.org/api/v2/assets/"
 
 class kobo(Document):
 
+    # Fetches all Kobo forms and imports their data into ERPNext
     @frappe.whitelist()
     def get_kobo_all_data(self):
         try:
@@ -43,6 +41,8 @@ class kobo(Document):
             
         # self.import_kobo_form_data("aCBiRZuZjGSsaMpySR78v6", "CLTS_Questionnaire")
 
+
+    # Fetches Kobo forms list and processes each form metadata
     @frappe.whitelist()
     def get_kobo_forms(self):
         try:
@@ -61,6 +61,8 @@ class kobo(Document):
             frappe.log_error(frappe.get_traceback(), "Kobo: Error in get_kobo_forms")
             frappe.throw("Failed to fetch forms from Kobo")
 
+
+    # Retrieves a single Kobo form structure and creates a Doctype if it has data
     @frappe.whitelist()
     def get_kobo_form_data(self, uid, name):
         try:
@@ -86,6 +88,8 @@ class kobo(Document):
             frappe.log_error(frappe.get_traceback(), "Kobo: Error in get_kobo_form_data")
             frappe.throw("Failed to fetch form data from Kobo")
 
+
+    # Maps a Kobo question to one or more ERPNext DocType fields
     def map_question_to_field(self, q, choices_map=None, index=0):
         qtype = q.get("type", "")
         
@@ -167,6 +171,8 @@ class kobo(Document):
 
         return fields
 
+  
+    # Creates or updates an ERPNext DocType based on a Kobo form structure
     @frappe.whitelist()
     def create_doctype_from_kobo(self, uid, name, doctype_name=None):
         try:
@@ -248,6 +254,8 @@ class kobo(Document):
             frappe.log_error(frappe.get_traceback(), "Kobo: Error in create_doctype_from_kobo")
             frappe.throw("Failed to create or update Doctype from Kobo form.")
             
+     
+    # Validates that all generated fieldnames are unique
     def validate_fieldnames(self, fields):
         """Prevent duplicate fieldnames"""
         seen = set()
@@ -257,6 +265,7 @@ class kobo(Document):
             seen.add(field['fieldname'])
     
             
+    # Safely extracts a readable label from Kobo label formats
     def _safe_label(self, label):
         if isinstance(label, list):
             for l in label:
@@ -265,6 +274,8 @@ class kobo(Document):
             return ""
         return str(label or "")
 
+   
+    # Sanitizes a string to be a valid ERPNext DocType name
     def _sanitize_doctype_name(self, name):
         import re
         name = re.sub(r"[^\w\s\-]", "", name)
@@ -273,6 +284,8 @@ class kobo(Document):
             name = "Doc_" + name
         return name
 
+
+    # Sanitizes and normalizes field names to be valid ERPNext fieldnames
     def _sanitize_fieldname(self, name):
         import re
         # Clean special characters
@@ -293,6 +306,8 @@ class kobo(Document):
             
         # return name
 
+
+    # Imports Kobo form submissions into the generated ERPNext DocType
     @frappe.whitelist()
     def import_kobo_form_data(self, uid, doctype_name):
         try:
@@ -369,14 +384,14 @@ class kobo(Document):
             
             
     
-    
-    
+    # Checks whether a Kobo form has no questions and no submissions
     def is_form_empty(self, survey, submissions):
         """تحقق إذا كانت الاستمارة فارغة"""
         return not survey and not submissions
     
     
     
+    # Creates a placeholder record when no submissions are available
     def create_sample_entry(self, doctype_name):
         """إنشاء إدخال نموذجي عند عدم وجود بيانات"""
         sample_data = {
@@ -389,7 +404,8 @@ class kobo(Document):
 			**sample_data
 		}).insert(ignore_permissions=True)
         
-        
+    
+    # Retrieves form submissions using Kobo API v2 with fallback to v1
     def get_submissions(self, uid):
         """Fetch submissions for a form using KoBoToolbox API v2 or fallback to v1"""
         submissions = []
@@ -418,8 +434,4 @@ class kobo(Document):
                             submissions = response_v1.json()
         return submissions
     
-    
-    
-# # -------------------------------------------------------------------------------.............>>>>>>>>>>>>>>>>>>
-# # ---------------iهذا الاخر مع ال checkbox ----------------------------------------------------------------.............>>>>>>>>>>>>>>>>>>
 

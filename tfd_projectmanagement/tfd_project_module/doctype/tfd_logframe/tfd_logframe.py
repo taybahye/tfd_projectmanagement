@@ -4,33 +4,32 @@ from frappe.utils.nestedset import NestedSet
 class TFDLogframe(NestedSet):
 
     def validate(self):
-        # Calculate achievement percentage based on target and achievement fields
         if self.target and self.target != 0:
             self.achievement_percentage = round((self.acheivement / self.target) * 100, 2)
         else:
             self.achievement_percentage = 0
 
     def before_insert(self):
-        #  1) If the type is 'Goal', it must not have a parent (it acts as a ROOT node only)
+        # ⭐ 1) إذا النوع Goal → لازم يكون بدون parent (ROOT منطقي فقط)
         if self.type == "Goal":
             self.parent_tfd_logframe = None
 
-        #  2) Determine the correct sequence/order index if not provided
+        # ⭐ 2) تحديد رقم الترتيب الصحيح
         if not self.order_index:
             self.order_index = self.get_next_order_index()
 
-        #  3) Generate the final record name (dynamically based on parent and type)
+        # ⭐ 3) توليد الاسم النهائي (يعتمد على parent "ظاهريًا")
         self.set_safe_autoname()
 
     def get_next_order_index(self):
-        """Returns the next sequence number within the same parent node"""
+        """يعطي رقم ترتيب داخل نفس الـ parent"""
         filters = {}
 
-        # If it has a parent -> get the maximum order_index within that parent
+        # إذا له parent → نجيب آخر order_index داخل نفس parent
         if self.parent_tfd_logframe:
             filters["parent_tfd_logframe"] = self.parent_tfd_logframe
         else:
-            # For ROOT nodes: Applies to 'Goal' type only
+            # ROOT nodes: Goal فقط
             filters["parent_tfd_logframe"] = ["is", "not set"]
 
         last_index = frappe.db.get_value(
@@ -43,10 +42,10 @@ class TFDLogframe(NestedSet):
 
     def set_safe_autoname(self):
         """
-        Final Name Format:
-        {parent_name or ROOT}-{type}-{order_index}
+        الاسم النهائي:
+        {parent أو ROOT}-{type}-{order_index}
         """
-        # Logic for naming prefix (uses ROOT for top-level nodes)
+        # الاسم فقط—not actual parent field
         parent_name = self.parent_tfd_logframe if self.parent_tfd_logframe else "ROOT"
 
         name_parts = [
@@ -57,7 +56,7 @@ class TFDLogframe(NestedSet):
 
         full_name = "-".join(name_parts)
 
-        # Character length protection (Max 140 chars)
+        # حماية الطول
         if len(full_name) > 140:
             full_name = full_name[:137] + "..."
 
@@ -66,19 +65,19 @@ class TFDLogframe(NestedSet):
 
 # ==========================================
 # API for Tree View (Updated & Fixed)
-# ==========================================
+# =================+ww=========================
 @frappe.whitelist()
 def get_logframe_children(doctype, parent=None, is_root=False, **kwargs):
     
-    # Define filters based on whether a parent node is selected
+    # تحديد الفلتر
     filters = {}
     if parent:
         filters["parent_tfd_logframe"] = parent
     else:
         filters["parent_tfd_logframe"] = ["is", "not set"]
 
-    # Fetch records
-    # 'is_group as expandable' is added to show the expansion arrow next to folders
+    # جلب البيانات
+    # قمت بإضافة "is_group as expandable" ليظهر سهم التوسيع بجانب المجلدات
     children = frappe.get_all(
         "TFD Logframe",
         filters=filters,
@@ -87,3 +86,34 @@ def get_logframe_children(doctype, parent=None, is_root=False, **kwargs):
     )
 
     return children
+
+# @frappe.whitelist()
+# def get_logframe_children(doctype, parent=None, **kwargs):
+
+#     children = frappe.get_all(
+#         "TFD Logframe",
+#         filters={"parent_logframe": parent} if parent else {},
+#         fields=["name as value", "type", "is_group"]
+#     )
+
+#     # ⭐ ترتيب صارم
+#     priority = {
+#         "Ind": 1,
+#         "Outcome": 2,
+#         "Output": 3,
+#         "Activity": 4,
+#         "Goal": 5
+#     }
+
+#     def sort_key(row):
+#         p = priority.get(row.type, 99)
+
+#         import re
+#         m = re.search(r"\d+", row.value or "")
+#         num = int(m.group()) if m else 0
+
+#         return (p, num)
+
+#     children.sort(key=sort_key)
+
+#     return children

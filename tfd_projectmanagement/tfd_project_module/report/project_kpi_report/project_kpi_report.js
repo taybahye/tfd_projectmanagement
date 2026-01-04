@@ -1,6 +1,4 @@
-// Copyright (c) 2025, Amd Oudah Prosite  and contributors
-// For license information, please see license.txt
-
+// Defines the Project KPI report filters for the Frappe UI
 frappe.query_reports["Project KPI Report"] = {
 	filters: [
 		{
@@ -20,4 +18,5 @@ frappe.query_reports["Project KPI Report"] = {
 			"fieldtype": "Date",
 		},
 	],
+
 };
