@@ -3,15 +3,15 @@ from frappe.model.document import Document
 
 class TFDMainProposal(Document):
 
-    # هذه الدالة تعمل عند الحفظ فقط (في السيرفر) فلا تسبب تعليق المتصفح
+    # This function runs only when saving (on the server), so it does not cause the browser to freeze
     def before_save(self):
-        # 1. جلب البيانات من الجدول الأول
+        # 1. Get data from the first child table (Project Info)
         info_data = self.get("project_info") or []
         
-        # 2. تنظيف الجدول الثاني
+        # 2. Clear the second child table (Project Plan)
         self.set("project_plan", [])
 
-        # 3. نقل البيانات
+        # 3. Transfer data: Copy specific fields from Info to Plan
         for row in info_data:
             self.append("project_plan", {
                 "project_name": row.project_name,
@@ -19,10 +19,12 @@ class TFDMainProposal(Document):
             })
 
     @frappe.whitelist()
+    # Fetches all employee/staffing details linked to a specific staffing plan
     def get_staffing(self, staffing_plan):
         return frappe.db.sql("SELECT * FROM `tabStaffing Plan Detail` WHERE parent = %s", (staffing_plan,), as_dict=True)
 
     @frappe.whitelist()
+    # Fetches all Logframe data, including linked Project Information and Indicators
     def get_log_frame(self, log_frame_name):
         return frappe.db.sql("""
             SELECT
@@ -41,6 +43,7 @@ class TFDMainProposal(Document):
         """, (log_frame_name,), as_dict=True)
 
     @frappe.whitelist()
+    # Gets a unique list of activities and their indicators for a specific logframe
     def get_indicators(self, logframe_name):
         # Helper logic kept as per previous requests
         indicator_list = frappe.db.sql("SELECT DISTINCT indicator_name FROM `tabTFD Logframe` WHERE logframe_name = %s ORDER BY indicator_name", (logframe_name,), as_dict=True)
@@ -52,6 +55,7 @@ class TFDMainProposal(Document):
         return [{'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set]
 
     @frappe.whitelist()
+    # Finds the main Goal or Root node of a logframe and returns its details
     def get_logframe_link(self, logframe_name):
         goal = frappe.db.get_value("TFD Logframe", {"logframe_name": logframe_name, "type": "Goal"}, ["indicator_name1", "order_index", "type"], as_dict=True)
         if not goal:

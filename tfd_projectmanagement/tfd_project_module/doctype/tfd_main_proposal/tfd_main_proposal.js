@@ -1,7 +1,10 @@
+/** * buildLogframeTree: Converts a flat array of data into a hierarchical HTML tree.
+ * It handles parent-child relationships, custom sorting, and specific numbering labels.
+ */
 async function buildLogframeTree(data) {
     const nodes = {};
     
-    // 1. Prepare Data
+    // 1. Prepare Data: Cleans type names and assigns a default order index.
     data.forEach(it => {
         const type = (it.type || "").trim();
         nodes[it.name] = { 
@@ -11,19 +14,20 @@ async function buildLogframeTree(data) {
         };
     });
 
-    // 2. Map Parents to Children
+    // 2. Map Parents to Children: Groups child record names under their parent record name.
     const childrenMap = {};
     data.forEach(it => {
         const parent = it.parent_tfd_logframe || it.parent || null;
         if (parent) (childrenMap[parent] ||= []).push(it.name);
     });
 
+    // Helper: Extracts numbers from a string (e.g., "Goal.01" -> 1) for sorting.
     function getNumericCode(name) { 
         const match = name ? name.match(/(\d+)/) : null; 
         return match ? parseInt(match[1], 10) : 0; 
     }
 
-    // 3. Sorting Function
+    // 3. Sorting Function: Returns children sorted by type priority, then order index, then name.
     const getOrderedChildren = (parentName) => {
         const all = childrenMap[parentName] || [];
         
@@ -33,64 +37,57 @@ async function buildLogframeTree(data) {
             const nodeA = nodes[a];
             const nodeB = nodes[b];
             
-            // 1. Sort by Type
+            // Sort by Type (e.g., Indicators first, then Outcomes)
             const weightA = typePriority[nodeA.type] || 99;
             const weightB = typePriority[nodeB.type] || 99;
             if (weightA !== weightB) return weightA - weightB;
 
-            // 2. Sort by Order Index
+            // Sort by manual Order Index
             const orderDiff = (nodeA.order_index || 0) - (nodeB.order_index || 0);
             if (orderDiff !== 0) return orderDiff;
             
-            // 3. Sort by Name
+            // Sort by Name (numeric comparison)
             return getNumericCode(nodeA.name) - getNumericCode(nodeB.name);
         });
     };
 
-    // 4. Build HTML
+    // 4. Build HTML: Recursively generates <ul> and <li> tags for the tree view.
     function buildHTML(nodeName, numberingPath) {
         const node = nodes[nodeName];
         const type = node.type;
-        
         const id = node.name;
 
-        // 2. Get the Text Description
+        // Get the Text Description
         let description = node.indicator_name1 || node.indicator_name || node.title || ""; 
 
-        // *** THE FIX *** // Remove patterns like "Goal.00035-", "Ind.00216-", "Outcome.00167-" from the start.
-        // Regex explanation:
-        // ^          : Start of the string
-        // [A-Za-z]+  : Any word (Goal, Ind, Outcome...)
-        // \.         : A dot
-        // \d+        : Numbers
-        // \s*-\s* : A hyphen (with optional spaces around it)
+        // Fix: Clean up prefixes from description using Regular Expression.
         if (description) {
             description = description.replace(/^[A-Za-z]+\.\d+\s*-\s*/, "");
         }
 
-        // Colors
+        // Assign colors based on node type
         const colorMap = { Goal: "#0d6efd", Outcome: "#198754", Output: "#0dcaf0", Ind: "#ffc107" };
         const color = colorMap[type] || "#000";
         
-        // --- Numbering Logic ---
+        // Define numbering logic (e.g., Goal.1, Outcome.1.1)
         const parentId = node.parent_tfd_logframe || node.parent;
         const parentNode = parentId ? nodes[parentId] : null;
         const parentType = parentNode ? parentNode.type : "";
 
         let label = `${type}.${numberingPath.join(".")}`;
 
+        // Special case: Indicators under a Goal
         if (type === "Ind" && parentType === "Goal") {
             const myIndex = numberingPath[numberingPath.length - 1];
             label = `Ind.G.${myIndex}`;
         }
-        // -----------------------
 
-        // Use the cleaned description. If empty, fallback to ID.
         let fullText = description ? description : id;
 
         let html = `<li style="margin-bottom:5px;">
                         <strong style="color:${color}">${label}</strong>: ${fullText}`;
         
+        // Find and process children nodes
         const kids = getOrderedChildren(nodeName);
         if (kids.length) {
             html += "<ul style='margin-top:5px;'>";
@@ -108,10 +105,10 @@ async function buildLogframeTree(data) {
         return html;
     }
 
-    // 5. Build Root
+    // 5. Build Root: Starts the process from top-level nodes (nodes with no parents).
     const roots = data.filter(it => !it.parent_tfd_logframe)
-                      .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
-                      .map(it => it.name);
+                    .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
+                    .map(it => it.name);
     
     let html = "<ul>";
     const rootCounts = {};
@@ -125,25 +122,26 @@ async function buildLogframeTree(data) {
     html += "</ul>";
     return html;
 }
+
 // ============================================================================
-//             *** منطق النموذج (تم حل مشكلة التعليق نهائياً) ***
+// *** Form Logic (Fixed the freezing/hanging issue permanently) ***
 // ============================================================================
 
 frappe.ui.form.on("TFD Main Proposal", {
     
-    // 1️⃣ عند التحميل (Refresh): ممنوع لمس الجداول! عرض فقط.
+    // 1️⃣ On Refresh: Do not touch tables! Just render the view tree.
     refresh: function(frm) {
         if (frm.doc.log_frame_name) {
             frm.trigger('render_view_only'); 
         }
     },
 
-    // 2️⃣ عند تغيير الاسم يدوياً: هنا فقط نملأ الجداول
+    // 2️⃣ On manual Name change: Only here we fill the actual tables.
     log_frame_name: function(frm) {
         if (frm.doc.log_frame_name) {
             frm.trigger('fetch_and_populate');
         } else {
-            // تنظيف إذا تم حذف الاسم
+            // Cleanup if name is deleted
             $(frm.fields_dict.indicators_and_activities_html.wrapper).html("");
             frm.doc.project_info = [];
             frm.doc.project_plan = [];
@@ -152,7 +150,7 @@ frappe.ui.form.on("TFD Main Proposal", {
         }
     },
 
-    // دالة العرض فقط (خفيفة جداً)
+    // render_view_only: Very lightweight display function.
     render_view_only: async function(frm) {
         const logframe_name = frm.doc.log_frame_name;
         try {
@@ -166,12 +164,12 @@ frappe.ui.form.on("TFD Main Proposal", {
         } catch (e) { console.log(e); }
     },
 
-    // دالة التعبئة (تعمل فقط عند الاختيار اليدوي)
+    // fetch_and_populate: Data fetching function (runs only on manual selection).
     fetch_and_populate: async function(frm) {
         const logframe_name = frm.doc.log_frame_name;
         
-        // مؤشر تحميل
-        $(frm.fields_dict.indicators_and_activities_html.wrapper).html('<div class="text-muted">جاري جلب البيانات...</div>');
+        // Loading indicator
+        $(frm.fields_dict.indicators_and_activities_html.wrapper).html('<div class="text-muted">Fetching data...</div>');
 
         try {
             const r = await frappe.call({
@@ -182,11 +180,11 @@ frappe.ui.form.on("TFD Main Proposal", {
 
             const data = r.message || [];
             
-            // 1. رسم الشجرة
+            // 1. Draw the Tree
             const html_output = await buildLogframeTree(data);
             $(frm.fields_dict.indicators_and_activities_html.wrapper).html(html_output);
 
-            // 2. تعبئة جدول واحد فقط (project_info) لتخفيف الحمل
+            // 2. Populate only one table (project_info) to reduce load
             frm.doc.project_info = [];
             
             $.each(data, function(_i, e) {
@@ -199,7 +197,7 @@ frappe.ui.form.on("TFD Main Proposal", {
             
             frm.refresh_field("project_info");
 
-            // 3. جلب بيانات الهدف
+            // 3. Fetch objective data
             const resp = await frappe.call({
                 doc: frm.doc,
                 method: "get_logframe_link",
@@ -211,7 +209,7 @@ frappe.ui.form.on("TFD Main Proposal", {
             if (frm.fields_dict.type) frm.set_value("type", d.type || "");
 
         } catch (err) {
-            frappe.msgprint("حدث خطأ في جلب البيانات");
+            frappe.msgprint("An error occurred while fetching data");
             console.error(err);
         }
     }
