@@ -1,6 +1,7 @@
 import frappe
 from frappe.utils.nestedset import NestedSet
 
+
 class TFDLogframe(NestedSet):
 
     # Checks data before saving to calculate the achievement percentage
@@ -89,35 +90,41 @@ def get_logframe_children(doctype, parent=None, is_root=False, **kwargs):
 
     return children
 
-# Note: The code below was commented out in your original file.
-# It contains logic for strict sorting by type priority.
-# @frappe.whitelist()
-# def get_logframe_children(doctype, parent=None, **kwargs):
 
-#     children = frappe.get_all(
-#         "TFD Logframe",
-#         filters={"parent_logframe": parent} if parent else {},
-#         fields=["name as value", "type", "is_group"]
-#     )
 
-#     # Strict sorting priority
-#     priority = {
-#         "Ind": 1,
-#         "Outcome": 2,
-#         "Output": 3,
-#         "Activity": 4,
-#         "Goal": 5
-#     }
+@frappe.whitelist()
+def add_node(**args):  # إضافة النجمتين هنا ضروري جداً
+    # الآن args ستعمل كقاموس يحتوي على (logframe_name, order_index, parent, إلخ)
+    
+    # 1. جلب بيانات الأب للحصول على الترتيب السابق
+    parent_name = args.get("parent")
+    parent_main_order = ""
+    
+    # التأكد أن الأب ليس هو اسم الـ Doctype نفسه (حالة الجذر)
+    if parent_name and parent_name != "TFD Logframe":
+        parent_main_order = frappe.db.get_value("TFD Logframe", parent_name, "main_order") or ""
 
-#     def sort_key(row):
-#         p = priority.get(row.type, 99)
+    # 2. حساب الترتيب الجديد
+    order_index = args.get("order_index") or 0
+    if parent_main_order:
+        final_main_order = f"{parent_main_order}.{order_index}"
+    else:
+        final_main_order = str(order_index)
 
-#         import re
-#         m = re.search(r"\d+", row.value or "")
-#         num = int(m.group()) if m else 0
-
-#         return (p, num)
-
-#     children.sort(key=sort_key)
-
-#     return children
+    # 3. إنشاء السجل الجديد
+    doc = frappe.get_doc({
+        "doctype": "TFD Logframe",
+        "logframe_name": args.get("logframe_name"),
+        "is_group": frappe.utils.cint(args.get("is_group")), # تحويل للقيمة الرقمية 0 أو 1
+        "parent_tfd_logframe": parent_name if parent_name != "TFD Logframe" else None,
+        "indicator_name": args.get("indicator_name"), # تأكد من إضافة هذا السطر
+        "order_index": order_index,
+        "main_order": final_main_order,
+        "order_parent": parent_main_order,
+        # أضف أي حقول أخرى مطلوبة هنا مثل indicator_name
+    })
+    
+    doc.insert()
+    
+    # فرابي يتوقع إرجاع اسم السجل الجديد لتحديث الشجرة
+    return doc.name

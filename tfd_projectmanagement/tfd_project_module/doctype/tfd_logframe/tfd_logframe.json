@@ -232,7 +232,8 @@
   {
    "fieldname": "order_parent",
    "fieldtype": "Data",
-   "label": "Order Parent"
+   "label": "Order Parent",
+   "mandatory_depends_on": "eval:doc.type != 'Goal'"
   },
   {
    "fieldname": "main_order",
@@ -279,7 +280,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-12-17 10:43:35.587553",
+ "modified": "2026-02-04 11:47:18.960418",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
@@ -287,6 +288,7 @@
  "nsm_parent_field": "parent_tfd_logframe",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
