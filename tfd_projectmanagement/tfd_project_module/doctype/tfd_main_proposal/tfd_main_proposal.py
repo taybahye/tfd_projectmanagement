@@ -42,17 +42,17 @@ class TFDMainProposal(Document):
             ORDER BY ind.creation ASC
         """, (log_frame_name,), as_dict=True)
 
-    @frappe.whitelist()
-    # Gets a unique list of activities and their indicators for a specific logframe
-    def get_indicators(self, logframe_name):
-        # Helper logic kept as per previous requests
-        indicator_list = frappe.db.sql("SELECT DISTINCT indicator_name FROM `tabTFD Logframe` WHERE logframe_name = %s ORDER BY indicator_name", (logframe_name,), as_dict=True)
-        unique_activity_set = set()
-        for indicator in indicator_list:
-            activities = frappe.db.sql("SELECT DISTINCT activity FROM `tabTFD Logframe Activities` WHERE parent IN (SELECT name FROM `tabTFD Logframe` WHERE logframe_name = %s AND indicator_name = %s)", (logframe_name, indicator['indicator_name']), as_dict=True)
-            for activity in activities:
-                unique_activity_set.add((activity['activity'], indicator['indicator_name']))
-        return [{'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set]
+    # @frappe.whitelist()
+    # # Gets a unique list of activities and their indicators for a specific logframe
+    # def get_indicators(self, logframe_name):
+    #     # Helper logic kept as per previous requests
+    #     indicator_list = frappe.db.sql("SELECT DISTINCT indicator_name FROM `tabTFD Logframe` WHERE logframe_name = %s ORDER BY indicator_name", (logframe_name,), as_dict=True)
+    #     unique_activity_set = set()
+    #     for indicator in indicator_list:
+    #         activities = frappe.db.sql("SELECT DISTINCT activity FROM `tabTFD Logframe Activities` WHERE parent IN (SELECT name FROM `tabTFD Logframe` WHERE logframe_name = %s AND indicator_name = %s)", (logframe_name, indicator['indicator_name']), as_dict=True)
+    #         for activity in activities:
+    #             unique_activity_set.add((activity['activity'], indicator['indicator_name']))
+    #     return [{'activity': activity, 'indicator': indicator} for activity, indicator in unique_activity_set]
 
     @frappe.whitelist()
     # Finds the main Goal or Root node of a logframe and returns its details
