@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"dBlGN0dl30\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Project Management</span>\",\"col\":12}},{\"id\":\"eWbVz9yHVY\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"EqP1QY00-y\",\"type\":\"card\",\"data\":{\"card_name\":\"Design\",\"col\":4}},{\"id\":\"qqvaFVK3CP\",\"type\":\"card\",\"data\":{\"card_name\":\"Implementation \",\"col\":4}},{\"id\":\"OBqastyNxb\",\"type\":\"card\",\"data\":{\"card_name\":\"Complaints\",\"col\":4}},{\"id\":\"N2pLXEXUlB\",\"type\":\"card\",\"data\":{\"card_name\":\"Collected Data\",\"col\":4}},{\"id\":\"rIWG-FWgk0\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"dBlGN0dl30\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Project Management</span>\",\"col\":12}},{\"id\":\"eWbVz9yHVY\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"EqP1QY00-y\",\"type\":\"card\",\"data\":{\"card_name\":\"Design\",\"col\":4}},{\"id\":\"qqvaFVK3CP\",\"type\":\"card\",\"data\":{\"card_name\":\"Implementation \",\"col\":4}},{\"id\":\"OBqastyNxb\",\"type\":\"card\",\"data\":{\"card_name\":\"Complaints\",\"col\":4}},{\"id\":\"N2pLXEXUlB\",\"type\":\"card\",\"data\":{\"card_name\":\"Data Collection\",\"col\":4}},{\"id\":\"rIWG-FWgk0\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-06-23 01:38:10.580202",
  "custom_blocks": [],
  "docstatus": 0,
@@ -11,37 +11,8 @@
  "idx": 3,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "Project Management",
+ "label": "TFD Project Managements",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Collected Data",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Indicator Collected Data",
-   "link_count": 0,
-   "link_to": "Indicator Collected Data",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Project KPI Report",
-   "link_count": 0,
-   "link_to": "Project KPI Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -291,6 +262,35 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Data Collection",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Indicator Collected Data",
+   "link_count": 0,
+   "link_to": "Indicator Collected Data",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project KPI Report",
+   "link_count": 0,
+   "link_to": "Project KPI Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Design",
    "link_count": 5,
    "link_type": "DocType",
@@ -320,7 +320,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Log frame",
+   "label": "TFD Logframe",
    "link_count": 0,
    "link_to": "TFD Logframe",
    "link_type": "DocType",
@@ -330,7 +330,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Proposal",
+   "label": "TFD Main Proposal",
    "link_count": 0,
    "link_to": "TFD Main Proposal",
    "link_type": "DocType",
@@ -348,7 +348,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-18 12:39:52.410214",
+ "modified": "2026-04-18 20:09:11.736259",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Project Managements",
@@ -367,5 +367,5 @@
  ],
  "sequence_id": 69.0,
  "shortcuts": [],
- "title": "Project Management"
+ "title": "TFD Project Managements"
 }
