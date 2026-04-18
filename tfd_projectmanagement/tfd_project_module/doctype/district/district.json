@@ -1,22 +1,21 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{code}-{government_ar}-{government_en}",
- "creation": "2024-10-21 10:57:12.523651",
+ "autoname": "format:{directorate_code}-{directorate_ar}-{ directorate_en}",
+ "creation": "2024-10-21 23:46:54.007358",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "code",
-  "compnay",
-  "government_ar",
-  "government_en",
+  "government",
+  "directorate_code",
+  "directorate_ar",
+  "directorate_en",
   "map_image",
   "x",
   "y",
   "population",
   "column_break_edxh",
   "geolocation_ibjd",
-  "returnees",
   "female_population",
   "male_population"
  ],
@@ -37,6 +36,11 @@
    "label": "Y"
   },
   {
+   "fieldname": "population",
+   "fieldtype": "Int",
+   "label": "Population"
+  },
+  {
    "fieldname": "column_break_edxh",
    "fieldtype": "Column Break"
   },
@@ -55,51 +59,42 @@
    "label": "Male Population"
   },
   {
-   "fieldname": "population",
-   "fieldtype": "Int",
-   "label": "Population"
-  },
-  {
-   "fieldname": "returnees",
-   "fieldtype": "Int",
-   "label": "returnees"
-  },
-  {
-   "fieldname": "code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "\u0643\u0648\u062f \u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629",
-   "reqd": 1
-  },
-  {
-   "fieldname": "government_ar",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629 \u0628\u0627\u0644\u0639\u0631\u0628\u064a",
-   "reqd": 1
-  },
-  {
-   "fieldname": "government_en",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629 \u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a ",
-   "reqd": 1
-  },
-  {
-   "fieldname": "compnay",
+   "fieldname": "government",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Compny",
-   "options": "Company",
+   "label": " \u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629",
+   "options": "Governorate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "directorate_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0643\u0648\u062f \u0627\u0644\u0645\u062f\u064a\u0631\u064a\u0629",
+   "reqd": 1
+  },
+  {
+   "fieldname": "directorate_ar",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0627\u0644\u0645\u062f\u064a\u0631\u064a\u0629 \u0628\u0627\u0644\u0639\u0631\u0628\u064a",
+   "reqd": 1
+  },
+  {
+   "fieldname": "directorate_en",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0627\u0644\u0645\u062f\u064a\u0631\u064a\u0629 \u0628\u0627\u0644\u0627\u0646\u062c\u0644\u064a\u0632\u064a ",
    "reqd": 1
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 22:03:40.259343",
+ "modified": "2026-04-15 13:50:30.527342",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
- "name": "TFD Governments",
+ "name": "District",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
@@ -116,7 +111,8 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

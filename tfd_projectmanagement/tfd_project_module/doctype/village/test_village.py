@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestTFDDirectorate(FrappeTestCase):
+class TestVillage(FrappeTestCase):
 	pass

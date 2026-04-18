@@ -8,12 +8,10 @@
  "field_order": [
   "city",
   "column_break_jgmd",
-  "directorate",
-  "column_break_kfgn",
   "disticts",
-  "column_break_imay",
+  "column_break_kfgn",
   "code",
-  "column_break_zbvq",
+  "column_break_imay",
   "tfd_code",
   "section_break_wgqn",
   "\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629_\u0628\u0627\u0644\u0639\u0631\u0628\u064a",
@@ -29,19 +27,12 @@
    "fieldname": "city",
    "fieldtype": "Link",
    "label": "City",
-   "options": "TFD Governments",
+   "options": "Governorate",
    "reqd": 1
   },
   {
    "fieldname": "column_break_jgmd",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "directorate",
-   "fieldtype": "Link",
-   "label": "Directorate",
-   "options": "TFD Directorate",
-   "reqd": 1
   },
   {
    "fieldname": "column_break_imay",
@@ -52,10 +43,6 @@
    "fieldtype": "Data",
    "label": "Code",
    "reqd": 1
-  },
-  {
-   "fieldname": "column_break_zbvq",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "tfd_code",
@@ -116,16 +103,17 @@
    "fieldname": "disticts",
    "fieldtype": "Link",
    "label": "Disticts",
-   "options": "TFD Districts",
+   "options": "District",
    "reqd": 1
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 22:04:33.268003",
+ "modified": "2026-04-15 14:20:54.807361",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
- "name": "TFD Villages",
+ "name": "Village",
  "owner": "Administrator",
  "permissions": [
   {
@@ -142,6 +130,8 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

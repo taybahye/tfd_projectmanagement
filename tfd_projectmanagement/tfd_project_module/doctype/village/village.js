@@ -1,5 +1,5 @@
 
-frappe.ui.form.on('TFD Villages', {
+frappe.ui.form.on('Village', {
     // Triggered when the City field changes
     city: function(frm) {
         if (frm.doc.city) {

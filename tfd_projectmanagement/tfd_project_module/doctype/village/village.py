@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class TFDVillages(Document):
+class Village(Document):
 	pass

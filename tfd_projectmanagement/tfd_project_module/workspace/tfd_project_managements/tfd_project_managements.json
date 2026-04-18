@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"dBlGN0dl30\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD Project Managements</span>\",\"col\":12}},{\"id\":\"eWbVz9yHVY\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"EqP1QY00-y\",\"type\":\"card\",\"data\":{\"card_name\":\"Design\",\"col\":4}},{\"id\":\"qqvaFVK3CP\",\"type\":\"card\",\"data\":{\"card_name\":\"Implementation \",\"col\":4}},{\"id\":\"OBqastyNxb\",\"type\":\"card\",\"data\":{\"card_name\":\"Complaints\",\"col\":4}},{\"id\":\"N2pLXEXUlB\",\"type\":\"card\",\"data\":{\"card_name\":\"Collected Data\",\"col\":4}},{\"id\":\"rIWG-FWgk0\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"dBlGN0dl30\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TFD Project Managements</span>\",\"col\":12}},{\"id\":\"eWbVz9yHVY\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629\",\"col\":4}},{\"id\":\"EqP1QY00-y\",\"type\":\"card\",\"data\":{\"card_name\":\"Design\",\"col\":4}},{\"id\":\"qqvaFVK3CP\",\"type\":\"card\",\"data\":{\"card_name\":\"Implementation \",\"col\":4}},{\"id\":\"OBqastyNxb\",\"type\":\"card\",\"data\":{\"card_name\":\"Complaints\",\"col\":4}},{\"id\":\"N2pLXEXUlB\",\"type\":\"card\",\"data\":{\"card_name\":\"Collected Data\",\"col\":4}},{\"id\":\"rIWG-FWgk0\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-06-23 01:38:10.580202",
  "custom_blocks": [],
  "docstatus": 0,
@@ -8,90 +8,11 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "chart",
- "idx": 2,
+ "idx": 3,
  "indicator_color": "green",
  "is_hidden": 0,
  "label": "TFD Project Managements",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Master Data",
-   "link_count": 7,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Governments",
-   "link_count": 0,
-   "link_to": "TFD Governments",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Districts ",
-   "link_count": 0,
-   "link_to": "TFD Directorate",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Subdistrict",
-   "link_count": 0,
-   "link_to": "TFD Districts",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Villages",
-   "link_count": 0,
-   "link_to": "TFD Villages",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Clusters",
-   "link_count": 0,
-   "link_to": "TFD Cluster",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Donors",
-   "link_count": 0,
-   "link_to": "Donor",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Bank of Indicators",
-   "link_count": 0,
-   "link_to": "TFD Main Indicators",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -356,9 +277,78 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Governorate",
+   "link_count": 0,
+   "link_to": "Governorate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "District",
+   "link_count": 0,
+   "link_to": "District",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "TFD Villages",
+   "link_count": 0,
+   "link_to": "TFD Villages",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cluster",
+   "link_count": 0,
+   "link_to": "TFD Cluster",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Donor",
+   "link_count": 0,
+   "link_to": "Donor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank of Indicator",
+   "link_count": 0,
+   "link_to": "TFD Main Indicators",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-02-25 12:26:47.537177",
+ "modified": "2026-04-15 14:15:41.344148",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Project Managements",
