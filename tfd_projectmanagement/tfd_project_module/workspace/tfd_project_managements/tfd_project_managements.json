@@ -348,7 +348,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-18 20:09:11.736259",
+ "modified": "2026-04-19 12:16:01.572555",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Project Managements",
@@ -363,6 +363,9 @@
   },
   {
    "role": "Projects User"
+  },
+  {
+   "role": "M&E-EMP"
   }
  ],
  "sequence_id": 69.0,
