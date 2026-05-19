@@ -27,4 +27,6 @@ def get_logframe_indicators(logframe_name):
         LEFT JOIN `tabTFD Logframe` parent 
             ON parent.name = log.old_parent
         WHERE log.logframe_name = %s
+				AND log.type = 'Ind'
+
 	""", (logframe_name,), as_dict=True)

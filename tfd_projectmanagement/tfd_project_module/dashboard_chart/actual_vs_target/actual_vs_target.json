@@ -1,0 +1,43 @@
+{
+ "chart_name": "Actual vs Target",
+ "chart_type": "Report",
+ "creation": "2026-05-09 10:41:23.863080",
+ "currency": "USD",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "modified": "2026-05-09 11:01:34.177900",
+ "modified_by": "Administrator",
+ "module": "TFD Project Module",
+ "name": "Actual vs Target",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "report_name": "Project KPI Report",
+ "roles": [],
+ "show_values_over_chart": 0,
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "x_field": "logframe_indicator",
+ "y_axis": [
+  {
+   "color": "#94A3B8",
+   "y_field": "baseline"
+  },
+  {
+   "color": "#1E3A8A",
+   "y_field": "target"
+  },
+  {
+   "color": "#4CAF50",
+   "y_field": "collected_value"
+  }
+ ]
+}

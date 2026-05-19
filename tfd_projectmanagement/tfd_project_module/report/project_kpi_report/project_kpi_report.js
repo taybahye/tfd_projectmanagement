@@ -2,8 +2,8 @@
 frappe.query_reports["Project KPI Report"] = {
 	filters: [
 		{
-			"fieldname": "logframe",
-			"label": __("Logframe"),
+			"fieldname": "logframe_name",
+			"label": __("TFD Project"),
 			"fieldtype": "Link",
 			"options": "TFD Logframe Name",
 		},

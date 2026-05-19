@@ -11,6 +11,7 @@
   "collected_value",
   "comment",
   "logframe_indicator",
+  "indicator_type",
   "order_index",
   "baseline",
   "target",
@@ -68,13 +69,19 @@
    "fieldname": "target",
    "fieldtype": "Float",
    "label": "Target"
+  },
+  {
+   "fetch_from": "logframe_indicator.type",
+   "fieldname": "indicator_type",
+   "fieldtype": "Data",
+   "label": "Indicator Type"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-12-24 11:21:34.817508",
+ "modified": "2026-05-11 19:28:00.254936",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Collected Data Child",

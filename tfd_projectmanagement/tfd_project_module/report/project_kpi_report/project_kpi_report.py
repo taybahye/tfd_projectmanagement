@@ -19,13 +19,24 @@ def get_columns():
         {"label": _("Result"), "fieldname": "result", "fieldtype": "Data", "width": 220},
         {"label": _("Indicator Number"), "fieldname": "order_index", "fieldtype": "Data", "width": 120},
         {"label": _("Indicator"), "fieldname": "indicator_name_ar", "fieldtype": "Data", "width": 300},
+        {
+            "label": _("Logframe Indicator"),
+            "fieldname": "logframe_indicator",
+            "fieldtype": "Data",
+            "width": 300
+        },
         {"label": _("Type"), "fieldname": "type", "fieldtype": "Data", "width": 120},
-        {"label": _("Baseline"), "fieldname": "baseline", "fieldtype": "Float", "width": 140},
-        {"label": _("Target"), "fieldname": "target", "fieldtype": "Float", "width": 140},
+        {"label": _("Baseline"), "fieldname": "baseline", "fieldtype": "Number", "width": 140},
+        {
+            "label": _("Target"),
+            "fieldname": "target",
+            "fieldtype": "Data",
+            "width": 140
+        },
         {
             "label": _("Cumulative Achievement"),
             "fieldname": "collected_value",
-            "fieldtype": "Float",
+            "fieldtype": "Number",
             "width": 140
         },
         {
@@ -47,6 +58,9 @@ def get_data(filters):
             MIN(icd.from_date) AS from_date,
             MAX(icd.to_date) AS to_date,
             inch.indicator_name_ar,
+            inch.logframe_indicator,
+            inch.baseline,
+            inch.target,
             inch.type,
             inch.order_index,
             SUM(inch.collected_value) AS collected_value,

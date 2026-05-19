@@ -238,7 +238,8 @@
   {
    "fieldname": "main_order",
    "fieldtype": "Data",
-   "label": "main order "
+   "label": "main order ",
+   "read_only": 1
   },
   {
    "depends_on": "eval:doc.parent_type == 'Goal'&&doc.type=='Ind'",
@@ -280,7 +281,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2026-02-08 09:29:06.962004",
+ "modified": "2026-05-09 09:50:42.154897",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe",
