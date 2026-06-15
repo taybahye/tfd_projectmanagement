@@ -18,16 +18,18 @@ frappe.ui.form.on("Indicator Collected Data", {
                     frm.clear_table("collecting_data");
 
                     let currentIndicator = null;
-
+                    console.log(r.message);
                     r.message.forEach(row => {
                         if(currentIndicator && currentIndicator != row.name){
                             let emptyRow = frm.add_child("collecting_data");
-                            emptyRow.indicator_name_ar = ""; // صف فارغ
+                            emptyRow.indicator_name_ar = ""; 
+                            emptyRow.parent_type = "";
                             emptyRow.type = "";
                         }
 
                         let d = frm.add_child("collecting_data");
                         d.indicator_name_ar = row.indicator_name_ar;
+                        d.parent_type = row.parent_type;
                         d.type = row.type;
                         d.logframe_indicator = row.name;
                         d.order_index = row.main_order;

@@ -6,7 +6,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "type"
+  "type",
+  "is_group"
  ],
  "fields": [
   {
@@ -18,11 +19,18 @@
    "label": "Type",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-04 14:30:32.220921",
+ "modified": "2026-05-19 12:43:27.115078",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "Indicator Type",
@@ -43,6 +51,8 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

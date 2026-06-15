@@ -21,35 +21,94 @@ def get_indicator_dashboard(logframe_name=None, from_date=None, to_date=None):
     rows = frappe.db.sql(f"""
         SELECT
             child.logframe_indicator,
+            child.parent_type,
             child.type,
             child.indicator_name_ar,
-            SUM(child.collected_value) AS value
+            SUM(child.collected_value) AS value,
+            SUM(child.target) AS target
         FROM `tabIndicator Collected Data Child` child
         INNER JOIN `tabIndicator Collected Data` parent
             ON parent.name = child.parent
         WHERE {" AND ".join(conditions)}
             AND child.indicator_type = "Ind"
-        GROUP BY child.logframe_indicator, child.type, child.indicator_name_ar
-        ORDER BY child.logframe_indicator, child.type
+            AND IFNULL(child.collected_value, 0) > 0
+        GROUP BY
+            child.logframe_indicator,
+            child.parent_type,
+            child.type,
+            child.indicator_name_ar
+        ORDER BY
+            child.logframe_indicator,
+            child.parent_type,
+            child.type
     """, values, as_dict=True)
 
     indicators = {}
 
     for row in rows:
-        if row.logframe_indicator not in indicators:
-            indicators[row.logframe_indicator] = {
+        indicator_key = row.logframe_indicator
+        parent_type = row.parent_type or "Without Group"
+        value = row.value or 0
+        target = row.target or 0
+
+        if indicator_key not in indicators:
+            indicators[indicator_key] = {
                 "indicator": row.indicator_name_ar,
                 "total": 0,
+                "target": 0,
+                "parents": {}
+            }
+
+        if parent_type not in indicators[indicator_key]["parents"]:
+            indicators[indicator_key]["parents"][parent_type] = {
+                "total": 0,
+                "target": 0,
                 "items": []
             }
 
-        value = row.value or 0
-
-        indicators[row.logframe_indicator]["items"].append({
-            "type": row.type,
-            "value": value
+        indicators[indicator_key]["parents"][parent_type]["items"].append({
+            "type": row.type or "Unknown",
+            "value": value,
+            "target": target
         })
 
-        indicators[row.logframe_indicator]["total"] += value
+        indicators[indicator_key]["parents"][parent_type]["total"] += value
+        indicators[indicator_key]["parents"][parent_type]["target"] += target
 
-    return list(indicators.values())
+        indicators[indicator_key]["total"] += value
+        indicators[indicator_key]["target"] += target
+
+    result = []
+
+    for indicator in indicators.values():
+        indicator["achievement"] = (
+            (indicator["total"] / indicator["target"]) * 100
+            if indicator["target"] else 0
+        )
+
+        indicator["parents"] = [
+            {
+                "parent_type": parent_type,
+                "total": data["total"],
+                "target": data["target"],
+                "achievement": (
+                    (data["total"] / data["target"]) * 100
+                    if data["target"] else 0
+                ),
+                "items": [
+                    {
+                        **item,
+                        "achievement": (
+                            (item["value"] / item["target"]) * 100
+                            if item["target"] else 0
+                        )
+                    }
+                    for item in data["items"]
+                ]
+            }
+            for parent_type, data in indicator["parents"].items()
+        ]
+
+        result.append(indicator)
+
+    return result

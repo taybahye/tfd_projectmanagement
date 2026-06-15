@@ -6,6 +6,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "parent_type",
   "type",
   "year",
   "month",
@@ -76,7 +77,7 @@
   },
   {
    "fieldname": "total",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_preview": 1,
    "label": "Total (Target)"
@@ -89,19 +90,27 @@
    "fieldname": "baseline",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "in_preview": 1,
    "label": "Baseline"
+  },
+  {
+   "fieldname": "parent_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Parent Type",
+   "options": "Indicator Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-13 10:17:33.695419",
+ "modified": "2026-05-19 12:01:07.535705",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Logframe child",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

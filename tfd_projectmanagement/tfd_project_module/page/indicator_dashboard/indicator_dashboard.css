@@ -28,7 +28,7 @@
 }
 .indicator-dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
@@ -78,4 +78,29 @@
     padding: 40px;
     color: #94a3b8;
     font-size: 15px;
+}
+.indicator-chart {
+    min-height: 280px;
+}
+
+.parent-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.child-row {
+    padding-left: 24px;
+    color: #475569;
+}
+
+.indicator-card {
+    min-width: 0;
+    overflow: hidden;
 }

@@ -26,6 +26,9 @@ doctype_js = {"Project" : "override/js/activity.js",
 # ------------------
 
 # include js, css files in header of desk.html
+app_include_js = [
+    "https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"
+]
 # app_include_css = "/assets/tfd_projectmanagement/css/tfd_projectmanagement.css"
 # app_include_js = "/assets/tfd_projectmanagement/js/tfd_projectmanagement.js"
 

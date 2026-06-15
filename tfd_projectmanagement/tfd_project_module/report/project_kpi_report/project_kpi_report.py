@@ -25,6 +25,12 @@ def get_columns():
             "fieldtype": "Data",
             "width": 300
         },
+        {
+            "label": _("Parent Type"),
+            "fieldname": "parent_type",
+            "fieldtype": "Data",
+            "width": 180
+        },
         {"label": _("Type"), "fieldname": "type", "fieldtype": "Data", "width": 120},
         {"label": _("Baseline"), "fieldname": "baseline", "fieldtype": "Number", "width": 140},
         {
@@ -61,6 +67,7 @@ def get_data(filters):
             inch.logframe_indicator,
             inch.baseline,
             inch.target,
+            inch.parent_type,
             inch.type,
             inch.order_index,
             SUM(inch.collected_value) AS collected_value,
@@ -90,7 +97,12 @@ def get_data(filters):
 
     # التجميع حسب المؤشر فقط
     query += """
-        GROUP BY inch.indicator_name_ar, inch.type, inch.order_index, icd.logframe_name
+        GROUP BY
+            inch.indicator_name_ar,
+            inch.parent_type,
+            inch.type,
+            inch.order_index,
+            icd.logframe_name
         ORDER BY inch.order_index
     """
 

@@ -78,6 +78,23 @@ frappe.ui.form.on('TFD Logframe', {
                 frm.set_value('order_parent', r.message.main_order);
             }
         }
+    },
+    onload(frm) {
+        frm.fields_dict.disaggregation.grid.get_field("parent_type").get_query = function() {
+            return {
+                filters: {
+                    is_group: 1
+                }
+            };
+        };
+
+        frm.fields_dict.disaggregation.grid.get_field("type").get_query = function() {
+            return {
+                filters: {
+                    is_group: 0
+                }
+            };
+        };
     }
 });
 
