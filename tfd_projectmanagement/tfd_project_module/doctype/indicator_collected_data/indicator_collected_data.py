@@ -67,7 +67,7 @@ def get_logframe_indicators(logframe_name):
             log.indicator_name_en,
             log.indicator_name_ar,
             log.main_order,
-            CONCAT(parent.type, ':', parent.indicator_name_en, ':\n', IFNULL(parent.indicator_name_ar, '')) AS indicator_parent
+            parent.indicator_name_ar AS indicator_parent
         FROM `tabTFD Logframe` log
         LEFT JOIN `tabTFD Logframe child` logc 
             ON log.name = logc.parent

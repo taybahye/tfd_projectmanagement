@@ -68,7 +68,9 @@ def get_data(filters):
             inch.baseline,
             inch.target,
             inch.parent_type,
+            inch.indicator_parent,
             inch.type,
+            inch.indicator_type,
             inch.order_index,
             SUM(inch.collected_value) AS collected_value,
             CASE
@@ -77,10 +79,19 @@ def get_data(filters):
                 ELSE 0
             END AS achievement_percent,
             icd.logframe_name,
-            inch.comment
+            inch.comment,
+            parent.name AS section_name,
+            parent.type AS section_type,
+            parent.indicator_name_ar AS section_title,
+            parent.main_order AS section_order
         FROM `tabIndicator Collected Data` icd
         JOIN `tabIndicator Collected Data Child` inch
             ON inch.parent = icd.name
+        LEFT JOIN `tabTFD Logframe` ind
+            ON ind.name = inch.logframe_indicator
+
+        LEFT JOIN `tabTFD Logframe` parent
+            ON parent.name = ind.old_parent
         WHERE TRIM(IFNULL(inch.indicator_name_ar, '')) <> ''
     """
 
@@ -103,16 +114,27 @@ def get_data(filters):
 
     # التجميع حسب المؤشر فقط
     query += """
-       GROUP BY
-            inch.indicator_name_ar,
-            inch.logframe_indicator,
-            inch.baseline,
-            inch.target,
-            inch.parent_type,
-            inch.type,
-            inch.order_index,
-            icd.logframe_name
-        ORDER BY inch.order_index
-    """
+        GROUP BY
+                inch.indicator_name_ar,
+                inch.logframe_indicator,
+                inch.baseline,
+                inch.target,
+                inch.parent_type,
+                inch.indicator_type,
+                inch.type,
+                inch.indicator_parent,
+                inch.order_index,
+                icd.logframe_name,
+                inch.comment,
+                parent.name,
+                parent.type,
+                parent.indicator_name_ar,
+                parent.main_order
+            ORDER BY
+                parent.main_order,
+                inch.order_index,
+                inch.indicator_name_ar,
+                inch.type
+        """
 
     return frappe.db.sql(query, values, as_dict=True)

@@ -1,5 +1,3 @@
-{% var is_ar = frappe.boot.lang === "ar"; %}
-
 <style>
     .kpi-print {
         direction: rtl;
@@ -8,115 +6,190 @@
         color: #111;
     }
 
-    .kpi-table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-    }
-
     .kpi-table th,
     .kpi-table td {
-        border: 1px solid #cfcfcf;
-        padding: 8px;
-        text-align: center;
+        border: 1px solid #d1d1d1;
+        padding: 7px;
         vertical-align: middle;
+        text-align: center;
         word-wrap: break-word;
     }
 
-    .kpi-title,
+    .kpi-main-title,
     .kpi-section,
     .kpi-header th,
     .kpi-number {
-        background: #176b3a;
-        color: #fff;
+        background: #176b3a !important;
+        color: white !important;
         font-weight: bold;
     }
 
-    .kpi-title {
-        font-size: 15px;
-        text-align: right;
+    .kpi-main-title {
+        font-size: 16px;
+        text-align: center;
         padding: 12px;
     }
 
     .kpi-section {
         font-size: 14px;
-        text-align: right;
+        text-align: right !important;
+        padding: 10px;
     }
 
     .kpi-number {
-        width: 45px;
+        width: 50px;
+    }
+
+    .text-cell {
+        text-align: right !important;
     }
 
     .progress-wrap {
         width: 100%;
-        height: 7px;
+        height: 8px;
         background: #e5e5e5;
         border-radius: 5px;
         margin-top: 4px;
     }
 
     .progress-bar {
-        height: 7px;
+        height: 8px;
         background: #4c7df0;
         border-radius: 5px;
     }
-    
+
+    @media print {
+        .kpi-table tr {
+            page-break-inside: avoid;
+        }
+    }
+
+    .kpi-number,
+    .indicator-cell {
+        vertical-align: middle !important;
+    }
+
+    .kpi-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .indicator-cell {
+        text-align: center !important;
+        vertical-align: middle !important;
+        font-weight: 600;
+        line-height: 1.7;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .comment-cell {
+        text-align: center !important;
+        vertical-align: middle !important;
+        white-space: normal;
+        word-break: break-word;
+    }
 </style>
 
 <div class="kpi-print">
     <table class="kpi-table">
-        <tr>
-            <td colspan="7" class="kpi-title">
-                الهدف العام: تحسين الحالة الصحية للسكان وتقليل معدل الوفيات والمرضى من خلال نهج متكامل لتطوير الرعاية الصحية
+    <colgroup>
+        <col style="width: 7%">
+        <col style="width: 38%">
+        <col style="width: 10%">
+        <col style="width: 8%">
+        <col style="width: 14%">
+        <col style="width: 10%">
+        <col style="width: 25%">
+    </colgroup>
+      <tr>
+        <td colspan="7" class="kpi-main-title">
+            النتائج والمؤشرات
+        </td>
+        </tr>
+        {% var last_section = null; %}
+    {% var last_indicator = null; %}
+
+    {% for(var i = 0, l = data.length; i < l; i++) { %}
+        {% var row = data[i]; %}
+        {% var indicator_key = row.section_name + "::" + row.order_index + "::" + row.indicator_name_ar; %}
+        {% var next_row = data[i + 1]; %}
+        {% var prev_row = data[i - 1]; %}
+        {% var prev_key = prev_row ? (prev_row.section_name + "::" + prev_row.order_index + "::" + prev_row.indicator_name_ar) : null; %}
+        {% var is_first_indicator_row = indicator_key !== prev_key; %}
+
+        {% var rowspan = 1; %}
+        {% if(is_first_indicator_row) { %}
+            {% for(var j = i + 1; j < l; j++) { %}
+                {% var compare_row = data[j]; %}
+                {% var compare_key = compare_row.section_name + "::" + compare_row.order_index + "::" + compare_row.indicator_name_ar; %}
+                {% if(compare_key === indicator_key) { %}
+                    {% rowspan++; %}
+                {% } else { %}
+                    {% break; %}
+                {% } %}
+            {% } %}
+        {% } %}
+
+        {% if(row.section_name && row.section_name !== last_section) { %}
+           <td colspan="7" class="kpi-section">
+
+                {% if(row.section_type === "Goal") { %}
+                    الهدف العام: {%= row.section_title %}
+
+                {% } else if(row.section_type === "Outcome") { %}
+                    النتيجة {%= row.section_order %}: {%= row.section_title %}
+
+                {% } else if(row.section_type === "Output") { %}
+                    المخرج {%= row.section_order %}: {%= row.section_title %}
+
+                {% } else { %}
+                    {%= row.section_title || "" %}
+                {% } %}
+
             </td>
-        </tr>
 
-        <tr class="kpi-header">
-            <th>#</th>
-            <th>المؤشر</th>
-            <th>وحدة المؤشر</th>
-            <th>الهدف</th>
-            <th>الإنجاز التراكمي</th>
-            <th>نسبة الإنجاز</th>
-            <th>الملاحظات</th>
-        </tr>
+            <tr class="kpi-header">
+                <th>#</th>
+                <th>المؤشرات</th>
+                <th>وحدة المؤشر</th>
+                <th>الهدف</th>
+                <th>الإنجاز التراكمي</th>
+                <th>نسبة الإنجاز</th>
+                <th>الملاحظات</th>
+            </tr>
 
-        {% for(var i=0, l=data.length; i<l; i++) { %}
-            {% var row = data[i]; %}
+            {% last_section = row.section_name; %}
+        {% } %}
 
-            <tr>
-                <td class="kpi-number">
-                    {%= row.order_index || (i + 1) %}
+        <tr>
+            {% if(is_first_indicator_row) { %}
+                <td class="kpi-number" rowspan="{%= rowspan %}">
+                    {%= row.order_index || "" %}
                 </td>
 
-                <td style="text-align: right;">
+                <td class="text-cell indicator-cell" rowspan="{%= rowspan %}">
                     {%= row.indicator_name_ar || "" %}
                 </td>
+            {% } %}
 
-                <td>
-                    {%= row.type || "" %}
-                </td>
+            <td>{%= row.type || "" %}</td>
+            <td>{%= row.target || 0 %}</td>
+            <td>{%= row.collected_value || 0 %}</td>
 
-                <td>
-                    {%= row.target || 0 %}
-                </td>
+            <td>
+                <div>{%= flt(row.achievement_percent || 0, 2) %}%</div>
+                <div class="progress-wrap">
+                    <div class="progress-bar" style="width: {%= Math.min(row.achievement_percent || 0, 100) %}%;"></div>
+                </div>
+            </td>
 
-                <td>
-                    {%= row.collected_value || 0 %}
-                </td>
+            <td class="text-cell">
+                {%= row.comment || "" %}
+            </td>
+        </tr>
+    {% } %}
 
-                <td>
-                    {%= row.achievement_percent || 0 %}%
-
-                    <div class="progress-wrap">
-                        <div class="progress-bar" style="width: {%= row.achievement_percent || 0 %}%;"></div>
-                    </div>
-                </td>
-
-                <td style="text-align: right;">
-                    {%= row.comment || "" %}
-                </td>
-            </tr>
-        {% } %}
     </table>
 </div>
