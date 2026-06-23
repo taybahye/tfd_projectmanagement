@@ -1,0 +1,122 @@
+{% var is_ar = frappe.boot.lang === "ar"; %}
+
+<style>
+    .kpi-print {
+        direction: rtl;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        color: #111;
+    }
+
+    .kpi-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .kpi-table th,
+    .kpi-table td {
+        border: 1px solid #cfcfcf;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+        word-wrap: break-word;
+    }
+
+    .kpi-title,
+    .kpi-section,
+    .kpi-header th,
+    .kpi-number {
+        background: #176b3a;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .kpi-title {
+        font-size: 15px;
+        text-align: right;
+        padding: 12px;
+    }
+
+    .kpi-section {
+        font-size: 14px;
+        text-align: right;
+    }
+
+    .kpi-number {
+        width: 45px;
+    }
+
+    .progress-wrap {
+        width: 100%;
+        height: 7px;
+        background: #e5e5e5;
+        border-radius: 5px;
+        margin-top: 4px;
+    }
+
+    .progress-bar {
+        height: 7px;
+        background: #4c7df0;
+        border-radius: 5px;
+    }
+    
+</style>
+
+<div class="kpi-print">
+    <table class="kpi-table">
+        <tr>
+            <td colspan="7" class="kpi-title">
+                الهدف العام: تحسين الحالة الصحية للسكان وتقليل معدل الوفيات والمرضى من خلال نهج متكامل لتطوير الرعاية الصحية
+            </td>
+        </tr>
+
+        <tr class="kpi-header">
+            <th>#</th>
+            <th>المؤشر</th>
+            <th>وحدة المؤشر</th>
+            <th>الهدف</th>
+            <th>الإنجاز التراكمي</th>
+            <th>نسبة الإنجاز</th>
+            <th>الملاحظات</th>
+        </tr>
+
+        {% for(var i=0, l=data.length; i<l; i++) { %}
+            {% var row = data[i]; %}
+
+            <tr>
+                <td class="kpi-number">
+                    {%= row.order_index || (i + 1) %}
+                </td>
+
+                <td style="text-align: right;">
+                    {%= row.indicator_name_ar || "" %}
+                </td>
+
+                <td>
+                    {%= row.type || "" %}
+                </td>
+
+                <td>
+                    {%= row.target || 0 %}
+                </td>
+
+                <td>
+                    {%= row.collected_value || 0 %}
+                </td>
+
+                <td>
+                    {%= row.achievement_percent || 0 %}%
+
+                    <div class="progress-wrap">
+                        <div class="progress-bar" style="width: {%= row.achievement_percent || 0 %}%;"></div>
+                    </div>
+                </td>
+
+                <td style="text-align: right;">
+                    {%= row.comment || "" %}
+                </td>
+            </tr>
+        {% } %}
+    </table>
+</div>

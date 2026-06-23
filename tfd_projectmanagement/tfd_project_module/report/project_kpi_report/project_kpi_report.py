@@ -71,7 +71,13 @@ def get_data(filters):
             inch.type,
             inch.order_index,
             SUM(inch.collected_value) AS collected_value,
-            icd.logframe_name
+            CASE
+                WHEN CAST(inch.target AS DECIMAL(18,6)) > 0 THEN
+                    ROUND((SUM(inch.collected_value) / CAST(inch.target AS DECIMAL(18,6))) * 100, 2)
+                ELSE 0
+            END AS achievement_percent,
+            icd.logframe_name,
+            inch.comment
         FROM `tabIndicator Collected Data` icd
         JOIN `tabIndicator Collected Data Child` inch
             ON inch.parent = icd.name
@@ -97,8 +103,11 @@ def get_data(filters):
 
     # التجميع حسب المؤشر فقط
     query += """
-        GROUP BY
+       GROUP BY
             inch.indicator_name_ar,
+            inch.logframe_indicator,
+            inch.baseline,
+            inch.target,
             inch.parent_type,
             inch.type,
             inch.order_index,
