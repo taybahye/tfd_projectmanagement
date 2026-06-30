@@ -18,6 +18,7 @@
     .kpi-main-title,
     .kpi-section,
     .kpi-header th,
+    .project-info-table th,
     .kpi-number {
         background: #176b3a !important;
         color: white !important;
@@ -90,21 +91,103 @@
         white-space: normal;
         word-break: break-word;
     }
+
+    .project-info-title {
+        background: #176b3a;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 12px;
+        margin-bottom: 12px;
+        text-align: right;
+        border-radius: 4px;
+    }
+
+    .project-info-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 14px;
+        table-layout: fixed;
+    }
+
+    .project-info-table th {
+        width: 25%;
+        background: #176b3a;
+        color: white;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        text-align: center;
+    }
+
+    .project-info-table td {
+        width: 75%;
+        background: #f7f7f7;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        text-align: right;
+    }
 </style>
 
 <div class="kpi-print">
+    {% var info = data && data.length ? data[0] : {}; %}
+
+    <div class="project-info-title">
+        المعلومات العامة للمشروع
+    </div>
+
+    <table class="project-info-table">
+        <tr>
+            <th>اسم المشروع</th>
+            <td>{%= info.project_name || "" %}</td>
+        </tr>
+        <tr>
+            <th>رقم المشروع</th>
+            <td>{%= info.project_number || "" %}</td>
+        </tr>
+        <tr>
+            <th>المانح</th>
+            <td>{%= info.donor || "" %}</td>
+        </tr>
+        <tr>
+            <th>الشريك المنفذ</th>
+            <td>{%= info.company || "" %}</td>
+        </tr>
+        <tr>
+            <th>فترة التقرير</th>
+            <td>
+                من {%= info.report_from_date || "" %}
+                إلى {%= info.report_to_date || "" %}
+            </td>
+        </tr>
+        <tr>
+            <th>فترة المشروع</th>
+            <td>
+                من {%= info.project_start_date || "" %}
+                إلى {%= info.project_end_date || "" %}
+            </td>
+        </tr>
+        <tr>
+            <th>رقم التقرير</th>
+            <td>{%= info.report_number || "" %}</td>
+        </tr>
+        <tr>
+            <th>إعداد التقرير</th>
+            <td>{%= info.prepared_by || "" %}</td>
+        </tr>
+    </table>
     <table class="kpi-table">
     <colgroup>
         <col style="width: 7%">
-        <col style="width: 38%">
-        <col style="width: 10%">
+        <col style="width: 34%">
+        <col style="width: 8%">
+        <col style="width: 8%">
         <col style="width: 8%">
         <col style="width: 14%">
         <col style="width: 10%">
         <col style="width: 25%">
     </colgroup>
       <tr>
-        <td colspan="7" class="kpi-main-title">
+        <td colspan="8" class="kpi-main-title">
             النتائج والمؤشرات
         </td>
         </tr>
@@ -113,11 +196,30 @@
 
     {% for(var i = 0, l = data.length; i < l; i++) { %}
         {% var row = data[i]; %}
-        {% var indicator_key = row.section_name + "::" + row.order_index + "::" + row.indicator_name_ar; %}
         {% var next_row = data[i + 1]; %}
         {% var prev_row = data[i - 1]; %}
+
+        {% var indicator_key = row.section_name + "::" + row.order_index + "::" + row.indicator_name_ar; %}
         {% var prev_key = prev_row ? (prev_row.section_name + "::" + prev_row.order_index + "::" + prev_row.indicator_name_ar) : null; %}
         {% var is_first_indicator_row = indicator_key !== prev_key; %}
+
+        {% var parent_key = indicator_key + "::" + (row.parent_type || ""); %}
+        {% var prev_parent_key = prev_row ? (prev_key + "::" + (prev_row.parent_type || "")) : null; %}
+        {% var is_first_parent_row = parent_key !== prev_parent_key; %}
+
+        {% var parent_rowspan = 1; %}
+        {% if(is_first_parent_row && row.parent_type) { %}
+            {% for(var k = i + 1; k < l; k++) { %}
+                {% var p = data[k]; %}
+                {% var p_indicator_key = p.section_name + "::" + p.order_index + "::" + p.indicator_name_ar; %}
+                {% var p_parent_key = p_indicator_key + "::" + (p.parent_type || ""); %}
+                {% if(p_parent_key === parent_key) { %}
+                    {% parent_rowspan++; %}
+                {% } else { %}
+                    {% break; %}
+                {% } %}
+            {% } %}
+        {% } %}
 
         {% var rowspan = 1; %}
         {% if(is_first_indicator_row) { %}
@@ -133,7 +235,7 @@
         {% } %}
 
         {% if(row.section_name && row.section_name !== last_section) { %}
-           <td colspan="7" class="kpi-section">
+           <td colspan="8" class="kpi-section">
 
                 {% if(row.section_type === "Goal") { %}
                     الهدف العام: {%= row.section_title %}
@@ -153,7 +255,7 @@
             <tr class="kpi-header">
                 <th>#</th>
                 <th>المؤشرات</th>
-                <th>وحدة المؤشر</th>
+                <th colspan="2">التصنيف</th>
                 <th>الهدف</th>
                 <th>الإنجاز التراكمي</th>
                 <th>نسبة الإنجاز</th>
@@ -174,7 +276,16 @@
                 </td>
             {% } %}
 
-            <td>{%= row.type || "" %}</td>
+           {% if(row.parent_type) { %}
+                {% if(is_first_parent_row) { %}
+                    <td rowspan="{%= parent_rowspan %}">
+                        {%= row.parent_type %}
+                    </td>
+                {% } %}
+                <td>{%= row.type || "" %}</td>
+            {% } else { %}
+                <td colspan="2">{%= row.type || "" %}</td>
+            {% } %}
             <td>{%= row.target || 0 %}</td>
             <td>{%= row.collected_value || 0 %}</td>
 
@@ -185,7 +296,7 @@
                 </div>
             </td>
 
-            <td class="text-cell">
+            <td class="comment-cell">
                 {%= row.comment || "" %}
             </td>
         </tr>

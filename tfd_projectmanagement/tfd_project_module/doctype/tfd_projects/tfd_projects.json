@@ -7,6 +7,9 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
+  "company",
+  "column_break_cqot",
+  "project_number",
   "status",
   "section_break_dbbf",
   "priority",
@@ -108,6 +111,22 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Expected End Date"
+  },
+  {
+   "fieldname": "column_break_cqot",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project_number",
+   "fieldtype": "Data",
+   "label": "Project Number",
+   "unique": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -117,7 +136,7 @@
    "link_fieldname": "custom_tfd_project"
   }
  ],
- "modified": "2025-11-16 09:57:47.199587",
+ "modified": "2026-06-28 23:10:39.794162",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "TFD Projects",

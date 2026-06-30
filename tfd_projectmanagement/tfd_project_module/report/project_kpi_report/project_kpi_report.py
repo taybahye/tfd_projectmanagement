@@ -16,7 +16,6 @@ def execute(filters=None):
 # Defines the columns for the Project KPI report
 def get_columns():
     return [
-        {"label": _("Result"), "fieldname": "result", "fieldtype": "Data", "width": 220},
         {"label": _("Indicator Number"), "fieldname": "order_index", "fieldtype": "Data", "width": 120},
         {"label": _("Indicator"), "fieldname": "indicator_name_ar", "fieldtype": "Data", "width": 300},
         {
@@ -56,6 +55,42 @@ def get_columns():
     ]
 
 
+
+def get_project_info(logframe_name):
+    if not logframe_name:
+        return {}
+
+    logframe_info = frappe.db.get_value(
+        "TFD Logframe Name",
+        logframe_name,
+        [
+            "name",
+            "tfd_project",
+        ],
+        as_dict=True,
+    ) or {}
+
+    if not logframe_info.get("tfd_project"):
+        return logframe_info
+
+    project_info = frappe.db.get_value(
+        "TFD Projects",
+        logframe_info.get("tfd_project"),
+        [
+            "project_name",
+            "project_number",
+            "expected_start_date",
+            "expected_end_date",
+        ],
+        as_dict=True,
+    ) or {}
+
+    return {
+        **logframe_info,
+        **project_info,
+        "project_start_date": project_info.get("expected_start_date"),
+        "project_end_date": project_info.get("expected_end_date"),
+    }
 
 # Retrieves and aggregates data for the Project KPI report based on filters
 def get_data(filters):
@@ -130,11 +165,20 @@ def get_data(filters):
                 parent.type,
                 parent.indicator_name_ar,
                 parent.main_order
-            ORDER BY
+           ORDER BY
                 parent.main_order,
-                inch.order_index,
-                inch.indicator_name_ar,
-                inch.type
+                inch.order_index
         """
 
-    return frappe.db.sql(query, values, as_dict=True)
+    data = frappe.db.sql(query, values, as_dict=True)
+
+    project_info = get_project_info(filters.get("logframe_name"))
+    project_info.update({
+        "report_from_date": filters.get("from_date"),
+        "report_to_date": filters.get("to_date"),
+    })
+
+    for row in data:
+        row.update(project_info)
+
+    return data

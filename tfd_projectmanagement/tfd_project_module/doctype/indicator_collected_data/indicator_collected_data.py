@@ -75,5 +75,6 @@ def get_logframe_indicators(logframe_name):
             ON parent.name = log.old_parent
         WHERE log.logframe_name = %s
             AND log.type = 'Ind'
-        ORDER BY log.main_order, logc.parent_type, logc.type
+        ORDER BY log.main_order, logc.idx
     """, (logframe_name,), as_dict=True)
+    
