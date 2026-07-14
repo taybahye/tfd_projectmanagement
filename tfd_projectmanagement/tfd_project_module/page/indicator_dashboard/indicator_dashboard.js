@@ -147,15 +147,17 @@ function render_indicator_cards(indicators) {
                         target: Number(item.target) || 0,
                         achievement: Number(item.achievement) || 0,
                         itemStyle: {
-                            color: lighten_color(base_color, 35 + (item_index * 25))
+                            color: parent_colors[item_index % parent_colors.length]
                         }
                     });
-                });
+                    });
             } else {
                 (parent.items || []).forEach((item, item_index) => {
-                    inner_data.push({
+                   inner_data.push({
                         name: item.type || 'Unknown',
                         value: Number(item.value) || 0,
+                        target: Number(item.target) || 0,
+                        achievement: Number(item.achievement) || 0,
                         itemStyle: {
                             color: parent_colors[item_index % parent_colors.length]
                         }

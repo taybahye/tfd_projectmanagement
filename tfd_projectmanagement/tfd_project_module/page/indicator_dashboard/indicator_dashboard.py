@@ -24,14 +24,12 @@ def get_indicator_dashboard(logframe_name=None, from_date=None, to_date=None):
             child.parent_type,
             child.type,
             child.indicator_name_ar,
-            SUM(child.collected_value) AS value,
-            SUM(child.target) AS target
+            SUM(child.collected_value) AS value
         FROM `tabIndicator Collected Data Child` child
         INNER JOIN `tabIndicator Collected Data` parent
             ON parent.name = child.parent
         WHERE {" AND ".join(conditions)}
             AND child.indicator_type = "Ind"
-            AND IFNULL(child.collected_value, 0) > 0
         GROUP BY
             child.logframe_indicator,
             child.parent_type,
@@ -49,7 +47,12 @@ def get_indicator_dashboard(logframe_name=None, from_date=None, to_date=None):
         indicator_key = row.logframe_indicator
         parent_type = row.parent_type or "Without Group"
         value = row.value or 0
-        target = row.target or 0
+
+        target = get_logframe_target(
+            indicator_key=indicator_key,
+            type_value=row.type,
+            parent_type=row.parent_type
+        )
 
         if indicator_key not in indicators:
             indicators[indicator_key] = {
@@ -112,3 +115,21 @@ def get_indicator_dashboard(logframe_name=None, from_date=None, to_date=None):
         result.append(indicator)
 
     return result
+
+
+def get_logframe_target(indicator_key, type_value=None, parent_type=None):
+    if not indicator_key:
+        return 0
+
+    doc = frappe.get_doc("TFD Logframe", indicator_key)
+
+    target = 0
+
+    for row in doc.get("disaggregation") or []:
+        same_type = (row.type or "") == (type_value or "")
+        same_parent = (row.parent_type or "") == (parent_type or "")
+
+        if same_type and same_parent:
+            target += row.total or 0
+
+    return target
