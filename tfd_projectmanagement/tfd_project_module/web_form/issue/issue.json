@@ -8,6 +8,7 @@
  "anonymous": 0,
  "apply_document_permissions": 0,
  "button_label": "Save",
+ "client_script": "frappe.web_form.after_load = () => {\n    console.log(\"WEB FORM LOADED\");\n\n    const fields_to_toggle = [\n        \"custom_complainant_name\",\n        \"custom_complainant_phone_number\",\n        \"subject\",\n        \"description\",\n        \"custom_gender\",\n        \"custom_complainant_phone_number\",\n        \"custom_marital_status\",\n        \"custom_governorate\",\n        \"custom_age_group\"\n    ];\n\n    function toggle_fields() {\n        const consent = frappe.web_form.get_value(\"custom_privacy_consents\");\n\n        console.log(\"CONSENT VALUE:\", consent);\n\n        fields_to_toggle.forEach((fieldname) => {\n            const field = frappe.web_form.fields_dict[fieldname];\n\n            if (field) {\n                field.df.hidden = !consent;\n                field.refresh();\n            } else {\n                console.log(\"FIELD NOT FOUND:\", fieldname);\n            }\n        });\n    }\n\n    // \u0639\u0646\u062f \u0641\u062a\u062d \u0627\u0644\u0635\u0641\u062d\u0629\n    toggle_fields();\n\n    // \u0639\u0646\u062f \u062a\u063a\u064a\u064a\u0631 Checkbox\n    frappe.web_form.on(\"custom_privacy_consents\", function(field, value) {\n        console.log(\"CONSENT CHANGED:\", value);\n        toggle_fields();\n    });\n};",
  "condition_json": "[]",
  "creation": "2026-08-05 09:33:24.094707",
  "custom_css": ".form-section .section-body {\n    flex-direction: row-reverse !important;\n}\n\n.form-section .section-head {\n    margin-left: auto !important;\n    margin-right: 0 !important;\n    direction: rtl !important;\n    text-align: right !important;\n}",
@@ -19,7 +20,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2026-08-08 22:02:39.301594",
+ "modified": "2026-08-18 11:00:42.036736",
  "modified_by": "Administrator",
  "module": "TFD Project Module",
  "name": "issue",
@@ -31,6 +32,19 @@
  "show_sidebar": 0,
  "title": "Issue",
  "web_form_fields": [
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "custom_privacy_consents",
+   "fieldtype": "Check",
+   "hidden": 0,
+   "label": "I agree to the processing of my personal data for the purpose of handling the complaint with full confidentiality",
+   "max_length": 0,
+   "max_value": 0,
+   "precision": "",
+   "read_only": 0,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
   {
    "allow_read_on_all_link_options": 0,
    "fieldname": "subject_section",
@@ -88,6 +102,20 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "fieldname": "custom_marital_status",
+   "fieldtype": "Select",
+   "hidden": 0,
+   "label": "Marital Status",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "Married\nSingle\nDivorced\nWidowed",
+   "precision": "",
+   "read_only": 0,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
    "fieldname": "custom_gender",
    "fieldtype": "Select",
    "hidden": 0,
@@ -98,6 +126,20 @@
    "precision": "",
    "read_only": 0,
    "reqd": 1,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "custom_age_group",
+   "fieldtype": "Select",
+   "hidden": 0,
+   "label": "Age Group",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "Under 18\n19-30\n31-65\nOver 65",
+   "precision": "",
+   "read_only": 0,
+   "reqd": 0,
    "show_in_filter": 0
   },
   {
