@@ -7,8 +7,10 @@ app_license = "agpl-3.0"
 
 # Apps
 # ------------------
-doctype_js = {"Project" : "override/js/activity.js",
-              }
+doctype_js = {
+    "Project": "override/js/activity.js",
+    "Issue": "public/js/issue.js",
+}
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
@@ -123,7 +125,10 @@ app_include_js = [
 doc_events = {
     "Project": {
        "on_update": "tfd_projectmanagement.override.py.activity.update_project",
-   }
+   },
+    "Issue": {
+       "validate": "tfd_projectmanagement.issue.validate_sensitive_issue",
+   },
 }
 #"/home/frappe/frappe-bench/apps/tfd_projectmanagement/tfd_projectmanagement/overrides/late_deduction.py"
 # permission_query_conditions = {
@@ -250,4 +255,3 @@ doc_events = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
